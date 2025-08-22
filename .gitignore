@@ -1,0 +1,35 @@
+# === Genomic data files ===
+*.fa
+*.fai
+*.bam
+*.bai
+*.cram
+*.crai
+*.haps
+*.haps.gz
+*.sample
+*.map
+*.ped
+*.match
+*.bed
+*.bim
+*.fam
+*.vcf
+*.vcf.gz
+*.vcf.gz.tbi
+*.vcf.bgz
+*.vcf.bgz.tbi
+*.tsv
+
+# === Log files ===
+*.log
+
+# === HPC / SLURM outputs ===
+slurm/
+
+# === Cromwell workflow outputs ===
+cromwell-executions/
+cromwell-workflow-logs/
+
+# === Cromwell Java Container ===
+cromwell-*.jar
