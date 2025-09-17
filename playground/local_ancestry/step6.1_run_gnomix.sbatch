@@ -2,10 +2,10 @@
 #SBATCH --job-name=gnomix
 #SBATCH --output=slurm/gnomix_%A_%a.out
 #SBATCH --error=slurm/gnomix_%A_%a.err
-#SBATCH --time=5-00:00:00
-#SBATCH --mem=200G
+#SBATCH --time=11-00:00:00
+#SBATCH --mem=300G
 #SBATCH -n 1
-#SBATCH --cpus-per-task=2
+#SBATCH --cpus-per-task=64
 #SBATCH --array=0-3   # 4 jobs in parallel
 #SBATCH --mail-type=ALL 
 #SBATCH --mail-user=ztcaterer@colorado.edu
@@ -18,8 +18,7 @@ source $(conda info --base)/etc/profile.d/conda.sh
 conda activate gnomix
 module load bcftools
 
-# list the given libraries in the conda environment
-conda list
+export NUMEXPR_MAX_THREADS=$SLURM_CPUS_PER_TASK
 
 WORKDIR=$WORK/gnomix
 FILEDIR=$WORKDIR/files
