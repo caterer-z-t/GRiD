@@ -1,4 +1,0 @@
-java -jar cromwell-81.jar \ 
-    run helloworld.wdl \
-    --inputs [insert-inputs-here] \
-    --outputs [insert-outputs-here] \
