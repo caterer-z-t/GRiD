@@ -10,6 +10,41 @@
 #SBATCH --mail-type=ALL
 #SBATCH --mail-user=ztcaterer@colorado.edu
 
+source "$(dirname "$0")/common.sh"
+
+usage() {
+    echo "Usage: $0 [-p PYTHON_SCRIPT] [-f OUTPUT_FILE] [-d OUTPUT_DIR] [-m MOSDEPTH_PREFIX] [-r REPEAT_MASK] [-e EXAMPLE_REGIONS] [-n N_SAMPLES] [-h]"
+    echo ""
+    echo "  -p   Python script to run"
+    echo "  -f   Output file path"
+    echo "  -d   Output directory"
+    echo "  -m   Mosdepth prefix (for batch files: prefix_batch_N.txt.gz)"
+    echo "  -r   Repeat mask BED file"
+    echo "  -e   Example regions file (.regions.bed.gz)"
+    echo "  -n   Number of samples"
+    echo "  -h   Show this help message"
+    exit 1
+}
+
+# Parse command line arguments
+while getopts "p:f:d:m:r:e:n:h" opt; do
+    case $opt in
+        p) PYTHON_SCRIPT="$OPTARG" ;;
+        f) OUT_FILE="$OPTARG" ;;
+        d) OUT_DIR="$OPTARG" ;;
+        m) MOSDEPTH_PREFIX="$OPTARG" ;;
+        r) REPEAT_MASK="$OPTARG" ;;
+        e) EXAMPLE_REGIONS="$OPTARG" ;;
+        n) N_SAMPLES="$OPTARG" ;;
+        h) usage ;;
+        *) usage ;;
+    esac
+done
+
+require_args PYTHON_SCRIPT OUT_FILE OUT_DIR MOSDEPTH_PREFIX REPEAT_MASK EXAMPLE_REGIONS N_SAMPLES
+
+export PYTHON_SCRIPT OUT_FILE OUT_DIR MOSDEPTH_PREFIX REPEAT_MASK EXAMPLE_REGIONS N_SAMPLES
+
 # -------------------------------
 # Modules
 # -------------------------------
@@ -24,106 +59,38 @@ conda activate lpa_vntr
 # -------------------------------
 # Paths & Settings
 # -------------------------------
-PYTHON_SCRIPT=$LPA/playground/cram_crai/step4_normalize_mosdepth/normalize_mosdepth.py
-OUT_DIR=$WORK/lpa_normalized
-MOSDEPTH_DIR=$WORK/lpa_mosdepth
-REPEAT_MASK_DIR=$LPA/playground/cram_crai/step4_normalize_mosdepth
-N_SAMPLES=1000
-OUT_FILE=$OUT_DIR/LPA_ID_scale_zdepths.txt.gz
+require_file "$PYTHON_SCRIPT"
+require_file "$REPEAT_MASK"
+require_file "$EXAMPLE_REGIONS"
+
+require_dir "$OUT_DIR"
+
+# Check that at least one batch file exists
+if [ ! -f "${MOSDEPTH_PREFIX}_batch_1.txt.gz" ]; then
+    echo "Error: No batch files found with prefix '$MOSDEPTH_PREFIX'"
+    echo "Expected files like: ${MOSDEPTH_PREFIX}_batch_1.txt.gz"
+    exit 1
+fi
 
 mkdir -p $OUT_DIR
-
-# -------------------------------
-# Download repeat mask files if not present
-# -------------------------------
-echo "Checking for repeat mask files..."
-
-# You'll need to download these files to longleaf. Here are some options:
-# For GRCh38 (since your files are b38):
-REPEAT_MASK=$REPEAT_MASK_DIR/repeat_mask_list.hg38.ucsc_bed
-
-# Alternative options based on what you have:
-# REPEAT_MASK=$REPEAT_MASK_DIR/GRCh37_repeat_mask_chr_6_cleaned.ucsc_bed  # if using GRCh37
-# REPEAT_MASK=$REPEAT_MASK_DIR/repeat_mask_list.hg37_chr6.ucsc_bed         # hg37 chr6 only
-
-if [ ! -f "$REPEAT_MASK" ]; then
-    echo "ERROR: Repeat mask file not found: $REPEAT_MASK"
-    echo "Please download the repeat mask files to $REPEAT_MASK_DIR"
-    echo "Available options based on your mention:"
-    echo "  - GRCh37_repeat_mask_chr_6_cleaned.ucsc_bed"
-    echo "  - repeat_mask_list.hg37.ucsc_bed"
-    echo "  - repeat_mask_list.hg37_chr6.ucsc_bed"
-    echo "  - repeat_mask_list.hg38.ucsc_bed (recommended for b38 data)"
-    exit 1
-fi
-
-# -------------------------------
-# Count available samples
-# -------------------------------
-SAMPLE_COUNT=$(ls -1 $MOSDEPTH_DIR/*.regions.bed.gz | wc -l)
-echo "Found $SAMPLE_COUNT .regions.bed.gz files in $MOSDEPTH_DIR"
-
-if [ $SAMPLE_COUNT -eq 0 ]; then
-    echo "ERROR: No .regions.bed.gz files found in $MOSDEPTH_DIR"
-    exit 1
-fi
-
-# Use actual sample count if it's less than our max
-if [ $SAMPLE_COUNT -lt $N_SAMPLES ]; then
-    N_SAMPLES=$SAMPLE_COUNT
-fi
-
-echo "Processing up to $N_SAMPLES samples"
-
-# -------------------------------
-# Debugging Files
-# -------------------------------
-cd $OUT_DIR
-
-# For debugging, you can run:
-DEBUG_LOG=$OUT_DIR/debug_mosdepth.log
-REGIONS_FILE=$LPA/playground/cram_crai/step2_count_read_files/734_possible_coding_vntr_regions.IBD2R_gt_0.25.uniq.txt
-
-LPA_REGION=$(awk '$7=="LPA" {print $1,$2,$3,$4,$5}' "$REGIONS_FILE")
-CHR=$(echo "$LPA_REGION" | awk '{print $1}')
-START_HG38=$(echo "$LPA_REGION" | awk '{print $2}')
-END_HG38=$(echo "$LPA_REGION" | awk '{print $3}')
-START_SAMTOOLS=$(echo "$LPA_REGION" | awk '{print $4}')
-END_SAMTOOLS=$(echo "$LPA_REGION" | awk '{print $5}')
-
-echo "LPA VNTR region loaded: ${CHR}:${START_HG38}-${END_HG38}"
-echo "LPA VNTR region for samtools: ${CHR}:${START_SAMTOOLS}-${END_SAMTOOLS}"
-
-echo "Debugging mosdepth data with debug_mosdepth_data.py"
-python $LPA/playground/cram_crai/step4_normalize_mosdepth/debug_mosdepth_data.py \
-    $MOSDEPTH_DIR \
-    $DEBUG_LOG
-
 
 # -------------------------------
 # Run Python Normalization
 # -------------------------------
 
-# Run the normalization script
+# Run the normalization script with correct arguments
 echo "Running Python normalization..."
 python $PYTHON_SCRIPT \
-    $MOSDEPTH_DIR \
+    $MOSDEPTH_PREFIX \
     $REPEAT_MASK \
+    $EXAMPLE_REGIONS \
     $N_SAMPLES \
     $OUT_FILE > $OUT_DIR/normalize_mosdepth_python.log 2>&1
 
-echo "Python normalization complete. Output: $OUT_FILE"
-echo "Log file: $OUT_DIR/normalize_mosdepth_python.log"
-
-# -------------------------------
-# Optional: Quick validation
-# -------------------------------
-if [ -f "$OUT_FILE" ]; then
-    echo "Output file created successfully."
-    echo "File size: $(du -h $OUT_FILE | cut -f1)"
-    echo "First few lines:"
-    zcat $OUT_FILE | head -5
+if [ $? -eq 0 ]; then
+    echo "Python normalization complete. Output: $OUT_FILE"
+    echo "Log file: $OUT_DIR/normalize_mosdepth_python.log"
 else
-    echo "ERROR: Output file not created!"
+    echo "Error: Python normalization failed. Check log file: $OUT_DIR/normalize_mosdepth_python.log"
     exit 1
 fi

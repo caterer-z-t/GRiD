@@ -1,12 +1,12 @@
 #!/bin/bash
 #SBATCH --job-name=gnomix
-#SBATCH --output=slurm/gnomix_%A_%a.out
-#SBATCH --error=slurm/gnomix_%A_%a.err
+#SBATCH --output=slurm/gnomix_%a.out
+#SBATCH --error=slurm/gnomix_%a.err
 #SBATCH --time=11-00:00:00
 #SBATCH --mem=300G
 #SBATCH -n 1
 #SBATCH --cpus-per-task=64
-#SBATCH --array=0-3   # 4 jobs in parallel
+#SBATCH --array=0-10   # <--- Change this depending on how many array tasks you want
 #SBATCH --mail-type=ALL 
 #SBATCH --mail-user=ztcaterer@colorado.edu
 
@@ -31,34 +31,37 @@ GNOMIX=$WORKDIR/gnomix.py
 IN_VCF="${FILEDIR}/phased_merged_SOL_ref.vcf.gz"
 [ ! -f "$IN_VCF" ] && IN_VCF="${IN_VCF%.gz}"
 
-# Which slice of splits does this array task handle?
-START=$(( SLURM_ARRAY_TASK_ID * 25 ))
-END=$(( START + 24 ))
+# total number of chunks
+TOTAL_SPLITS=100
 
-# check for pretrained models dir
+# number of array tasks (auto-detected from sbatch --array)
+NUM_TASKS=$SLURM_ARRAY_TASK_COUNT
+
+# how many splits each task should process
+CHUNK_SIZE=$(( (TOTAL_SPLITS + NUM_TASKS - 1) / NUM_TASKS ))
+
+# range for this array task
+START=$(( SLURM_ARRAY_TASK_ID * CHUNK_SIZE ))
+END=$(( START + CHUNK_SIZE - 1 ))
+
+# cap at TOTAL_SPLITS-1
+if [ $END -ge $TOTAL_SPLITS ]; then
+    END=$(( TOTAL_SPLITS - 1 ))
+fi
+
+echo "Task ${SLURM_ARRAY_TASK_ID} handling splits $START to $END"
+
+# check for pretrained models dir (same as before)
 if [ ! -d "$WORKDIR/pretrained_gnomix_models" ]; then
     echo "Pretrained models not found, downloading..."
-    
-    # Install gdown if not already available
     if ! command -v gdown &> /dev/null; then
-        echo "gdown not found, installing via pip..."
         pip install --user gdown
         export PATH=$PATH:$HOME/.local/bin
     fi
-
-    # Download pretrained models from Google Drive
     gdown https://drive.google.com/uc?id=1Q0zg9zqTaZUvt42uxzE_0gcfnFvjwi33 -O pretrained_gnomix_models.tar.gz
-    
-    echo "Expanding pretrained models..."
     tar -xvf pretrained_gnomix_models.tar.gz
     rm pretrained_gnomix_models.tar.gz
-
-    echo "Downloaded pretrained models to directory ./pretrained_gnomix_models"
-else
-    echo "Pretrained models found, skipping download."
 fi
-
-echo "Handling splits $START to $END"
 
 for i in $(seq -w $START $END); do
     GROUP="${FILEDIR}/sample_ids_split_${i}"

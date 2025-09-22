@@ -14,9 +14,43 @@ module purge
 module load gcloud
 
 # -------------------------------
-# Settings
+# USAGE
+# -------------------------------
+usage() {
+    echo "Usage: sbatch $0 [-d CRAM_DIR] BUCKET_PATH"
+    echo ""
+    echo "  BUCKET_PATH   Google Cloud bucket path (required, e.g. gs://your-bucket/path/)"
+    echo "  -d CRAM_DIR   Local directory to copy cram files into (default: \$SOL/cram)"
+    echo "  -h            Show this help message"
+    exit 1
+}
+
+# -------------------------------
+# Defaults
 # -------------------------------
 CRAM_DIR=$SOL/cram
+
+# -------------------------------
+# Parse arguments
+# -------------------------------
+while getopts "d:h" opt; do
+    case $opt in
+        d) CRAM_DIR="$OPTARG" ;;
+        h) usage ;;
+        \?) usage ;;
+    esac
+done
+shift $((OPTIND - 1))   # shift past parsed flags
+
+# -------------------------------
+# Validate arguments
+# -------------------------------
+if [ $# -eq 0 ]; then
+    usage "Error: Missing BUCKET_PATH"
+fi
+
+BUCKET_PATH=$1
+
 mkdir -p "$CRAM_DIR"
 
 # -------------------------------
@@ -41,15 +75,6 @@ copy_crams_from_bucket () {
 }
 
 # -------------------------------
-# Example call
+# Run
 # -------------------------------
-# Usage: sbatch this_script.sh gs://bucket-name/path/
-if [ $# -eq 0 ]; then
-    echo "Error: No Google bucket path provided."
-    echo "Usage: sbatch $0 gs://your-bucket/path/"
-    exit 1
-fi
-
-copy_crams_from_bucket "$1"
-
-# GOOGLE_BUCKET='gs://fc-secure-708ee835-1980-4752-941f-f42b5ce2f58b/submissions/'
+copy_crams_from_bucket "$BUCKET_PATH"
