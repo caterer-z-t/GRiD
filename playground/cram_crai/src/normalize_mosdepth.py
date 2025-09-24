@@ -1,12 +1,5 @@
 #!/usr/bin/env python3
-"""
-Python conversion of normalize_mosdepth_inflow_rewritten.cpp
-Normalizes individual mosdepth .regions.bed.gz files for VNTR analysis
-
-Usage:
-python normalize_mosdepth.py <mosdepth_dir> <repeat_mask_bed> <n_samples> <output_file>
-"""
-
+# In[1]: Imports
 import sys
 import gzip
 import math
@@ -14,394 +7,282 @@ import numpy as np
 import time
 from collections import defaultdict
 import os
+import argparse
+from pathlib import Path
 
 # Get the file path of the current script
-current_file_path = os.path.abspath(__file__)
-current_dir = os.path.dirname(current_file_path)
-utils_path = os.path.join(current_dir, "utils", "utils.py")
+current_file_path = Path(__file__).resolve()
+current_dir = current_file_path.parent
+utils_path = current_dir / "utils" / "utils.py"
 
 # Import all contents from utils/utils.py
-sys.path.insert(0, os.path.join(current_dir, "utils"))
+sys.path.insert(0, str(current_dir / "utils"))
 
-from utils.utils import *
+from utils import *
+
+# In[2]: 1. Preparation
+def arg_parser():
+    parser = argparse.ArgumentParser(description="Normalize mosdepth data")
+    parser.add_argument("--mosdepth_dir", type=str, required=True, help="Directory containing mosdepth files")
+    parser.add_argument("--repeat_mask", type=str, required=True, help="Path to repeat mask BED file")
+    parser.add_argument("--chromosome", type=str, required=True, help="Chromosome to analyze")
+    parser.add_argument("--start", type=int, required=True, help="Start position")
+    parser.add_argument("--end", type=int, required=True, help="End position")
+    parser.add_argument("--threads", type=int, default=1, help="Number of threads to use")
+    parser.add_argument("--min_depth", type=int, default=20, help="Minimum depth threshold")
+    parser.add_argument("--max_depth", type=int, default=100, help="Maximum depth threshold")
+    parser.add_argument("--output_file", type=str, default="normalized_output.txt.gz", help="Output file path")
+    return parser.parse_args()
 
 
-def determine_regions_to_extract(mosdepth_prefix, target_chr=6, max_batches=10):
-    """
-    Analyze first 10 batches to determine which regions to extract
-    based on mean depth criteria (20-100x coverage after scaling by 0.01)
-    """
-    log_message("Analyzing batches to determine regions to extract...")
-    
-    R = 0  # number of regions
-    mean_depths = []
-    N = 0  # number of individuals processed
-    
-    for batch in range(max_batches):
-        batch_file = f"{mosdepth_prefix}_batch_{batch + 1}.txt.gz"
+# In[3]: Decide which regions to extract
+def get_individuals(mosdepth_dir: str) -> dict[str, Path]:
+    """Map individual IDs to their mosdepth.global.dist file paths."""
+    mosdepth_dir = Path(mosdepth_dir)
+    return {
+        f.stem.split(".")[0]: f
+        for f in mosdepth_dir.glob("*.mosdepth.global.dist.txt")
+    }
+
+
+def regions_bed_gz(global_dist_file: Path) -> Path:
+    """Derive the .regions.bed.gz file path from a global.dist file path."""
+    return global_dist_file.with_name(
+        global_dist_file.name.replace(".mosdepth.global.dist.txt", ".regions.bed.gz")
+    )
+
+
+def extract_reasonable_depth_regions(
+    individuals: dict[str, Path],
+    chromosome: str,
+    start: int,
+    end: int,
+    min_depth: int = 20,
+    max_depth: int = 100,
+) -> dict[str, list[tuple[int, int]]]:
+    """Extract regions within depth bounds for each individual."""
+    regions_to_extract: dict[str, list[tuple[int, int, float]]] = defaultdict(list)
+
+    for individual_id, global_dist_file in individuals.items():
+        bed_gz = regions_bed_gz(global_dist_file)
+
+        log_message(f"Processing {bed_gz} for individual {individual_id}")
         
-        if not os.path.exists(batch_file):
-            log_message(f"Warning: Batch file {batch_file} not found, continuing with available batches")
+        if not bed_gz.exists():
+            log_message(f"Warning: {bed_gz} does not exist.")
             continue
-        
-        try:
-            with read_gzipped_file(batch_file) as f:
-                for line in f:
-                    if not line.strip():
-                        continue
-                    
-                    parts = line.strip().split('\t')
-                    if len(parts) < 2:
-                        continue
-                    
-                    sample_id = parts[0]
-                    depths = [int(d) for d in parts[1:]]
-                    
-                    # Initialize on first sample
-                    if R == 0:
-                        R = len(depths)
-                        mean_depths = [0.0] * R
-                    
-                    if len(depths) != R:
-                        log_message(f"Warning: Sample {sample_id} has {len(depths)} depths, expected {R}")
-                        continue
-                    
-                    # Add depths (convert by 0.01 like C++ version)
-                    for r, depth in enumerate(depths):
-                        mean_depths[r] += depth * 0.01
-                    
-                    N += 1
-        
-        except Exception as e:
-            log_message(f"Error reading batch {batch}: {e}")
-            continue
-        
-        log_message(f"Read batch {batch}")
-    
-    # Calculate mean depths and determine extraction criteria
-    extract_regions = []
-    num_extract = 0
-    
-    for r in range(R):
-        mean_depth = mean_depths[r] / N if N > 0 else 0
-        # Use criteria: 20 <= mean_depth <= 100 (after 0.01 scaling)
-        if 20 <= mean_depth <= 100:
-            extract_regions.append(True)
-            num_extract += 1
-        else:
-            extract_regions.append(False)
-    
-    log_message(f"Read {N} individuals")
-    log_message(f"Extracting {num_extract} / {R} regions")
-    
-    return extract_regions, mean_depths, N
 
-def load_repeat_mask(bed_file, target_chr=6):
-    """Load repeat mask regions for specified chromosome"""
-    log_message(f"Loading repeat mask from {bed_file}")
-    
-    overlaps_vntr = defaultdict(lambda: defaultdict(bool))
-    num_vntrs = 0
-    total_length = 0
-    
-    try:
-        with open(bed_file, 'r') as f:
+        with gzip.open(bed_gz, "rt") as f:
             for line in f:
-                if line.startswith('#') or not line.strip():
+                if not line.startswith(f"chr{chromosome}"):
                     continue
-                
-                parts = line.strip().split('\t')
-                if len(parts) < 3:
-                    continue
-                
-                chr_num = parse_chromosome(parts[0])
-                if chr_num != target_chr:
-                    continue
-                
-                start = int(parts[1])
-                end = int(parts[2])
-                
-                num_vntrs += 1
-                length = end - start
-                total_length += length
-                
-                # Mark 1kb regions that overlap
-                for kb in range(start // 1000, (end // 1000) + 1):
-                    overlaps_vntr[chr_num][kb] = True
-        
-        log_message(f"Read {num_vntrs} autosomal VNTRs spanning {total_length/1e6:.2f} Mb")
-        return overlaps_vntr
-    
-    except FileNotFoundError:
-        log_message(f"Warning: Repeat mask file {bed_file} not found")
-        return defaultdict(lambda: defaultdict(bool))
 
-def update_extraction_list(example_regions_file, extract_regions, overlaps_vntr, target_chr=6):
-    """Update extraction list to exclude regions overlapping VNTRs"""
-    log_message("Updating extraction list to exclude VNTR overlaps...")
-    
-    regions_overlap = 0
-    extract_overlap = 0
-    
-    try:
-        with read_gzipped_file(example_regions_file) as f:
-            r = 0
+                fields = line.strip().split("\t")
+                if len(fields) < 4:
+                    continue  # skip malformed lines
+
+                chrom, region_start, region_end, depth = fields[0], int(fields[1]), int(fields[2]), float(fields[3])
+
+                # Only skip if NEITHER condition is true
+                if depth <= 0 and (region_end < start or region_start > end):
+                    continue
+
+                if depth < min_depth or depth > max_depth:
+                    continue
+                
+                # Store if you want to return later
+                regions_to_extract[individual_id].append((region_start, region_end, depth))
+
+    return regions_to_extract
+
+def extract_reasonable_depth_regions_excluded(
+    individuals: dict[str, Path],
+    chromosome: str,
+    start: int,
+    end: int,
+    min_depth: int = 20,
+    max_depth: int = 100,
+    excluded: dict[str, set[int]] = None
+) -> dict[str, list[tuple[int, int, float]]]:
+    """Extract regions within depth bounds for each individual, excluding repeats."""
+    regions_to_extract: dict[str, list[tuple[int, int, float]]] = defaultdict(list)
+
+    for individual_id, global_dist_file in individuals.items():
+        bed_gz = regions_bed_gz(global_dist_file)
+
+        log_message(f"Processing {bed_gz} for individual {individual_id}")
+        
+        if not bed_gz.exists():
+            log_message(f"Warning: {bed_gz} does not exist.")
+            continue
+
+        with gzip.open(bed_gz, "rt") as f:
             for line in f:
-                if line.startswith('#') or not line.strip():
+                if not line.startswith(f"chr{chromosome}"):
                     continue
-                
-                parts = line.strip().split('\t')
-                if len(parts) < 4:
-                    continue
-                
-                chr_num = parse_chromosome(parts[0])
-                start = int(parts[1])
-                end = int(parts[2])
-                
-                # Skip non-target chromosomes but don't increment counter
-                if chr_num != target_chr:
-                    continue
-                
-                if r >= len(extract_regions):
-                    break
-                
-                # Check if region overlaps VNTR
-                if overlaps_vntr[chr_num][start // 1000]:
-                    regions_overlap += 1
-                    if extract_regions[r]:
-                        extract_overlap += 1
-                        extract_regions[r] = False
-                
-                r += 1
-        
-        num_extract = sum(extract_regions)
-        log_message(f"Excluding {regions_overlap} / {len(extract_regions)} regions overlapping VNTRs")
-        log_message(f"Excluded {extract_overlap} in extract set; {num_extract} left")
-    
-    except Exception as e:
-        log_message(f"Error processing example regions file: {e}")
-    
-    return extract_regions
 
-def load_all_samples(mosdepth_prefix, extract_regions, max_n_samples):
-    """Load depth data for all samples from batch files"""
-    log_message("Loading all sample data...")
-    
-    num_extract = sum(extract_regions)
-    if num_extract == 0:
-        log_message("Error: No regions selected for extraction!")
-        return [], [], np.array([])
-    
-    batch_size = 25.0
-    batch_num = math.ceil(max_n_samples / batch_size)
-    
-    all_ids = []
-    all_scales = []
-    all_depths = []
-    
-    for batch in range(batch_num):
-        batch_file = f"{mosdepth_prefix}_batch_{batch + 1}.txt.gz"
-        
-        if not os.path.exists(batch_file):
-            log_message(f"Warning: Batch file {batch_file} not found, skipping")
-            continue
-        
-        try:
-            with read_gzipped_file(batch_file) as f:
-                for line in f:
-                    if not line.strip():
-                        continue
-                    
-                    parts = line.strip().split('\t')
-                    if len(parts) < 2:
-                        continue
-                    
-                    sample_id = parts[0]
-                    depths = [int(d) for d in parts[1:]]
-                    
-                    if len(depths) != len(extract_regions):
-                        log_message(f"Warning: Sample {sample_id} has {len(depths)} depths, expected {len(extract_regions)}")
-                        continue
-                    
-                    # Extract depths for selected regions
-                    extract_depths = []
-                    for r, depth in enumerate(depths):
-                        if extract_regions[r]:
-                            extract_depths.append(float(depth))
-                    
-                    if not extract_depths:
-                        continue
-                    
-                    # Calculate mean depth and scale factor
-                    mean_depth = np.mean(extract_depths)
-                    scale_factor = mean_depth
-                    
-                    # Normalize by individual mean
-                    if mean_depth > 0:
-                        normalized_depths = np.array(extract_depths) / mean_depth
-                    else:
-                        normalized_depths = np.array(extract_depths)
-                    
-                    all_ids.append(sample_id)
-                    all_scales.append(scale_factor)
-                    all_depths.append(normalized_depths)
-        
-        except Exception as e:
-            log_message(f"Error reading batch {batch}: {e}")
-            continue
-        
-        log_message(f"Read batch {batch}")
-    
-    if not all_depths:
-        log_message("Error: No samples successfully loaded!")
-        return [], [], np.array([])
-    
-    depths_matrix = np.array(all_depths)
-    log_message(f"Read {len(all_ids)} individuals; normalizing by region")
-    
-    return all_ids, all_scales, depths_matrix
+                fields = line.strip().split("\t")
+                if len(fields) < 4:
+                    continue  # skip malformed lines
 
-def normalize_by_region(depths_matrix):
-    """Normalize each region across individuals"""
-    n_samples, n_regions = depths_matrix.shape
-    
-    normalized_depths = np.zeros_like(depths_matrix)
-    region_stats = []
-    
-    for r in range(n_regions):
-        region_depths = depths_matrix[:, r]
-        
-        mu = np.mean(region_depths)
-        variance = np.var(region_depths, ddof=1) if n_samples > 1 else 0
-        
-        region_stats.append({
-            'mean': mu,
-            'variance': variance,
-            'sigma2_ratio': 100 * variance / mu if mu > 0 else 0
-        })
-        
-        # Normalize: (x - mu) / sqrt(mu) - matching C++ logic
+                chrom, region_start, region_end, depth = fields[0], int(fields[1]), int(fields[2]), float(fields[3])
+
+                # Condition 1 OR 2: depth > 0 OR overlap with [start, end]
+                if not (depth > 0 or (region_end >= start and region_start <= end)):
+                    continue
+
+                # Repeat filtering
+                if excluded is not None:
+                    region_kb = set(range(region_start // 1000, region_end // 1000 + 1))
+                    if region_kb & excluded.get(chrom, set()):
+                        # log_message(f"Skipping repeat-overlapping region {chrom}:{region_start}-{region_end}")
+                        continue
+
+                # Passed filters → log the line
+                regions_to_extract[individual_id].append((region_start, region_end, depth))
+                
+    return regions_to_extract
+
+# In[4]: Exclude regions overlapping repeats/VNTR
+
+def load_repeat_mask(repeat_bed: str) -> dict[str, set[int]]:
+    """
+    Read repeat/VNTR regions into a dictionary of excluded kb bins per chromosome.
+    Returns: {chrom: set(kb_indices)}
+    """
+    excluded = defaultdict(set)
+    with open(repeat_bed) as f:
+        for line in f:
+            if line.startswith("#"):  # skip header/comment
+                continue
+            chrom, start, end = line.strip().split()[:3]
+            start, end = int(start), int(end)
+            for kb in range(start // 1000, end // 1000 + 1):
+                excluded[chrom].add(kb)
+    return excluded
+
+def build_depth_matrix(regions_to_extract: dict[str, list[tuple[int, int, float]]]):
+    """
+    Build depth matrix: {individual: {region: depth}} 
+    directly from regions_to_extract, which already has (start, end, depth).
+    """
+    depth_matrix = defaultdict(dict)
+
+    for individual_id, regions in regions_to_extract.items():
+        for start, end, depth in regions:
+            depth_matrix[individual_id][(start, end)] = depth
+
+    return depth_matrix
+
+def normalize_within_individual(depth_matrix):
+    """
+    Normalize depths within each individual by their mean depth.
+    """
+    for ind, regions in depth_matrix.items():
+        if not regions:
+            continue
+        mean_depth = np.mean(list(regions.values()))
+        for r in regions:
+            regions[r] /= mean_depth
+    return depth_matrix
+
+def normalize_across_individuals(depth_matrix):
+    """
+    Normalize per-region across all individuals: z = (x - mu) / sqrt(mu).
+    Returns normalized matrix and variance ratios.
+    """
+    # collect all regions
+    all_regions = set()
+    for regions in depth_matrix.values():
+        all_regions.update(regions.keys())
+
+    variance_ratios = {}
+    for region in all_regions:
+        values = [depth_matrix[ind].get(region, np.nan) for ind in depth_matrix]
+        values = np.array([v for v in values if not np.isnan(v)])
+        if len(values) == 0:
+            continue
+
+        mu = values.mean()
+        var = values.var()
         if mu > 0:
-            inv_root_mean = 1.0 / math.sqrt(mu)
-            normalized_depths[:, r] = (region_depths - mu) * inv_root_mean
-        else:
-            normalized_depths[:, r] = region_depths - mu
-    
-    log_message("Normalized by region")
-    return normalized_depths, region_stats
+            var_ratio = var / mu
+            variance_ratios[region] = var_ratio
 
-def select_high_variance_regions(region_stats, percentile=0.9):
-    """Select regions with high variance for final output"""
-    ratio_mult = 100
-    sigma2_ratios = [stats['sigma2_ratio'] for stats in region_stats]
-    
-    if not sigma2_ratios:
-        return [], 1.0
-    
-    sigma2_ratios_sorted = sorted(sigma2_ratios)
-    
-    # Select regions above 90th percentile
-    threshold_idx = int(percentile * len(sigma2_ratios_sorted))
-    if threshold_idx >= len(sigma2_ratios_sorted):
-        threshold_idx = len(sigma2_ratios_sorted) - 1
-    sigma2_ratio_min = sigma2_ratios_sorted[threshold_idx]
-    
-    want_regions = [ratio > sigma2_ratio_min for ratio in sigma2_ratios]
-    num_want = sum(want_regions)
-    
-    log_message(f"Restricting to {num_want} regions with sigma2ratio > {sigma2_ratio_min:.3f}")
-    
-    # Calculate scaling factor based on median sigma2ratio
-    median_idx = len(sigma2_ratios_sorted) // 2
-    sigma2_ratio_median = sigma2_ratios_sorted[median_idx] if sigma2_ratios_sorted else 1.0
-    scale_factor = 1.0 / math.sqrt(sigma2_ratio_median / ratio_mult) if sigma2_ratio_median > 0 else 1.0
-    
-    log_message(f"Rescaling to approximate z-scores based on median sigma2ratio = {sigma2_ratio_median:.3f}")
-    
-    return want_regions, scale_factor
+            # transform each individual's value
+            for ind in depth_matrix:
+                if region in depth_matrix[ind]:
+                    depth_matrix[ind][region] = (depth_matrix[ind][region] - mu) / math.sqrt(mu)
 
-def write_output(output_file, sample_ids, scales, normalized_depths, region_stats, want_regions, scale_factor):
-    """Write normalized output to gzipped file"""
-    log_message(f"Writing output to {output_file}")
-    
-    n_samples = len(sample_ids)
-    selected_regions = [i for i, want in enumerate(want_regions) if want]
-    n_regions = len(selected_regions)
-    
-    with gzip.open(output_file, 'wt') as f:
-        # Write region means
-        f.write(f"{n_samples}\t{n_regions}")
-        for r in selected_regions:
-            f.write(f"\t{region_stats[r]['mean']:.3f}")
-        f.write("\n")
-        
-        # Write sigma2 ratios
-        f.write(f"{n_samples}\t{n_regions}")
-        for r in selected_regions:
-            f.write(f"\t{region_stats[r]['sigma2_ratio']:.3f}")
-        f.write("\n")
-        
-        # Write sample data
-        for i, sample_id in enumerate(sample_ids):
-            f.write(f"{sample_id}\t{scales[i]*0.01:.2f}")
-            for r in selected_regions:
-                scaled_depth = scale_factor * normalized_depths[i, r]
-                f.write(f"\t{scaled_depth:.2f}")
-            f.write("\n")
+    return depth_matrix, variance_ratios
 
-def main():
-    if len(sys.argv) != 6:
-        print("ERROR: 5 arguments required")
-        print("- arg1: prefix of mosdepth input (no more than 170 characters), used in <prefix>_batch_<batchnumber>.txt.gz")
-        print("- arg2: bed file path e.g. /path/to/repeat_mask_list.hg38.ucsc_bed")
-        print("- arg3: example input e.g. /path/to/name_regions.bed.gz")
-        print("- arg4: N_sample(int)")
-        print("- arg5: output path e.g. /path/to/ID_scale_zdepths.txt.gz")
-        return 1
-    
-    mosdepth_prefix = sys.argv[1]
-    bed_source = sys.argv[2]
-    example_output = sys.argv[3]
-    max_n_samples = int(sys.argv[4])
-    output_path = sys.argv[5]
-    
-    start_time = time.time()
-    
-    # Step 1: Determine which regions to extract based on first 10 batches
-    extract_regions, mean_depths, n_analyzed = determine_regions_to_extract(mosdepth_prefix)
-    
-    if not extract_regions or not any(extract_regions):
-        log_message("Error: No regions meet extraction criteria!")
-        return 1
-    
-    # Step 2: Load repeat mask and exclude overlapping regions
-    overlaps_vntr = load_repeat_mask(bed_source)
-    extract_regions = update_extraction_list(example_output, extract_regions, overlaps_vntr)
-    
-    if not any(extract_regions):
-        log_message("Error: No regions remain after VNTR filtering!")
-        return 1
-    
-    # Step 3: Load all sample data and normalize by individual
-    sample_ids, scales, depths_matrix = load_all_samples(mosdepth_prefix, extract_regions, max_n_samples)
-    
-    if len(sample_ids) == 0:
-        log_message("Error: No samples successfully loaded!")
-        return 1
-    
-    # Step 4: Normalize by region across individuals
-    normalized_depths, region_stats = normalize_by_region(depths_matrix)
-    
-    # Step 5: Select high-variance regions
-    want_regions, scale_factor = select_high_variance_regions(region_stats)
-    
-    # Step 6: Write output
-    write_output(output_path, sample_ids, scales, normalized_depths, region_stats, want_regions, scale_factor)
-    
-    total_time = time.time() - start_time
-    log_message(f"Complete! Total time: {total_time:.1f} seconds")
-    
-    return 0
+def select_high_variance_regions(variance_ratios, top_frac=0.1):
+    """
+    Select top fraction of regions by variance/mean ratio.
+    """
+    n_keep = max(1, int(len(variance_ratios) * top_frac))
+    sorted_regions = sorted(variance_ratios.items(), key=lambda x: x[1], reverse=True)
+    return dict(sorted_regions[:n_keep])
 
+def write_output(depth_matrix, variance_ratios, output_file):
+    individuals = list(depth_matrix.keys())
+    regions = sorted(variance_ratios.keys())
+
+    with gzip.open(output_file, "wt") as out:
+        # header
+        out.write("region\t" + "\t".join(individuals) + "\n")
+
+        # per-region normalized depths
+        for region in regions:
+            line = [f"{region[0]}-{region[1]}"]
+            for ind in individuals:
+                val = depth_matrix[ind].get(region, "NA")
+                line.append(str(val))
+            out.write("\t".join(line) + "\n")
+
+
+# In[]: Main execution
 if __name__ == "__main__":
-    sys.exit(main())
+    # 1. Preparation
+    args = arg_parser()
+    start_time = time.time()
+
+    # Get individuals and their mosdepth files
+    individuals = get_individuals(args.mosdepth_dir)
+    log_message(f"Found {len(individuals)} individuals.")
+
+    # run on first 5 individuals for testing
+    # individuals = dict(list(individuals.items())[:5])
+    # log_message(f"Processing {len(individuals)} individuals for testing.")
+
+    # Load repeat mask
+    excluded = load_repeat_mask(args.repeat_mask)
+
+    # Phase 1 + 2: extract filtered regions
+    regions_to_extract = extract_reasonable_depth_regions_excluded(
+        individuals,
+        args.chromosome,
+        args.start,
+        args.end,
+        min_depth=args.min_depth,
+        max_depth=args.max_depth,
+        excluded=excluded
+    )
+
+    # Phase 3: build depth matrix
+    depth_matrix = build_depth_matrix(regions_to_extract)
+    
+    # Phase 4: within-individual normalization
+    depth_matrix = normalize_within_individual(depth_matrix)
+
+    # Phase 5: across-individual normalization
+    depth_matrix, variance_ratios = normalize_across_individuals(depth_matrix)
+
+    # Phase 6: keep high variance regions
+    variance_ratios = select_high_variance_regions(variance_ratios, top_frac=0.1)
+
+    # Phase 7: write results
+    write_output(depth_matrix, variance_ratios, args.output_file)
+
+    end_time = time.time()
+    log_message(f"Normalization completed in {end_time - start_time:.2f} seconds.")

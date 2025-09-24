@@ -34,3 +34,6 @@ cromwell-workflow-logs/
 
 # === Cromwell Java Container ===
 cromwell-*.jar
+
+# === Python cache files ===
+__pycache__/
