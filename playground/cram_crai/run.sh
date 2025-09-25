@@ -49,3 +49,16 @@ sbatch step5_find_neighbors.sbatch \
    -f LPA_neighbors \
    -z 1.0 \
    -n 5
+
+# Step 6, Normalize neighbors
+N_NBR=5
+sbatch step6_normalize_neighbors.sbatch \
+   -c $WORK/lpa_read_counts/read_count.txt \
+   -n $WORK/lpa_find_neighbors/LPA_neighbors.zMax1.0.txt.gz \
+   -o $WORK/lpa_normalize_neighbors \
+   -r $LPA/playground/cram_crai/files/734_possible_coding_vntr_regions.IBD2R_gt_0.25.uniq.txt \
+   -p test \
+   -C $CHR \
+   -s $START \
+   -e $END \
+   -N $N_NBR

@@ -21,6 +21,7 @@
 *.vcf.bgz.tbi
 *.tsv
 *.ucsc_bed
+test/files
 
 # === Log files ===
 *.log
@@ -37,3 +38,10 @@ cromwell-*.jar
 
 # === Python cache files ===
 __pycache__/
+.pytest_cache/
+
+# === Distribution / build files ===
+GRiD.egg-info/
+
+# === readthedocs build files ==
+docs/build/
