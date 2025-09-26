@@ -15,14 +15,12 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      # Install conda
-      - name: Setup Miniconda
-        uses: conda-incubator/setup-miniconda@v3
-        with:
-          auto-update-conda: true
-          python-version: 3.11   # match your environment Python
-          activate-environment: docs
-          environment-file: docs/environment.yml  # path to your exported env
+      # Install mamba
+      - name: Install dependencies
+        run: |
+          conda install mamba -n base -c conda-forge
+          mamba env update -n docs -f docs/setup-miniconda-patched-environment.yml
+
 
       # Build the site
       - name: Build Docs

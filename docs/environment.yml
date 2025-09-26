@@ -74,4 +74,3 @@ dependencies:
       - uvicorn==0.37.0
       - watchfiles==1.1.0
       - websockets==15.0.1
-prefix: /nas/longleaf/home/catererz/.conda/envs/docs
