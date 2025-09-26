@@ -42,6 +42,7 @@ jobs:
       - name: Build Docs
         shell: bash
         run: |
+          conda activate docs
           cd docs
           make html
 
