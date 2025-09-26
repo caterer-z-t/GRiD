@@ -19,7 +19,7 @@ jobs:
       - name: Install dependencies
         run: |
           conda install mamba -n base -c conda-forge
-          mamba env update -n docs -f docs/setup-miniconda-patched-environment.yml
+          mamba env update -n docs -f docs/environment.yml
 
 
       # Build the site
