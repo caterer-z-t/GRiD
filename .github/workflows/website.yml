@@ -3,29 +3,41 @@ name: Build and Deploy Website
 on:
   push:
     branches:
+      - '*'
+  pull_request:
+    branches:
       - main
-  workflow_dispatch:
 
 jobs:
   build-and-deploy:
-    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash -el {0}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v3
 
-      - name: Setup Conda
-        uses: conda-incubator/setup-miniconda@v3
+      # Set up Conda
+      - name: Set up Conda
+        uses: conda-incubator/setup-miniconda@v2
         with:
-          auto-activate-base: true
+          python-version: 3.12
+          auto-update-conda: true
+          environment-file: docs/environment.yml
+          activate-environment: docs
 
-      - name: Install dependencies
-        shell: bash
-        run: |
-          source ~/miniconda/etc/profile.d/conda.sh
-          conda install -n base -c conda-forge mamba
-          mamba env create -n docs -f docs/environment.yml || \
-          mamba env update -n docs -f docs/environment.yml
-          conda activate docs
+      - name: Verify Conda Environment
+        run: conda info --envs && conda list
+        
+      # - name: Install Dependencies
+      #   run: |
+      #     conda activate docs
+      #     pip install -r docs/environment.yml
 
       - name: Build Docs
         shell: bash
@@ -38,3 +50,4 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./docs/build/html
+          publish_branch: gh-pages
