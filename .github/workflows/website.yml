@@ -21,9 +21,10 @@ jobs:
       - name: Install dependencies
         shell: bash
         run: |
-          conda install -n base -c conda-forge mamba
-          mamba env update -n docs -f docs/environment.yml
           source ~/miniconda/etc/profile.d/conda.sh
+          conda install -n base -c conda-forge mamba
+          mamba env create -n docs -f docs/environment.yml || \
+          mamba env update -n docs -f docs/environment.yml
           conda activate docs
 
       - name: Build Docs
