@@ -2,7 +2,7 @@
 import argparse
 import pysam
 from pathlib import Path
-from GRiD.utils.utils import format_region, arg_check, argument_parser
+from GRiD.utils.utils import format_region, arg_check, argument_parser, ensure_index
 
 # In[1]: Functions
 def subset_bam_or_cram(
@@ -40,12 +40,17 @@ def main():
     if args.region is None:
         args.region = format_region(args)
 
+    print(f"Subsetting {args.input} for region {args.region}...")
     subset_bam_or_cram(
         args.input,
         args.region,
         args.output,
         reference=args.reference
     )
+
+    print("Indexing output file...")
+    # ensure output index is created
+    ensure_index(args.output)
 
     print(f"Subset written to {args.output} for region {args.region}")
 

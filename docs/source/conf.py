@@ -6,7 +6,7 @@
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
-project = 'lpa-vntr'
+project = 'GRiD'
 copyright = '2025, Zachary Caterer'
 author = 'Zachary Caterer'
 release = 'v0'

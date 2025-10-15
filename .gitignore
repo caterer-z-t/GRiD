@@ -45,3 +45,6 @@ GRiD.egg-info/
 
 # === readthedocs build files ==
 docs/build/
+
+# === Mukamel code files ===
+mukamel/

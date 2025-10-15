@@ -11,7 +11,7 @@
 #SBATCH --mail-type=ALL
 #SBATCH --mail-user=ztcaterer@colorado.edu
 
-source "$LPA/playground/cram_crai/common.sh"
+source "$GRID/playground/cram_crai/common.sh"
 
 usage(){
     echo "Usage: $0 -c COUNT_FILE -n NEIGHBOR_FILE -o OUTPUT_DIR -r REGION_FILE -p PREFIX -C CHR -s START -e END [-N N_NEIGHBORS]"
@@ -104,13 +104,34 @@ while read CHR BP_START BP_END REST; do
         next
     }
     ARGIND==2 {
+        # Only process if this sample exists in read_count file
+        if (!($1 in reads)) {
+            next
+        }
+        
+        # Only process if we have a valid read count
+        if (reads[$1] == "" || reads[$1] == 0) {
+            next
+        }
+        
+        # Calculate neighbor average
         sum=0; num=0;
         for (i=1; i<=Nnbr; i++) {
-            sum+=reads[$(3*i)]/$(3*i+1);
-            num++;
+            nbr_sample = $(3*i)
+            nbr_dist = $(3*i+1)
+            
+            # Check if neighbor exists and has valid data
+            if (nbr_sample in reads && reads[nbr_sample] != "" && reads[nbr_sample] != 0 && nbr_dist > 0) {
+                sum += reads[nbr_sample] / nbr_dist
+                num++
+            }
         }
-        norm_reads = reads[$1]/$2/(sum/num);
-        print $1, norm_reads
+        
+        # Only output if we have valid neighbors
+        if (num > 0 && $2 > 0) {
+            norm_reads = reads[$1] / $2 / (sum / num)
+            print $1, norm_reads
+        }
     }' \
     read_count.cleaned.txt \
     <(zcat "$FIND_NEIGHBOR_OUTPUT_PATH") \

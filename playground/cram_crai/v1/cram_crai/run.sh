@@ -50,41 +50,21 @@ sbatch step5_find_neighbors.sbatch \
    -z 1.0 \
    -n 5
 
-# Step 6, Extract reference sequences for VNTR region
-# Step LPA-1, extract reference sequence for LPA region
-sbatch step_lpa1_extract_reference.sbatch \
-   -r $GRID/cram/hg38.fa \
-   -b $GRID/cram/ref_hg38.bed \
-   -o $WORK/lpa_extract_reference \
-   -f ref_lpa_hg38
-
-# Step 7, realign reads to extracted reference sequence
-# Step LPA-2, realign reads to LPA reference sequence
-sbatch step7_realign.sbatch \
-   -p $GRID/playground/cram_crai/src/realign_lpa.py \
-   -c $SOL/cram \
-   -r $GRID/cram/hg38.fa \
-   -f $WORK/lpa_extract_reference/ref_lpa_hg38.fasta \
-   -o $WORK/lpa_realign/realign_results.txt \
+# Step 6, Normalize neighbors
+sbatch step6_normalize_neighbors.sbatch \
+   -c $WORK/lpa_read_counts/read_count.txt \
+   -n $WORK/lpa_find_neighbors/LPA_neighbors.zMax1.0.txt.gz \
+   -o $WORK/lpa_normalize_neighbors \
+   -r $GRID/files/734_possible_coding_vntr_regions.IBD2R_gt_0.25.uniq.txt \
+   -p test \
    -C $CHR \
    -s $START \
-   -e $END
+   -e $END \
+   -N 5
 
-
-# Step 8, compute diploid CN estimates
-# Step LPA-3, compute diploid CN estimates for LPA region
-sbatch step_lpa3_compute_dipCN.sbatch \
-   -p $GRID/playground/cram_crai/src/compute_dipCN.py \
-   -c $WORK/lpa_realign/realign_results.txt \
-   -n $WORK/lpa_find_neighbors/LPA_neighbors.zMax1.0.txt.gz \
-   -o $WORK/lpa_compute_dipCN/LPA \
-   -N 200
-
-# Step 9, estimate KIV CN
-# Step LPA-4, estimate KIV CN for LPA region
-sbatch step_lpa5_estimate_KIV_CN.sbatch \
-   -p $GRID/playground/cram_crai/src/estimate_KIV_CN.py \
-   -a $WORK/lpa_compute_dipCN/LPA.exon1A.dipCN.txt \
-   -b $WORK/lpa_compute_dipCN/LPA.exon1B.dipCN.txt \
-   -o $WORK/lpa_estimate_kiv_cn/LPA_KIV2_copy_numbers.tsv \
-   -f tsv
+sbatch step7_compare_lpa_ass.sbatch \
+    -p $GRID/playground/cram_crai/src/plot_vntr_lpa_dipCN_ass.py \
+    -f $GRID/files/diploid_calls.txt \
+    -d $WORK/lpa_normalize_neighbors/test_6_160605062_160647661.dipCN.txt \
+    -o lpa_vntr_lpa_dipCN_ass \
+    -O $WORK/lpa_vntr_lpa_dipCN_ass

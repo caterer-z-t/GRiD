@@ -1,0 +1,1 @@
+/proj/epi/CVDGeneNas/migraff/SOL/pheno/lpa/solLpa_idmatched.csv

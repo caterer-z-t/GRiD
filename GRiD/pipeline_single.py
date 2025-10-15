@@ -1,6 +1,6 @@
 # In[0]: Imports
 from pathlib import Path
-from GRiD.utils.utils import format_region, arg_check, argument_parser
+from GRiD.utils.utils import format_region, arg_check, argument_parser, ensure_index
 from subset_cram import subset_bam_or_cram
 from count_reads import count_reads
 from mosdepth import run_mosdepth
@@ -19,6 +19,7 @@ def process_file(input_file, output_dir, reference, region=None, window=1000):
     # Step 1: subset
     subset_file = output_dir / f"{sample_id}.subset.bam"
     subset_bam_or_cram(str(input_path), region, str(subset_file), reference=reference)
+    ensure_index(str(subset_file))
     print(f"Subset done: {subset_file}")
 
     # Step 2: count reads
@@ -31,7 +32,7 @@ def process_file(input_file, output_dir, reference, region=None, window=1000):
     print(f"Mosdepth done: {mosdepth_prefix}")
 
     # Step 4: extract region coverage
-    regions_bed_gz = mosdepth_prefix.with_suffix(".regions.bed.gz")
+    regions_bed_gz = mosdepth_prefix.with_suffix(".mosdepth.regions.bed.gz")
     coverage = extract_region_cov(regions_bed_gz, region)
     print(f"Region coverage: {coverage}")
 
