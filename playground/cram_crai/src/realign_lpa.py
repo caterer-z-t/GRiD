@@ -16,9 +16,55 @@ import re
 MIN_QUAL = ord(':')  # ASCII value for ':'
 BAD_SCORE = 9999
 
-# Positions of the 7 KIV2 repeats in hg19/hg37
-STARTS = [161032593, 161038148, 161043694, 161049238, 161054784, 161060331, 161065878]
-REF_OFFSET = 161032032  # Reference start position
+# Global variables to be set from position file
+STARTS = []
+REF_OFFSET = 0
+
+
+def load_positions(positions_file, genome_build):
+    """
+    Load hardcoded positions from file.
+    
+    File format (tab-separated):
+    Hg38file    Hg19file
+    160611000   161032032
+    160611561   161032593
+    ...
+    
+    Returns: (starts, ref_offset) tuple
+    """
+    starts = []
+    ref_offset = 0
+    
+    # Determine which column to use (0=hg38, 1=hg19)
+    col_idx = 0 if genome_build == 'hg38' else 1
+    
+    with open(positions_file, 'r') as f:
+        # Skip header
+        next(f)
+        
+        for i, line in enumerate(f):
+            fields = line.strip().split('\t')
+            if len(fields) < 2:
+                continue
+            
+            try:
+                pos = int(fields[col_idx])
+                
+                # First position is the reference offset
+                if i == 0:
+                    ref_offset = pos
+                # Remaining 7 positions are the repeat starts
+                else:
+                    starts.append(pos)
+            except ValueError:
+                print(f"WARNING: Could not parse position: {line.strip()}", file=sys.stderr)
+                continue
+    
+    if len(starts) != 7:
+        raise ValueError(f"Expected 7 repeat positions, got {len(starts)}")
+    
+    return starts, ref_offset
 
 
 def load_reference(ref_fasta_path):
@@ -107,11 +153,11 @@ def classify_variant(combined_scores):
     """
     s = combined_scores
     
-    # Check if position 0 (161032593) has minimum score -> 1B_KIV3
+    # Check if position 0 (first repeat) has minimum score -> 1B_KIV3
     if all(s[0] < s[i] for i in range(1, 7)):
         return '1B_KIV3'
     
-    # Check if position 4 (161054784) has minimum score -> 1B_KIV2
+    # Check if position 4 (fifth repeat) has minimum score -> 1B_KIV2
     elif all(s[4] < s[i] for i in range(7) if i != 4):
         return '1B_KIV2'
     
@@ -196,12 +242,41 @@ def main():
         required=True,
         help='Sample ID to prepend to output'
     )
+    parser.add_argument(
+        '--positions',
+        required=True,
+        help='Path to hardcoded positions file'
+    )
+    parser.add_argument(
+        '--genome-build',
+        choices=['hg19', 'hg37', 'hg38'],
+        default='hg38',
+        help='Genome build (default: hg38)'
+    )
     
     args = parser.parse_args()
+    
+    # Treat hg37 as hg19
+    genome_build = 'hg19' if args.genome_build == 'hg37' else args.genome_build
+    
+    # Load positions
+    global STARTS, REF_OFFSET
+    try:
+        STARTS, REF_OFFSET = load_positions(args.positions, genome_build)
+        print(f"Loaded {len(STARTS)} repeat positions for {genome_build}", file=sys.stderr)
+        print(f"Reference offset: {REF_OFFSET}", file=sys.stderr)
+        print(f"Repeat starts: {STARTS}", file=sys.stderr)
+    except FileNotFoundError:
+        print(f"ERROR: Positions file not found: {args.positions}", file=sys.stderr)
+        sys.exit(1)
+    except Exception as e:
+        print(f"ERROR: Failed to load positions: {e}", file=sys.stderr)
+        sys.exit(1)
     
     # Load reference sequence
     try:
         ref_seq = load_reference(args.reference)
+        print(f"Loaded reference sequence: {len(ref_seq)} bp", file=sys.stderr)
     except FileNotFoundError:
         print(f"ERROR: Reference file not found: {args.reference}", file=sys.stderr)
         sys.exit(1)

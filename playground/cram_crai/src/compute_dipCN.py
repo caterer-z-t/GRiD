@@ -13,6 +13,31 @@ import sys
 from pathlib import Path
 
 
+def normalize_sample_id(sample_id):
+    """
+    Normalize sample IDs by removing common file extensions and suffixes.
+    
+    Examples:
+        NWD278973.b38.irc.v1_subset → NWD278973
+        NWD278973.cram → NWD278973
+        NWD278973 → NWD278973
+    """
+    # Strip whitespace first
+    sample_id = sample_id.strip()
+    
+    # Remove .b38.irc.v1_subset pattern (before other extensions)
+    if '.b38.irc.v1_subset' in sample_id:
+        sample_id = sample_id.replace('.b38.irc.v1_subset', '')
+    
+    # Remove common CRAM/BAM file patterns
+    if sample_id.endswith('.cram'):
+        sample_id = sample_id[:-5]
+    elif sample_id.endswith('.bam'):
+        sample_id = sample_id[:-4]
+    
+    return sample_id.strip()
+
+
 def load_count_results(count_file):
     """
     Load read counts from realignment output.
@@ -24,12 +49,18 @@ def load_count_results(count_file):
     counts = {}
     
     with open(count_file, 'r') as f:
-        for line in f:
+        for i, line in enumerate(f):
             fields = line.strip().split('\t')
             if len(fields) != 5:
                 continue
             
-            sample_id = fields[0]
+            original_id = fields[0]
+            sample_id = normalize_sample_id(original_id)
+            
+            # Debug first few
+            if i < 3:
+                print(f"  DEBUG count: '{original_id}' -> '{sample_id}'", file=sys.stderr)
+            
             try:
                 counts[sample_id] = {
                     '1B_KIV3': int(fields[1]),
@@ -59,12 +90,18 @@ def load_neighbor_results(neighbor_file):
     mode = 'rt' if neighbor_file.endswith('.gz') else 'r'
     
     with open_func(neighbor_file, mode) as f:
-        for line in f:
+        for i, line in enumerate(f):
             fields = line.strip().split('\t')
             if len(fields) < 2:
                 continue
             
-            sample_id = fields[0]
+            original_id = fields[0]
+            sample_id = normalize_sample_id(original_id)
+            
+            # Debug first few
+            if i < 3:
+                print(f"  DEBUG neighbor: '{original_id}' -> '{sample_id}'", file=sys.stderr)
+            
             try:
                 scale = float(fields[1])
             except ValueError:
@@ -72,12 +109,12 @@ def load_neighbor_results(neighbor_file):
             
             # Parse neighbors (triplets: neighbor_id, scale, distance)
             neighbor_list = []
-            for i in range(2, len(fields), 3):
-                if i + 2 < len(fields):
+            for j in range(2, len(fields), 3):
+                if j + 2 < len(fields):
                     try:
-                        neighbor_id = fields[i]
-                        neighbor_scale = float(fields[i + 1])
-                        distance = float(fields[i + 2])
+                        neighbor_id = normalize_sample_id(fields[j])
+                        neighbor_scale = float(fields[j + 1])
+                        distance = float(fields[j + 2])
                         neighbor_list.append((neighbor_id, neighbor_scale, distance))
                     except ValueError:
                         continue
@@ -201,6 +238,30 @@ def main():
     print(f"Loading neighbor results from {args.neighbor_file}...")
     neighbors = load_neighbor_results(args.neighbor_file)
     print(f"  Loaded neighbor info for {len(neighbors)} samples")
+    
+    # Debug: Check for sample ID overlap
+    count_ids = set(counts.keys())
+    neighbor_ids = set(neighbors.keys())
+    overlap = count_ids & neighbor_ids
+    
+    print(f"\nSample ID debugging:")
+    print(f"  Samples in count file: {len(count_ids)}")
+    print(f"  Samples in neighbor file: {len(neighbor_ids)}")
+    print(f"  Overlapping samples: {len(overlap)}")
+    
+    if len(overlap) == 0:
+        print("\nERROR: No overlapping sample IDs found!")
+        print("\nFirst 5 sample IDs from count file:")
+        for i, sample_id in enumerate(list(count_ids)[:5]):
+            print(f"    '{sample_id}'")
+        print("\nFirst 5 sample IDs from neighbor file:")
+        for i, sample_id in enumerate(list(neighbor_ids)[:5]):
+            print(f"    '{sample_id}'")
+        print("\nSample IDs don't match! Check if one has file extensions or different naming.")
+        sys.exit(1)
+    elif len(overlap) < len(count_ids) * 0.5:
+        print(f"\nWARNING: Only {len(overlap)/len(count_ids)*100:.1f}% of samples overlap!")
+        print("  Some samples in count file may be missing from neighbor file")
     
     # Process each exon type
     exon_types = ['1B_KIV3', '1B_notKIV3', '1B', '1A']

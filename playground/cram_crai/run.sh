@@ -66,6 +66,8 @@ sbatch step7_realign.sbatch \
    -r $GRID/cram/hg38.fa \
    -f $WORK/lpa_extract_reference/ref_lpa_hg38.fasta \
    -o $WORK/lpa_realign/realign_results.txt \
+   -P $GRID/files/hardcoded_positions.txt \
+   -g hg38 \
    -C $CHR \
    -s $START \
    -e $END
@@ -73,7 +75,7 @@ sbatch step7_realign.sbatch \
 
 # Step 8, compute diploid CN estimates
 # Step LPA-3, compute diploid CN estimates for LPA region
-sbatch step_lpa3_compute_dipCN.sbatch \
+sbatch step8_compute_dipCN.sbatch \
    -p $GRID/playground/cram_crai/src/compute_dipCN.py \
    -c $WORK/lpa_realign/realign_results.txt \
    -n $WORK/lpa_find_neighbors/LPA_neighbors.zMax1.0.txt.gz \
@@ -82,9 +84,16 @@ sbatch step_lpa3_compute_dipCN.sbatch \
 
 # Step 9, estimate KIV CN
 # Step LPA-4, estimate KIV CN for LPA region
-sbatch step_lpa5_estimate_KIV_CN.sbatch \
+sbatch step9_estimate_KIV_CN.sbatch \
    -p $GRID/playground/cram_crai/src/estimate_KIV_CN.py \
    -a $WORK/lpa_compute_dipCN/LPA.exon1A.dipCN.txt \
    -b $WORK/lpa_compute_dipCN/LPA.exon1B.dipCN.txt \
    -o $WORK/lpa_estimate_kiv_cn/LPA_KIV2_copy_numbers.tsv \
    -f tsv
+
+# Step 10, plot KIV2 copy number vs Lp(a) association
+sbatch step10_plot_KIVCN_and_lpa.sbatch \
+   -p $GRID/playground/cram_crai/src/plot_lpa_ass.py \
+   -k $WORK/lpa_estimate_kiv_cn/LPA_KIV2_copy_numbers.tsv \
+   -l $GRID/files/diploid_calls.txt \
+   -o $WORK/lpa_plots/LPA_association
