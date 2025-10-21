@@ -48,3 +48,5 @@ docs/build/
 
 # === Mukamel code files ===
 mukamel/
+
+files/SOL_NWD_IDs_crosswalk.csv
