@@ -1,0 +1,693 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="../">
+  <head><meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="Index" href="../genindex.html"><link rel="search" title="Search" href="../search.html"><link rel="next" title="Read Counting Module" href="count-reads.html"><link rel="prev" title="Utilities Overview" href="utilities_overview.html">
+        <link rel="prefetch" href="../_static/grid_logo.png" as="image">
+
+    <link rel="shortcut icon" href="../_static/favicon.ico"><!-- Generated with Sphinx 8.2.3 and Furo 2025.09.25 -->
+        <title>Helper Functions - GRiD v0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d111a655" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=580074bf" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=8dab3a3b" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f2f2f2;
+  --color-code-foreground: #1e1e1e;
+  --color-brand-primary: #D91E36;
+  --color-brand-content: #D91E36;
+  --color-link: #D91E36;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  --color-brand-primary: #D91E36;
+  --color-brand-content: #D91E36;
+  --color-link: #D91E36;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  --color-brand-primary: #D91E36;
+  --color-brand-content: #D91E36;
+  --color-link: #D91E36;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle site navigation sidebar">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc" aria-label="Toggle table of contents sidebar">
+<label class="overlay sidebar-overlay" for="__navigation"></label>
+<label class="overlay toc-overlay" for="__toc"></label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <span class="icon"><svg><use href="#svg-menu"></use></svg></span>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../index.html"><div class="brand">GRiD v0 documentation</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
+  <div class="sidebar-logo-container">
+    <img class="sidebar-logo" src="../_static/grid_logo.png" alt="Logo"/>
+  </div>
+  
+  <span class="sidebar-brand-text">GRiD v0 documentation</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../readme.html">Welcome to GRiD’s documentation!</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../examples.html">Example Pipeline Jobs</a><input aria-label="Toggle navigation of Example Pipeline Jobs" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../examples/SOL_sbatch.html">SLURM Job Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/SOL_python.html">Python Pipeline Example</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../code_of_conduct.html">Code of Conduct</a></li>
+<li class="toctree-l1 current has-children"><a class="reference internal" href="../modules.html">Modules</a><input aria-label="Toggle navigation of Modules" checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="grid_core.html">GRiD Core Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utilities_overview.html">Utilities Overview</a></li>
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">Helper Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="count-reads.html">Read Counting Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mosdepth.html">Mosdepth Coverage Analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="normalize-mosdepth.html">Mosdepth Coverage Normalization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="find-neighbors.html">Neighbor Finding Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lpa-realign.html">LPA Realignment Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="compute-dipcn.html">Diploid Copy Number Computation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="estimate-kiv.html">KIV-2 Copy Number Estimation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="crai.html">CRAM Index Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="subset.html">CRAM Subsetting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="extract-reference.html">Extract Reference Sequences</a></li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="view-this-page">
+  <a class="muted-link" href="../_sources/modules_dir/helper-functions.rst.txt" title="View this page">
+    <svg><use href="#svg-eye"></use></svg>
+    <span class="visually-hidden">View this page</span>
+  </a>
+</div>
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <section id="helper-functions">
+<h1>Helper Functions<a class="headerlink" href="#helper-functions" title="Link to this heading">¶</a></h1>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">¶</a></h2>
+<section id="helper-utilities">
+<h3>Helper Utilities<a class="headerlink" href="#helper-utilities" title="Link to this heading">¶</a></h3>
+<p>Shared utility functions used across multiple GRiD modules. These provide common functionality for file handling, configuration management, and output formatting.</p>
+<section id="modules">
+<h4>Modules<a class="headerlink" href="#modules" title="Link to this heading">¶</a></h4>
+<section id="create-region-py">
+<h5><code class="docutils literal notranslate"><span class="pre">create_region.py</span></code><a class="headerlink" href="#create-region-py" title="Link to this heading">¶</a></h5>
+<p><strong>Purpose:</strong> Format genomic region strings for samtools/pysam
+<strong>Functions:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">create_region_string(region,</span> <span class="pre">chrom,</span> <span class="pre">start,</span> <span class="pre">end)</span></code> - Creates standardized region strings (e.g., “chr6:160000000-160100000”)</p></li>
+</ul>
+<p><strong>Usage:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">grid.utils.helper_dir.create_region</span><span class="w"> </span><span class="kn">import</span> <span class="n">create_region_string</span>
+
+<span class="c1"># From separate components</span>
+<span class="n">region</span> <span class="o">=</span> <span class="n">create_region_string</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="s2">&quot;chr6&quot;</span><span class="p">,</span> <span class="mi">160000000</span><span class="p">,</span> <span class="mi">160100000</span><span class="p">)</span>
+<span class="c1"># Returns: &quot;chr6:160000000-160100000&quot;</span>
+
+<span class="c1"># From existing region string</span>
+<span class="n">region</span> <span class="o">=</span> <span class="n">create_region_string</span><span class="p">(</span><span class="s2">&quot;chr6:160000000-160100000&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+<span class="c1"># Returns: &quot;chr6:160000000-160100000&quot;</span>
+</pre></div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="display-results-py">
+<h5><code class="docutils literal notranslate"><span class="pre">display_results.py</span></code><a class="headerlink" href="#display-results-py" title="Link to this heading">¶</a></h5>
+<p><strong>Purpose:</strong> Pretty-print results to console using Rich library
+<strong>Functions:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">display_results(results,</span> <span class="pre">title)</span></code> - Display tabular results with formatting</p></li>
+</ul>
+<p><strong>Usage:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">grid.utils.helper_dir.display_results</span><span class="w"> </span><span class="kn">import</span> <span class="n">display_results</span>
+
+<span class="n">results</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">{</span><span class="s2">&quot;sample&quot;</span><span class="p">:</span> <span class="s2">&quot;S001&quot;</span><span class="p">,</span> <span class="s2">&quot;count&quot;</span><span class="p">:</span> <span class="mi">1234</span><span class="p">},</span>
+    <span class="p">{</span><span class="s2">&quot;sample&quot;</span><span class="p">:</span> <span class="s2">&quot;S002&quot;</span><span class="p">,</span> <span class="s2">&quot;count&quot;</span><span class="p">:</span> <span class="mi">2345</span><span class="p">}</span>
+<span class="p">]</span>
+<span class="n">display_results</span><span class="p">(</span><span class="n">results</span><span class="p">,</span> <span class="s2">&quot;Read Counts&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="find-all-cram-files-py">
+<h5><code class="docutils literal notranslate"><span class="pre">find_all_cram_files.py</span></code><a class="headerlink" href="#find-all-cram-files-py" title="Link to this heading">¶</a></h5>
+<p><strong>Purpose:</strong> Discover CRAM files in directories
+<strong>Functions:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">find_all_cram_files(directory)</span></code> - Recursively find all .cram files</p></li>
+</ul>
+<p><strong>Usage:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">grid.utils.helper_dir.find_all_cram_files</span><span class="w"> </span><span class="kn">import</span> <span class="n">find_all_cram_files</span>
+
+<span class="n">cram_files</span> <span class="o">=</span> <span class="n">find_all_cram_files</span><span class="p">(</span><span class="s2">&quot;data/crams/&quot;</span><span class="p">)</span>
+<span class="c1"># Returns: List of Path objects</span>
+</pre></div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="load-flags-from-yaml-py">
+<h5><code class="docutils literal notranslate"><span class="pre">load_flags_from_yaml.py</span></code><a class="headerlink" href="#load-flags-from-yaml-py" title="Link to this heading">¶</a></h5>
+<p><strong>Purpose:</strong> Load SAM flag filters from YAML configuration
+<strong>Functions:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">load_flags_from_yaml(config_path)</span></code> - Parse SAM flags from config</p></li>
+</ul>
+<p><strong>Usage:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">grid.utils.helper_dir.load_flags_from_yaml</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_flags_from_yaml</span>
+
+<span class="n">flags</span> <span class="o">=</span> <span class="n">load_flags_from_yaml</span><span class="p">(</span><span class="s2">&quot;config.yaml&quot;</span><span class="p">)</span>
+<span class="c1"># Returns: Dict with &#39;required_flags&#39; and &#39;excluded_flags&#39;</span>
+</pre></div>
+</div>
+<p><strong>Config Format:</strong></p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">sam_flags</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">required_flags</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">PROPER_PAIR</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">READ_MAPPED</span>
+<span class="w">  </span><span class="nt">excluded_flags</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DUPLICATE</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SECONDARY</span>
+</pre></div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="setup-output-file-py">
+<h5><code class="docutils literal notranslate"><span class="pre">setup_output_file.py</span></code><a class="headerlink" href="#setup-output-file-py" title="Link to this heading">¶</a></h5>
+<p><strong>Purpose:</strong> Prepare output files and directories
+<strong>Functions:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">setup_output_file(output_path,</span> <span class="pre">create_dirs=True)</span></code> - Ensure output path exists</p></li>
+</ul>
+<p><strong>Usage:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">grid.utils.helper_dir.setup_output_file</span><span class="w"> </span><span class="kn">import</span> <span class="n">setup_output_file</span>
+
+<span class="n">output_file</span> <span class="o">=</span> <span class="n">setup_output_file</span><span class="p">(</span><span class="s2">&quot;results/analysis/output.tsv&quot;</span><span class="p">)</span>
+<span class="c1"># Creates &#39;results/analysis/&#39; directory if needed</span>
+</pre></div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="write-result-to-file-py">
+<h5><code class="docutils literal notranslate"><span class="pre">write_result_to_file.py</span></code><a class="headerlink" href="#write-result-to-file-py" title="Link to this heading">¶</a></h5>
+<p><strong>Purpose:</strong> Write analysis results to disk
+<strong>Functions:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">write_result_to_file(results,</span> <span class="pre">output_file,</span> <span class="pre">header)</span></code> - Write TSV output</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">append_result_to_file(result,</span> <span class="pre">output_file)</span></code> - Append single result</p></li>
+</ul>
+<p><strong>Usage:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">grid.utils.helper_dir.write_result_to_file</span><span class="w"> </span><span class="kn">import</span> <span class="n">write_result_to_file</span>
+
+<span class="n">results</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">{</span><span class="s2">&quot;sample&quot;</span><span class="p">:</span> <span class="s2">&quot;S001&quot;</span><span class="p">,</span> <span class="s2">&quot;reads&quot;</span><span class="p">:</span> <span class="mi">1234</span><span class="p">,</span> <span class="s2">&quot;coverage&quot;</span><span class="p">:</span> <span class="mf">45.2</span><span class="p">},</span>
+    <span class="p">{</span><span class="s2">&quot;sample&quot;</span><span class="p">:</span> <span class="s2">&quot;S002&quot;</span><span class="p">,</span> <span class="s2">&quot;reads&quot;</span><span class="p">:</span> <span class="mi">2345</span><span class="p">,</span> <span class="s2">&quot;coverage&quot;</span><span class="p">:</span> <span class="mf">52.1</span><span class="p">}</span>
+<span class="p">]</span>
+<span class="n">write_result_to_file</span><span class="p">(</span>
+    <span class="n">results</span><span class="p">,</span>
+    <span class="s2">&quot;output.tsv&quot;</span><span class="p">,</span>
+    <span class="n">header</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;sample&quot;</span><span class="p">,</span> <span class="s2">&quot;reads&quot;</span><span class="p">,</span> <span class="s2">&quot;coverage&quot;</span><span class="p">]</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="design-principles">
+<h4>Design Principles<a class="headerlink" href="#design-principles" title="Link to this heading">¶</a></h4>
+<p>These helpers follow DRY (Don’t Repeat Yourself) principles:</p>
+<ul class="simple">
+<li><p><strong>Reusable:</strong> Used across multiple pipeline modules</p></li>
+<li><p><strong>Focused:</strong> Each module does one thing well</p></li>
+<li><p><strong>Flexible:</strong> Accept various input formats when reasonable</p></li>
+<li><p><strong>Type-safe:</strong> Use pathlib.Path for file operations</p></li>
+</ul>
+</section>
+<section id="common-patterns">
+<h4>Common Patterns<a class="headerlink" href="#common-patterns" title="Link to this heading">¶</a></h4>
+<p>Most utilities follow these conventions:</p>
+<ul class="simple">
+<li><p>Accept <code class="docutils literal notranslate"><span class="pre">Path</span></code> or <code class="docutils literal notranslate"><span class="pre">str</span></code> for file paths</p></li>
+<li><p>Return standardized types (<code class="docutils literal notranslate"><span class="pre">Path</span></code>, <code class="docutils literal notranslate"><span class="pre">dict</span></code>, <code class="docutils literal notranslate"><span class="pre">list</span></code>)</p></li>
+<li><p>Raise descriptive exceptions on errors</p></li>
+<li><p>Support both programmatic and CLI usage</p></li>
+</ul>
+</section>
+</section>
+</section>
+<section id="python-api-documentation">
+<h2>Python API Documentation<a class="headerlink" href="#python-api-documentation" title="Link to this heading">¶</a></h2>
+<section id="module-grid.utils.helper_dir">
+<span id="grid-utils-helper-dir"></span><h3>grid.utils.helper_dir<a class="headerlink" href="#module-grid.utils.helper_dir" title="Link to this heading">¶</a></h3>
+<dl class="py function">
+<dt class="sig sig-object py" id="grid.utils.helper_dir.create_region_string">
+<span class="sig-prename descclassname"><span class="pre">grid.utils.helper_dir.</span></span><span class="sig-name descname"><span class="pre">create_region_string</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">region</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">chrom</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#grid.utils.helper_dir.create_region_string" title="Link to this definition">¶</a></dt>
+<dd><p>Create a genomic region string in ‘chr:start-end’ format.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>region</strong> (<em>str</em>) – Full region string (e.g., ‘chr6:160000000-160100000’)</p></li>
+<li><p><strong>chrom</strong> (<em>str</em>) – Chromosome name (e.g., ‘chr6’)</p></li>
+<li><p><strong>start</strong> (<em>int</em>) – Start position (e.g., 160000000)</p></li>
+<li><p><strong>end</strong> (<em>int</em>) – End position (e.g., 160100000)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Genomic region string.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="grid.utils.helper_dir.find_cram_files">
+<span class="sig-prename descclassname"><span class="pre">grid.utils.helper_dir.</span></span><span class="sig-name descname"><span class="pre">find_cram_files</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cram_dir</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#grid.utils.helper_dir.find_cram_files" title="Link to this definition">¶</a></dt>
+<dd><p>Return all CRAM files in a directory.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>cram_dir</strong> (<em>str</em>) – Path to the directory containing CRAM files.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>List of paths to CRAM files.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>List[str]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="grid.utils.helper_dir.load_flags">
+<span class="sig-prename descclassname"><span class="pre">grid.utils.helper_dir.</span></span><span class="sig-name descname"><span class="pre">load_flags</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parameter</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#grid.utils.helper_dir.load_flags" title="Link to this definition">¶</a></dt>
+<dd><p>Load read count flags from a YAML configuration file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>config_file</strong> (<em>str</em>) – Path to the YAML configuration file.</p></li>
+<li><p><strong>parameter</strong> (<em>str</em>) – The parameter name to look for in the YAML file.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A set of read count flags.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Set[int]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="grid.utils.helper_dir.print_batch_summary">
+<span class="sig-prename descclassname"><span class="pre">grid.utils.helper_dir.</span></span><span class="sig-name descname"><span class="pre">print_batch_summary</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">total_processed</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">failed_items</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">operation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'processed'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#grid.utils.helper_dir.print_batch_summary" title="Link to this definition">¶</a></dt>
+<dd><p>Print summary of a batch operation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>total_processed</strong> (<em>int</em>) – Total number of items processed</p></li>
+<li><p><strong>failed_items</strong> (<em>list</em>) – List of failed item names/basenames</p></li>
+<li><p><strong>operation</strong> (<em>str</em>) – Description of operation (e.g., “indexed”, “processed”, “counted”)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="grid.utils.helper_dir.print_individual_error">
+<span class="sig-prename descclassname"><span class="pre">grid.utils.helper_dir.</span></span><span class="sig-name descname"><span class="pre">print_individual_error</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">basename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">error</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">progress_console</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#grid.utils.helper_dir.print_individual_error" title="Link to this definition">¶</a></dt>
+<dd><p>Print error message for an individual item.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>basename</strong> (<em>str</em>) – Item basename/name</p></li>
+<li><p><strong>error</strong> (<em>str</em>) – Error message</p></li>
+<li><p><strong>progress_console</strong> – Optional Progress console for proper rendering</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="grid.utils.helper_dir.print_individual_success">
+<span class="sig-prename descclassname"><span class="pre">grid.utils.helper_dir.</span></span><span class="sig-name descname"><span class="pre">print_individual_success</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">basename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">message</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">progress_console</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#grid.utils.helper_dir.print_individual_success" title="Link to this definition">¶</a></dt>
+<dd><p>Print success message for an individual item.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>basename</strong> (<em>str</em>) – Item basename/name</p></li>
+<li><p><strong>message</strong> (<em>str</em>) – Success message (e.g., “done: reads=1234” or “indexed”)</p></li>
+<li><p><strong>progress_console</strong> – Optional Progress console for proper rendering</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="grid.utils.helper_dir.setup_output_file">
+<span class="sig-prename descclassname"><span class="pre">grid.utils.helper_dir.</span></span><span class="sig-name descname"><span class="pre">setup_output_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">output_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">chrom</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#grid.utils.helper_dir.setup_output_file" title="Link to this definition">¶</a></dt>
+<dd><p>Create output file with header.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>output_file</strong> (<em>str</em>) – Path to output TSV file</p></li>
+<li><p><strong>chrom</strong> (<em>str</em>) – Chromosome name</p></li>
+<li><p><strong>start</strong> (<em>int</em>) – Start position</p></li>
+<li><p><strong>end</strong> (<em>int</em>) – End position</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Path object for the output file</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>Path</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="grid.utils.helper_dir.write_result_to_file">
+<span class="sig-prename descclassname"><span class="pre">grid.utils.helper_dir.</span></span><span class="sig-name descname"><span class="pre">write_result_to_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">output_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">basename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">count</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">write_lock</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">progress_console</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#grid.utils.helper_dir.write_result_to_file" title="Link to this definition">¶</a></dt>
+<dd><p>Write a single result to the output file in a thread-safe manner.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>output_file</strong> (<em>Path</em>) – Path to output file</p></li>
+<li><p><strong>basename</strong> (<em>str</em>) – Sample basename</p></li>
+<li><p><strong>count</strong> (<em>int</em><em> | </em><em>str</em>) – Read count or “Error”</p></li>
+<li><p><strong>write_lock</strong> (<em>lock</em>) – Threading lock for safe file writing</p></li>
+<li><p><strong>progress_console</strong> – Optional Progress console for proper rendering</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="count-reads.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">Read Counting Module</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="utilities_overview.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">Utilities Overview</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2025, Zachary Caterer
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Helper Functions</a><ul>
+<li><a class="reference internal" href="#overview">Overview</a><ul>
+<li><a class="reference internal" href="#helper-utilities">Helper Utilities</a><ul>
+<li><a class="reference internal" href="#modules">Modules</a><ul>
+<li><a class="reference internal" href="#create-region-py"><code class="docutils literal notranslate"><span class="pre">create_region.py</span></code></a></li>
+<li><a class="reference internal" href="#display-results-py"><code class="docutils literal notranslate"><span class="pre">display_results.py</span></code></a></li>
+<li><a class="reference internal" href="#find-all-cram-files-py"><code class="docutils literal notranslate"><span class="pre">find_all_cram_files.py</span></code></a></li>
+<li><a class="reference internal" href="#load-flags-from-yaml-py"><code class="docutils literal notranslate"><span class="pre">load_flags_from_yaml.py</span></code></a></li>
+<li><a class="reference internal" href="#setup-output-file-py"><code class="docutils literal notranslate"><span class="pre">setup_output_file.py</span></code></a></li>
+<li><a class="reference internal" href="#write-result-to-file-py"><code class="docutils literal notranslate"><span class="pre">write_result_to_file.py</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#design-principles">Design Principles</a></li>
+<li><a class="reference internal" href="#common-patterns">Common Patterns</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#python-api-documentation">Python API Documentation</a><ul>
+<li><a class="reference internal" href="#module-grid.utils.helper_dir">grid.utils.helper_dir</a><ul>
+<li><a class="reference internal" href="#grid.utils.helper_dir.create_region_string"><code class="docutils literal notranslate"><span class="pre">create_region_string()</span></code></a></li>
+<li><a class="reference internal" href="#grid.utils.helper_dir.find_cram_files"><code class="docutils literal notranslate"><span class="pre">find_cram_files()</span></code></a></li>
+<li><a class="reference internal" href="#grid.utils.helper_dir.load_flags"><code class="docutils literal notranslate"><span class="pre">load_flags()</span></code></a></li>
+<li><a class="reference internal" href="#grid.utils.helper_dir.print_batch_summary"><code class="docutils literal notranslate"><span class="pre">print_batch_summary()</span></code></a></li>
+<li><a class="reference internal" href="#grid.utils.helper_dir.print_individual_error"><code class="docutils literal notranslate"><span class="pre">print_individual_error()</span></code></a></li>
+<li><a class="reference internal" href="#grid.utils.helper_dir.print_individual_success"><code class="docutils literal notranslate"><span class="pre">print_individual_success()</span></code></a></li>
+<li><a class="reference internal" href="#grid.utils.helper_dir.setup_output_file"><code class="docutils literal notranslate"><span class="pre">setup_output_file()</span></code></a></li>
+<li><a class="reference internal" href="#grid.utils.helper_dir.write_result_to_file"><code class="docutils literal notranslate"><span class="pre">write_result_to_file()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="../_static/documentation_options.js?v=f8c80a57"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/scripts/furo.js?v=46bd48cc"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    </body>
+</html>

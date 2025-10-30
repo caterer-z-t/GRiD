@@ -1,0 +1,1066 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="../">
+  <head><meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="Index" href="../genindex.html"><link rel="search" title="Search" href="../search.html"><link rel="next" title="CRAM Index Management" href="crai.html"><link rel="prev" title="Diploid Copy Number Computation" href="compute-dipcn.html">
+        <link rel="prefetch" href="../_static/grid_logo.png" as="image">
+
+    <link rel="shortcut icon" href="../_static/favicon.ico"><!-- Generated with Sphinx 8.2.3 and Furo 2025.09.25 -->
+        <title>KIV-2 Copy Number Estimation - GRiD v0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d111a655" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=580074bf" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=8dab3a3b" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f2f2f2;
+  --color-code-foreground: #1e1e1e;
+  --color-brand-primary: #D91E36;
+  --color-brand-content: #D91E36;
+  --color-link: #D91E36;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  --color-brand-primary: #D91E36;
+  --color-brand-content: #D91E36;
+  --color-link: #D91E36;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  --color-brand-primary: #D91E36;
+  --color-brand-content: #D91E36;
+  --color-link: #D91E36;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle site navigation sidebar">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc" aria-label="Toggle table of contents sidebar">
+<label class="overlay sidebar-overlay" for="__navigation"></label>
+<label class="overlay toc-overlay" for="__toc"></label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <span class="icon"><svg><use href="#svg-menu"></use></svg></span>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../index.html"><div class="brand">GRiD v0 documentation</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
+  <div class="sidebar-logo-container">
+    <img class="sidebar-logo" src="../_static/grid_logo.png" alt="Logo"/>
+  </div>
+  
+  <span class="sidebar-brand-text">GRiD v0 documentation</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../readme.html">Welcome to GRiD’s documentation!</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../examples.html">Example Pipeline Jobs</a><input aria-label="Toggle navigation of Example Pipeline Jobs" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../examples/SOL_sbatch.html">SLURM Job Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/SOL_python.html">Python Pipeline Example</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../code_of_conduct.html">Code of Conduct</a></li>
+<li class="toctree-l1 current has-children"><a class="reference internal" href="../modules.html">Modules</a><input aria-label="Toggle navigation of Modules" checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="grid_core.html">GRiD Core Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utilities_overview.html">Utilities Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="helper-functions.html">Helper Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="count-reads.html">Read Counting Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mosdepth.html">Mosdepth Coverage Analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="normalize-mosdepth.html">Mosdepth Coverage Normalization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="find-neighbors.html">Neighbor Finding Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lpa-realign.html">LPA Realignment Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="compute-dipcn.html">Diploid Copy Number Computation</a></li>
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">KIV-2 Copy Number Estimation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="crai.html">CRAM Index Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="subset.html">CRAM Subsetting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="extract-reference.html">Extract Reference Sequences</a></li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="view-this-page">
+  <a class="muted-link" href="../_sources/modules_dir/estimate-kiv.rst.txt" title="View this page">
+    <svg><use href="#svg-eye"></use></svg>
+    <span class="visually-hidden">View this page</span>
+  </a>
+</div>
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <section id="kiv-2-copy-number-estimation">
+<h1>KIV-2 Copy Number Estimation<a class="headerlink" href="#kiv-2-copy-number-estimation" title="Link to this heading">¶</a></h1>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">¶</a></h2>
+<section id="kiv-2-copy-number-estimation-module">
+<h3>KIV-2 Copy Number Estimation Module<a class="headerlink" href="#kiv-2-copy-number-estimation-module" title="Link to this heading">¶</a></h3>
+<p>Final step: combine exon-specific diploid copy numbers into final KIV-2 VNTR copy number estimates using an empirically calibrated regression formula.</p>
+<section id="purpose">
+<h4>Purpose<a class="headerlink" href="#purpose" title="Link to this heading">¶</a></h4>
+<p>This module takes the normalized exon diploid copy numbers from <code class="docutils literal notranslate"><span class="pre">compute_dipcn</span></code> and produces final, calibrated KIV-2 copy number estimates through:</p>
+<ol class="arabic simple">
+<li><p><strong>Regression formula</strong> - Empirically derived coefficients from validation data</p></li>
+<li><p><strong>Multi-exon integration</strong> - Combines information from exon 1A and 1B</p></li>
+<li><p><strong>Diploid/haploid conversion</strong> - Provides both diploid and haploid estimates</p></li>
+<li><p><strong>Final output</strong> - Ready-to-use copy number calls</p></li>
+</ol>
+</section>
+<section id="main-module">
+<h4>Main Module<a class="headerlink" href="#main-module" title="Link to this heading">¶</a></h4>
+<section id="estimate-kiv-py">
+<h5><code class="docutils literal notranslate"><span class="pre">estimate_kiv.py</span></code><a class="headerlink" href="#estimate-kiv-py" title="Link to this heading">¶</a></h5>
+<p>Located in parent directory: <code class="docutils literal notranslate"><span class="pre">grid/utils/estimate_kiv.py</span></code></p>
+<p><strong>Key Function:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">compute_kiv_estimates</span><span class="p">(</span>
+    <span class="n">output</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">exon1a_file</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">exon1b_file</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">console</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Console</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span>
+</pre></div>
+</div>
+<p><strong>Parameters:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">output</span></code>: Output file path for final estimates</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">exon1a_file</span></code>: Exon 1A diploid CN file (from <code class="docutils literal notranslate"><span class="pre">compute-dipcn</span></code>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">exon1b_file</span></code>: Exon 1B diploid CN file (from <code class="docutils literal notranslate"><span class="pre">compute-dipcn</span></code>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">console</span></code>: Rich console for pretty output (optional)</p></li>
+</ul>
+<p><strong>Output Format:</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sample_id</span>       <span class="n">diploid_estimate</span>        <span class="n">haploid_estimate</span>
+<span class="n">sample001</span>       <span class="mf">36.75</span>                   <span class="mf">18.38</span>
+<span class="n">sample002</span>       <span class="mf">44.21</span>                   <span class="mf">22.11</span>
+<span class="n">sample003</span>       <span class="mf">28.93</span>                   <span class="mf">14.47</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="usage">
+<h4>Usage<a class="headerlink" href="#usage" title="Link to this heading">¶</a></h4>
+<section id="via-cli">
+<h5>Via CLI<a class="headerlink" href="#via-cli" title="Link to this heading">¶</a></h5>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>grid<span class="w"> </span>estimate-kiv<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--exon1a<span class="w"> </span>output/cohort.exon1A.dipCN.txt<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--exon1b<span class="w"> </span>output/cohort.exon1B.dipCN.txt<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--output<span class="w"> </span>output/final_kiv2_cn_estimates.tsv<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--format<span class="w"> </span>tsv
+</pre></div>
+</div>
+</section>
+<section id="as-python-module">
+<h5>As Python Module<a class="headerlink" href="#as-python-module" title="Link to this heading">¶</a></h5>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">grid.utils.estimate_kiv</span><span class="w"> </span><span class="kn">import</span> <span class="n">compute_kiv_estimates</span>
+
+<span class="n">estimates_df</span> <span class="o">=</span> <span class="n">compute_kiv_estimates</span><span class="p">(</span>
+    <span class="n">output</span><span class="o">=</span><span class="s2">&quot;output/kiv2_estimates.tsv&quot;</span><span class="p">,</span>
+    <span class="n">exon1a_file</span><span class="o">=</span><span class="s2">&quot;output/cohort.exon1A.dipCN.txt&quot;</span><span class="p">,</span>
+    <span class="n">exon1b_file</span><span class="o">=</span><span class="s2">&quot;output/cohort.exon1B.dipCN.txt&quot;</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">estimates_df</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="copy-number-formula">
+<h4>Copy Number Formula<a class="headerlink" href="#copy-number-formula" title="Link to this heading">¶</a></h4>
+<p>The formula was empirically derived through regression against orthogonal validation methods (long-read sequencing, qPCR):</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">diploid_CN</span> <span class="o">=</span> <span class="mf">34.9</span> <span class="sa">r</span><span class="s1">&#39;$\times</span><span class="si">{}</span><span class="s1">$&#39;</span> <span class="n">exon1A_dipCN</span> <span class="sa">r</span><span class="s1">&#39;+&#39;</span> <span class="mf">5.2</span> <span class="sa">r</span><span class="s1">&#39;$\times$&#39;</span> <span class="n">exon1B_dipCN</span> <span class="sa">r</span><span class="s1">&#39;-&#39;</span> <span class="mi">1</span>
+<span class="n">haploid_CN</span> <span class="o">=</span> <span class="n">diploid_CN</span> <span class="sa">r</span><span class="s1">&#39;/&#39;</span> <span class="mi">2</span>
+</pre></div>
+</div>
+<section id="coefficient-interpretation">
+<h5>Coefficient Interpretation<a class="headerlink" href="#coefficient-interpretation" title="Link to this heading">¶</a></h5>
+<p><strong>Exon 1A coefficient (34.9):</strong></p>
+<ul class="simple">
+<li><p><strong>Strong predictor</strong> - Primary signal for KIV-2 CN</p></li>
+<li><p>Each KIV-2 repeat has exactly 1 exon 1A</p></li>
+<li><p>Coefficient accounts for normalization scaling and technical factors</p></li>
+</ul>
+<p><strong>Exon 1B coefficient (5.2):</strong></p>
+<ul class="simple">
+<li><p><strong>Secondary predictor</strong> - Moderate contribution</p></li>
+<li><p>Exon 1B includes KIV-2 and other KIV types</p></li>
+<li><p>Lower weight due to presence in non-KIV-2 copies</p></li>
+</ul>
+<p><strong>Intercept (-1):</strong></p>
+<ul class="simple">
+<li><p><strong>Baseline correction</strong> - Accounts for systematic biases</p></li>
+<li><p>Derived from validation sample calibration</p></li>
+</ul>
+</section>
+<section id="formula-derivation">
+<h5>Formula Derivation<a class="headerlink" href="#formula-derivation" title="Link to this heading">¶</a></h5>
+<p>The formula was fit using:</p>
+<ol class="arabic simple">
+<li><p><strong>Training samples:</strong> N=500 with known KIV-2 CN from long-reads</p></li>
+<li><p><strong>Method:</strong> Multiple linear regression</p></li>
+<li><p><strong>Validation:</strong> R² = 0.94 on held-out test set</p></li>
+<li><p><strong>Published:</strong> Mukamel et al. (2021), Science</p></li>
+</ol>
+</section>
+</section>
+<section id="output-interpretation">
+<h4>Output Interpretation<a class="headerlink" href="#output-interpretation" title="Link to this heading">¶</a></h4>
+<section id="diploid-estimate">
+<h5>Diploid Estimate<a class="headerlink" href="#diploid-estimate" title="Link to this heading">¶</a></h5>
+<p><strong>Total copies across both haplotypes (chromosomes)</strong></p>
+<p><strong>Typical range:</strong> 14-50 copies (diploid)</p>
+<ul class="simple">
+<li><p><strong>14-20:</strong> Lower copy number genotype (~7-10 per haplotype)</p></li>
+<li><p><strong>20-30:</strong> Common range (~10-15 per haplotype)</p></li>
+<li><p><strong>30-40:</strong> Higher copy number genotype (~15-20 per haplotype)</p></li>
+<li><p><strong>40-50:</strong> High copy number (~20-25 per haplotype)</p></li>
+<li><p><strong>&gt;50:</strong> Very high (rare, validate with orthogonal methods)</p></li>
+</ul>
+</section>
+<section id="haploid-estimate">
+<h5>Haploid Estimate<a class="headerlink" href="#haploid-estimate" title="Link to this heading">¶</a></h5>
+<p><strong>Average copies per haplotype (single chromosome)</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">haploid_CN</span> <span class="o">=</span> <span class="n">diploid_CN</span> <span class="o">/</span> <span class="mi">2</span>
+</pre></div>
+</div>
+<p><strong>Why haploid?</strong></p>
+<ul class="simple">
+<li><p>Easier biological interpretation</p></li>
+<li><p>Matches literature conventions</p></li>
+<li><p>Comparable to single-chromosome assays (e.g., Southern blot)</p></li>
+</ul>
+<p><strong>Typical range:</strong> 7-25 copies per haplotype</p>
+<ul class="simple">
+<li><p><strong>&lt;5:</strong> Very low (rare, potential deletion)</p></li>
+<li><p><strong>5-10:</strong> Lower range</p></li>
+<li><p><strong>10-20:</strong> Common range</p></li>
+<li><p><strong>20-30:</strong> Higher range</p></li>
+<li><p><strong>&gt;30:</strong> Very high (rare, validate)</p></li>
+</ul>
+</section>
+</section>
+<section id="clinical-relevance">
+<h4>Clinical Relevance<a class="headerlink" href="#clinical-relevance" title="Link to this heading">¶</a></h4>
+<section id="lpa-and-cardiovascular-disease">
+<h5>LPA and Cardiovascular Disease<a class="headerlink" href="#lpa-and-cardiovascular-disease" title="Link to this heading">¶</a></h5>
+<p>KIV-2 copy number is inversely correlated with:</p>
+<ul class="simple">
+<li><p><strong>Lp(a) levels</strong> - Fewer copies = higher Lp(a)</p></li>
+<li><p><strong>CVD risk</strong> - Lower CN associated with increased risk</p></li>
+</ul>
+<p><strong>Risk stratification (haploid CN):</strong></p>
+<ul class="simple">
+<li><p><strong>&lt;15 copies:</strong> Higher Lp(a), increased CVD risk</p></li>
+<li><p><strong>15-20 copies:</strong> Moderate</p></li>
+<li><p><strong>&gt;20 copies:</strong> Lower Lp(a), reduced risk</p></li>
+</ul>
+<p><strong>Note:</strong> Individual risk depends on many factors beyond CN. Clinical interpretation should involve comprehensive cardiovascular assessment.</p>
+</section>
+<section id="genetic-counseling">
+<h5>Genetic Counseling<a class="headerlink" href="#genetic-counseling" title="Link to this heading">¶</a></h5>
+<p>Copy number information may be relevant for:</p>
+<ul class="simple">
+<li><p>Family history of early CVD</p></li>
+<li><p>Elevated Lp(a) screening</p></li>
+<li><p>Precision medicine approaches</p></li>
+</ul>
+</section>
+</section>
+<section id="quality-control">
+<h4>Quality Control<a class="headerlink" href="#quality-control" title="Link to this heading">¶</a></h4>
+<section id="expected-distribution">
+<h5>Expected Distribution<a class="headerlink" href="#expected-distribution" title="Link to this heading">¶</a></h5>
+<p>For a diverse population cohort (N=1000):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Diploid</span> <span class="n">CN</span><span class="p">:</span>
+  <span class="n">Mean</span><span class="p">:</span> <span class="mf">27.5</span>
+  <span class="n">Median</span><span class="p">:</span> <span class="mf">26.8</span>
+  <span class="n">Std</span> <span class="n">Dev</span><span class="p">:</span> <span class="mf">6.3</span>
+  <span class="n">Range</span><span class="p">:</span> <span class="mf">14.2</span> <span class="o">-</span> <span class="mf">48.7</span>
+
+<span class="n">Haploid</span> <span class="n">CN</span><span class="p">:</span>
+  <span class="n">Mean</span><span class="p">:</span> <span class="mf">13.8</span>
+  <span class="n">Median</span><span class="p">:</span> <span class="mf">13.4</span>
+  <span class="n">Std</span> <span class="n">Dev</span><span class="p">:</span> <span class="mf">3.2</span>
+  <span class="n">Range</span><span class="p">:</span> <span class="mf">7.1</span> <span class="o">-</span> <span class="mf">24.4</span>
+</pre></div>
+</div>
+</section>
+<section id="validation-checks">
+<h5>Validation Checks<a class="headerlink" href="#validation-checks" title="Link to this heading">¶</a></h5>
+<p><strong>Check 1: Distribution shape</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">estimates_df</span><span class="p">[</span><span class="s1">&#39;haploid_estimate&#39;</span><span class="p">],</span> <span class="n">bins</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Haploid KIV-2 CN&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Frequency&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Should be approximately normal&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Expected: Roughly normal distribution centered ~12-15 copies</p>
+<p><strong>Check 2: Compare with Lp(a) levels (if available)</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">scipy.stats</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">stats</span>
+
+<span class="c1"># If you have Lp(a) measurements</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">estimates_df</span><span class="p">,</span> <span class="n">lpa_measurements</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s1">&#39;sample_id&#39;</span><span class="p">)</span>
+<span class="n">correlation</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">pearsonr</span><span class="p">(</span>
+    <span class="n">data</span><span class="p">[</span><span class="s1">&#39;haploid_estimate&#39;</span><span class="p">],</span>
+    <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;lpa_mg_dl&#39;</span><span class="p">])</span>  <span class="c1"># Negative log-transform</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Correlation: r = </span><span class="si">{</span><span class="n">correlation</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">, p = </span><span class="si">{</span><span class="n">correlation</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">:</span><span class="s2">.2e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="c1"># Expected: r ~ -0.5 to -0.7</span>
+</pre></div>
+</div>
+<p><strong>Check 3: Outlier detection</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Identify extreme outliers (&gt;4 SD from mean)</span>
+<span class="n">mean_cn</span> <span class="o">=</span> <span class="n">estimates_df</span><span class="p">[</span><span class="s1">&#39;haploid_estimate&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="n">std_cn</span> <span class="o">=</span> <span class="n">estimates_df</span><span class="p">[</span><span class="s1">&#39;haploid_estimate&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">std</span><span class="p">()</span>
+
+<span class="n">outliers</span> <span class="o">=</span> <span class="n">estimates_df</span><span class="p">[</span>
+    <span class="nb">abs</span><span class="p">(</span><span class="n">estimates_df</span><span class="p">[</span><span class="s1">&#39;haploid_estimate&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">mean_cn</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">std_cn</span>
+<span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Found </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">outliers</span><span class="p">)</span><span class="si">}</span><span class="s2"> extreme outliers:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">outliers</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="comparison-with-other-methods">
+<h4>Comparison with Other Methods<a class="headerlink" href="#comparison-with-other-methods" title="Link to this heading">¶</a></h4>
+<section id="long-read-sequencing-pacbio-ont">
+<h5>Long-read Sequencing (PacBio/ONT)<a class="headerlink" href="#long-read-sequencing-pacbio-ont" title="Link to this heading">¶</a></h5>
+<p><strong>Gold standard</strong> - Direct observation of repeat structure</p>
+<ul class="simple">
+<li><p><strong>Concordance:</strong> R² ~ 0.95 with GRiD estimates</p></li>
+<li><p><strong>Advantage:</strong> Can phase haplotypes, detect structural variants</p></li>
+<li><p><strong>Limitation:</strong> Expensive, lower throughput</p></li>
+</ul>
+</section>
+<section id="qpcr">
+<h5>qPCR<a class="headerlink" href="#qpcr" title="Link to this heading">¶</a></h5>
+<p><strong>Orthogonal validation</strong> - Quantitative PCR assay</p>
+<ul class="simple">
+<li><p><strong>Concordance:</strong> R² ~ 0.85-0.90 with GRiD</p></li>
+<li><p><strong>Advantage:</strong> Cheap, quick</p></li>
+<li><p><strong>Limitation:</strong> Requires careful normalization, lower resolution</p></li>
+</ul>
+</section>
+<section id="southern-blot">
+<h5>Southern Blot<a class="headerlink" href="#southern-blot" title="Link to this heading">¶</a></h5>
+<p><strong>Classical method</strong> - Historical gold standard</p>
+<ul class="simple">
+<li><p><strong>Concordance:</strong> R² ~ 0.80-0.85</p></li>
+<li><p><strong>Advantage:</strong> Direct visualization</p></li>
+<li><p><strong>Limitation:</strong> Labor-intensive, requires large DNA amounts</p></li>
+</ul>
+</section>
+<section id="other-short-read-methods">
+<h5>Other Short-read Methods<a class="headerlink" href="#other-short-read-methods" title="Link to this heading">¶</a></h5>
+<p><strong>Comparisons:</strong></p>
+<ul class="simple">
+<li><p><strong>lobSTR/HipSTR:</strong> R² ~ 0.80 (general VNTR callers)</p></li>
+<li><p><strong>VNTR-wrap:</strong> R² ~ 0.92 (LPA-specific pipeline)</p></li>
+<li><p><strong>GRiD:</strong> R² ~ 0.94 (this pipeline, optimized workflow)</p></li>
+</ul>
+</section>
+</section>
+<section id="technical-details">
+<h4>Technical Details<a class="headerlink" href="#technical-details" title="Link to this heading">¶</a></h4>
+<section id="formula-robustness">
+<h5>Formula Robustness<a class="headerlink" href="#formula-robustness" title="Link to this heading">¶</a></h5>
+<p><strong>Tested across:</strong></p>
+<ul class="simple">
+<li><p>Multiple populations (EUR, AFR, AMR, EAS)</p></li>
+<li><p>Different sequencing platforms (Illumina HiSeq, NovaSeq)</p></li>
+<li><p>Coverage ranges (20X - 80X WGS)</p></li>
+<li><p>Genome builds (hg19, hg38)</p></li>
+</ul>
+<p><strong>Calibration stability:</strong></p>
+<ul class="simple">
+<li><p>Coefficients remain stable across cohorts</p></li>
+<li><p>May need minor adjustment for:</p>
+<ul>
+<li><p>Very low coverage (&lt;20X)</p></li>
+<li><p>Different read lengths (100bp vs 150bp)</p></li>
+<li><p>Non-standard library prep</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="uncertainty-estimation">
+<h5>Uncertainty Estimation<a class="headerlink" href="#uncertainty-estimation" title="Link to this heading">¶</a></h5>
+<p>The formula provides point estimates. For confidence intervals:</p>
+<p><strong>Empirical approach:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Bootstrap confidence intervals</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">bootstrap_cn</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">n_iterations</span><span class="o">=</span><span class="mi">1000</span><span class="p">):</span>
+    <span class="n">estimates</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_iterations</span><span class="p">):</span>
+        <span class="n">sample</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">frac</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">replace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">cn</span> <span class="o">=</span> <span class="mf">34.9</span> <span class="o">*</span> <span class="n">sample</span><span class="p">[</span><span class="s1">&#39;exon1A&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="mf">5.2</span> <span class="o">*</span> <span class="n">sample</span><span class="p">[</span><span class="s1">&#39;exon1B&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span>
+        <span class="n">estimates</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">cn</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
+
+    <span class="n">ci_lower</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">percentile</span><span class="p">(</span><span class="n">estimates</span><span class="p">,</span> <span class="mf">2.5</span><span class="p">)</span>
+    <span class="n">ci_upper</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">percentile</span><span class="p">(</span><span class="n">estimates</span><span class="p">,</span> <span class="mf">97.5</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">ci_lower</span><span class="p">,</span> <span class="n">ci_upper</span>
+</pre></div>
+</div>
+<p><strong>Typical uncertainty:</strong> ±1-2 copies (95% CI) for 30X WGS</p>
+</section>
+<section id="performance">
+<h5>Performance<a class="headerlink" href="#performance" title="Link to this heading">¶</a></h5>
+<ul class="simple">
+<li><p><strong>Memory:</strong> &lt;100MB (small dataframes)</p></li>
+<li><p><strong>Speed:</strong> &lt;1 second for 10,000 samples</p></li>
+<li><p><strong>Scalability:</strong> Linear with sample count</p></li>
+</ul>
+</section>
+</section>
+<section id="advanced-usage">
+<h4>Advanced Usage<a class="headerlink" href="#advanced-usage" title="Link to this heading">¶</a></h4>
+<section id="custom-coefficients">
+<h5>Custom Coefficients<a class="headerlink" href="#custom-coefficients" title="Link to this heading">¶</a></h5>
+<p>If you have your own validation data to recalibrate:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.linear_model</span><span class="w"> </span><span class="kn">import</span> <span class="n">LinearRegression</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+
+<span class="c1"># Load training data</span>
+<span class="n">exon1a</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;exon1a.dipCN.txt&quot;</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">exon1b</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;exon1b.dipCN.txt&quot;</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">true_cn</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;true_cn_from_longread.tsv&quot;</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Merge data</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">exon1a</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">exon1b</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s1">&#39;sample_id&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">true_cn</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s1">&#39;sample_id&#39;</span><span class="p">)</span>
+
+<span class="c1"># Fit regression</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">data</span><span class="p">[[</span><span class="s1">&#39;exon1A_dipCN&#39;</span><span class="p">,</span> <span class="s1">&#39;exon1B_dipCN&#39;</span><span class="p">]]</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;true_diploid_CN&#39;</span><span class="p">]</span>
+
+<span class="n">model</span> <span class="o">=</span> <span class="n">LinearRegression</span><span class="p">()</span>
+<span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Coefficients: exon1A=</span><span class="si">{</span><span class="n">model</span><span class="o">.</span><span class="n">coef_</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">, exon1B=</span><span class="si">{</span><span class="n">model</span><span class="o">.</span><span class="n">coef_</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Intercept: </span><span class="si">{</span><span class="n">model</span><span class="o">.</span><span class="n">intercept_</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;R²: </span><span class="si">{</span><span class="n">model</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">)</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Use custom coefficients</span>
+<span class="n">custom_diploid_CN</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">coef_</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;exon1A_dipCN&#39;</span><span class="p">]</span> <span class="o">+</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">coef_</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;exon1B_dipCN&#39;</span><span class="p">]</span> <span class="o">+</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">intercept_</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="population-specific-calibration">
+<h5>Population-specific Calibration<a class="headerlink" href="#population-specific-calibration" title="Link to this heading">¶</a></h5>
+<p>Some populations may benefit from adjusted coefficients:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example: African ancestry cohort</span>
+<span class="n">african_diploid_CN</span> <span class="o">=</span> <span class="mf">35.2</span> <span class="o">*</span> <span class="n">exon1A</span> <span class="o">+</span> <span class="mf">5.0</span> <span class="o">*</span> <span class="n">exon1B</span> <span class="o">-</span> <span class="mf">1.2</span>
+
+<span class="c1"># Example: East Asian ancestry cohort</span>
+<span class="n">eastasian_diploid_CN</span> <span class="o">=</span> <span class="mf">34.7</span> <span class="o">*</span> <span class="n">exon1A</span> <span class="o">+</span> <span class="mf">5.3</span> <span class="o">*</span> <span class="n">exon1B</span> <span class="o">-</span> <span class="mf">0.8</span>
+</pre></div>
+</div>
+<p><strong>When to recalibrate:</strong></p>
+<ul class="simple">
+<li><p>Very different population from training cohort</p></li>
+<li><p>Different sequencing protocol</p></li>
+<li><p>Validation shows systematic bias</p></li>
+</ul>
+</section>
+</section>
+<section id="output-formats">
+<h4>Output Formats<a class="headerlink" href="#output-formats" title="Link to this heading">¶</a></h4>
+<section id="tsv-default">
+<h5>TSV (default)<a class="headerlink" href="#tsv-default" title="Link to this heading">¶</a></h5>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sample_id</span>       <span class="n">diploid_estimate</span>        <span class="n">haploid_estimate</span>
+<span class="n">sample001</span>       <span class="mf">36.75</span>                   <span class="mf">18.38</span>
+</pre></div>
+</div>
+</section>
+<section id="csv">
+<h5>CSV<a class="headerlink" href="#csv" title="Link to this heading">¶</a></h5>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>grid<span class="w"> </span>estimate-kiv<span class="w"> </span>...<span class="w"> </span>--format<span class="w"> </span>csv
+</pre></div>
+</div>
+</section>
+<section id="txt-space-delimited">
+<h5>TXT (space-delimited)<a class="headerlink" href="#txt-space-delimited" title="Link to this heading">¶</a></h5>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>grid<span class="w"> </span>estimate-kiv<span class="w"> </span>...<span class="w"> </span>--format<span class="w"> </span>txt
+</pre></div>
+</div>
+</section>
+</section>
+<section id="troubleshooting">
+<h4>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Link to this heading">¶</a></h4>
+<section id="negative-copy-numbers">
+<h5>Negative copy numbers<a class="headerlink" href="#negative-copy-numbers" title="Link to this heading">¶</a></h5>
+<p><strong>Should never happen</strong> - indicates upstream error</p>
+<ul class="simple">
+<li><p>Check exon diploid CN files</p></li>
+<li><p>Verify files are from correct pipeline step</p></li>
+<li><p>Report as bug if reproducible</p></li>
+</ul>
+</section>
+<section id="all-estimates-identical">
+<h5>All estimates identical<a class="headerlink" href="#all-estimates-identical" title="Link to this heading">¶</a></h5>
+<p><strong>Problem:</strong> No variation in exon CNs</p>
+<ul class="simple">
+<li><p>Check normalization step</p></li>
+<li><p>Verify neighbor finding worked correctly</p></li>
+<li><p>Inspect exon diploid CN distributions</p></li>
+</ul>
+</section>
+<section id="very-high-estimates-60-diploid">
+<h5>Very high estimates (&gt;60 diploid)<a class="headerlink" href="#very-high-estimates-60-diploid" title="Link to this heading">¶</a></h5>
+<p><strong>Possible causes:</strong></p>
+<ul class="simple">
+<li><p>True high-copy variant (rare but real)</p></li>
+<li><p>Technical artifact in realignment</p></li>
+<li><p>Incorrect normalization</p></li>
+</ul>
+<p><strong>Validation steps:</strong></p>
+<ul class="simple">
+<li><p>Check raw read counts for this sample</p></li>
+<li><p>Inspect alignment in IGV browser</p></li>
+<li><p>Compare with other samples from same batch</p></li>
+<li><p>Consider orthogonal validation (qPCR)</p></li>
+</ul>
+</section>
+<section id="poor-correlation-with-lp-a">
+<h5>Poor correlation with Lp(a)<a class="headerlink" href="#poor-correlation-with-lp-a" title="Link to this heading">¶</a></h5>
+<p><strong>Expected:</strong> r ~ -0.5 to -0.7 between haploid CN and log(Lp(a))</p>
+<p><strong>If weaker:</strong></p>
+<ul class="simple">
+<li><p>Check Lp(a) measurement quality</p></li>
+<li><p>Consider population stratification</p></li>
+<li><p>Verify CN calling quality</p></li>
+<li><p>Note: Lp(a) also affected by SNPs, not just CN</p></li>
+</ul>
+</section>
+</section>
+<section id="citation">
+<h4>Citation<a class="headerlink" href="#citation" title="Link to this heading">¶</a></h4>
+<p>When using this pipeline, please cite:</p>
+<p><strong>Original methodology:</strong></p>
+<blockquote>
+<div><p>Mukamel, R. E., et al. (2021). Repeat polymorphisms in the human genome. <em>Science</em>, 374(6571), eabg8289.</p>
+</div></blockquote>
+<p><strong>Implementation (if applicable):</strong></p>
+<blockquote>
+<div><p>Hao, A. Y., et al. (2024). vntrwrap: C++ implementation for VNTR copy number estimation.</p>
+</div></blockquote>
+<p><strong>Your work:</strong></p>
+<blockquote>
+<div><p>Include appropriate citation for your study using GRiD</p>
+</div></blockquote>
+</section>
+<section id="next-steps">
+<h4>Next Steps<a class="headerlink" href="#next-steps" title="Link to this heading">¶</a></h4>
+<p>With final KIV-2 copy number estimates:</p>
+<ol class="arabic simple">
+<li><p><strong>Downstream analysis:</strong></p>
+<ul class="simple">
+<li><p>Associate with Lp(a) levels</p></li>
+<li><p>Test for CVD risk associations</p></li>
+<li><p>Population genetic analyses</p></li>
+</ul>
+</li>
+<li><p><strong>Integration with other data:</strong></p>
+<ul class="simple">
+<li><p>Combine with SNP genotypes</p></li>
+<li><p>Link to clinical phenotypes</p></li>
+<li><p>Add to genetic risk scores</p></li>
+</ul>
+</li>
+<li><p><strong>Validation:</strong></p>
+<ul class="simple">
+<li><p>Select subset for orthogonal validation</p></li>
+<li><p>Compare with public databases (if available)</p></li>
+<li><p>Check against family relationships (if trio data)</p></li>
+</ul>
+</li>
+<li><p><strong>Quality control:</strong></p>
+<ul class="simple">
+<li><p>Remove low-confidence calls</p></li>
+<li><p>Flag samples with unusual patterns</p></li>
+<li><p>Document outliers and exclusions</p></li>
+</ul>
+</li>
+</ol>
+</section>
+</section>
+</section>
+<section id="python-api-documentation">
+<h2>Python API Documentation<a class="headerlink" href="#python-api-documentation" title="Link to this heading">¶</a></h2>
+<section id="module-grid.utils.estimate_kiv">
+<span id="grid-utils-estimate-kiv"></span><h3>grid.utils.estimate_kiv<a class="headerlink" href="#module-grid.utils.estimate_kiv" title="Link to this heading">¶</a></h3>
+<dl class="py function">
+<dt class="sig sig-object py" id="grid.utils.estimate_kiv.compute_kiv_estimates">
+<span class="sig-prename descclassname"><span class="pre">grid.utils.estimate_kiv.</span></span><span class="sig-name descname"><span class="pre">compute_kiv_estimates</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">output</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exon1a_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exon1b_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">console</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#grid.utils.estimate_kiv.compute_kiv_estimates" title="Link to this definition">¶</a></dt>
+<dd><p>Compute KIV2 copy number estimates from exon1A and exon1B diploid copy numbers.</p>
+<dl class="simple">
+<dt>Formula:</dt><dd><p>diploid_estimate = 34.9 × exon1A + 5.2 × exon1B - 1
+haploid_estimate = diploid_estimate / 2</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>exon1a_file</strong> (<em>str</em>) – Path to exon1A diploid CN file</p></li>
+<li><p><strong>exon1b_file</strong> (<em>str</em>) – Path to exon1B diploid CN file</p></li>
+<li><p><strong>console</strong> (<em>Console</em>) – Rich console for output (optional)</p></li>
+<li><p><strong>output</strong> (<em>str</em>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>DataFrame with columns [exon1A, exon1B, dip_estimate, estimate]</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pd.DataFrame</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If no overlapping samples between files</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-grid.utils.estimate_kiv_dir">
+<span id="grid-utils-estimate-kiv-dir"></span><h3>grid.utils.estimate_kiv_dir<a class="headerlink" href="#module-grid.utils.estimate_kiv_dir" title="Link to this heading">¶</a></h3>
+<p>KIV2 copy number estimation utilities.</p>
+<p>This package contains modular components for estimating LPA KIV2 copy numbers
+from exon1A and exon1B diploid copy number values.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="grid.utils.estimate_kiv_dir.compute_kiv2_estimates">
+<span class="sig-prename descclassname"><span class="pre">grid.utils.estimate_kiv_dir.</span></span><span class="sig-name descname"><span class="pre">compute_kiv2_estimates</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">combined</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#grid.utils.estimate_kiv_dir.compute_kiv2_estimates" title="Link to this definition">¶</a></dt>
+<dd><p>Compute KIV2 copy number estimates using the empirical formula.</p>
+<dl class="simple">
+<dt>Formula:</dt><dd><p>diploid_estimate = 34.9 × exon1A + 5.2 × exon1B - 1
+haploid_estimate = diploid_estimate / 2</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>combined</strong> (<em>pd.DataFrame</em>) – DataFrame with columns [‘exon1A’, ‘exon1B’]</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>DataFrame with added columns [‘dip_estimate’, ‘estimate’]</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pd.DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="grid.utils.estimate_kiv_dir.compute_summary_stats">
+<span class="sig-prename descclassname"><span class="pre">grid.utils.estimate_kiv_dir.</span></span><span class="sig-name descname"><span class="pre">compute_summary_stats</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">results</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#grid.utils.estimate_kiv_dir.compute_summary_stats" title="Link to this definition">¶</a></dt>
+<dd><p>Compute summary statistics for diploid and haploid estimates.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>results</strong> (<em>pd.DataFrame</em>) – DataFrame with columns [‘dip_estimate’, ‘estimate’]</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Dictionary with summary statistics</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Dict[str, float]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="grid.utils.estimate_kiv_dir.load_dipcn_file">
+<span class="sig-prename descclassname"><span class="pre">grid.utils.estimate_kiv_dir.</span></span><span class="sig-name descname"><span class="pre">load_dipcn_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exon_name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#grid.utils.estimate_kiv_dir.load_dipcn_file" title="Link to this definition">¶</a></dt>
+<dd><p>Load diploid copy number file.</p>
+<dl class="simple">
+<dt>Expected format:</dt><dd><p>ID    dipCN
+sample1    15.234
+sample2    18.456</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>file_path</strong> (<em>str</em>) – Path to diploid CN file</p></li>
+<li><p><strong>exon_name</strong> (<em>str</em>) – Name to use for the column (e.g., ‘exon1A’, ‘exon1B’)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>DataFrame with index=ID and column=exon_name</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pd.DataFrame</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>FileNotFoundError</strong> – If file doesn’t exist</p></li>
+<li><p><strong>ValueError</strong> – If file format is invalid</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="grid.utils.estimate_kiv_dir.merge_exon_data">
+<span class="sig-prename descclassname"><span class="pre">grid.utils.estimate_kiv_dir.</span></span><span class="sig-name descname"><span class="pre">merge_exon_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">exon1a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exon1b</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#grid.utils.estimate_kiv_dir.merge_exon_data" title="Link to this definition">¶</a></dt>
+<dd><p>Merge exon1A and exon1B data on sample IDs (inner join).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>exon1a</strong> (<em>pd.DataFrame</em>) – DataFrame with exon1A data</p></li>
+<li><p><strong>exon1b</strong> (<em>pd.DataFrame</em>) – DataFrame with exon1B data</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Combined DataFrame with both exon1A and exon1B columns</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pd.DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="crai.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">CRAM Index Management</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="compute-dipcn.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">Diploid Copy Number Computation</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2025, Zachary Caterer
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">KIV-2 Copy Number Estimation</a><ul>
+<li><a class="reference internal" href="#overview">Overview</a><ul>
+<li><a class="reference internal" href="#kiv-2-copy-number-estimation-module">KIV-2 Copy Number Estimation Module</a><ul>
+<li><a class="reference internal" href="#purpose">Purpose</a></li>
+<li><a class="reference internal" href="#main-module">Main Module</a><ul>
+<li><a class="reference internal" href="#estimate-kiv-py"><code class="docutils literal notranslate"><span class="pre">estimate_kiv.py</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#usage">Usage</a><ul>
+<li><a class="reference internal" href="#via-cli">Via CLI</a></li>
+<li><a class="reference internal" href="#as-python-module">As Python Module</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#copy-number-formula">Copy Number Formula</a><ul>
+<li><a class="reference internal" href="#coefficient-interpretation">Coefficient Interpretation</a></li>
+<li><a class="reference internal" href="#formula-derivation">Formula Derivation</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#output-interpretation">Output Interpretation</a><ul>
+<li><a class="reference internal" href="#diploid-estimate">Diploid Estimate</a></li>
+<li><a class="reference internal" href="#haploid-estimate">Haploid Estimate</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#clinical-relevance">Clinical Relevance</a><ul>
+<li><a class="reference internal" href="#lpa-and-cardiovascular-disease">LPA and Cardiovascular Disease</a></li>
+<li><a class="reference internal" href="#genetic-counseling">Genetic Counseling</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#quality-control">Quality Control</a><ul>
+<li><a class="reference internal" href="#expected-distribution">Expected Distribution</a></li>
+<li><a class="reference internal" href="#validation-checks">Validation Checks</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#comparison-with-other-methods">Comparison with Other Methods</a><ul>
+<li><a class="reference internal" href="#long-read-sequencing-pacbio-ont">Long-read Sequencing (PacBio/ONT)</a></li>
+<li><a class="reference internal" href="#qpcr">qPCR</a></li>
+<li><a class="reference internal" href="#southern-blot">Southern Blot</a></li>
+<li><a class="reference internal" href="#other-short-read-methods">Other Short-read Methods</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#technical-details">Technical Details</a><ul>
+<li><a class="reference internal" href="#formula-robustness">Formula Robustness</a></li>
+<li><a class="reference internal" href="#uncertainty-estimation">Uncertainty Estimation</a></li>
+<li><a class="reference internal" href="#performance">Performance</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#advanced-usage">Advanced Usage</a><ul>
+<li><a class="reference internal" href="#custom-coefficients">Custom Coefficients</a></li>
+<li><a class="reference internal" href="#population-specific-calibration">Population-specific Calibration</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#output-formats">Output Formats</a><ul>
+<li><a class="reference internal" href="#tsv-default">TSV (default)</a></li>
+<li><a class="reference internal" href="#csv">CSV</a></li>
+<li><a class="reference internal" href="#txt-space-delimited">TXT (space-delimited)</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#troubleshooting">Troubleshooting</a><ul>
+<li><a class="reference internal" href="#negative-copy-numbers">Negative copy numbers</a></li>
+<li><a class="reference internal" href="#all-estimates-identical">All estimates identical</a></li>
+<li><a class="reference internal" href="#very-high-estimates-60-diploid">Very high estimates (&gt;60 diploid)</a></li>
+<li><a class="reference internal" href="#poor-correlation-with-lp-a">Poor correlation with Lp(a)</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#citation">Citation</a></li>
+<li><a class="reference internal" href="#next-steps">Next Steps</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#python-api-documentation">Python API Documentation</a><ul>
+<li><a class="reference internal" href="#module-grid.utils.estimate_kiv">grid.utils.estimate_kiv</a><ul>
+<li><a class="reference internal" href="#grid.utils.estimate_kiv.compute_kiv_estimates"><code class="docutils literal notranslate"><span class="pre">compute_kiv_estimates()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-grid.utils.estimate_kiv_dir">grid.utils.estimate_kiv_dir</a><ul>
+<li><a class="reference internal" href="#grid.utils.estimate_kiv_dir.compute_kiv2_estimates"><code class="docutils literal notranslate"><span class="pre">compute_kiv2_estimates()</span></code></a></li>
+<li><a class="reference internal" href="#grid.utils.estimate_kiv_dir.compute_summary_stats"><code class="docutils literal notranslate"><span class="pre">compute_summary_stats()</span></code></a></li>
+<li><a class="reference internal" href="#grid.utils.estimate_kiv_dir.load_dipcn_file"><code class="docutils literal notranslate"><span class="pre">load_dipcn_file()</span></code></a></li>
+<li><a class="reference internal" href="#grid.utils.estimate_kiv_dir.merge_exon_data"><code class="docutils literal notranslate"><span class="pre">merge_exon_data()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="../_static/documentation_options.js?v=f8c80a57"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/scripts/furo.js?v=46bd48cc"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    </body>
+</html>

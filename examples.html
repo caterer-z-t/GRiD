@@ -3,11 +3,11 @@
   <head><meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="index" title="Index" href="genindex.html"><link rel="search" title="Search" href="search.html"><link rel="next" title="Welcome to GRiD’s documentation!" href="readme.html">
+<link rel="index" title="Index" href="genindex.html"><link rel="search" title="Search" href="search.html"><link rel="next" title="SLURM Job Example" href="examples/SOL_sbatch.html"><link rel="prev" title="Welcome to GRiD’s documentation!" href="readme.html">
         <link rel="prefetch" href="_static/grid_logo.png" as="image">
 
     <link rel="shortcut icon" href="_static/favicon.ico"><!-- Generated with Sphinx 8.2.3 and Furo 2025.09.25 -->
-        <title>GRiD v0 documentation</title>
+        <title>Example Pipeline Jobs - GRiD v0 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d111a655" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=580074bf" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
@@ -172,7 +172,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="#"><div class="brand">GRiD v0 documentation</div></a>
+      <a href="index.html"><div class="brand">GRiD v0 documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -191,7 +191,7 @@
   <aside class="sidebar-drawer">
     <div class="sidebar-container">
       
-      <div class="sidebar-sticky"><a class="sidebar-brand" href="#">
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="index.html">
   <div class="sidebar-logo-container">
     <img class="sidebar-logo" src="_static/grid_logo.png" alt="Logo"/>
   </div>
@@ -205,9 +205,9 @@
 </form>
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
   <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
-<ul>
+<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="readme.html">Welcome to GRiD’s documentation!</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="examples.html">Example Pipeline Jobs</a><input aria-label="Toggle navigation of Example Pipeline Jobs" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l1 current has-children current-page"><a class="current reference internal" href="#">Example Pipeline Jobs</a><input aria-label="Toggle navigation of Example Pipeline Jobs" checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="examples/SOL_sbatch.html">SLURM Job Example</a></li>
 <li class="toctree-l2"><a class="reference internal" href="examples/SOL_python.html">Python Pipeline Example</a></li>
 </ul>
@@ -250,7 +250,7 @@
         </a>
         <div class="content-icon-container">
           <div class="view-this-page">
-  <a class="muted-link" href="_sources/index.rst.txt" title="View this page">
+  <a class="muted-link" href="_sources/examples.rst.txt" title="View this page">
     <svg><use href="#svg-eye"></use></svg>
     <span class="visually-hidden">View this page</span>
   </a>
@@ -268,36 +268,15 @@
           </label>
         </div>
         <article role="main" id="furo-main-content">
-          <section id="grid">
-<h1>GRiD<a class="headerlink" href="#grid" title="Link to this heading">¶</a></h1>
-<p>Welcome to the GRiD documentation!</p>
-<p>Below is the main README for an overview of the project.</p>
+          <section id="example-pipeline-jobs">
+<h1>Example Pipeline Jobs<a class="headerlink" href="#example-pipeline-jobs" title="Link to this heading">¶</a></h1>
+<p>The GRiD documentation provides examples for running the SOL pipeline
+in two common ways: via SLURM (HPC) and via a direct Python script.</p>
 <div class="toctree-wrapper compound">
-<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<p class="caption" role="heading"><span class="caption-text">Examples</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="readme.html">Welcome to GRiD’s documentation!</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="readme.html#grid-genomic-repeat-inference-from-depth">GRiD - Genomic Repeat inference from Depth</a></li>
-<li class="toctree-l2"><a class="reference internal" href="readme.html#to-do-s">To-Do’s</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="examples.html">Example Pipeline Jobs</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="examples/SOL_sbatch.html">SLURM Job Example</a></li>
-<li class="toctree-l2"><a class="reference internal" href="examples/SOL_python.html">Python Pipeline Example</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="contributing.html#contributing-to-grid">Contributing to GRiD</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="code_of_conduct.html">Code of Conduct</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="code_of_conduct.html#code-of-conduct-grid">Code of Conduct - GRiD</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="modules.html">Modules</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="modules.html#command-line-interface">Command-Line Interface</a></li>
-<li class="toctree-l2"><a class="reference internal" href="modules.html#module-documentation">Module Documentation</a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="examples/SOL_sbatch.html">SLURM Job Example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/SOL_python.html">Python Pipeline Example</a></li>
 </ul>
 </div>
 </section>
@@ -307,16 +286,26 @@
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="readme.html">
+          <a class="next-page" href="examples/SOL_sbatch.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">Welcome to GRiD’s documentation!</div>
+                <div class="title">SLURM Job Example</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
-          
+          <a class="prev-page" href="readme.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">Welcome to GRiD’s documentation!</div>
+                
+              </div>
+            </a>
         </div>
         <div class="bottom-of-page">
           <div class="left-details">

@@ -1,12 +1,13 @@
 <!doctype html>
 <html class="no-js" lang="en" data-content_root="./">
-  <head><meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="#" /><link rel="search" title="Search" href="search.html" />
+  <head><meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="#"><link rel="search" title="Search" href="search.html">
+        <link rel="prefetch" href="_static/grid_logo.png" as="image">
 
-    <!-- Generated with Sphinx 8.2.3 and Furo 2025.07.19 --><title>Index - GRiD v0 documentation</title>
+    <link rel="shortcut icon" href="_static/favicon.ico"><!-- Generated with Sphinx 8.2.3 and Furo 2025.09.25 --><title>Index - GRiD v0 documentation</title>
 <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d111a655" />
-    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=25af2a20" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=580074bf" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=8dab3a3b" />
     
@@ -17,18 +18,27 @@
   body {
     --color-code-background: #f2f2f2;
   --color-code-foreground: #1e1e1e;
+  --color-brand-primary: #D91E36;
+  --color-brand-content: #D91E36;
+  --color-link: #D91E36;
   
   }
   @media not print {
     body[data-theme="dark"] {
-      --color-code-background: #2b2b2b;
-  --color-code-foreground: #f8f8f2;
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  --color-brand-primary: #D91E36;
+  --color-brand-content: #D91E36;
+  --color-link: #D91E36;
   
     }
     @media (prefers-color-scheme: dark) {
       body:not([data-theme="light"]) {
-        --color-code-background: #2b2b2b;
-  --color-code-foreground: #f8f8f2;
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  --color-brand-primary: #D91E36;
+  --color-brand-content: #D91E36;
+  --color-link: #D91E36;
   
       }
     }
@@ -143,14 +153,10 @@
   </symbol>
 </svg>
 
-<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
-<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
-<label class="overlay sidebar-overlay" for="__navigation">
-  <div class="visually-hidden">Hide navigation sidebar</div>
-</label>
-<label class="overlay toc-overlay" for="__toc">
-  <div class="visually-hidden">Hide table of contents sidebar</div>
-</label>
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle site navigation sidebar">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc" aria-label="Toggle table of contents sidebar">
+<label class="overlay sidebar-overlay" for="__navigation"></label>
+<label class="overlay toc-overlay" for="__toc"></label>
 
 <a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
 
@@ -160,8 +166,7 @@
   <header class="mobile-header">
     <div class="header-left">
       <label class="nav-overlay-icon" for="__navigation">
-        <div class="visually-hidden">Toggle site navigation sidebar</div>
-        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+        <span class="icon"><svg><use href="#svg-menu"></use></svg></span>
       </label>
     </div>
     <div class="header-center">
@@ -169,8 +174,7 @@
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
-        <button class="theme-toggle">
-          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+        <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
           <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
           <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
           <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
@@ -178,8 +182,7 @@
         </button>
       </div>
       <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
-        <div class="visually-hidden">Toggle table of contents sidebar</div>
-        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+        <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
       </label>
     </div>
   </header>
@@ -187,6 +190,9 @@
     <div class="sidebar-container">
       
       <div class="sidebar-sticky"><a class="sidebar-brand" href="index.html">
+  <div class="sidebar-logo-container">
+    <img class="sidebar-logo" src="_static/grid_logo.png" alt="Logo"/>
+  </div>
   
   <span class="sidebar-brand-text">GRiD v0 documentation</span>
   
@@ -196,7 +202,34 @@
   <input type="hidden" name="area" value="default">
 </form>
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
-  
+  <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="readme.html">Welcome to GRiD’s documentation!</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="examples.html">Example Pipeline Jobs</a><input aria-label="Toggle navigation of Example Pipeline Jobs" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="examples/SOL_sbatch.html">SLURM Job Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/SOL_python.html">Python Pipeline Example</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="code_of_conduct.html">Code of Conduct</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="modules.html">Modules</a><input aria-label="Toggle navigation of Modules" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="modules_dir/grid_core.html">GRiD Core Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules_dir/utilities_overview.html">Utilities Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules_dir/helper-functions.html">Helper Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules_dir/count-reads.html">Read Counting Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules_dir/mosdepth.html">Mosdepth Coverage Analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules_dir/normalize-mosdepth.html">Mosdepth Coverage Normalization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules_dir/find-neighbors.html">Neighbor Finding Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules_dir/lpa-realign.html">LPA Realignment Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules_dir/compute-dipcn.html">Diploid Copy Number Computation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules_dir/estimate-kiv.html">KIV-2 Copy Number Estimation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules_dir/crai.html">CRAM Index Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules_dir/subset.html">CRAM Subsetting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules_dir/extract-reference.html">Extract Reference Sequences</a></li>
+</ul>
+</li>
+</ul>
+
 </div>
 </div>
 
@@ -215,8 +248,7 @@
         </a>
         <div class="content-icon-container">
           <div class="theme-toggle-container theme-toggle-content">
-            <button class="theme-toggle">
-              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+            <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
               <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
               <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
               <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
@@ -224,16 +256,1383 @@
             </button>
           </div>
           <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
-            <div class="visually-hidden">Toggle table of contents sidebar</div>
-            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+            <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
           </label>
         </div>
         <article role="main" id="furo-main-content">
           
 <section class="genindex-section">
   <h1 id="index">Index</h1>
-  <div class="genindex-jumpbox"></div>
+  <div class="genindex-jumpbox"><a href="#Symbols"><strong>Symbols</strong></a> | <a href="#_"><strong>_</strong></a> | <a href="#B"><strong>B</strong></a> | <a href="#C"><strong>C</strong></a> | <a href="#E"><strong>E</strong></a> | <a href="#F"><strong>F</strong></a> | <a href="#G"><strong>G</strong></a> | <a href="#L"><strong>L</strong></a> | <a href="#M"><strong>M</strong></a> | <a href="#N"><strong>N</strong></a> | <a href="#P"><strong>P</strong></a> | <a href="#R"><strong>R</strong></a> | <a href="#S"><strong>S</strong></a> | <a href="#V"><strong>V</strong></a> | <a href="#W"><strong>W</strong></a></div>
 </section>
+<section id="Symbols" class="genindex-section">
+  <h2>Symbols</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li>
+    --bed-file
+
+        <ul>
+          <li><a href="modules.html#cmdoption-grid-extract-reference-b">grid-extract-reference command line option</a>
+</li>
+        </ul></li>
+        <li>
+    --bucket-path
+
+        <ul>
+          <li><a href="modules.html#cmdoption-grid-gcloud-copy-b">grid-gcloud-copy command line option</a>
+</li>
+        </ul></li>
+        <li>
+    --by
+
+        <ul>
+          <li><a href="modules.html#cmdoption-grid-mosdepth-by">grid-mosdepth command line option</a>
+</li>
+        </ul></li>
+        <li>
+    --chrom
+
+        <ul>
+          <li><a href="modules.html#cmdoption-grid-count-reads-c">grid-count-reads command line option</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-lpa-realign-c">grid-lpa-realign command line option</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-mosdepth-c">grid-mosdepth command line option</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-normalize-mosdepth-c">grid-normalize-mosdepth command line option</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-subset-C">grid-subset command line option</a>
+</li>
+        </ul></li>
+        <li>
+    --config
+
+        <ul>
+          <li><a href="modules.html#cmdoption-grid-count-reads-config">grid-count-reads command line option</a>
+</li>
+        </ul></li>
+        <li>
+    --count-file
+
+        <ul>
+          <li><a href="modules.html#cmdoption-grid-compute-dipcn-c">grid-compute-dipcn command line option</a>
+</li>
+        </ul></li>
+        <li>
+    --cram
+
+        <ul>
+          <li><a href="modules.html#cmdoption-grid-crai-c">grid-crai command line option</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-subset-c">grid-subset command line option</a>
+</li>
+        </ul></li>
+        <li>
+    --cram-dir
+
+        <ul>
+          <li><a href="modules.html#cmdoption-grid-count-reads-C">grid-count-reads command line option</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-gcloud-copy-C">grid-gcloud-copy command line option</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-lpa-realign-C">grid-lpa-realign command line option</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-mosdepth-C">grid-mosdepth command line option</a>
+</li>
+        </ul></li>
+        <li>
+    --end
+
+        <ul>
+          <li><a href="modules.html#cmdoption-grid-count-reads-e">grid-count-reads command line option</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-lpa-realign-e">grid-lpa-realign command line option</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-mosdepth-e">grid-mosdepth command line option</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-normalize-mosdepth-e">grid-normalize-mosdepth command line option</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-subset-e">grid-subset command line option</a>
+</li>
+        </ul></li>
+        <li>
+    --exon1a
+
+        <ul>
+          <li><a href="modules.html#cmdoption-grid-estimate-kiv-a">grid-estimate-kiv command line option</a>
+</li>
+        </ul></li>
+        <li>
+    --exon1b
+
+        <ul>
+          <li><a href="modules.html#cmdoption-grid-estimate-kiv-b">grid-estimate-kiv command line option</a>
+</li>
+        </ul></li>
+        <li>
+    --fast
+
+        <ul>
+          <li><a href="modules.html#cmdoption-grid-mosdepth-fast">grid-mosdepth command line option</a>
+</li>
+        </ul></li>
+        <li>
+    --format
+
+        <ul>
+          <li><a href="modules.html#cmdoption-grid-estimate-kiv-f">grid-estimate-kiv command line option</a>
+</li>
+        </ul></li>
+        <li>
+    --genome-build
+
+        <ul>
+          <li><a href="modules.html#cmdoption-grid-lpa-realign-g">grid-lpa-realign command line option</a>
+</li>
+        </ul></li>
+        <li>
+    --input-file
+
+        <ul>
+          <li><a href="modules.html#cmdoption-grid-find-neighbors-i">grid-find-neighbors command line option</a>
+</li>
+        </ul></li>
+        <li>
+    --lpa-ref-fasta
+
+        <ul>
+          <li><a href="modules.html#cmdoption-grid-lpa-realign-f">grid-lpa-realign command line option</a>
+</li>
+        </ul></li>
+        <li>
+    --max-depth
+
+        <ul>
+          <li><a href="modules.html#cmdoption-grid-normalize-mosdepth-max-depth">grid-normalize-mosdepth command line option</a>
+</li>
+        </ul></li>
+        <li>
+    --min-depth
+
+        <ul>
+          <li><a href="modules.html#cmdoption-grid-normalize-mosdepth-min-depth">grid-normalize-mosdepth command line option</a>
+</li>
+        </ul></li>
+        <li>
+    --mosdepth-dir
+
+        <ul>
+          <li><a href="modules.html#cmdoption-grid-normalize-mosdepth-M">grid-normalize-mosdepth command line option</a>
+</li>
+        </ul></li>
+        <li>
+    --n-neighbors
+
+        <ul>
+          <li><a href="modules.html#cmdoption-grid-compute-dipcn-N">grid-compute-dipcn command line option</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-find-neighbors-n">grid-find-neighbors command line option</a>
+</li>
+        </ul></li>
+        <li>
+    --neighbor-file
+
+        <ul>
+          <li><a href="modules.html#cmdoption-grid-compute-dipcn-n">grid-compute-dipcn command line option</a>
+</li>
+        </ul></li>
+        <li>
+    --no-fast
+
+        <ul>
+          <li><a href="modules.html#cmdoption-grid-mosdepth-fast">grid-mosdepth command line option</a>
+</li>
+        </ul></li>
+        <li>
+    --output
+
+        <ul>
+          <li><a href="modules.html#cmdoption-grid-estimate-kiv-o">grid-estimate-kiv command line option</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-subset-o">grid-subset command line option</a>
+</li>
+        </ul></li>
+        <li>
+    --output-dir
+
+        <ul>
+          <li><a href="modules.html#cmdoption-grid-extract-reference-o">grid-extract-reference command line option</a>
+</li>
+        </ul></li>
+        <li>
+    --output-file
+
+        <ul>
+          <li><a href="modules.html#cmdoption-grid-count-reads-o">grid-count-reads command line option</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-find-neighbors-o">grid-find-neighbors command line option</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-lpa-realign-o">grid-lpa-realign command line option</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-mosdepth-o">grid-mosdepth command line option</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-normalize-mosdepth-o">grid-normalize-mosdepth command line option</a>
+</li>
+        </ul></li>
+        <li>
+    --output-prefix
+
+        <ul>
+          <li><a href="modules.html#cmdoption-grid-compute-dipcn-o">grid-compute-dipcn command line option</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-extract-reference-f">grid-extract-reference command line option</a>
+</li>
+        </ul></li>
+        <li>
+    --positions-file
+
+        <ul>
+          <li><a href="modules.html#cmdoption-grid-lpa-realign-P">grid-lpa-realign command line option</a>
+</li>
+        </ul></li>
+        <li>
+    --ref-fasta
+
+        <ul>
+          <li><a href="modules.html#cmdoption-grid-count-reads-r">grid-count-reads command line option</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-lpa-realign-r">grid-lpa-realign command line option</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-mosdepth-r">grid-mosdepth command line option</a>
+</li>
+        </ul></li>
+        <li>
+    --reference
+
+        <ul>
+          <li><a href="modules.html#cmdoption-grid-crai-r">grid-crai command line option</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-subset-R">grid-subset command line option</a>
+</li>
+        </ul></li>
+        <li>
+    --reference-fa
+
+        <ul>
+          <li><a href="modules.html#cmdoption-grid-extract-reference-r">grid-extract-reference command line option</a>
+</li>
+        </ul></li>
+        <li>
+    --region
+
+        <ul>
+          <li><a href="modules.html#cmdoption-grid-subset-r">grid-subset command line option</a>
+</li>
+        </ul></li>
+        <li>
+    --region-name
+
+        <ul>
+          <li><a href="modules.html#cmdoption-grid-mosdepth-n">grid-mosdepth command line option</a>
+</li>
+        </ul></li>
+        <li>
+    --repeat-mask
+
+        <ul>
+          <li><a href="modules.html#cmdoption-grid-normalize-mosdepth-r">grid-normalize-mosdepth command line option</a>
+</li>
+        </ul></li>
+        <li>
+    --sigma2-max
+
+        <ul>
+          <li><a href="modules.html#cmdoption-grid-find-neighbors-sigma2-max">grid-find-neighbors command line option</a>
+</li>
+        </ul></li>
+        <li>
+    --start
+
+        <ul>
+          <li><a href="modules.html#cmdoption-grid-count-reads-s">grid-count-reads command line option</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-lpa-realign-s">grid-lpa-realign command line option</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-mosdepth-s">grid-mosdepth command line option</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-normalize-mosdepth-s">grid-normalize-mosdepth command line option</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-subset-s">grid-subset command line option</a>
+</li>
+        </ul></li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li>
+    --threads
+
+        <ul>
+          <li><a href="modules.html#cmdoption-grid-count-reads-t">grid-count-reads command line option</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-lpa-realign-t">grid-lpa-realign command line option</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-mosdepth-t">grid-mosdepth command line option</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-normalize-mosdepth-t">grid-normalize-mosdepth command line option</a>
+</li>
+        </ul></li>
+        <li>
+    --top-frac
+
+        <ul>
+          <li><a href="modules.html#cmdoption-grid-normalize-mosdepth-top-frac">grid-normalize-mosdepth command line option</a>
+</li>
+        </ul></li>
+        <li>
+    --version
+
+        <ul>
+          <li><a href="modules.html#cmdoption-grid-v">grid command line option</a>
+</li>
+        </ul></li>
+        <li>
+    --work-dir
+
+        <ul>
+          <li><a href="modules.html#cmdoption-grid-mosdepth-w">grid-mosdepth command line option</a>
+</li>
+        </ul></li>
+        <li>
+    --zmax
+
+        <ul>
+          <li><a href="modules.html#cmdoption-grid-find-neighbors-z">grid-find-neighbors command line option</a>
+</li>
+        </ul></li>
+        <li>
+    -a
+
+        <ul>
+          <li><a href="modules.html#cmdoption-grid-estimate-kiv-a">grid-estimate-kiv command line option</a>
+</li>
+        </ul></li>
+        <li>
+    -b
+
+        <ul>
+          <li><a href="modules.html#cmdoption-grid-estimate-kiv-b">grid-estimate-kiv command line option</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-extract-reference-b">grid-extract-reference command line option</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-gcloud-copy-b">grid-gcloud-copy command line option</a>
+</li>
+        </ul></li>
+        <li>
+    -C
+
+        <ul>
+          <li><a href="modules.html#cmdoption-grid-count-reads-C">grid-count-reads command line option</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-gcloud-copy-C">grid-gcloud-copy command line option</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-lpa-realign-C">grid-lpa-realign command line option</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-mosdepth-C">grid-mosdepth command line option</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-subset-C">grid-subset command line option</a>
+</li>
+        </ul></li>
+        <li>
+    -c
+
+        <ul>
+          <li><a href="modules.html#cmdoption-grid-compute-dipcn-c">grid-compute-dipcn command line option</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-count-reads-c">grid-count-reads command line option</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-crai-c">grid-crai command line option</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-lpa-realign-c">grid-lpa-realign command line option</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-mosdepth-c">grid-mosdepth command line option</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-normalize-mosdepth-c">grid-normalize-mosdepth command line option</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-subset-c">grid-subset command line option</a>
+</li>
+        </ul></li>
+        <li>
+    -e
+
+        <ul>
+          <li><a href="modules.html#cmdoption-grid-count-reads-e">grid-count-reads command line option</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-lpa-realign-e">grid-lpa-realign command line option</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-mosdepth-e">grid-mosdepth command line option</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-normalize-mosdepth-e">grid-normalize-mosdepth command line option</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-subset-e">grid-subset command line option</a>
+</li>
+        </ul></li>
+        <li>
+    -f
+
+        <ul>
+          <li><a href="modules.html#cmdoption-grid-estimate-kiv-f">grid-estimate-kiv command line option</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-extract-reference-f">grid-extract-reference command line option</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-lpa-realign-f">grid-lpa-realign command line option</a>
+</li>
+        </ul></li>
+        <li>
+    -g
+
+        <ul>
+          <li><a href="modules.html#cmdoption-grid-lpa-realign-g">grid-lpa-realign command line option</a>
+</li>
+        </ul></li>
+        <li>
+    -i
+
+        <ul>
+          <li><a href="modules.html#cmdoption-grid-find-neighbors-i">grid-find-neighbors command line option</a>
+</li>
+        </ul></li>
+        <li>
+    -M
+
+        <ul>
+          <li><a href="modules.html#cmdoption-grid-normalize-mosdepth-M">grid-normalize-mosdepth command line option</a>
+</li>
+        </ul></li>
+        <li>
+    -N
+
+        <ul>
+          <li><a href="modules.html#cmdoption-grid-compute-dipcn-N">grid-compute-dipcn command line option</a>
+</li>
+        </ul></li>
+        <li>
+    -n
+
+        <ul>
+          <li><a href="modules.html#cmdoption-grid-compute-dipcn-n">grid-compute-dipcn command line option</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-find-neighbors-n">grid-find-neighbors command line option</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-mosdepth-n">grid-mosdepth command line option</a>
+</li>
+        </ul></li>
+        <li>
+    -o
+
+        <ul>
+          <li><a href="modules.html#cmdoption-grid-compute-dipcn-o">grid-compute-dipcn command line option</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-count-reads-o">grid-count-reads command line option</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-estimate-kiv-o">grid-estimate-kiv command line option</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-extract-reference-o">grid-extract-reference command line option</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-find-neighbors-o">grid-find-neighbors command line option</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-lpa-realign-o">grid-lpa-realign command line option</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-mosdepth-o">grid-mosdepth command line option</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-normalize-mosdepth-o">grid-normalize-mosdepth command line option</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-subset-o">grid-subset command line option</a>
+</li>
+        </ul></li>
+        <li>
+    -P
+
+        <ul>
+          <li><a href="modules.html#cmdoption-grid-lpa-realign-P">grid-lpa-realign command line option</a>
+</li>
+        </ul></li>
+        <li>
+    -R
+
+        <ul>
+          <li><a href="modules.html#cmdoption-grid-subset-R">grid-subset command line option</a>
+</li>
+        </ul></li>
+        <li>
+    -r
+
+        <ul>
+          <li><a href="modules.html#cmdoption-grid-count-reads-r">grid-count-reads command line option</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-crai-r">grid-crai command line option</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-extract-reference-r">grid-extract-reference command line option</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-lpa-realign-r">grid-lpa-realign command line option</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-mosdepth-r">grid-mosdepth command line option</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-normalize-mosdepth-r">grid-normalize-mosdepth command line option</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-subset-r">grid-subset command line option</a>
+</li>
+        </ul></li>
+        <li>
+    -s
+
+        <ul>
+          <li><a href="modules.html#cmdoption-grid-count-reads-s">grid-count-reads command line option</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-lpa-realign-s">grid-lpa-realign command line option</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-mosdepth-s">grid-mosdepth command line option</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-normalize-mosdepth-s">grid-normalize-mosdepth command line option</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-subset-s">grid-subset command line option</a>
+</li>
+        </ul></li>
+        <li>
+    -t
+
+        <ul>
+          <li><a href="modules.html#cmdoption-grid-count-reads-t">grid-count-reads command line option</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-lpa-realign-t">grid-lpa-realign command line option</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-mosdepth-t">grid-mosdepth command line option</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-normalize-mosdepth-t">grid-normalize-mosdepth command line option</a>
+</li>
+        </ul></li>
+        <li>
+    -v
+
+        <ul>
+          <li><a href="modules.html#cmdoption-grid-v">grid command line option</a>
+</li>
+        </ul></li>
+        <li>
+    -w
+
+        <ul>
+          <li><a href="modules.html#cmdoption-grid-mosdepth-w">grid-mosdepth command line option</a>
+</li>
+        </ul></li>
+        <li>
+    -z
+
+        <ul>
+          <li><a href="modules.html#cmdoption-grid-find-neighbors-z">grid-find-neighbors command line option</a>
+</li>
+        </ul></li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="_" class="genindex-section">
+  <h2>_</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="modules_dir/normalize-mosdepth.html#grid.utils.normalize_mosdepth_dir._process_one_individual">_process_one_individual() (in module grid.utils.normalize_mosdepth_dir)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="B" class="genindex-section">
+  <h2>B</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="modules_dir/normalize-mosdepth.html#grid.utils.normalize_mosdepth_dir.build_depth_matrix">build_depth_matrix() (in module grid.utils.normalize_mosdepth_dir)</a>
+</li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="modules_dir/normalize-mosdepth.html#grid.utils.normalize_mosdepth_dir.build_matrix_from_regions">build_matrix_from_regions() (in module grid.utils.normalize_mosdepth_dir)</a>
+</li>
+        <li><a href="modules_dir/mosdepth.html#grid.utils.mosdepth_dir.build_mosdepth_command">build_mosdepth_command() (in module grid.utils.mosdepth_dir)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="C" class="genindex-section">
+  <h2>C</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="modules_dir/mosdepth.html#grid.utils.mosdepth_dir.check_mosdepth_available">check_mosdepth_available() (in module grid.utils.mosdepth_dir)</a>
+</li>
+        <li><a href="modules_dir/lpa-realign.html#grid.utils.align_lpa_dir.classify_read_pairs">classify_read_pairs() (in module grid.utils.align_lpa_dir)</a>
+</li>
+        <li><a href="modules_dir/lpa-realign.html#grid.utils.align_lpa_dir.classify_variant_from_scores">classify_variant_from_scores() (in module grid.utils.align_lpa_dir)</a>
+</li>
+        <li><a href="modules_dir/lpa-realign.html#grid.utils.align_lpa_dir.compute_alignment_scores">compute_alignment_scores() (in module grid.utils.align_lpa_dir)</a>
+</li>
+        <li><a href="modules_dir/compute-dipcn.html#grid.utils.compute_dipcn.compute_dipcn_pipeline">compute_dipcn_pipeline() (in module grid.utils.compute_dipcn)</a>
+</li>
+        <li><a href="modules_dir/compute-dipcn.html#grid.utils.compute_dipcn_dir.compute_diploid_cn_for_exon">compute_diploid_cn_for_exon() (in module grid.utils.compute_dipcn_dir)</a>
+</li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="modules_dir/estimate-kiv.html#grid.utils.estimate_kiv_dir.compute_kiv2_estimates">compute_kiv2_estimates() (in module grid.utils.estimate_kiv_dir)</a>
+</li>
+        <li><a href="modules_dir/estimate-kiv.html#grid.utils.estimate_kiv.compute_kiv_estimates">compute_kiv_estimates() (in module grid.utils.estimate_kiv)</a>
+</li>
+        <li><a href="modules_dir/mosdepth.html#grid.utils.mosdepth_dir.compute_region_coverage">compute_region_coverage() (in module grid.utils.mosdepth_dir)</a>
+</li>
+        <li><a href="modules_dir/estimate-kiv.html#grid.utils.estimate_kiv_dir.compute_summary_stats">compute_summary_stats() (in module grid.utils.estimate_kiv_dir)</a>
+</li>
+        <li><a href="modules_dir/count-reads.html#grid.utils.count_reads.count_reads">count_reads() (in module grid.utils.count_reads)</a>
+</li>
+        <li><a href="modules_dir/count-reads.html#grid.utils.count_reads_dir.count_reads_in_region">count_reads_in_region() (in module grid.utils.count_reads_dir)</a>
+</li>
+        <li><a href="modules_dir/helper-functions.html#grid.utils.helper_dir.create_region_string">create_region_string() (in module grid.utils.helper_dir)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="E" class="genindex-section">
+  <h2>E</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="modules_dir/crai.html#grid.utils.ensure_crai.ensure_crai">ensure_crai() (in module grid.utils.ensure_crai)</a>
+</li>
+        <li><a href="modules_dir/lpa-realign.html#grid.utils.align_lpa_dir.extract_reads_from_cram">extract_reads_from_cram() (in module grid.utils.align_lpa_dir)</a>
+</li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="modules_dir/extract-reference.html#grid.utils.extract_reference.extract_reference">extract_reference() (in module grid.utils.extract_reference)</a>
+</li>
+        <li><a href="modules_dir/normalize-mosdepth.html#grid.utils.normalize_mosdepth_dir.extract_regions">extract_regions() (in module grid.utils.normalize_mosdepth_dir)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="F" class="genindex-section">
+  <h2>F</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="modules_dir/find-neighbors.html#grid.utils.find_neighbors_dir.filter_regions_by_variance">filter_regions_by_variance() (in module grid.utils.find_neighbors_dir)</a>
+</li>
+        <li><a href="modules_dir/lpa-realign.html#grid.utils.align_lpa_dir.find_cram_files">find_cram_files() (in module grid.utils.align_lpa_dir)</a>
+
+        <ul>
+          <li><a href="modules_dir/helper-functions.html#grid.utils.helper_dir.find_cram_files">(in module grid.utils.helper_dir)</a>
+</li>
+        </ul></li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="modules_dir/find-neighbors.html#grid.utils.find_neighbors.find_neighbors">find_neighbors() (in module grid.utils.find_neighbors)</a>
+</li>
+        <li><a href="modules_dir/find-neighbors.html#grid.utils.find_neighbors_dir.find_neighbors_sklearn">find_neighbors_sklearn() (in module grid.utils.find_neighbors_dir)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="G" class="genindex-section">
+  <h2>G</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="modules_dir/compute-dipcn.html#grid.utils.compute_dipcn_dir.get_exon_count">get_exon_count() (in module grid.utils.compute_dipcn_dir)</a>
+</li>
+        <li><a href="modules_dir/normalize-mosdepth.html#grid.utils.normalize_mosdepth_dir.get_individuals">get_individuals() (in module grid.utils.normalize_mosdepth_dir)</a>
+</li>
+        <li>
+    grid
+
+        <ul>
+          <li><a href="modules_dir/grid_core.html#module-grid">module</a>
+</li>
+        </ul></li>
+        <li>
+    grid command line option
+
+        <ul>
+          <li><a href="modules.html#cmdoption-grid-v">--version</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-v">-v</a>
+</li>
+        </ul></li>
+        <li>
+    grid-compute-dipcn command line option
+
+        <ul>
+          <li><a href="modules.html#cmdoption-grid-compute-dipcn-c">--count-file</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-compute-dipcn-N">--n-neighbors</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-compute-dipcn-n">--neighbor-file</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-compute-dipcn-o">--output-prefix</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-compute-dipcn-c">-c</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-compute-dipcn-n">-n</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-compute-dipcn-N">-N</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-compute-dipcn-o">-o</a>
+</li>
+        </ul></li>
+        <li>
+    grid-count-reads command line option
+
+        <ul>
+          <li><a href="modules.html#cmdoption-grid-count-reads-c">--chrom</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-count-reads-config">--config</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-count-reads-C">--cram-dir</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-count-reads-e">--end</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-count-reads-o">--output-file</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-count-reads-r">--ref-fasta</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-count-reads-s">--start</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-count-reads-t">--threads</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-count-reads-C">-C</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-count-reads-c">-c</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-count-reads-e">-e</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-count-reads-o">-o</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-count-reads-r">-r</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-count-reads-s">-s</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-count-reads-t">-t</a>
+</li>
+        </ul></li>
+        <li>
+    grid-crai command line option
+
+        <ul>
+          <li><a href="modules.html#cmdoption-grid-crai-c">--cram</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-crai-r">--reference</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-crai-c">-c</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-crai-r">-r</a>
+</li>
+        </ul></li>
+        <li>
+    grid-estimate-kiv command line option
+
+        <ul>
+          <li><a href="modules.html#cmdoption-grid-estimate-kiv-a">--exon1a</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-estimate-kiv-b">--exon1b</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-estimate-kiv-f">--format</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-estimate-kiv-o">--output</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-estimate-kiv-a">-a</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-estimate-kiv-b">-b</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-estimate-kiv-f">-f</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-estimate-kiv-o">-o</a>
+</li>
+        </ul></li>
+        <li>
+    grid-extract-reference command line option
+
+        <ul>
+          <li><a href="modules.html#cmdoption-grid-extract-reference-b">--bed-file</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-extract-reference-o">--output-dir</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-extract-reference-f">--output-prefix</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-extract-reference-r">--reference-fa</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-extract-reference-b">-b</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-extract-reference-f">-f</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-extract-reference-o">-o</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-extract-reference-r">-r</a>
+</li>
+        </ul></li>
+        <li>
+    grid-find-neighbors command line option
+
+        <ul>
+          <li><a href="modules.html#cmdoption-grid-find-neighbors-i">--input-file</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-find-neighbors-n">--n-neighbors</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-find-neighbors-o">--output-file</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-find-neighbors-sigma2-max">--sigma2-max</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-find-neighbors-z">--zmax</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-find-neighbors-i">-i</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-find-neighbors-n">-n</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-find-neighbors-o">-o</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-find-neighbors-z">-z</a>
+</li>
+        </ul></li>
+        <li>
+    grid-gcloud-copy command line option
+
+        <ul>
+          <li><a href="modules.html#cmdoption-grid-gcloud-copy-b">--bucket-path</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-gcloud-copy-C">--cram-dir</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-gcloud-copy-b">-b</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-gcloud-copy-C">-C</a>
+</li>
+        </ul></li>
+        <li>
+    grid-lpa-realign command line option
+
+        <ul>
+          <li><a href="modules.html#cmdoption-grid-lpa-realign-c">--chrom</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-lpa-realign-C">--cram-dir</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-lpa-realign-e">--end</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-lpa-realign-g">--genome-build</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-lpa-realign-f">--lpa-ref-fasta</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-lpa-realign-o">--output-file</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-lpa-realign-P">--positions-file</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-lpa-realign-r">--ref-fasta</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-lpa-realign-s">--start</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-lpa-realign-t">--threads</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-lpa-realign-C">-C</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-lpa-realign-c">-c</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-lpa-realign-e">-e</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-lpa-realign-f">-f</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-lpa-realign-g">-g</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-lpa-realign-o">-o</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-lpa-realign-P">-P</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-lpa-realign-r">-r</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-lpa-realign-s">-s</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-lpa-realign-t">-t</a>
+</li>
+        </ul></li>
+        <li>
+    grid-mosdepth command line option
+
+        <ul>
+          <li><a href="modules.html#cmdoption-grid-mosdepth-by">--by</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-mosdepth-c">--chrom</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-mosdepth-C">--cram-dir</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-mosdepth-e">--end</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-mosdepth-fast">--fast</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-mosdepth-fast">--no-fast</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-mosdepth-o">--output-file</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-mosdepth-r">--ref-fasta</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-mosdepth-n">--region-name</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-mosdepth-s">--start</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-mosdepth-t">--threads</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-mosdepth-w">--work-dir</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-mosdepth-C">-C</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-mosdepth-c">-c</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-mosdepth-e">-e</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-mosdepth-n">-n</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-mosdepth-o">-o</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-mosdepth-r">-r</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-mosdepth-s">-s</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-mosdepth-t">-t</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-mosdepth-w">-w</a>
+</li>
+        </ul></li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li>
+    grid-normalize-mosdepth command line option
+
+        <ul>
+          <li><a href="modules.html#cmdoption-grid-normalize-mosdepth-c">--chrom</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-normalize-mosdepth-e">--end</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-normalize-mosdepth-max-depth">--max-depth</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-normalize-mosdepth-min-depth">--min-depth</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-normalize-mosdepth-M">--mosdepth-dir</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-normalize-mosdepth-o">--output-file</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-normalize-mosdepth-r">--repeat-mask</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-normalize-mosdepth-s">--start</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-normalize-mosdepth-t">--threads</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-normalize-mosdepth-top-frac">--top-frac</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-normalize-mosdepth-c">-c</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-normalize-mosdepth-e">-e</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-normalize-mosdepth-M">-M</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-normalize-mosdepth-o">-o</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-normalize-mosdepth-r">-r</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-normalize-mosdepth-s">-s</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-normalize-mosdepth-t">-t</a>
+</li>
+        </ul></li>
+        <li>
+    grid-subset command line option
+
+        <ul>
+          <li><a href="modules.html#cmdoption-grid-subset-C">--chrom</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-subset-c">--cram</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-subset-e">--end</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-subset-o">--output</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-subset-R">--reference</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-subset-r">--region</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-subset-s">--start</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-subset-c">-c</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-subset-C">-C</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-subset-e">-e</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-subset-o">-o</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-subset-r">-r</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-subset-R">-R</a>
+</li>
+          <li><a href="modules.html#cmdoption-grid-subset-s">-s</a>
+</li>
+        </ul></li>
+        <li>
+    grid.cli
+
+        <ul>
+          <li><a href="modules_dir/grid_core.html#module-grid.cli">module</a>
+</li>
+        </ul></li>
+        <li>
+    grid.config
+
+        <ul>
+          <li><a href="modules_dir/grid_core.html#module-grid.config">module</a>
+</li>
+        </ul></li>
+        <li>
+    grid.pipeline
+
+        <ul>
+          <li><a href="modules_dir/grid_core.html#module-grid.pipeline">module</a>
+</li>
+        </ul></li>
+        <li>
+    grid.utils
+
+        <ul>
+          <li><a href="modules_dir/utilities_overview.html#module-grid.utils">module</a>
+</li>
+        </ul></li>
+        <li>
+    grid.utils.align_lpa
+
+        <ul>
+          <li><a href="modules_dir/lpa-realign.html#module-grid.utils.align_lpa">module</a>
+</li>
+        </ul></li>
+        <li>
+    grid.utils.align_lpa_dir
+
+        <ul>
+          <li><a href="modules_dir/lpa-realign.html#module-grid.utils.align_lpa_dir">module</a>
+</li>
+        </ul></li>
+        <li>
+    grid.utils.compute_dipcn
+
+        <ul>
+          <li><a href="modules_dir/compute-dipcn.html#module-grid.utils.compute_dipcn">module</a>
+</li>
+        </ul></li>
+        <li>
+    grid.utils.compute_dipcn_dir
+
+        <ul>
+          <li><a href="modules_dir/compute-dipcn.html#module-grid.utils.compute_dipcn_dir">module</a>
+</li>
+        </ul></li>
+        <li>
+    grid.utils.count_reads
+
+        <ul>
+          <li><a href="modules_dir/count-reads.html#module-grid.utils.count_reads">module</a>
+</li>
+        </ul></li>
+        <li>
+    grid.utils.count_reads_dir
+
+        <ul>
+          <li><a href="modules_dir/count-reads.html#module-grid.utils.count_reads_dir">module</a>
+</li>
+        </ul></li>
+        <li>
+    grid.utils.ensure_crai
+
+        <ul>
+          <li><a href="modules_dir/crai.html#module-grid.utils.ensure_crai">module</a>
+</li>
+        </ul></li>
+        <li>
+    grid.utils.estimate_kiv
+
+        <ul>
+          <li><a href="modules_dir/estimate-kiv.html#module-grid.utils.estimate_kiv">module</a>
+</li>
+        </ul></li>
+        <li>
+    grid.utils.estimate_kiv_dir
+
+        <ul>
+          <li><a href="modules_dir/estimate-kiv.html#module-grid.utils.estimate_kiv_dir">module</a>
+</li>
+        </ul></li>
+        <li>
+    grid.utils.extract_reference
+
+        <ul>
+          <li><a href="modules_dir/extract-reference.html#module-grid.utils.extract_reference">module</a>
+</li>
+        </ul></li>
+        <li>
+    grid.utils.find_neighbors
+
+        <ul>
+          <li><a href="modules_dir/find-neighbors.html#module-grid.utils.find_neighbors">module</a>
+</li>
+        </ul></li>
+        <li>
+    grid.utils.find_neighbors_dir
+
+        <ul>
+          <li><a href="modules_dir/find-neighbors.html#module-grid.utils.find_neighbors_dir">module</a>
+</li>
+        </ul></li>
+        <li>
+    grid.utils.helper_dir
+
+        <ul>
+          <li><a href="modules_dir/helper-functions.html#module-grid.utils.helper_dir">module</a>
+</li>
+        </ul></li>
+        <li>
+    grid.utils.mosdepth_dir
+
+        <ul>
+          <li><a href="modules_dir/mosdepth.html#module-grid.utils.mosdepth_dir">module</a>
+</li>
+        </ul></li>
+        <li>
+    grid.utils.normalize_mosdepth_dir
+
+        <ul>
+          <li><a href="modules_dir/normalize-mosdepth.html#module-grid.utils.normalize_mosdepth_dir">module</a>
+</li>
+        </ul></li>
+        <li>
+    grid.utils.run_mosdepth
+
+        <ul>
+          <li><a href="modules_dir/mosdepth.html#module-grid.utils.run_mosdepth">module</a>
+</li>
+        </ul></li>
+        <li>
+    grid.utils.run_normalized_mosdepth
+
+        <ul>
+          <li><a href="modules_dir/normalize-mosdepth.html#module-grid.utils.run_normalized_mosdepth">module</a>
+</li>
+        </ul></li>
+        <li>
+    grid.utils.subset_cram
+
+        <ul>
+          <li><a href="modules_dir/subset.html#module-grid.utils.subset_cram">module</a>
+</li>
+        </ul></li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="L" class="genindex-section">
+  <h2>L</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="modules_dir/compute-dipcn.html#grid.utils.compute_dipcn_dir.load_count_results">load_count_results() (in module grid.utils.compute_dipcn_dir)</a>
+</li>
+        <li><a href="modules_dir/estimate-kiv.html#grid.utils.estimate_kiv_dir.load_dipcn_file">load_dipcn_file() (in module grid.utils.estimate_kiv_dir)</a>
+</li>
+        <li><a href="modules_dir/helper-functions.html#grid.utils.helper_dir.load_flags">load_flags() (in module grid.utils.helper_dir)</a>
+</li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="modules_dir/compute-dipcn.html#grid.utils.compute_dipcn_dir.load_neighbor_results">load_neighbor_results() (in module grid.utils.compute_dipcn_dir)</a>
+</li>
+        <li><a href="modules_dir/lpa-realign.html#grid.utils.align_lpa_dir.load_positions">load_positions() (in module grid.utils.align_lpa_dir)</a>
+</li>
+        <li><a href="modules_dir/lpa-realign.html#grid.utils.align_lpa_dir.load_reference">load_reference() (in module grid.utils.align_lpa_dir)</a>
+</li>
+        <li><a href="modules_dir/normalize-mosdepth.html#grid.utils.normalize_mosdepth_dir.load_repeat_mask">load_repeat_mask() (in module grid.utils.normalize_mosdepth_dir)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="M" class="genindex-section">
+  <h2>M</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="modules_dir/grid_core.html#grid.cli.main">main() (in module grid.cli)</a>
+</li>
+        <li><a href="modules_dir/estimate-kiv.html#grid.utils.estimate_kiv_dir.merge_exon_data">merge_exon_data() (in module grid.utils.estimate_kiv_dir)</a>
+</li>
+        <li>
+    module
+
+        <ul>
+          <li><a href="modules_dir/grid_core.html#module-grid">grid</a>
+</li>
+          <li><a href="modules_dir/grid_core.html#module-grid.cli">grid.cli</a>
+</li>
+          <li><a href="modules_dir/grid_core.html#module-grid.config">grid.config</a>
+</li>
+          <li><a href="modules_dir/grid_core.html#module-grid.pipeline">grid.pipeline</a>
+</li>
+          <li><a href="modules_dir/utilities_overview.html#module-grid.utils">grid.utils</a>
+</li>
+          <li><a href="modules_dir/lpa-realign.html#module-grid.utils.align_lpa">grid.utils.align_lpa</a>
+</li>
+          <li><a href="modules_dir/lpa-realign.html#module-grid.utils.align_lpa_dir">grid.utils.align_lpa_dir</a>
+</li>
+          <li><a href="modules_dir/compute-dipcn.html#module-grid.utils.compute_dipcn">grid.utils.compute_dipcn</a>
+</li>
+          <li><a href="modules_dir/compute-dipcn.html#module-grid.utils.compute_dipcn_dir">grid.utils.compute_dipcn_dir</a>
+</li>
+          <li><a href="modules_dir/count-reads.html#module-grid.utils.count_reads">grid.utils.count_reads</a>
+</li>
+          <li><a href="modules_dir/count-reads.html#module-grid.utils.count_reads_dir">grid.utils.count_reads_dir</a>
+</li>
+          <li><a href="modules_dir/crai.html#module-grid.utils.ensure_crai">grid.utils.ensure_crai</a>
+</li>
+          <li><a href="modules_dir/estimate-kiv.html#module-grid.utils.estimate_kiv">grid.utils.estimate_kiv</a>
+</li>
+          <li><a href="modules_dir/estimate-kiv.html#module-grid.utils.estimate_kiv_dir">grid.utils.estimate_kiv_dir</a>
+</li>
+          <li><a href="modules_dir/extract-reference.html#module-grid.utils.extract_reference">grid.utils.extract_reference</a>
+</li>
+          <li><a href="modules_dir/find-neighbors.html#module-grid.utils.find_neighbors">grid.utils.find_neighbors</a>
+</li>
+          <li><a href="modules_dir/find-neighbors.html#module-grid.utils.find_neighbors_dir">grid.utils.find_neighbors_dir</a>
+</li>
+          <li><a href="modules_dir/helper-functions.html#module-grid.utils.helper_dir">grid.utils.helper_dir</a>
+</li>
+          <li><a href="modules_dir/mosdepth.html#module-grid.utils.mosdepth_dir">grid.utils.mosdepth_dir</a>
+</li>
+          <li><a href="modules_dir/normalize-mosdepth.html#module-grid.utils.normalize_mosdepth_dir">grid.utils.normalize_mosdepth_dir</a>
+</li>
+          <li><a href="modules_dir/mosdepth.html#module-grid.utils.run_mosdepth">grid.utils.run_mosdepth</a>
+</li>
+          <li><a href="modules_dir/normalize-mosdepth.html#module-grid.utils.run_normalized_mosdepth">grid.utils.run_normalized_mosdepth</a>
+</li>
+          <li><a href="modules_dir/subset.html#module-grid.utils.subset_cram">grid.utils.subset_cram</a>
+</li>
+        </ul></li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="N" class="genindex-section">
+  <h2>N</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="modules_dir/normalize-mosdepth.html#grid.utils.normalize_mosdepth_dir.normalize_matrix">normalize_matrix() (in module grid.utils.normalize_mosdepth_dir)</a>
+</li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="modules_dir/compute-dipcn.html#grid.utils.compute_dipcn_dir.normalize_sample_id">normalize_sample_id() (in module grid.utils.compute_dipcn_dir)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="P" class="genindex-section">
+  <h2>P</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="modules_dir/lpa-realign.html#grid.utils.align_lpa_dir.parse_cigar">parse_cigar() (in module grid.utils.align_lpa_dir)</a>
+</li>
+        <li><a href="modules_dir/grid_core.html#grid.cli.print_banner">print_banner() (in module grid.cli)</a>
+</li>
+        <li><a href="modules_dir/helper-functions.html#grid.utils.helper_dir.print_batch_summary">print_batch_summary() (in module grid.utils.helper_dir)</a>
+</li>
+        <li><a href="modules_dir/helper-functions.html#grid.utils.helper_dir.print_individual_error">print_individual_error() (in module grid.utils.helper_dir)</a>
+</li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="modules_dir/helper-functions.html#grid.utils.helper_dir.print_individual_success">print_individual_success() (in module grid.utils.helper_dir)</a>
+</li>
+        <li><a href="modules_dir/grid_core.html#grid.cli.print_version_and_exit">print_version_and_exit() (in module grid.cli)</a>
+</li>
+        <li><a href="modules_dir/lpa-realign.html#grid.utils.align_lpa_dir.process_cram_file">process_cram_file() (in module grid.utils.align_lpa_dir)</a>
+</li>
+        <li><a href="modules_dir/count-reads.html#grid.utils.count_reads_dir.process_single_cram">process_single_cram() (in module grid.utils.count_reads_dir)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="R" class="genindex-section">
+  <h2>R</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="modules_dir/find-neighbors.html#grid.utils.find_neighbors_dir.read_normalized_data">read_normalized_data() (in module grid.utils.find_neighbors_dir)</a>
+</li>
+        <li><a href="modules_dir/normalize-mosdepth.html#grid.utils.normalize_mosdepth_dir.regions_bed_gz">regions_bed_gz() (in module grid.utils.normalize_mosdepth_dir)</a>
+</li>
+        <li><a href="modules_dir/lpa-realign.html#grid.utils.align_lpa.run_lpa_realignments">run_lpa_realignments() (in module grid.utils.align_lpa)</a>
+</li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="modules_dir/mosdepth.html#grid.utils.run_mosdepth.run_mosdepth">run_mosdepth() (in module grid.utils.run_mosdepth)</a>
+</li>
+        <li><a href="modules_dir/mosdepth.html#grid.utils.mosdepth_dir.run_mosdepth_single_cram">run_mosdepth_single_cram() (in module grid.utils.mosdepth_dir)</a>
+</li>
+        <li><a href="modules_dir/normalize-mosdepth.html#grid.utils.run_normalized_mosdepth.run_normalize_mosdepth">run_normalize_mosdepth() (in module grid.utils.run_normalized_mosdepth)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="S" class="genindex-section">
+  <h2>S</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="modules_dir/find-neighbors.html#grid.utils.find_neighbors_dir.save_neighbors">save_neighbors() (in module grid.utils.find_neighbors_dir)</a>
+</li>
+        <li><a href="modules_dir/normalize-mosdepth.html#grid.utils.normalize_mosdepth_dir.select_high_variance_regions">select_high_variance_regions() (in module grid.utils.normalize_mosdepth_dir)</a>
+</li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="modules_dir/helper-functions.html#grid.utils.helper_dir.setup_output_file">setup_output_file() (in module grid.utils.helper_dir)</a>
+</li>
+        <li><a href="modules_dir/subset.html#grid.utils.subset_cram.subset_cram">subset_cram() (in module grid.utils.subset_cram)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="V" class="genindex-section">
+  <h2>V</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="modules_dir/lpa-realign.html#grid.utils.align_lpa_dir.validate_inputs">validate_inputs() (in module grid.utils.align_lpa_dir)</a>
+</li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="modules_dir/compute-dipcn.html#grid.utils.compute_dipcn_dir.validate_sample_overlap">validate_sample_overlap() (in module grid.utils.compute_dipcn_dir)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="W" class="genindex-section">
+  <h2>W</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="modules_dir/mosdepth.html#grid.utils.mosdepth_dir.wait_for_mosdepth_output">wait_for_mosdepth_output() (in module grid.utils.mosdepth_dir)</a>
+</li>
+        <li><a href="modules_dir/mosdepth.html#grid.utils.mosdepth_dir.write_coverage_result">write_coverage_result() (in module grid.utils.mosdepth_dir)</a>
+</li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="modules_dir/compute-dipcn.html#grid.utils.compute_dipcn_dir.write_dipcn_output">write_dipcn_output() (in module grid.utils.compute_dipcn_dir)</a>
+</li>
+        <li><a href="modules_dir/normalize-mosdepth.html#grid.utils.normalize_mosdepth_dir.write_normalized_output">write_normalized_output() (in module grid.utils.normalize_mosdepth_dir)</a>
+</li>
+        <li><a href="modules_dir/helper-functions.html#grid.utils.helper_dir.write_result_to_file">write_result_to_file() (in module grid.utils.helper_dir)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
 
         </article>
       </div>

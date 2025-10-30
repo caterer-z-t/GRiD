@@ -1,0 +1,1033 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="../">
+  <head><meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="Index" href="../genindex.html"><link rel="search" title="Search" href="../search.html"><link rel="next" title="KIV-2 Copy Number Estimation" href="estimate-kiv.html"><link rel="prev" title="LPA Realignment Module" href="lpa-realign.html">
+        <link rel="prefetch" href="../_static/grid_logo.png" as="image">
+
+    <link rel="shortcut icon" href="../_static/favicon.ico"><!-- Generated with Sphinx 8.2.3 and Furo 2025.09.25 -->
+        <title>Diploid Copy Number Computation - GRiD v0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d111a655" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=580074bf" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=8dab3a3b" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f2f2f2;
+  --color-code-foreground: #1e1e1e;
+  --color-brand-primary: #D91E36;
+  --color-brand-content: #D91E36;
+  --color-link: #D91E36;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  --color-brand-primary: #D91E36;
+  --color-brand-content: #D91E36;
+  --color-link: #D91E36;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  --color-brand-primary: #D91E36;
+  --color-brand-content: #D91E36;
+  --color-link: #D91E36;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle site navigation sidebar">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc" aria-label="Toggle table of contents sidebar">
+<label class="overlay sidebar-overlay" for="__navigation"></label>
+<label class="overlay toc-overlay" for="__toc"></label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <span class="icon"><svg><use href="#svg-menu"></use></svg></span>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../index.html"><div class="brand">GRiD v0 documentation</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
+  <div class="sidebar-logo-container">
+    <img class="sidebar-logo" src="../_static/grid_logo.png" alt="Logo"/>
+  </div>
+  
+  <span class="sidebar-brand-text">GRiD v0 documentation</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../readme.html">Welcome to GRiD’s documentation!</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../examples.html">Example Pipeline Jobs</a><input aria-label="Toggle navigation of Example Pipeline Jobs" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../examples/SOL_sbatch.html">SLURM Job Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/SOL_python.html">Python Pipeline Example</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../code_of_conduct.html">Code of Conduct</a></li>
+<li class="toctree-l1 current has-children"><a class="reference internal" href="../modules.html">Modules</a><input aria-label="Toggle navigation of Modules" checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="grid_core.html">GRiD Core Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utilities_overview.html">Utilities Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="helper-functions.html">Helper Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="count-reads.html">Read Counting Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mosdepth.html">Mosdepth Coverage Analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="normalize-mosdepth.html">Mosdepth Coverage Normalization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="find-neighbors.html">Neighbor Finding Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lpa-realign.html">LPA Realignment Module</a></li>
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">Diploid Copy Number Computation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="estimate-kiv.html">KIV-2 Copy Number Estimation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="crai.html">CRAM Index Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="subset.html">CRAM Subsetting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="extract-reference.html">Extract Reference Sequences</a></li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="view-this-page">
+  <a class="muted-link" href="../_sources/modules_dir/compute-dipcn.rst.txt" title="View this page">
+    <svg><use href="#svg-eye"></use></svg>
+    <span class="visually-hidden">View this page</span>
+  </a>
+</div>
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <section id="diploid-copy-number-computation">
+<h1>Diploid Copy Number Computation<a class="headerlink" href="#diploid-copy-number-computation" title="Link to this heading">¶</a></h1>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">¶</a></h2>
+<section id="diploid-copy-number-computation-module">
+<h3>Diploid Copy Number Computation Module<a class="headerlink" href="#diploid-copy-number-computation-module" title="Link to this heading">¶</a></h3>
+<p>Compute diploid copy numbers for LPA KIV-2 exons using neighbor-based normalization. This is the penultimate step before final KIV-2 CN estimation.</p>
+<section id="purpose">
+<h4>Purpose<a class="headerlink" href="#purpose" title="Link to this heading">¶</a></h4>
+<p>This module transforms raw realignment read counts into normalized diploid copy number estimates by:</p>
+<ol class="arabic simple">
+<li><p><strong>Neighbor-based normalization</strong> - Compare each sample to similar individuals</p></li>
+<li><p><strong>Batch effect correction</strong> - Remove technical variation</p></li>
+<li><p><strong>Diploid CN estimation</strong> - Account for both haplotypes</p></li>
+<li><p><strong>Exon-specific quantification</strong> - Separate estimates for 1A, 1B, and subtypes</p></li>
+</ol>
+<p>The output provides refined CN estimates for each exon type, which are combined in the final step to estimate total KIV-2 copy number.</p>
+</section>
+<section id="main-module">
+<h4>Main Module<a class="headerlink" href="#main-module" title="Link to this heading">¶</a></h4>
+<section id="compute-dipcn-py">
+<h5><code class="docutils literal notranslate"><span class="pre">compute_dipcn.py</span></code><a class="headerlink" href="#compute-dipcn-py" title="Link to this heading">¶</a></h5>
+<p>Located in parent directory: <code class="docutils literal notranslate"><span class="pre">grid/utils/compute_dipcn.py</span></code></p>
+<p><strong>Key Function:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">compute_dipcn_pipeline</span><span class="p">(</span>
+    <span class="n">count_file</span><span class="p">:</span> <span class="n">Path</span><span class="p">,</span>
+    <span class="n">neighbor_file</span><span class="p">:</span> <span class="n">Path</span><span class="p">,</span>
+    <span class="n">output_prefix</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">n_neighbors</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">200</span><span class="p">,</span>
+    <span class="n">console</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Console</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+</pre></div>
+</div>
+<p><strong>Parameters:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">count_file</span></code>: Realignment output TSV (from <code class="docutils literal notranslate"><span class="pre">lpa-realign</span></code>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">neighbor_file</span></code>: Neighbor file (from <code class="docutils literal notranslate"><span class="pre">find-neighbors</span></code>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">output_prefix</span></code>: Prefix for output files (e.g., “output/sample”)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">n_neighbors</span></code>: Number of top neighbors to use (default: 200)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">console</span></code>: Rich console for pretty output (optional)</p></li>
+</ul>
+<p><strong>Output Files:</strong>
+Four files are generated with diploid CN for each exon type:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">output_prefix</span><span class="o">&gt;.</span><span class="n">exon1A</span><span class="o">.</span><span class="n">dipCN</span><span class="o">.</span><span class="n">txt</span>
+<span class="o">&lt;</span><span class="n">output_prefix</span><span class="o">&gt;.</span><span class="n">exon1B</span><span class="o">.</span><span class="n">dipCN</span><span class="o">.</span><span class="n">txt</span>
+<span class="o">&lt;</span><span class="n">output_prefix</span><span class="o">&gt;.</span><span class="n">exon1B_KIV3</span><span class="o">.</span><span class="n">dipCN</span><span class="o">.</span><span class="n">txt</span>
+<span class="o">&lt;</span><span class="n">output_prefix</span><span class="o">&gt;.</span><span class="n">exon1B_notKIV3</span><span class="o">.</span><span class="n">dipCN</span><span class="o">.</span><span class="n">txt</span>
+</pre></div>
+</div>
+<p><strong>Output Format (each file):</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sample_id</span>       <span class="n">diploid_CN</span>
+<span class="n">sample001</span>       <span class="mf">18.45</span>
+<span class="n">sample002</span>       <span class="mf">22.13</span>
+<span class="n">sample003</span>       <span class="mf">15.89</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="usage">
+<h4>Usage<a class="headerlink" href="#usage" title="Link to this heading">¶</a></h4>
+<section id="via-cli">
+<h5>Via CLI<a class="headerlink" href="#via-cli" title="Link to this heading">¶</a></h5>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>grid<span class="w"> </span>compute-dipcn<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--count-file<span class="w"> </span>output/lpa_realignment_counts.tsv<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--neighbor-file<span class="w"> </span>output/neighbors.zMax2.0.txt.gz<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--output-prefix<span class="w"> </span>output/sample_cohort<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--n-neighbors<span class="w"> </span><span class="m">200</span>
+</pre></div>
+</div>
+<p><strong>Output:</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">output</span><span class="o">/</span><span class="n">sample_cohort</span><span class="o">.</span><span class="n">exon1A</span><span class="o">.</span><span class="n">dipCN</span><span class="o">.</span><span class="n">txt</span>
+<span class="n">output</span><span class="o">/</span><span class="n">sample_cohort</span><span class="o">.</span><span class="n">exon1B</span><span class="o">.</span><span class="n">dipCN</span><span class="o">.</span><span class="n">txt</span>
+<span class="n">output</span><span class="o">/</span><span class="n">sample_cohort</span><span class="o">.</span><span class="n">exon1B_KIV3</span><span class="o">.</span><span class="n">dipCN</span><span class="o">.</span><span class="n">txt</span>
+<span class="n">output</span><span class="o">/</span><span class="n">sample_cohort</span><span class="o">.</span><span class="n">exon1B_notKIV3</span><span class="o">.</span><span class="n">dipCN</span><span class="o">.</span><span class="n">txt</span>
+</pre></div>
+</div>
+</section>
+<section id="as-python-module">
+<h5>As Python Module<a class="headerlink" href="#as-python-module" title="Link to this heading">¶</a></h5>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">grid.utils.compute_dipcn</span><span class="w"> </span><span class="kn">import</span> <span class="n">compute_dipcn_pipeline</span>
+
+<span class="n">compute_dipcn_pipeline</span><span class="p">(</span>
+    <span class="n">count_file</span><span class="o">=</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;output/lpa_realignment_counts.tsv&quot;</span><span class="p">),</span>
+    <span class="n">neighbor_file</span><span class="o">=</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;output/neighbors.zMax2.0.txt.gz&quot;</span><span class="p">),</span>
+    <span class="n">output_prefix</span><span class="o">=</span><span class="s2">&quot;output/sample_cohort&quot;</span><span class="p">,</span>
+    <span class="n">n_neighbors</span><span class="o">=</span><span class="mi">200</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="algorithm-details">
+<h4>Algorithm Details<a class="headerlink" href="#algorithm-details" title="Link to this heading">¶</a></h4>
+<section id="step-1-load-data">
+<h5>Step 1: Load Data<a class="headerlink" href="#step-1-load-data" title="Link to this heading">¶</a></h5>
+<ol class="arabic simple">
+<li><p><strong>Read counts:</strong> Load realignment counts for all samples</p></li>
+<li><p><strong>Neighbors:</strong> Load neighbor lists for each sample</p></li>
+<li><p><strong>Validate:</strong> Ensure all samples have neighbor information</p></li>
+</ol>
+</section>
+<section id="step-2-neighbor-based-normalization">
+<h5>Step 2: Neighbor-Based Normalization<a class="headerlink" href="#step-2-neighbor-based-normalization" title="Link to this heading">¶</a></h5>
+<p>For each sample and each exon type:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get top N neighbors</span>
+<span class="n">neighbors</span> <span class="o">=</span> <span class="n">neighbor_list</span><span class="p">[:</span><span class="n">n_neighbors</span><span class="p">]</span>
+
+<span class="c1"># Calculate neighbor statistics</span>
+<span class="n">neighbor_counts</span> <span class="o">=</span> <span class="n">counts</span><span class="p">[</span><span class="n">neighbors</span><span class="p">]</span>
+<span class="n">neighbor_median</span> <span class="o">=</span> <span class="n">median</span><span class="p">(</span><span class="n">neighbor_counts</span><span class="p">)</span>
+<span class="n">neighbor_std</span> <span class="o">=</span> <span class="n">std</span><span class="p">(</span><span class="n">neighbor_counts</span><span class="p">)</span>
+
+<span class="c1"># Normalize sample count</span>
+<span class="n">normalized_count</span> <span class="o">=</span> <span class="n">sample_count</span> <span class="o">/</span> <span class="n">neighbor_median</span>
+</pre></div>
+</div>
+<p><strong>Why neighbor-based?</strong></p>
+<ul class="simple">
+<li><p><strong>Reduces batch effects:</strong> Similar samples likely from same batch</p></li>
+<li><p><strong>Population-aware:</strong> Accounts for ancestry-related variation</p></li>
+<li><p><strong>Adaptive:</strong> Each sample gets custom reference baseline</p></li>
+</ul>
+</section>
+<section id="step-3-copy-number-estimation">
+<h5>Step 3: Copy Number Estimation<a class="headerlink" href="#step-3-copy-number-estimation" title="Link to this heading">¶</a></h5>
+<p>Convert normalized counts to diploid CN:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Assuming KIV-3 is diploid (2 copies) as anchor</span>
+<span class="n">reference_diploid</span> <span class="o">=</span> <span class="mf">2.0</span>
+<span class="n">diploid_CN</span> <span class="o">=</span> <span class="n">normalized_count</span> <span class="sa">r</span><span class="s1">&#39;\times{×}&#39;</span> <span class="n">reference_diploid</span>
+</pre></div>
+</div>
+<p><strong>For exon_1B_KIV3:</strong></p>
+<ul class="simple">
+<li><p>Expected to be 2 copies in diploid individuals (1 per haplotype)</p></li>
+<li><p>Used as normalization anchor</p></li>
+<li><p>Deviations may indicate rare KIV-3 variants</p></li>
+</ul>
+<p><strong>For exon_1A and exon_1B:</strong></p>
+<ul class="simple">
+<li><p>Variable copy number</p></li>
+<li><p>Normalized against neighbors with similar genomic background</p></li>
+<li><p>Diploid estimate accounts for both haplotypes</p></li>
+</ul>
+</section>
+<section id="step-4-quality-control">
+<h5>Step 4: Quality Control<a class="headerlink" href="#step-4-quality-control" title="Link to this heading">¶</a></h5>
+<p>Filter and flag potential issues:</p>
+<ul class="simple">
+<li><p>Extreme outliers (|z-score| &gt; 4)</p></li>
+<li><p>Very low read counts (&lt; 10 reads)</p></li>
+<li><p>Samples with insufficient neighbor data</p></li>
+</ul>
+</section>
+</section>
+<section id="copy-number-interpretation">
+<h4>Copy Number Interpretation<a class="headerlink" href="#copy-number-interpretation" title="Link to this heading">¶</a></h4>
+<section id="exon-1a-diploid-cn">
+<h5>Exon 1A Diploid CN<a class="headerlink" href="#exon-1a-diploid-cn" title="Link to this heading">¶</a></h5>
+<p><strong>Range:</strong> Typically 10-40 (diploid)</p>
+<ul class="simple">
+<li><p><strong>10-15:</strong> Lower copy number genotype</p></li>
+<li><p><strong>20-30:</strong> Common range</p></li>
+<li><p><strong>35-40:</strong> Higher copy number genotype</p></li>
+<li><p><strong>&gt;40:</strong> Rare, verify with orthogonal methods</p></li>
+</ul>
+<p><strong>Biological meaning:</strong>
+Each KIV-2 repeat unit has 1 exon 1A, so:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>haploid KIV-2 copies ≈ diploid_CN / 2
+</pre></div>
+</div>
+</section>
+<section id="exon-1b-diploid-cn">
+<h5>Exon 1B Diploid CN<a class="headerlink" href="#exon-1b-diploid-cn" title="Link to this heading">¶</a></h5>
+<p><strong>Range:</strong> Typically 12-45 (diploid)</p>
+<ul class="simple">
+<li><p>Includes all KIV types (KIV-2, KIV-3, etc.)</p></li>
+<li><p>Should be slightly higher than exon 1A</p></li>
+<li><p>Difference reflects non-KIV-2 copies</p></li>
+</ul>
+<p><strong>Relationship:</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>exon_1B_CN ≈ exon_1A_CN + exon_1B_KIV3_CN
+</pre></div>
+</div>
+</section>
+<section id="exon-1b-kiv3-diploid-cn">
+<h5>Exon 1B_KIV3 Diploid CN<a class="headerlink" href="#exon-1b-kiv3-diploid-cn" title="Link to this heading">¶</a></h5>
+<p><strong>Expected:</strong> ~2.0 (diploid, single copy per haplotype)</p>
+<ul class="simple">
+<li><p><strong>1.5-2.5:</strong> Normal range with measurement noise</p></li>
+<li><p><strong>&lt;1.0:</strong> Possible deletion (very rare)</p></li>
+<li><p><strong>&gt;3.0:</strong> Possible duplication (very rare)</p></li>
+</ul>
+<p><strong>Use as QC:</strong>
+Samples with very aberrant KIV-3 CN may have:</p>
+<ul class="simple">
+<li><p>Alignment issues</p></li>
+<li><p>True rare variants</p></li>
+<li><p>Technical artifacts</p></li>
+</ul>
+</section>
+<section id="exon-1b-notkiv3-diploid-cn">
+<h5>Exon 1B_notKIV3 Diploid CN<a class="headerlink" href="#exon-1b-notkiv3-diploid-cn" title="Link to this heading">¶</a></h5>
+<p><strong>Calculation:</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">exon_1B_notKIV3</span> <span class="o">=</span> <span class="n">exon_1B</span> <span class="o">-</span> <span class="n">exon_1B_KIV3</span>
+</pre></div>
+</div>
+<p><strong>Range:</strong> Should closely match exon 1A</p>
+<ul class="simple">
+<li><p>Additional normalization check</p></li>
+<li><p>Validates exon relationships</p></li>
+</ul>
+</section>
+</section>
+<section id="parameter-tuning">
+<h4>Parameter Tuning<a class="headerlink" href="#parameter-tuning" title="Link to this heading">¶</a></h4>
+<section id="n-neighbors-default-200">
+<h5><code class="docutils literal notranslate"><span class="pre">n_neighbors</span></code> (default: 200)<a class="headerlink" href="#n-neighbors-default-200" title="Link to this heading">¶</a></h5>
+<p><strong>Purpose:</strong> Number of similar samples for normalization baseline</p>
+<ul class="simple">
+<li><p><strong>Fewer (50-100):</strong></p>
+<ul>
+<li><p>More stringent</p></li>
+<li><p>Only closest matches</p></li>
+<li><p>Better for homogeneous cohorts</p></li>
+</ul>
+</li>
+<li><p><strong>More (300-500):</strong></p>
+<ul>
+<li><p>More robust to outliers</p></li>
+<li><p>Better for diverse cohorts</p></li>
+<li><p>May include less similar samples</p></li>
+</ul>
+</li>
+</ul>
+<p><strong>Recommendation:</strong></p>
+<ul class="simple">
+<li><p>Small cohort (&lt;500): 100-150</p></li>
+<li><p>Medium cohort (500-2000): 200-300</p></li>
+<li><p>Large cohort (&gt;2000): 200-500</p></li>
+</ul>
+<p><strong>Trade-off:</strong></p>
+<ul class="simple">
+<li><p>Too few: Sensitive to outlier neighbors</p></li>
+<li><p>Too many: Include dissimilar samples, reduce specificity</p></li>
+</ul>
+</section>
+</section>
+<section id="expected-results">
+<h4>Expected Results<a class="headerlink" href="#expected-results" title="Link to this heading">¶</a></h4>
+<section id="typical-distribution">
+<h5>Typical Distribution<a class="headerlink" href="#typical-distribution" title="Link to this heading">¶</a></h5>
+<p>For 1000 samples from diverse populations:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Exon</span> <span class="mi">1</span><span class="n">A</span> <span class="n">Diploid</span> <span class="n">CN</span><span class="p">:</span>
+  <span class="n">Mean</span><span class="p">:</span> <span class="mf">25.3</span>
+  <span class="n">Median</span><span class="p">:</span> <span class="mf">24.8</span>
+  <span class="n">Range</span><span class="p">:</span> <span class="mf">12.5</span> <span class="o">-</span> <span class="mf">42.7</span>
+
+<span class="n">Exon</span> <span class="mi">1</span><span class="n">B_KIV3</span> <span class="n">Diploid</span> <span class="n">CN</span><span class="p">:</span>
+  <span class="n">Mean</span><span class="p">:</span> <span class="mf">2.04</span>
+  <span class="n">Median</span><span class="p">:</span> <span class="mf">2.01</span>
+  <span class="n">Range</span><span class="p">:</span> <span class="mf">1.7</span> <span class="o">-</span> <span class="mf">2.3</span>
+</pre></div>
+</div>
+</section>
+<section id="quality-metrics">
+<h5>Quality Metrics<a class="headerlink" href="#quality-metrics" title="Link to this heading">¶</a></h5>
+<p><strong>Coefficient of Variation (CV):</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">cv</span> <span class="o">=</span> <span class="n">std</span><span class="p">(</span><span class="n">diploid_CN</span><span class="p">)</span> <span class="o">/</span> <span class="n">mean</span><span class="p">(</span><span class="n">diploid_CN</span><span class="p">)</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><strong>Good:</strong> CV &lt; 0.3 for exon 1A</p></li>
+<li><p><strong>Acceptable:</strong> CV &lt; 0.5</p></li>
+<li><p><strong>Poor:</strong> CV &gt; 0.5 (check for batch effects)</p></li>
+</ul>
+<p><strong>Exon Correlation:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">correlation</span><span class="p">(</span><span class="n">exon_1A</span><span class="p">,</span> <span class="n">exon_1B</span><span class="p">)</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><strong>Good:</strong> r &gt; 0.85</p></li>
+<li><p><strong>Acceptable:</strong> r &gt; 0.75</p></li>
+<li><p><strong>Poor:</strong> r &lt; 0.75 (alignment or normalization issues)</p></li>
+</ul>
+</section>
+</section>
+<section id="validation">
+<h4>Validation<a class="headerlink" href="#validation" title="Link to this heading">¶</a></h4>
+<section id="internal-consistency-checks">
+<h5>Internal Consistency Checks<a class="headerlink" href="#internal-consistency-checks" title="Link to this heading">¶</a></h5>
+<p><strong>Check 1: Exon relationships</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># exon_1B should be &gt;= exon_1A</span>
+<span class="k">assert</span> <span class="p">(</span><span class="n">exon_1B</span> <span class="o">&gt;=</span> <span class="n">exon_1A</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+
+<span class="c1"># exon_1B_KIV3 should be ~2</span>
+<span class="k">assert</span> <span class="mf">1.5</span> <span class="o">&lt;</span> <span class="n">exon_1B_KIV3</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="o">&lt;</span> <span class="mf">2.5</span>
+</pre></div>
+</div>
+<p><strong>Check 2: Correlation</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s1">&#39;exon_1A&#39;</span><span class="p">:</span> <span class="n">exon_1A_CN</span><span class="p">,</span>
+    <span class="s1">&#39;exon_1B&#39;</span><span class="p">:</span> <span class="n">exon_1B_CN</span>
+<span class="p">})</span>
+
+<span class="n">correlation</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">corr</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">correlation</span><span class="p">)</span>
+<span class="c1"># Should show strong positive correlation</span>
+</pre></div>
+</div>
+</section>
+<section id="comparison-with-known-samples">
+<h5>Comparison with Known Samples<a class="headerlink" href="#comparison-with-known-samples" title="Link to this heading">¶</a></h5>
+<p>If validation samples with known CN are available:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">known_samples</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;sample001&#39;</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span>  <span class="c1"># Known KIV-2 CN</span>
+    <span class="s1">&#39;sample002&#39;</span><span class="p">:</span> <span class="mi">25</span><span class="p">,</span>
+    <span class="s1">&#39;sample003&#39;</span><span class="p">:</span> <span class="mi">15</span>
+<span class="p">}</span>
+
+<span class="k">for</span> <span class="n">sample</span><span class="p">,</span> <span class="n">true_CN</span> <span class="ow">in</span> <span class="n">known_samples</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="n">estimated_CN</span> <span class="o">=</span> <span class="n">diploid_CN_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">sample</span><span class="p">,</span> <span class="s1">&#39;diploid_CN&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="mi">2</span>
+    <span class="n">error</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">estimated_CN</span> <span class="o">-</span> <span class="n">true_CN</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">sample</span><span class="si">}</span><span class="s2">: True=</span><span class="si">{</span><span class="n">true_CN</span><span class="si">}</span><span class="s2">, Est=</span><span class="si">{</span><span class="n">estimated_CN</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">, Error=</span><span class="si">{</span><span class="n">error</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="technical-details">
+<h4>Technical Details<a class="headerlink" href="#technical-details" title="Link to this heading">¶</a></h4>
+<section id="performance">
+<h5>Performance<a class="headerlink" href="#performance" title="Link to this heading">¶</a></h5>
+<ul class="simple">
+<li><p><strong>Memory:</strong> &lt;4GB for 1000 samples</p></li>
+<li><p><strong>Speed:</strong> ~30-60 seconds for 1000 samples</p></li>
+<li><p><strong>Parallelization:</strong> Not currently implemented (fast enough)</p></li>
+</ul>
+</section>
+<section id="dependencies">
+<h5>Dependencies<a class="headerlink" href="#dependencies" title="Link to this heading">¶</a></h5>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">pandas</span></code> - Data manipulation</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">numpy</span></code> - Numerical operations</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">scipy</span></code> - Statistical functions (optional)</p></li>
+</ul>
+</section>
+</section>
+<section id="troubleshooting">
+<h4>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Link to this heading">¶</a></h4>
+<section id="all-diploid-cns-near-2">
+<h5>All diploid CNs near 2<a class="headerlink" href="#all-diploid-cns-near-2" title="Link to this heading">¶</a></h5>
+<p><strong>Possible causes:</strong></p>
+<ul class="simple">
+<li><p>Normalization issue - check neighbor file</p></li>
+<li><p>All samples similar - low biological variation</p></li>
+<li><p>Incorrect reference scaling</p></li>
+</ul>
+<p><strong>Solution:</strong></p>
+<ul class="simple">
+<li><p>Verify neighbor file is correct</p></li>
+<li><p>Check exon count distributions</p></li>
+<li><p>Ensure exon_1B_KIV3 used as anchor</p></li>
+</ul>
+</section>
+<section id="extreme-outliers-cn-100">
+<h5>Extreme outliers (CN &gt; 100)<a class="headerlink" href="#extreme-outliers-cn-100" title="Link to this heading">¶</a></h5>
+<p><strong>Possible causes:</strong></p>
+<ul class="simple">
+<li><p>Technical artifacts</p></li>
+<li><p>Very poor neighbors for that sample</p></li>
+<li><p>True extreme variant (rare)</p></li>
+</ul>
+<p><strong>Solution:</strong></p>
+<ul class="simple">
+<li><p>Check read counts for that sample</p></li>
+<li><p>Inspect neighbor similarity</p></li>
+<li><p>Consider removing sample from analysis</p></li>
+</ul>
+</section>
+<section id="negative-diploid-cns">
+<h5>Negative diploid CNs<a class="headerlink" href="#negative-diploid-cns" title="Link to this heading">¶</a></h5>
+<p><strong>Should never happen</strong> - indicates serious error</p>
+<ul class="simple">
+<li><p>Check input count file format</p></li>
+<li><p>Verify neighbor file integrity</p></li>
+<li><p>Report as bug if reproducible</p></li>
+</ul>
+</section>
+<section id="poor-correlation-between-exons">
+<h5>Poor correlation between exons<a class="headerlink" href="#poor-correlation-between-exons" title="Link to this heading">¶</a></h5>
+<p><strong>Possible causes:</strong></p>
+<ul class="simple">
+<li><p>Alignment issues in realignment step</p></li>
+<li><p>Batch effects not properly normalized</p></li>
+<li><p>Incorrect exon positions file</p></li>
+</ul>
+<p><strong>Solution:</strong></p>
+<ul class="simple">
+<li><p>Rerun realignment with validated positions file</p></li>
+<li><p>Check for batch confounding in neighbor selection</p></li>
+<li><p>Increase <code class="docutils literal notranslate"><span class="pre">n_neighbors</span></code> for more robust normalization</p></li>
+</ul>
+</section>
+</section>
+<section id="next-step">
+<h4>Next Step<a class="headerlink" href="#next-step" title="Link to this heading">¶</a></h4>
+<p>After computing diploid CNs, proceed to final KIV-2 estimation:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>grid<span class="w"> </span>estimate-kiv<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--exon1a<span class="w"> </span>output/sample_cohort.exon1A.dipCN.txt<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--exon1b<span class="w"> </span>output/sample_cohort.exon1B.dipCN.txt<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--output<span class="w"> </span>output/final_kiv2_estimates.tsv
+</pre></div>
+</div>
+<p>This combines the exon diploid CNs using the empirically-derived formula to produce final KIV-2 copy number estimates.</p>
+</section>
+</section>
+</section>
+<section id="python-api-documentation">
+<h2>Python API Documentation<a class="headerlink" href="#python-api-documentation" title="Link to this heading">¶</a></h2>
+<section id="module-grid.utils.compute_dipcn">
+<span id="grid-utils-compute-dipcn"></span><h3>grid.utils.compute_dipcn<a class="headerlink" href="#module-grid.utils.compute_dipcn" title="Link to this heading">¶</a></h3>
+<dl class="py function">
+<dt class="sig sig-object py" id="grid.utils.compute_dipcn.compute_dipcn_pipeline">
+<span class="sig-prename descclassname"><span class="pre">grid.utils.compute_dipcn.</span></span><span class="sig-name descname"><span class="pre">compute_dipcn_pipeline</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">count_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">neighbor_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_prefix</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_neighbors</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">console</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#grid.utils.compute_dipcn.compute_dipcn_pipeline" title="Link to this definition">¶</a></dt>
+<dd><p>Main function to compute diploid copy numbers for all exon types.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>count_file</strong> (<em>Path</em>) – Path to realignment count file</p></li>
+<li><p><strong>neighbor_file</strong> (<em>Path</em>) – Path to neighbor results file (can be gzipped)</p></li>
+<li><p><strong>output_prefix</strong> (<em>Path</em>) – Output file prefix</p></li>
+<li><p><strong>n_neighbors</strong> (<em>int</em>) – Number of top neighbors to use</p></li>
+<li><p><strong>console</strong> (<em>Console</em>) – Rich console for output (optional)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-grid.utils.compute_dipcn_dir">
+<span id="grid-utils-compute-dipcn-dir"></span><h3>grid.utils.compute_dipcn_dir<a class="headerlink" href="#module-grid.utils.compute_dipcn_dir" title="Link to this heading">¶</a></h3>
+<p>Diploid copy number computation utilities.</p>
+<p>This package contains modular components for computing diploid copy numbers
+for LPA KIV-2 repeats using neighbor-based normalization.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="grid.utils.compute_dipcn_dir.compute_diploid_cn_for_exon">
+<span class="sig-prename descclassname"><span class="pre">grid.utils.compute_dipcn_dir.</span></span><span class="sig-name descname"><span class="pre">compute_diploid_cn_for_exon</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">counts</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">neighbors</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exon_type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_neighbors</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">200</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#grid.utils.compute_dipcn_dir.compute_diploid_cn_for_exon" title="Link to this definition">¶</a></dt>
+<dd><p>Compute diploid copy number for all samples for a given exon type.</p>
+<p>Formula: dipCN = (sample_count / sample_scale) / (mean_neighbor_normalized_count)
+where mean_neighbor_normalized_count = mean(neighbor_count / neighbor_scale)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>counts</strong> (<em>Dict</em>) – Dictionary mapping sample_id to count dict</p></li>
+<li><p><strong>neighbors</strong> (<em>Dict</em>) – Dictionary mapping sample_id to (scale, neighbor_list)</p></li>
+<li><p><strong>exon_type</strong> (<em>str</em>) – Exon type to compute (‘1B_KIV3’, ‘1B_notKIV3’, ‘1B’, ‘1A’)</p></li>
+<li><p><strong>n_neighbors</strong> (<em>int</em>) – Number of top neighbors to use</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Dictionary mapping sample_id to diploid copy number</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Dict[str, float]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="grid.utils.compute_dipcn_dir.get_exon_count">
+<span class="sig-prename descclassname"><span class="pre">grid.utils.compute_dipcn_dir.</span></span><span class="sig-name descname"><span class="pre">get_exon_count</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">counts_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exon_type</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#grid.utils.compute_dipcn_dir.get_exon_count" title="Link to this definition">¶</a></dt>
+<dd><p>Get the appropriate count for a given exon type.</p>
+<p>Exon types:
+- 1B_KIV3: just the 1B_KIV3 count
+- 1B_notKIV3: 1B_KIV2 + 1B_tied
+- 1B: 1B_KIV3 + 1B_KIV2 + 1B_tied
+- 1A: just the 1A count</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>counts_dict</strong> (<em>Dict</em><em>[</em><em>str</em><em>, </em><em>int</em><em>]</em>) – Dictionary with keys ‘1B_KIV3’, ‘1B_KIV2’, ‘1B_tied’, ‘1A’</p></li>
+<li><p><strong>exon_type</strong> (<em>str</em>) – Exon type to compute</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Count for the specified exon type</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If exon_type is not recognized</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="grid.utils.compute_dipcn_dir.load_count_results">
+<span class="sig-prename descclassname"><span class="pre">grid.utils.compute_dipcn_dir.</span></span><span class="sig-name descname"><span class="pre">load_count_results</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">count_file</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#grid.utils.compute_dipcn_dir.load_count_results" title="Link to this definition">¶</a></dt>
+<dd><p>Load read counts from realignment output.</p>
+<p>Expected format: sample_id  1B_KIV3 1B_KIV2 1B_tied 1A</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>count_file</strong> (<em>Path</em>) – Path to count file</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>Dictionary mapping sample_id to count dict</dt><dd><p>Example: {‘NWD123’: {‘1B_KIV3’: 45, ‘1B_KIV2’: 23, …}}</p>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Dict[str, Dict[str, int]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="grid.utils.compute_dipcn_dir.load_neighbor_results">
+<span class="sig-prename descclassname"><span class="pre">grid.utils.compute_dipcn_dir.</span></span><span class="sig-name descname"><span class="pre">load_neighbor_results</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">neighbor_file</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#grid.utils.compute_dipcn_dir.load_neighbor_results" title="Link to this definition">¶</a></dt>
+<dd><p>Load neighbor information from find_neighbors output.</p>
+<p>Expected format: sample_id  scale   neighbor1       neighbor1_scale neighbor1_distance      …</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>neighbor_file</strong> (<em>Path</em>) – Path to neighbor file (can be gzipped)</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Dict mapping sample_id to (scale, neighbor_list)
+where neighbor_list is [(neighbor_id, neighbor_scale, distance), …]
+Example: {‘NWD123’: (1.0, [(‘NWD456’, 0.98, 0.05), (‘NWD789’, 1.02, 0.07), …])}</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>Dict</em>[str, <em>Tuple</em>[float, <em>List</em>[<em>Tuple</em>[str, float, float]]]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="grid.utils.compute_dipcn_dir.normalize_sample_id">
+<span class="sig-prename descclassname"><span class="pre">grid.utils.compute_dipcn_dir.</span></span><span class="sig-name descname"><span class="pre">normalize_sample_id</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sample_id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#grid.utils.compute_dipcn_dir.normalize_sample_id" title="Link to this definition">¶</a></dt>
+<dd><p>Normalize sample IDs by removing common file extensions and suffixes.</p>
+<p class="rubric">Examples</p>
+<p>NWD278973.b38.irc.v1_subset → NWD278973
+NWD278973.cram → NWD278973
+NWD278973 → NWD278973</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>sample_id</strong> (<em>str</em>) – Original sample ID</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Normalized sample ID</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="grid.utils.compute_dipcn_dir.validate_sample_overlap">
+<span class="sig-prename descclassname"><span class="pre">grid.utils.compute_dipcn_dir.</span></span><span class="sig-name descname"><span class="pre">validate_sample_overlap</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">counts</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">neighbors</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">console</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#grid.utils.compute_dipcn_dir.validate_sample_overlap" title="Link to this definition">¶</a></dt>
+<dd><p>Validate that there are overlapping samples between counts and neighbors.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>counts</strong> (<em>Dict</em>) – Dictionary of count results</p></li>
+<li><p><strong>neighbors</strong> (<em>Dict</em>) – Dictionary of neighbor results</p></li>
+<li><p><strong>console</strong> (<em>Console</em>) – Rich console for output (optional)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Number of overlapping samples</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="grid.utils.compute_dipcn_dir.write_dipcn_output">
+<span class="sig-prename descclassname"><span class="pre">grid.utils.compute_dipcn_dir.</span></span><span class="sig-name descname"><span class="pre">write_dipcn_output</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">results</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_file</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#grid.utils.compute_dipcn_dir.write_dipcn_output" title="Link to this definition">¶</a></dt>
+<dd><p>Write diploid copy numbers to output file.</p>
+<p>Output format:
+ID  dipCN
+sample1     2.345678
+sample2     1.987654
+…</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>results</strong> (<em>Dict</em><em>[</em><em>str</em><em>, </em><em>float</em><em>]</em>) – Dictionary mapping sample_id to diploid CN</p></li>
+<li><p><strong>output_file</strong> (<em>str</em>) – Output file path</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="estimate-kiv.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">KIV-2 Copy Number Estimation</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="lpa-realign.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">LPA Realignment Module</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2025, Zachary Caterer
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Diploid Copy Number Computation</a><ul>
+<li><a class="reference internal" href="#overview">Overview</a><ul>
+<li><a class="reference internal" href="#diploid-copy-number-computation-module">Diploid Copy Number Computation Module</a><ul>
+<li><a class="reference internal" href="#purpose">Purpose</a></li>
+<li><a class="reference internal" href="#main-module">Main Module</a><ul>
+<li><a class="reference internal" href="#compute-dipcn-py"><code class="docutils literal notranslate"><span class="pre">compute_dipcn.py</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#usage">Usage</a><ul>
+<li><a class="reference internal" href="#via-cli">Via CLI</a></li>
+<li><a class="reference internal" href="#as-python-module">As Python Module</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#algorithm-details">Algorithm Details</a><ul>
+<li><a class="reference internal" href="#step-1-load-data">Step 1: Load Data</a></li>
+<li><a class="reference internal" href="#step-2-neighbor-based-normalization">Step 2: Neighbor-Based Normalization</a></li>
+<li><a class="reference internal" href="#step-3-copy-number-estimation">Step 3: Copy Number Estimation</a></li>
+<li><a class="reference internal" href="#step-4-quality-control">Step 4: Quality Control</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#copy-number-interpretation">Copy Number Interpretation</a><ul>
+<li><a class="reference internal" href="#exon-1a-diploid-cn">Exon 1A Diploid CN</a></li>
+<li><a class="reference internal" href="#exon-1b-diploid-cn">Exon 1B Diploid CN</a></li>
+<li><a class="reference internal" href="#exon-1b-kiv3-diploid-cn">Exon 1B_KIV3 Diploid CN</a></li>
+<li><a class="reference internal" href="#exon-1b-notkiv3-diploid-cn">Exon 1B_notKIV3 Diploid CN</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#parameter-tuning">Parameter Tuning</a><ul>
+<li><a class="reference internal" href="#n-neighbors-default-200"><code class="docutils literal notranslate"><span class="pre">n_neighbors</span></code> (default: 200)</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#expected-results">Expected Results</a><ul>
+<li><a class="reference internal" href="#typical-distribution">Typical Distribution</a></li>
+<li><a class="reference internal" href="#quality-metrics">Quality Metrics</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#validation">Validation</a><ul>
+<li><a class="reference internal" href="#internal-consistency-checks">Internal Consistency Checks</a></li>
+<li><a class="reference internal" href="#comparison-with-known-samples">Comparison with Known Samples</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#technical-details">Technical Details</a><ul>
+<li><a class="reference internal" href="#performance">Performance</a></li>
+<li><a class="reference internal" href="#dependencies">Dependencies</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#troubleshooting">Troubleshooting</a><ul>
+<li><a class="reference internal" href="#all-diploid-cns-near-2">All diploid CNs near 2</a></li>
+<li><a class="reference internal" href="#extreme-outliers-cn-100">Extreme outliers (CN &gt; 100)</a></li>
+<li><a class="reference internal" href="#negative-diploid-cns">Negative diploid CNs</a></li>
+<li><a class="reference internal" href="#poor-correlation-between-exons">Poor correlation between exons</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#next-step">Next Step</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#python-api-documentation">Python API Documentation</a><ul>
+<li><a class="reference internal" href="#module-grid.utils.compute_dipcn">grid.utils.compute_dipcn</a><ul>
+<li><a class="reference internal" href="#grid.utils.compute_dipcn.compute_dipcn_pipeline"><code class="docutils literal notranslate"><span class="pre">compute_dipcn_pipeline()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-grid.utils.compute_dipcn_dir">grid.utils.compute_dipcn_dir</a><ul>
+<li><a class="reference internal" href="#grid.utils.compute_dipcn_dir.compute_diploid_cn_for_exon"><code class="docutils literal notranslate"><span class="pre">compute_diploid_cn_for_exon()</span></code></a></li>
+<li><a class="reference internal" href="#grid.utils.compute_dipcn_dir.get_exon_count"><code class="docutils literal notranslate"><span class="pre">get_exon_count()</span></code></a></li>
+<li><a class="reference internal" href="#grid.utils.compute_dipcn_dir.load_count_results"><code class="docutils literal notranslate"><span class="pre">load_count_results()</span></code></a></li>
+<li><a class="reference internal" href="#grid.utils.compute_dipcn_dir.load_neighbor_results"><code class="docutils literal notranslate"><span class="pre">load_neighbor_results()</span></code></a></li>
+<li><a class="reference internal" href="#grid.utils.compute_dipcn_dir.normalize_sample_id"><code class="docutils literal notranslate"><span class="pre">normalize_sample_id()</span></code></a></li>
+<li><a class="reference internal" href="#grid.utils.compute_dipcn_dir.validate_sample_overlap"><code class="docutils literal notranslate"><span class="pre">validate_sample_overlap()</span></code></a></li>
+<li><a class="reference internal" href="#grid.utils.compute_dipcn_dir.write_dipcn_output"><code class="docutils literal notranslate"><span class="pre">write_dipcn_output()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="../_static/documentation_options.js?v=f8c80a57"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/scripts/furo.js?v=46bd48cc"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    </body>
+</html>
