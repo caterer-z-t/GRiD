@@ -23,7 +23,7 @@ six==1.17.0
 threadpoolctl==3.6.0
 tomli==2.2.1
 typing_extensions==4.15.0
-tzdata==2025b
+tzdata==2025.2
 wheel==0.45.1
 zipp==3.23.0
 zstd==1.5.7
