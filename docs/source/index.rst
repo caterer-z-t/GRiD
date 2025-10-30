@@ -1,17 +1,19 @@
 .. GRiD documentation master file, created by
    sphinx-quickstart on Thu Sep 25 10:52:43 2025.
-   You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
 
 GRiD
 ====
 
-Add your content using ``reStructuredText`` syntax. See the
-`reStructuredText <https://www.sphinx-doc.org/en/master/usage/restructuredtext/index.html>`_
-documentation for details.
+Welcome to the GRiD documentation!
 
+Below is the main README for an overview of the project.
 
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
 
+   readme.rst
+   examples.rst
+   contributing.rst
+   code_of_conduct.rst
+   modules.rst

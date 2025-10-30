@@ -1,0 +1,19 @@
+# Read Counts Proper Flags
+read-count:
+  flags:
+    - 83 
+    - 99
+    - 147
+    - 163
+    - 81
+    - 97
+    - 145
+    - 161
+  
+# Realignment Parameters
+realign:
+  flags:
+    - 99
+    - 147
+    - 163
+    - 83

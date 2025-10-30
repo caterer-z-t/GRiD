@@ -1,8 +1,0 @@
-# For submitting an interactive job
-salloc \
---partition=general \
---nodes=1 \
---ntasks=1 \
---cpus-per-task=1 \
---mem=32G \
---time=02:00:00
