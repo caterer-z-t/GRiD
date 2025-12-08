@@ -30,4 +30,4 @@ def validate_sample_overlap(
         console.print(f"  • Samples in neighbor file: {len(neighbor_samples)}")
         console.print(f"  • Overlapping samples: {len(overlap)}")
     
-    return len(overlap)
+    return len(overlap), overlap

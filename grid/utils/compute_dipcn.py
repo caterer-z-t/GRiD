@@ -57,7 +57,7 @@ def compute_dipcn_pipeline(
     
     # Step 3: Validate sample overlap
     console.rule("[bold blue]Step 3: Validate Sample Overlap")
-    overlap_count = validate_sample_overlap(counts, neighbors, console)
+    overlap_count, overlap_samples = validate_sample_overlap(counts, neighbors, console)
     
     if overlap_count == 0:
         console.print("[red]✗ No overlapping samples found! Cannot proceed.[/red]")

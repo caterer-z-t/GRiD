@@ -34,8 +34,6 @@ def run_lpa_realignments(
     """
     Main function to run LPA realignment for all CRAM files in a directory.
     
-    UPDATED: Now supports parallel processing with multiple threads.
-    
     Args:
         cram_dir (str): Directory containing CRAM/BAM files
         reference_fa (str): Reference genome FASTA for CRAM files

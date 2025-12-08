@@ -36,7 +36,7 @@ def count_reads(
 - `threads`: Parallel processing threads
 
 **Output Format:**
-```txt
+```
 sample_id       read_count
 sample001       1234
 sample002       2345

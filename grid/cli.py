@@ -68,7 +68,33 @@ def crai(cram, reference):
         sys.exit(1)
 
 # In[3]: CLI Command for Batch Indexing CRAMs
-# Implement later
+@cli.command()
+@click.option("-C", "--cram-dir", required=True, type=click.Path(exists=True), help="Directory with CRAM files")
+@click.option("-r", "--reference", required=True, type=click.Path(exists=True), help="Reference genome FASTA")
+@click.option("-t", "--threads", default=1, type=int, help="Number of threads for parallel processing")
+
+def batch_crai(cram_dir, reference, threads):
+    """
+    Ensure CRAI indices exist for all CRAM files in a directory.
+    
+    Args:
+        cram_dir: Directory containing CRAM files.
+        reference: Path to the reference genome FASTA.
+        threads: Number of threads for parallel processing.
+
+    Returns:
+        None
+    """
+    from .utils.batch_crai import batch_crai
+
+    print_banner()
+    try:
+        with console.status("[bold green]Batch checking/creating CRAIs...", spinner="dots"):
+            batch_crai(cram_dir=cram_dir, reference=reference, console=console, threads=threads)
+        console.print(f"[green]✓ All CRAI indices are ready.[/green]")
+    except Exception as e:
+        console.print(f"[red]✗ Batch CRAI creation failed: {str(e)}[/red]")
+        sys.exit(1)
         
 # In[4]: CLI Command for Subsetting CRAM
 @cli.command()
@@ -110,7 +136,48 @@ def subset(cram, region, output, reference):
         sys.exit(1)
 
 # In[]: CLI Command for Batch Subsetting CRAMs
-# Implement later
+@cli.command()
+@click.option("-C", "--cram-dir", required=True, type=click.Path(exists=True), help="Directory with CRAM files")
+@click.option("-r", "--region", required=False, help="Genomic region (e.g., 'chr6:160000000-160100000')")
+@click.option("-c", "--chrom", required=False, help="Chromosome (e.g., chr6)")
+@click.option("-s", "--start", required=False, type=int, help="Start position (e.g., 160000000)")
+@click.option("-e", "--end", required=False, type=int, help="End position (e.g., 160100000)")
+@click.option("-o", "--output-dir", required=True, type=click.Path(), help="Output directory for subset CRAM files")
+@click.option("-R", "--reference", required=True, type=click.Path(exists=True), help="Reference genome FASTA")
+def batch_subset(cram_dir, region, chrom, start, end, output_dir, reference):
+    """
+    Subset all CRAM files in a directory to a specific genomic region.
+    
+    Args:
+        cram_dir: Directory containing CRAM files.
+        region: Genomic region in 'chr:start-end' format.
+        chrom: Chromosome (if region not provided).
+        start: Start position (if region not provided).
+        end: End position (if region not provided).
+        output_dir: Directory to save subset CRAM files.
+        reference: Reference genome FASTA.
+    Returns:
+        None
+    """
+    from .utils.batch_subset_cram import batch_subset_cram
+    from .helper.create_region import create_region_string
+    
+    region = create_region_string(region, chrom, start, end)
+
+    print_banner()
+    try:
+        with console.status(f"[bold green]Batch subsetting CRAMs for region {region}...", spinner="dots"):
+            batch_subset_cram(
+                cram_dir=cram_dir,
+                region=region,
+                output_dir=output_dir,
+                reference=reference,
+                console=console
+            )
+        console.print(f"[green]✓ All subset CRAM files created in {output_dir}.[/green]")
+    except Exception as e:
+        console.print(f"[red]✗ Batch CRAM subsetting failed: {str(e)}[/red]")
+        sys.exit(1)
 
 # In[5]: CLI Command for Google Cloud Copy
 @cli.command()
@@ -242,11 +309,11 @@ def normalize_mosdepth(
               help="Maximum variance threshold for filtering regions")
 def find_neighbors(input_file, output_file, zmax, n_neighbors, sigma2_max):
     """Find nearest neighbors among individuals using normalized z-depths."""
-    from .utils.find_neighbors import find_neighbors as find_neighbors_fn
+    from .utils.find_neighbors import find_neighbors
 
     print_banner()
     try:
-        find_neighbors_fn(
+        find_neighbors(
             input_file=input_file,
             output_file=output_file,
             zmax=zmax,

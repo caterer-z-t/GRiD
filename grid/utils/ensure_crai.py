@@ -16,15 +16,16 @@ def ensure_crai(cram_path: str, reference: str = None) -> str:
         Path to CRAI file.
     """
     cram_file = Path(cram_path)
+
     if not cram_file.exists():
-        raise FileNotFoundError(f"CRAM file not found: {cram_path}")
+        raise FileNotFoundError(f"CRAM not found: {cram_path}")
 
-    crai_file = cram_file.with_suffix(cram_file.suffix + ".crai")
-    if crai_file.exists():
-        return str(crai_file)
+    # pysam creates file.crai, not file.cram.crai
+    crai_file = cram_file.with_suffix(".crai")
 
-    if reference is None:
-        raise ValueError("Reference genome must be provided to create CRAI.")
+    if not crai_file.exists():
+        if reference is None:
+            raise ValueError("Reference genome must be provided")
+        pysam.index(str(cram_file), reference=reference)
 
-    pysam.index(str(cram_file), reference=reference)
-    return str(crai_file)
+    return cram_file

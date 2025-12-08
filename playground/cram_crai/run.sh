@@ -52,7 +52,7 @@ sbatch step5_find_neighbors.sbatch \
 
 # Step 6, Extract reference sequences for VNTR region
 # Step LPA-1, extract reference sequence for LPA region
-sbatch step_lpa1_extract_reference.sbatch \
+sbatch step6_extract_reference.sbatch \
    -r $GRID/cram/hg38.fa \
    -b $GRID/cram/ref_hg38.bed \
    -o $WORK/lpa_extract_reference \

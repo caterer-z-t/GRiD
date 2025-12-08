@@ -137,11 +137,11 @@ If you use this pipeline, please cite:
 
 - Mukamel et al. (2021) [Original methodology](https://doi.org/10.1126/science.abg8289)
 - Hao et al. (2024) [Implementation](https://github.com/alexliyihao/vntrwrap)
-- This pipeline [Your paper when published](https://caterer-z-t.github.io/GRiD/CITATION.cff)
+- This pipeline [Your paper when published](https://github.com/caterer-z-t/GRiD/blob/v0.1/CITATION.cff)
 
 ## License
 
-Released under [MIT License](https://caterer-z-t.github.io/GRiD/LICENSE)
+Released under [MIT License](https://github.com/caterer-z-t/GRiD/blob/v0.1/LICENSE)
 
 ## Support
 

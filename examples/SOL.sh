@@ -72,8 +72,11 @@ export LPA=$HOME/epi/lpa
 export GRID=$HOME/epi/GRiD
 export SOFTWARE=$HOME/epi/software
 
-mkdir -p $WORK/grid
-cd $WORK/grid
+# Name for working directory for this run
+WORK_DIR=$WORK/LPA_VNTR_PIPELINE_SOFTWARE
+
+mkdir -p $WORK_DIR
+cd $WORK_DIR
 
 REGIONS_FILE="$GRID/files/734_possible_coding_vntr_regions.IBD2R_gt_0.25.uniq.txt"
 LPA_REGION=$(awk '$7=="LPA" {print $1,$2,$3}' "$REGIONS_FILE")
@@ -127,7 +130,7 @@ if run_step 3; then
         --start $START \
         --end $END \
         --region-name LPA \
-        --work-dir $WORK/grid/mosdepth \
+        --work-dir $WORK_DIR/mosdepth \
         --by 1000 \
         --fast \
         --threads 4 \
@@ -140,7 +143,7 @@ fi
 if run_step 4; then
     echo "=== Step 4: Normalizing Mosdepth ==="
     grid normalize-mosdepth \
-        --mosdepth-dir $WORK/grid/mosdepth \
+        --mosdepth-dir $WORK_DIR/mosdepth \
         --repeat-mask $GRID/files/repeat_mask_list.hg38.ucsc_bed \
         --chrom chr$CHR \
         --start $START \
@@ -175,7 +178,7 @@ if run_step 6; then
     grid extract-reference \
         --reference-fa $GRID/files/hg38.fa \
         --bed-file $GRID/files/ref_hg38.bed \
-        --output-dir $WORK/grid \
+        --output-dir $WORK_DIR \
         --output-prefix lpa_reference \
         >> extract_lpa_reference.log 2>&1
 fi

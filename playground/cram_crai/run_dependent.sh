@@ -11,6 +11,9 @@ echo "LPA VNTR Pipeline - Dependency Submission"
 echo "=========================================="
 echo ""
 
+WORK="/nas/longleaf/home/catererz/work/LPA_VNTR_PIPELINE_CODE"
+mkdir -p $WORK
+
 # Get region information
 REGIONS_FILE="$GRID/files/734_possible_coding_vntr_regions.IBD2R_gt_0.25.uniq.txt"
 LPA_REGION=$(awk '$7=="LPA" {print $1,$2,$3}' "$REGIONS_FILE")
@@ -82,7 +85,7 @@ echo ""
 
 # Step LPA-1: Extract reference
 echo "Submitting Step LPA-1: Extract reference (no dependencies)..."
-JOB_LPA1=$(sbatch --parsable step_lpa1_extract_reference.sbatch \
+JOB_LPA1=$(sbatch --parsable step6_extract_reference.sbatch \
    -r $GRID/cram/hg38.fa \
    -b $GRID/files/ref_hg37.bed \
    -o $WORK/lpa_extract_reference \
@@ -93,7 +96,7 @@ echo ""
 # Step LPA-2: Realign
 # Depends on Step 1 (CRAM files) AND Step LPA-1 (reference)
 echo "Submitting Step LPA-2: Realign reads (depends on Step 1 and LPA-1)..."
-JOB_LPA2=$(sbatch --parsable --dependency=afterok:$JOB1:$JOB_LPA1 step_lpa2_realign.sbatch \
+JOB_LPA2=$(sbatch --parsable --dependency=afterok:$JOB1:$JOB_LPA1 step7_realign.sbatch \
    -p $GRID/playground/cram_crai/src/realign_lpa.py \
    -c $SOL/cram \
    -r $GRID/cram/hg38.fa \
@@ -108,7 +111,7 @@ echo ""
 # Step LPA-3: Compute diploid CN
 # Depends on Step 5 (neighbors) AND Step LPA-2 (realignment)
 echo "Submitting Step LPA-3: Compute diploid CN (depends on Step 5 and LPA-2)..."
-JOB_LPA3=$(sbatch --parsable --dependency=afterok:$JOB5:$JOB_LPA2 step_lpa3_compute_dipCN.sbatch \
+JOB_LPA3=$(sbatch --parsable --dependency=afterok:$JOB5:$JOB_LPA2 step8_compute_dipCN.sbatch \
    -p $GRID/playground/cram_crai/src/compute_dipCN.py \
    -c $WORK/lpa_realign/realign_results.txt \
    -n $WORK/lpa_find_neighbors/LPA_neighbors.zMax1.0.txt.gz \
@@ -119,7 +122,7 @@ echo ""
 
 # Step LPA-5: Estimate KIV CN
 echo "Submitting Step LPA-5: Estimate KIV CN (depends on Step LPA-3)..."
-JOB_LPA5=$(sbatch --parsable --dependency=afterok:$JOB_LPA3 step_lpa5_estimate_KIV_CN.sbatch \
+JOB_LPA5=$(sbatch --parsable --dependency=afterok:$JOB_LPA3 step9_estimate_KIV_CN.sbatch \
    -p $GRID/playground/cram_crai/src/estimate_KIV_CN.py \
    -a $WORK/lpa_compute_dipCN/LPA.exon1A.dipCN.txt \
    -b $WORK/lpa_compute_dipCN/LPA.exon1B.dipCN.txt \
