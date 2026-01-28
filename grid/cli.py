@@ -294,6 +294,44 @@ def normalize_mosdepth(
     except Exception as e:
         console.print(f"[red]✗ Mosdepth normalization failed: {str(e)}[/red]")
         sys.exit(1)
+
+# In[]: updated normalize mosdepth
+@cli.command()
+@click.option("-M", "--mosdepth-dir", required=True, type=click.Path(exists=True), help="Directory with mosdepth files")
+@click.option("-r", "--repeat-mask", required=True, type=click.Path(exists=True), help="Repeat mask BED file")
+@click.option("-c", "--chrom", required=True, help="Chromosome (e.g., chr6)")
+@click.option("-s", "--start", required=True, type=int, help="Start coordinate")
+@click.option("-e", "--end", required=True, type=int, help="End coordinate")
+@click.option("-o", "--output-file", required=True, type=click.Path(), help="Normalized output file (.gz)")
+@click.option("--min-depth", required=False, default=20, type=int, help="Minimum depth to keep (default: 20)")
+@click.option("--max-depth", required=False, default=100, type=int, help="Maximum depth to keep (default: 100)")
+@click.option("--top-frac", required=False, default=0.1, type=float, help="Top fraction of high-variance regions to keep (default: 0.1)")
+@click.option("-t", "--threads", required=False, default=1, type=int, help="Number of threads for parallel processing (default: 1)")
+def normalize_mosdepth_update(
+    mosdepth_dir, repeat_mask, chrom, start, end, output_file,
+    min_depth, max_depth, top_frac, threads
+):
+    """Normalize mosdepth coverage across all samples in a directory."""
+    print_banner()
+    
+    from .utils.normalize_mosdepth_dir.normalize_mosdepth import run_normalize_mosdepth
+    
+    try:
+        run_normalize_mosdepth(
+            mosdepth_dir=mosdepth_dir,
+            output_file=output_file,
+            repeat_mask=repeat_mask,
+            chrom=chrom,
+            start=start,
+            end=end,
+            min_depth=min_depth,
+            max_depth=max_depth,
+            top_frac=top_frac,
+            threads=threads
+        )
+    except Exception as e:
+        console.print(f"[red]✗ Mosdepth normalization failed: {str(e)}[/red]")
+        sys.exit(1)
         
 # In[9]: Find Neighbors Command
 @cli.command()

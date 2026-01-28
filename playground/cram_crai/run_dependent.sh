@@ -4,7 +4,7 @@
 # This script submits all jobs with proper dependencies so they run sequentially
 # Each job waits for the previous one to complete successfully before starting
 
-set -e  # Exit on error
+# set -e  # Exit on error
 
 echo "=========================================="
 echo "LPA VNTR Pipeline - Dependency Submission"
@@ -25,14 +25,14 @@ echo "LPA Region: Chr${CHR}:${START}-${END}"
 echo ""
 
 # Step 1: Copy files from Google bucket
-echo "Submitting Step 1: Copy files from Google bucket..."
-JOB1=$(sbatch --parsable step1_gcloud_copy_files.sbatch -d gs://fc-secure-708ee835-1980-4752-941f-f42b5ce2f58b/submissions/)
-echo "  Job ID: $JOB1"
-echo ""
+# echo "Submitting Step 1: Copy files from Google bucket..."
+# JOB1=$(sbatch --parsable step1_gcloud_copy_files.sbatch -d gs://fc-secure-708ee835-1980-4752-941f-f42b5ce2f58b/submissions/)
+# echo "  Job ID: $JOB1"
+# echo ""
 
 # Step 2: Count reads in VNTR region
 echo "Submitting Step 2: Count reads (depends on Step 1)..."
-JOB2=$(sbatch --parsable --dependency=afterok:$JOB1 step2_count_read.sbatch \
+JOB2=$(sbatch --parsable step2_count_read.sbatch \
    -c $SOL/cram \
    -o $WORK/lpa_read_counts/read_count.txt \
    -r $GRID/cram/hg38.fa \
@@ -45,7 +45,7 @@ echo ""
 
 # Step 3: Run mosdepth
 echo "Submitting Step 3: Mosdepth coverage (depends on Step 1)..."
-JOB3=$(sbatch --parsable --dependency=afterok:$JOB1 step3_mosdepth.sbatch \
+JOB3=$(sbatch --parsable step3_mosdepth.sbatch \
    -c $SOL/cram \
    -o $WORK/lpa_mosdepth/mosdepth_summary.txt \
    -r $GRID/cram/hg38.fa \
@@ -96,7 +96,7 @@ echo ""
 # Step LPA-2: Realign
 # Depends on Step 1 (CRAM files) AND Step LPA-1 (reference)
 echo "Submitting Step LPA-2: Realign reads (depends on Step 1 and LPA-1)..."
-JOB_LPA2=$(sbatch --parsable --dependency=afterok:$JOB1:$JOB_LPA1 step7_realign.sbatch \
+JOB_LPA2=$(sbatch --parsable --dependency=afterok:$JOB_LPA1 step7_realign.sbatch \
    -p $GRID/playground/cram_crai/src/realign_lpa.py \
    -c $SOL/cram \
    -r $GRID/cram/hg38.fa \

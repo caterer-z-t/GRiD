@@ -22,7 +22,7 @@ cd "$WORKDIR" || exit 1
 # Define input PLINK paths
 VCF2PLINK_DIR="$WORK/vcf2plink"
 REFERENCE="$VCF2PLINK_DIR/reference_panel"
-TARGET="$VCF2PLINK_DIR/SOL_ch6"
+TARGET="$VCF2PLINK_DIR/SOL_ch6_LPA_NWD"
 GenotypeHarmonizer="$SOFTWARE/GenotypeHarmonizer-1.4.28/GenotypeHarmonizer.jar"
 
 # Run Genotype Harmonizer
@@ -31,7 +31,7 @@ java -Xmx30g -jar $GenotypeHarmonizer \
   --inputType PLINK_BED \
   --ref "$REFERENCE" \
   --refType PLINK_BED \
-  --output harmonized_SOL \
+  --output harmonized_SOL_ch6_LPA_NWD \
   --outputType PLINK_BED \
   --update-id
 

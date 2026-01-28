@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH --job-name=SOL_PIPELINE
+#SBATCH --job-name=ARIC_JHS_MESA_PIPELINE
 #SBATCH --output=slurm/%x.out
 #SBATCH --error=slurm/%x.err
 #SBATCH --time=2-00:00:00
@@ -67,13 +67,13 @@ export USERS=/users/c/a/catererz
 export HOME=/nas/longleaf/home/catererz
 export EPI=/proj/epi
 export SOL=$EPI/Genetic_Data_Center/SOL
-export CRAM=$SOL/cram
+export CRAM=/proj/topmed/users/catererz/jhs_mesa_aric/
 export LPA=$HOME/epi/lpa
 export GRID=$HOME/epi/GRiD
 export SOFTWARE=$HOME/epi/software
 
 # Name for working directory for this run
-WORK_DIR=$WORK/updated_LPA_VNTR_SOFTWARE
+WORK_DIR=$WORK/aric_jhs_mesa_lpa_pipeline_run
 
 mkdir -p $WORK_DIR
 cd $WORK_DIR
@@ -92,7 +92,7 @@ if run_step 1; then
     for cram_file in $CRAM/*.cram; do
         if [ ! -f "${cram_file}.crai" ]; then
             echo "Index file for $cram_file not found. Creating index..." >> ensure_crai.log 2>&1
-            grid ensure-crai --cram-file "$cram_file" >> ensure_crai.log 2>&1
+            grid crai --cram "$cram_file" -r "$GRID/files/hg38.fa" >> ensure_crai.log 2>&1
         else
             echo "Index file for $cram_file already exists. Skipping..." >> ensure_crai.log 2>&1
         fi

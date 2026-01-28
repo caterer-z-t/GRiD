@@ -1,7 +1,7 @@
 #!/bin/bash
 #SBATCH --job-name=phase
-#SBATCH --output=slurm/phase.out
-#SBATCH --error=slurm/phase.err
+#SBATCH --output=slurm/%x.out
+#SBATCH --error=slurm/%x.err
 #SBATCH --time=11-00:00:00
 #SBATCH --mem=320G
 #SBATCH --partition=general
@@ -31,7 +31,7 @@ EAGLE_EXE=$SOFTWARE/Eagle_v2.4.1/eagle
 GEN_MAP=$SOFTWARE/Eagle_v2.4.1/tables/genetic_map_1cMperMb.txt
 
 # Merged PLINK input file prefix
-PLINK_PATH=$WORK/pca/merged_SOL_ref
+PLINK_PATH=$WORK/merge_files/merged_SOL_ref
 PREFIX=$(basename "$PLINK_PATH")
 LPA_PRUNED_PREFIX="${PREFIX}_LPA"
 
@@ -62,7 +62,7 @@ fi
 
 # Run PLINK filtering and Eagle depending on flag
 if $LPA_FLAG; then
-  echo "🔍 Filtering LPA region (chr6:110–210Mb) and assigning SNP IDs..."
+  echo "🔍 Filtering LPA region (chr6:135–185Mb) and assigning SNP IDs..."
 
   # Check if the merged PLINK file for LPA region already exists
   if [ ! -f "merged_SOL_ref_LPA.bed" ]; then
@@ -70,22 +70,22 @@ if $LPA_FLAG; then
     plink \
       --bfile $PREFIX \
       --chr 6 \
-      --from-bp 110000000 \
-      --to-bp 210000000 \
+      --from-bp 135000000 \
+      --to-bp 185000000 \
       --set-missing-var-ids @:# \
       --make-bed \
-      --out $LPA_PREFIX \
+      --out $LPA_PRUNED_PREFIX \
       --threads 16
   fi
 
   # Check if the VCF file already exists
-  if [ ! -f "$LPA_PREFIX.vcf" ]; then
+  if [ ! -f "$LPA_PRUNED_PREFIX.vcf" ]; then
     echo "🧬 Converting PLINK to VCF..."
     plink \
-        --bfile $LPA_PREFIX \
+        --bfile $LPA_PRUNED_PREFIX \
         --recode vcf-iid \
         --chr 6 \
-        --out $LPA_PREFIX \
+        --out $LPA_PRUNED_PREFIX \
         --threads 16
     fi 
 
@@ -93,7 +93,7 @@ if $LPA_FLAG; then
   echo "🚀 Running Eagle on LPA region using VCF input..."
   "$EAGLE_EXE" \
     --numThreads 16 \
-    --vcf "$LPA_PREFIX.vcf" \
+    --vcf "$LPA_PRUNED_PREFIX.vcf" \
     --geneticMapFile=$(basename "$GEN_MAP") \
     --chrom 6 \
     --vcfOutFormat v \

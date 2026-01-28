@@ -1,7 +1,7 @@
 #!/bin/bash
 #SBATCH --job-name=merge
-#SBATCH --output=slurm/merge.out
-#SBATCH --error=slurm/merge.err
+#SBATCH --output=slurm/%x.out
+#SBATCH --error=slurm/%x.err
 #SBATCH --time=2-00:00:00
 #SBATCH --mem=320G
 #SBATCH --partition=general
@@ -12,7 +12,7 @@
 
 # Load PLINK 2 first for cleaning
 module purge
-module load plink/2.00a3LM
+module load plink/2.00
 
 # Set working directory
 WORKDIR=$WORK/merge_files
@@ -20,10 +20,10 @@ mkdir -p "$WORKDIR"
 cd "$WORKDIR" || exit 1
 
 # Define input prefixes (no extensions)
-SOL="$WORK/genotype_harmonizer/harmonized_SOL"
+SOL="$WORK/genotype_harmonizer/harmonized_SOL_ch6_LPA_NWD"
 REF="$WORK/vcf2plink/reference_panel"
 
-if [ ! -f harmonized_SOL_cleaned.bed ] && [ ! -f harmonized_SOL_cleaned.bim ] && [ ! -f harmonized_SOL_cleaned.fam ]; then
+if [ ! -f harmonized_SOL_ch6_LPA_NWD_cleaned.bed ] && [ ! -f harmonized_SOL_ch6_LPA_NWD_cleaned.bim ] && [ ! -f harmonized_SOL_ch6_LPA_NWD_cleaned.fam ]; then
   # Step 1: Clean SOL dataset
   echo "Step 1: Clean SOL dataset..."
   plink2 --bfile "$SOL" \
@@ -31,7 +31,7 @@ if [ ! -f harmonized_SOL_cleaned.bed ] && [ ! -f harmonized_SOL_cleaned.bim ] &&
         --max-alleles 2 \
         --set-all-var-ids @:#:\$r:\$a \
         --make-bed \
-        --out harmonized_SOL_cleaned \
+        --out harmonized_SOL_ch6_LPA_NWD_cleaned \
         --threads 4
 else 
   echo "✅ SOL dataset already cleaned. Skipping step 1."
@@ -53,7 +53,7 @@ else
 fi
 
 # Check if cleaned files exist before merging
-if [ ! -f harmonized_SOL_cleaned.bed ] || [ ! -f harmonized_SOL_cleaned.bim ] || [ ! -f harmonized_SOL_cleaned.fam ]; then
+if [ ! -f harmonized_SOL_ch6_LPA_NWD_cleaned.bed ] || [ ! -f harmonized_SOL_ch6_LPA_NWD_cleaned.bim ] || [ ! -f harmonized_SOL_ch6_LPA_NWD_cleaned.fam ]; then
   echo "❌ Cleaned SOL files are missing. Exiting."
   exit 1
 fi
@@ -67,7 +67,7 @@ fi
 module load plink/1.90b6.21
 
 # Define base file names
-BASEA=harmonized_SOL_cleaned
+BASEA=harmonized_SOL_ch6_LPA_NWD_cleaned
 BASEB=reference_panel_cleaned
 
 # Prepare merge list
@@ -119,23 +119,5 @@ elif [[ -f tmp_merge.bed ]]; then
   mv tmp_merge.log merged_SOL_ref.log
 else
   echo "❌ Unexpected merge failure. Check tmp_merge.log for details."
-  exit 1
-fi
-
-# Final verification
-if [[ -f merged_SOL_ref.bed ]] && [[ -f merged_SOL_ref.bim ]] && [[ -f merged_SOL_ref.fam ]]; then
-  echo "🎉 Final merge successful!"
-  echo "📊 Output files: merged_SOL_ref.{bed,bim,fam}"
-  
-  # Print summary statistics
-  echo "📈 Summary:"
-  echo "   - Merged dataset: $(wc -l < merged_SOL_ref.fam) samples"
-  echo "   - Total variants: $(wc -l < merged_SOL_ref.bim) SNPs"
-else
-  echo "❌ Merge still failed. Check merged_SOL_ref.log for details."
-  echo "🔍 Troubleshooting suggestions:"
-  echo "   1. Check if input files have compatible formats"
-  echo "   2. Verify chromosome coding (1-22, X, Y vs chr1-chr22, chrX, chrY)"
-  echo "   3. Check for build/strand mismatches"
   exit 1
 fi

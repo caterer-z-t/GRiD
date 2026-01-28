@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Step 1, move files from google bucket to local (aka longleaf)
-sbatch step1_gcloud_copy_files.sbatch -d gs://fc-secure-708ee835-1980-4752-941f-f42b5ce2f58b/submissions/
+# sbatch step1_gcloud_copy_files.sbatch -d gs://fc-secure-708ee835-1980-4752-941f-f42b5ce2f58b/submissions/
 
 # Step 2, count reads in VNTR region for each cram file
 REGIONS_FILE="$GRID/files/734_possible_coding_vntr_regions.IBD2R_gt_0.25.uniq.txt"
@@ -13,7 +13,7 @@ END=$(echo "$LPA_REGION" | awk '{print $3}')
 sbatch step2_count_read.sbatch \
    -c $SOL/cram \
    -o $WORK/lpa_read_counts/read_count.txt \
-   -r $GRID/cram/hg38.fa \
+   -r $GRID/files/hg38.fa \
    -C $CHR \
    -s $START \
    -e $END \
@@ -23,7 +23,7 @@ sbatch step2_count_read.sbatch \
 sbatch step3_mosdepth.sbatch \
    -c $SOL/cram \
    -o $WORK/lpa_mosdepth/mosdepth_summary.txt \
-   -r $GRID/cram/hg38.fa \
+   -r $GRID/files/hg38.fa \
    -C $CHR \
    -s $START \
    -e $END \
@@ -53,8 +53,8 @@ sbatch step5_find_neighbors.sbatch \
 # Step 6, Extract reference sequences for VNTR region
 # Step LPA-1, extract reference sequence for LPA region
 sbatch step6_extract_reference.sbatch \
-   -r $GRID/cram/hg38.fa \
-   -b $GRID/cram/ref_hg38.bed \
+   -r $GRID/files/hg38.fa \
+   -b $GRID/files/ref_hg38.bed \
    -o $WORK/lpa_extract_reference \
    -f ref_lpa_hg38
 
@@ -63,7 +63,7 @@ sbatch step6_extract_reference.sbatch \
 sbatch step7_realign.sbatch \
    -p $GRID/playground/cram_crai/src/realign_lpa.py \
    -c $SOL/cram \
-   -r $GRID/cram/hg38.fa \
+   -r $GRID/files/hg38.fa \
    -f $WORK/lpa_extract_reference/ref_lpa_hg38.fasta \
    -o $WORK/lpa_realign/realign_results.txt \
    -P $GRID/files/hardcoded_positions.txt \
