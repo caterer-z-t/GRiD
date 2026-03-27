@@ -1,0 +1,65 @@
+samples_file: "/nas/longleaf/home/catererz/epi/GRiD/files/nwd_ids.txt"
+directory_loc: "/proj/epi/Genetic_Data_Center/SOL/cram"
+reference_genome: "/nas/longleaf/home/catererz/epi/GRiD/files/hg38.fa"
+output_dir: "/nas/longleaf/home/catererz/work/software_dev"
+threads: 4
+file_type: "cram"
+
+# VNTR region of interest
+chrom: "chr6"
+start_bp: 160605062
+end_bp: 160647661
+
+output_file_type: "tsv"
+
+index: 
+  run: False
+  output_file_prefix: "index_file_results"
+
+count_reads:
+  run: True
+  output_file_prefix: "read_counts"
+  flags:
+    - 83 
+    - 99
+    - 147
+    - 163
+    - 81
+    - 97
+    - 145
+    - 161
+
+mosdepth:
+  run: True
+  output_file_prefix: "mosdepth_results" 
+  bin_size: 1000
+  mode: "fast"
+  region_name: "LPA"
+  work_dir: "/nas/longleaf/home/catererz/work/software_dev/mosdepth_work"
+  remove_intermediate: True
+
+  normalize: 
+    run: True
+    min_depth: 20
+    max_depth: 100
+    top_frac: 0.1
+    output_file_prefix: "mosdepth_results_normalized"
+    repeat_mask_file: "/nas/longleaf/home/catererz/epi/GRiD/files/repeat_mask_list.hg38.ucsc_bed"
+
+  neighbors:
+    run: True
+    output_file_prefix: "neighbor_coverage"
+    num_neighbors: 5
+    zmax: 2.0
+    sigma2_max: 1000
+
+compute_diploid_genotypes:
+  run: True
+  output_file_prefix: "diploid_genotypes"
+
+compute_haploid_genotypes:
+  run: False
+  output_file_prefix: "haploid_genotypes"
+  phased_vcf: "/nas/longleaf/home/catererz/epi/GRiD/files/phased_genotypes.vcf.gz"
+  ilash_output: "/nas/longleaf/home/catererz/epi/GRiD/files/ilash_output.tsv"
+  ibs_output: "/nas/longleaf/home/catererz/epi/GRiD/files/ibs_output.tsv"

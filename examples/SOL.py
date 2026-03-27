@@ -36,7 +36,7 @@ console = Console()
 def parse_range(arg: str):
     """Parse step range input (e.g., '3-5', '5', or '')."""
     if not arg:
-        return 1, 9
+        return 1, 8
     match = re.match(r"^(\d+)-(\d+)$", arg)
     if match:
         return int(match.group(1)), int(match.group(2))
@@ -186,14 +186,14 @@ def main():
         )
 
     # STEP 9 — Compute KIV2 CN
-    if should_run(9, start_step, end_step):
-        console.rule("[bold cyan]Step 9: Computing LPA KIV2 CN[/bold cyan]")
-        estimate_kiv.callback(
-            exon1a="lpa_dipcn.exon1A.dipCN.txt",
-            exon1b="lpa_dipcn.exon1B.dipCN.txt",
-            output="lpa_kiv2_cn.txt",
-            format="txt",
-        )
+    # if should_run(9, start_step, end_step):
+    #     console.rule("[bold cyan]Step 9: Computing LPA KIV2 CN[/bold cyan]")
+    #     estimate_kiv.callback(
+    #         exon1a="lpa_dipcn.exon1A.dipCN.txt",
+    #         exon1b="lpa_dipcn.exon1B.dipCN.txt",
+    #         output="lpa_kiv2_cn.txt",
+    #         format="txt",
+    #     )
 
     console.rule(f"[bold green]Pipeline complete for steps {start_step}–{end_step}[/bold green]")
 

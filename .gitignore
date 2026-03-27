@@ -49,4 +49,10 @@ docs/build/
 # === Mukamel code files ===
 mukamel/
 
+# SOL / NWD files
 files/SOL_NWD_IDs_crosswalk.csv
+files/nwd_ids.txt
+files/nwd_dev.txt
+
+# Playground files + directories
+playground/

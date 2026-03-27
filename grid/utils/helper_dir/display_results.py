@@ -46,22 +46,3 @@ def print_individual_error(
         progress_console.print(output)
     else:
         console.print(output)
-
-# In[5]: Print Batch Summary
-def print_batch_summary(
-    total_processed: int,
-    failed_items: list,
-    operation: str = "processed"
-) -> None:
-    """
-    Print summary of a batch operation.
-    
-    Args:
-        total_processed: Total number of items processed
-        failed_items: List of failed item names/basenames
-        operation: Description of operation (e.g., "indexed", "processed", "counted")
-    """
-    if failed_items:
-        console.print(f"[red]✗ {len(failed_items)} files failed to be {operation}[/red]")
-    else:
-        console.print(f"[bold green]✓ Successfully {operation} {total_processed} files[/bold green]")

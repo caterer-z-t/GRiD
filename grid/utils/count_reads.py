@@ -1,104 +1,163 @@
-# grid/utils/count_reads_for_directory.py
-# In[1]: Imports
+# In[0]: Imports
 from pathlib import Path
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from threading import Lock
 from functools import partial
+import pysam
 
-from .helper_dir.find_all_cram_files import find_cram_files
-from .helper_dir.setup_output_file import setup_output_file
-from .helper_dir.write_result_to_file import write_result_to_file
-from .helper_dir.load_flags_from_yaml import load_flags
-from .count_reads_dir.process_single_cram import process_single_cram
+from .utils import (
+    log,
+    get_samples,
+    setup_output_file,
+    find_file,
+    progress_bar
+)
 
-from rich.console import Console
-from rich.progress import Progress, SpinnerColumn, TextColumn, BarColumn, TaskProgressColumn
-
-# In[2]: Setup Rich Console
-console = Console()
-
-# In[3]: Main Function to Count Reads in Directory
+# In[1]: Main count reads
 def count_reads(
-    cram_dir: str,
-    output_file: str,
-    ref_fasta: str,
-    chrom: str,
-    start: int,
-    end: int,
-    config_file: str,
-    threads: int = 1
+        config,
+        console=None
 ):
-    """
-    Count reads for all CRAMs in a directory using parallel processing.
-    
-    Args:
-        cram_dir: Directory containing CRAM files
-        output_file: Path to output TSV file
-        ref_fasta: Path to reference genome FASTA
-        chrom: Chromosome name
-        start: Start position
-        end: End position
-        config_file: Path to YAML config file
-        threads: Number of threads for parallel processing
-    """
-    # Load configuration
-    proper_flags = load_flags(config_file, "read-count")
-    
-    # Find all CRAM files
-    cram_files = find_cram_files(cram_dir)
+    try:
+        directory_loc = config['directory_loc']
+        samples_file = config['samples_file']
+        samples = get_samples(samples_file)
+        chrom = config.get('chrom', None)
+        start = config.get('start_bp', None)
+        end = config.get('end_bp', None)
+        flags = config.get('count_reads', {}).get('flags', [])
+        threads = config.get('threads', 1)
+
+        output_file_prefix = config.get('count_reads', {}).get('output_file_prefix', None) 
+        output_file_type = config.get('output_file_type', 'tsv')
+        output_dir = config.get('output_dir', '.')
+        output_file = Path(f"{output_dir}/{output_file_prefix}.{output_file_type}")
+        
+        ref = config.get('reference_genome')
+    except Exception as e:
+        log(console, f"Config error: {e}", style="danger")
+        return
     
     # Setup output file with header
     output_path = setup_output_file(output_file, chrom, start, end)
     
-    # Display initial information
-    console.print(f"[yellow]Detected {len(cram_files)} CRAM files in {cram_dir}[/yellow]")
-    console.print(f"[yellow]Using {threads} thread(s) for parallel processing[/yellow]")
-    
+    files = {
+        sample: result
+        for sample in samples
+        if (result := find_file(directory_loc, sample, config.get('file_type')))[0] is not None
+    }
+
     # Create lock for thread-safe file writing
     write_lock = Lock()
     
     # Create a partial function with fixed parameters
     process_func = partial(
         process_single_cram,
-        ref_fasta=ref_fasta,
+        ref_fasta=ref,
         chrom=chrom,
         start=start,
         end=end,
-        proper_flags=proper_flags
+        proper_flags=flags,
+        console=console
     )
     
     # Process CRAMs with threading and progress tracking
-    with Progress(
-        SpinnerColumn(),
-        TextColumn("[progress.description]{task.description}"),
-        BarColumn(),
-        TaskProgressColumn(),
-        console=console
-    ) as progress:
-        
-        task = progress.add_task(
-            "[bold green]Processing CRAM files", 
-            total=len(cram_files)
-        )
+    with progress_bar(console, total=len(files), description="Counting reads") as (progress, task):
         
         with ThreadPoolExecutor(max_workers=threads) as executor:
             # Submit all jobs
-            future_to_cram = {
-                executor.submit(process_func, cram): cram 
-                for cram in cram_files
+            future_to_sample = {
+                executor.submit(process_func, file): sample 
+                for sample, file in files.items()
             }
             
             # Collect and write results as they complete
-            for future in as_completed(future_to_cram):
-                basename, count = future.result()
+            for future in as_completed(future_to_sample):
+                sample = future_to_sample[future]
+                count = future.result()
                 
                 # Write result to file (thread-safe)
-                write_result_to_file(output_path, basename, count, write_lock, progress.console)
+                write_read_results(output_path, sample, count, write_lock)
                 
                 # Update progress bar
-                progress.update(task, advance=1)
+                progress.advance(task)
     
-    console.print(
-        f"[bold blue]VNTR read counting completed. "
-        f"Results written to {output_path}[/bold blue]"
-    )
+    log(console, f"Read counting completed. "
+                   f"Results written to {output_path}", style="success")
+    
+def count_reads_in_region(
+    cram_file: str,
+    ref_fasta: str,
+    chrom: str,
+    start: int,
+    end: int,
+    proper_flags: set[int]
+) -> int:
+    """
+    Count properly paired reads in a genomic region using pysam.
+    """
+    count = 0
+    with pysam.AlignmentFile(cram_file, "rc", reference_filename=ref_fasta) as bam:
+        for read in bam.fetch(chrom, start, end):
+            if read.flag in proper_flags:
+                count += 1
+    return count
+
+def process_single_cram(
+    path: str,
+    ref_fasta: str,
+    chrom: str,
+    start: int,
+    end: int,
+    proper_flags: set[int],
+    console=None
+) -> int | str:
+    """
+    Process a single sequence alignment file and count reads in region.
+    
+    Args:
+        path: Path to sequence alignment file
+        ref_fasta: Path to reference genome FASTA
+        chrom: Chromosome name
+        start: Start position
+        end: End position
+        proper_flags: Set of SAM flags to count
+    
+    Returns:
+        int or str: Read count or "Error"
+    """
+    basename = Path(path).name
+
+    try:
+        count = count_reads_in_region(
+            path, 
+            ref_fasta, 
+            chrom, 
+            start, 
+            end, 
+            proper_flags
+        )
+        return count
+    except Exception as e:
+        log(console, f"Failed to count reads for {basename}: {e}", style="danger")
+        return "Error"
+    
+# In[3]: Helper function to write results to file in a thread-safe way
+def write_read_results(
+    output_file: Path,
+    basename: str,
+    count: int | str,
+    write_lock: Lock
+    ) -> None:
+    """
+    Write a single result to the output file in a thread-safe manner.
+    
+    Args:
+        output_file: Path to output file
+        basename: Sample basename
+        count: Read count or "Error"
+        write_lock: Threading lock for safe file writing
+    """
+    with write_lock:
+        with open(output_file, "a") as f:
+            f.write(f"{basename}\t{count}\n")

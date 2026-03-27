@@ -1,119 +1,147 @@
-# grid/utils/compute_dipcn.py
-# In[1]: Imports
+# In[0]: Imports
+import pandas as pd
+import gzip
 from pathlib import Path
-import time
-from rich.console import Console
-from rich.progress import Progress, SpinnerColumn, TextColumn, BarColumn
 
-from .compute_dipcn_dir.load_count_results import load_count_results
-from .compute_dipcn_dir.load_neighbor_results import load_neighbor_results
-from .compute_dipcn_dir.validate_sample_overlap import validate_sample_overlap
-from .compute_dipcn_dir.compute_diploid_cn import compute_diploid_cn_for_exon
-from .compute_dipcn_dir.write_dipcn_output import write_dipcn_output
+from .utils import (
+    log,
+    progress_bar
+)
 
-# Exon types to process
-EXON_TYPES = ['1B_KIV3', '1B_notKIV3', '1B', '1A']
 
-# In[2]: Main function to compute diploid copy numbers
-def compute_dipcn_pipeline(
-    count_file: Path,
-    neighbor_file: Path,
-    output_prefix: Path,
-    n_neighbors: int,
-    console: Console = None
-):
+# In[1]: Main function
+def compute_diploid_genotypes(
+        config,
+        console
+) -> None:
     """
-    Main function to compute diploid copy numbers for all exon types.
-    
+    Replicate the awk normalization exactly:
+
+        norm_reads = reads[sample] / sample_scale
+                     / mean( reads[neighbor] / neighbor_scale )
+
+    where the mean is over the top n_nbr neighbors.
+
     Args:
-        count_file (Path): Path to realignment count file
-        neighbor_file (Path): Path to neighbor results file (can be gzipped)
-        output_prefix (Path): Output file prefix
-        n_neighbors (int): Number of top neighbors to use
-        console (Console): Rich console for output (optional)
-        
-    Returns:
-        None
+        config:  configuration dictionary
+        console: Rich console for logging
     """
-    if console is None:
-        console = Console()
+    try:
+        output_file_prefix = config.get('compute_diploid_genotypes', {}).get('output_file_prefix', None)
+        output_file_type   = config.get('output_file_type', 'tsv')
+        output_dir         = config.get('output_dir', '.')
+        output_file        = Path(f"{output_dir}/{output_file_prefix}.{output_file_type}")
 
-    console.print(f"[blue]Starting diploid copy number computation...[/blue]")
+        n_nbr = config.get('compute_diploid_genotypes', {}).get('n_nbr', 300)
 
-    output_prefix = Path(output_prefix).expanduser()
-    output_prefix.parent.mkdir(parents=True, exist_ok=True)
-    
-    start_time = time.time()
-    
-    # Step 1: Load count results
-    console.rule("[bold blue]Step 1: Load Count Results")
-    counts = load_count_results(count_file)
-    console.print(f"[green]✓ Loaded counts for {len(counts)} samples[/green]")
-    
-    # Step 2: Load neighbor results
-    console.rule("[bold blue]Step 2: Load Neighbor Results")
-    neighbors = load_neighbor_results(neighbor_file)
-    console.print(f"[green]✓ Loaded neighbor info for {len(neighbors)} samples[/green]")
-    
-    # Step 3: Validate sample overlap
-    console.rule("[bold blue]Step 3: Validate Sample Overlap")
-    overlap_count, overlap_samples = validate_sample_overlap(counts, neighbors, console)
-    
-    if overlap_count == 0:
-        console.print("[red]✗ No overlapping samples found! Cannot proceed.[/red]")
-        raise ValueError("No overlapping sample IDs between count and neighbor files")
-    
-    console.print(f"[green]✓ Found {overlap_count} overlapping samples[/green]")
-    
-    # Step 4: Create output directory
-    output_prefix.parent.mkdir(parents=True, exist_ok=True)
-    
-    # Step 5: Process each exon type
-    console.rule("[bold blue]Step 4: Compute Diploid Copy Numbers")
-    
-    results_summary = {}
-    
-    with Progress(
-        SpinnerColumn(),
-        TextColumn("[progress.description]{task.description}"),
-        BarColumn(),
-        console=console,
-    ) as progress:
-        task = progress.add_task(
-            f"[cyan]Processing exon types...",
-            total=len(EXON_TYPES)
-        )
-        
-        for exon_type in EXON_TYPES:
-            # Compute diploid copy numbers for this exon type
-            results = compute_diploid_cn_for_exon(
-                counts=counts,
-                neighbors=neighbors,
-                exon_type=exon_type,
-                n_neighbors=n_neighbors
-            )
-            
-            # Write output
-            output_file = f"{output_prefix}.exon{exon_type}.dipCN.txt"
-            write_dipcn_output(results, output_file)
-            
-            results_summary[exon_type] = {
-                'count': len(results),
-                'file': output_file
-            }
-            
+        read_counts_file_prefix = config['count_reads'].get('output_file_prefix', None)
+        read_counts_file = Path(f"{output_dir}/{read_counts_file_prefix}.{output_file_type}")
+
+        zMax                  = config['mosdepth']['neighbors'].get('zmax', 2.0)
+        neighbors_file_prefix = config['mosdepth']['neighbors'].get('output_file_prefix', None)
+        neighbors_file        = Path(f"{output_dir}/{neighbors_file_prefix}.zMax{zMax:.1f}.{output_file_type}.gz")
+    except Exception as e:
+        log(console, f"Config error: {e}", style="danger")
+        return
+
+    # --- Load read counts ---
+    reads_raw = pd.read_csv(read_counts_file, sep="\t", header=0, names=["Sample", "Reads"])
+    reads_raw["Reads"] = pd.to_numeric(reads_raw["Reads"], errors="coerce")
+    reads_raw.dropna(subset=["Reads"], inplace=True)
+    reads: dict[str, float] = reads_raw.set_index("Sample")["Reads"].to_dict()
+
+    # --- Load neighbors ---
+    neighbors, sample_scales = load_neighbors(neighbors_file)
+
+    # --- Compute normalized dipCN ---
+    dipcn_list: list[tuple[str, float]] = []
+    missing_ids: set[str] = set()
+
+    with progress_bar(console, total=len(neighbors), description="Computing dipCN...") as (progress, task):
+        for sample_id, nbr_list in neighbors.items():
+            sample_scale = sample_scales.get(sample_id)
+            if sample_scale is None or sample_id not in reads:
+                progress.advance(task)
+                continue
+
+            sample_reads = reads[sample_id]
+
+            total = 0.0
+            count = 0
+            for nbr_id, nbr_scale in nbr_list:
+                if count >= n_nbr:
+                    break
+                if nbr_id not in reads:
+                    missing_ids.add(nbr_id)
+                    continue
+                total += reads[nbr_id] / nbr_scale
+                count += 1
+
+            if count == 0:
+                progress.advance(task)
+                continue
+
+            # Matches awk: reads[$1] / $2 / (sum / num)
+            norm_reads = (sample_reads / sample_scale) / (total / count)
+            dipcn_list.append((sample_id, norm_reads))
             progress.advance(task)
-    
-    # Step 6: Summary
-    console.rule("[bold blue]Summary")
-    elapsed = time.time() - start_time
-    
-    console.print(f"[bold green]✓ Processed {len(EXON_TYPES)} exon types[/bold green]")
-    console.print("")
-    
-    for exon_type, info in results_summary.items():
-        console.print(f"[blue]{exon_type}:[/blue] {info['count']} samples → {info['file']}")
-    
-    console.print("")
-    console.print(f"[blue]Time elapsed: {elapsed:.2f} seconds[/blue]")
-    console.rule("[bold green]✓ Diploid copy number computation complete")
+
+    if missing_ids:
+        log(console,
+            f"Warning: {len(missing_ids)} neighbor IDs not found in read counts "
+            f"(showing up to 5: {list(missing_ids)[:5]})",
+            style="warning")
+
+    # --- Save ---
+    dipcn_df = pd.DataFrame(dipcn_list, columns=["Sample", "Norm_Reads"])
+    dipcn_df.to_csv(output_file, sep="\t", index=False)
+    log(console, f"Saved {len(dipcn_df)} samples → {output_file}", style="success")
+
+
+# In[2]: Load neighbors
+def load_neighbors(neighbors_file: Path) -> tuple[dict[str, list[tuple[str, float]]], dict[str, float]]:
+    """
+    Parse the gzipped neighbors file.
+
+    Each line format:
+        sample_id  sample_scale  nbr1_id  nbr1_scale  nbr1_norm_dist  nbr2_id ...
+
+    norm_dist is present but unused — only neighbor_id and neighbor_scale are needed.
+
+    Returns:
+        neighbors     : {sample_id: [(neighbor_id, neighbor_scale), ...]}
+        sample_scales : {sample_id: sample_scale}
+    """
+    neighbors: dict[str, list[tuple[str, float]]] = {}
+    sample_scales: dict[str, float] = {}
+
+    with gzip.open(neighbors_file, "rt") as f:
+        for line in f:
+            parts = line.strip().split("\t")
+            if len(parts) < 2:
+                continue
+
+            sample_id = parts[0]
+            try:
+                sample_scale = float(parts[1])
+            except ValueError:
+                continue
+
+            sample_scales[sample_id] = sample_scale
+
+            nbr_list: list[tuple[str, float]] = []
+            i = 2
+            while i + 2 <= len(parts):
+                nbr_id = parts[i]
+                try:
+                    nbr_scale = float(parts[i + 1])
+                    # parts[i + 2] is norm_dist — unused
+                except ValueError:
+                    i += 3
+                    continue
+                nbr_list.append((nbr_id, nbr_scale))
+                i += 3
+
+            neighbors[sample_id] = nbr_list
+
+    return neighbors, sample_scales

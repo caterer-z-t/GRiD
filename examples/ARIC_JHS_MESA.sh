@@ -18,7 +18,7 @@
 # ============================
 
 # Parse input argument
-RANGE=${1:-1-9}  # Default: full pipeline if nothing provided
+RANGE=${1:-1-8}  # Default: full pipeline if nothing provided
 
 # Convert argument to start and end numbers
 if [[ "$RANGE" =~ ^([0-9]+)-([0-9]+)$ ]]; then
@@ -219,15 +219,15 @@ fi
 # ------------------------------
 # Step 9: Compute LPA KIV-2 CN
 # ------------------------------
-if run_step 9; then
-    echo "=== Step 9: Computing LPA KIV-2 CN ==="
-    grid estimate-kiv \
-        --exon1a lpa_dipcn.exon1A.dipCN.txt \
-        --exon1b lpa_dipcn.exon1B.dipCN.txt \
-        --output lpa_kiv2_cn.txt \
-        --format txt \
-        >> compute_kiv2_cn.log 2>&1
-fi
+# if run_step 9; then
+#     echo "=== Step 9: Computing LPA KIV-2 CN ==="
+#     grid estimate-kiv \
+#         --exon1a lpa_dipcn.exon1A.dipCN.txt \
+#         --exon1b lpa_dipcn.exon1B.dipCN.txt \
+#         --output lpa_kiv2_cn.txt \
+#         --format txt \
+#         >> compute_kiv2_cn.log 2>&1
+# fi
 
 
 echo "Pipeline complete for steps $START_STEP–$END_STEP."
