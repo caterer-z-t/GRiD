@@ -53,6 +53,11 @@ mukamel/
 files/SOL_NWD_IDs_crosswalk.csv
 files/nwd_ids.txt
 files/nwd_dev.txt
+files/diploid_calls.txt
 
 # Playground files + directories
 playground/
+
+# JHS / MESA / ARIC NWD files
+files/JHS_NWDID_Key.csv
+files/MESA_NWDID_Key.csv
