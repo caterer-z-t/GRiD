@@ -27,6 +27,7 @@ def count_reads(
         end = config.get('end_bp', None)
         flags = config.get('count_reads', {}).get('flags', [])
         threads = config.get('threads', 1)
+        min_mapq = config.get('min_mapq', 1)
 
         output_file_prefix = config.get('count_reads', {}).get('output_file_prefix', None) 
         output_file_type = config.get('output_file_type', 'tsv')
@@ -58,6 +59,7 @@ def count_reads(
         start=start,
         end=end,
         proper_flags=flags,
+        min_mapq=min_mapq,
         console=console
     )
     
@@ -91,7 +93,8 @@ def count_reads_in_region(
     chrom: str,
     start: int,
     end: int,
-    proper_flags: set[int]
+    proper_flags: set[int],
+    min_mapq: int = 1,
 ) -> int:
     """
     Count properly paired reads in a genomic region using pysam.
@@ -99,7 +102,15 @@ def count_reads_in_region(
     count = 0
     with pysam.AlignmentFile(cram_file, "rc", reference_filename=ref_fasta) as bam:
         for read in bam.fetch(chrom, start, end):
-            if read.flag in proper_flags:
+            if (
+                read.flag in proper_flags          # exact flag match like C++
+                and read.mapq >= min_mapq
+                and read.reference_id == read.next_reference_id
+                and not read.is_duplicate           # exclude duplicates
+                and not read.is_secondary           # exclude secondary alignments
+                and read.reference_start >= start   # start position inside region (matchs Hujoel C++ bin logic)
+                and read.reference_start < end
+                ):
                 count += 1
     return count
 
@@ -110,6 +121,7 @@ def process_single_cram(
     start: int,
     end: int,
     proper_flags: set[int],
+    min_mapq: int = 1,
     console=None
 ) -> int | str:
     """
@@ -135,7 +147,8 @@ def process_single_cram(
             chrom, 
             start, 
             end, 
-            proper_flags
+            proper_flags,
+            min_mapq
         )
         return count
     except Exception as e:

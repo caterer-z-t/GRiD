@@ -3,6 +3,7 @@ import os
 import pysam    
 from pathlib import Path
 from threading import Lock
+import gzip
 import glob
 from rich.progress import Progress, SpinnerColumn, TextColumn, BarColumn, TaskProgressColumn
 from contextlib import contextmanager
@@ -241,3 +242,9 @@ def create_region_string(chrom: str, start: int, end: int, console=None) -> str:
         log(console, "You must provide either a full region or chromosome, start, and end separately.", style="danger")
         raise ValueError("Invalid region parameters")
     return region
+
+
+def open_maybe_gz(path, mode="rt"):
+    if str(path).endswith(".gz"):
+        return gzip.open(path, mode)
+    return open(path, mode)

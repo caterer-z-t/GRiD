@@ -1,5 +1,5 @@
-samples_file: "/nas/longleaf/home/catererz/epi/GRiD/files/nwd_ids.txt"
-directory_loc: "/proj/epi/Genetic_Data_Center/SOL/cram"
+samples_file: "/nas/longleaf/home/catererz/epi/GRiD/files/SOL_nwd_ids.txt"
+directory_loc: "/proj/epi/Genetic_Data_Center/SOL/cram/SOL"
 reference_genome: "/nas/longleaf/home/catererz/epi/GRiD/files/hg38.fa"
 output_dir: "/nas/longleaf/home/catererz/work/software_dev"
 threads: 4
@@ -19,15 +19,16 @@ index:
 count_reads:
   run: True
   output_file_prefix: "read_counts"
+  min_mapq: 1
   flags:
-    - 83 
-    - 99
-    - 147
-    - 163
-    - 81
-    - 97
-    - 145
-    - 161
+    - 83   # proper pair, reverse strand
+    # - 99     
+    - 147  # proper pair, mate reverse
+    # - 163
+    - 81   # reverse, mate forward (unpaired-ish)
+    # - 97
+    - 145  # mate reverse
+    # - 161
 
 mosdepth:
   run: True
