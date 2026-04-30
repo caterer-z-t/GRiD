@@ -80,25 +80,25 @@ def WGS(config):
         sys.exit(1)
 
 # In[3]: Whole Exome VNTR Copy Number Estimation Command
-@cli.command()
-@click.argument('config', type=click.Path(exists=True))
-def  WES(config):
-    """
-    Whole Exome Sequencing (WES) pipeline for estimating LPA KIV-2 copy numbers.
+# @cli.command()
+# @click.argument('config', type=click.Path(exists=True))
+# def  WES(config):
+#     """
+#     Whole Exome Sequencing (WES) pipeline for estimating LPA KIV-2 copy numbers.
 
-    Args:
-        config: Path to YAML configuration file specifying input CRAMs, reference genome, and pipeline
+#     Args:
+#         config: Path to YAML configuration file specifying input CRAMs, reference genome, and pipeline
 
-    Returns:
-        Haplotype KIV-2 copy number estimates for each sample in the input CRAMs, saved to an output file specified in the config.
-    """
-    from .pipeline import run_wes_pipeline
-    print_banner()
-    try:        
-        run_wes_pipeline(console=console, config=config)
-    except Exception as e:
-        log(console, f"✗ WES pipeline failed: {str(e)}", style="danger")
-        sys.exit(1)
+#     Returns:
+#         Haplotype KIV-2 copy number estimates for each sample in the input CRAMs, saved to an output file specified in the config.
+#     """
+#     from .pipeline import run_wes_pipeline
+#     print_banner()
+#     try:        
+#         run_wes_pipeline(console=console, config=config)
+#     except Exception as e:
+#         log(console, f"✗ WES pipeline failed: {str(e)}", style="danger")
+#         sys.exit(1)
 
 
 # In[2]: CLI Command for Ensuring CRAI Index

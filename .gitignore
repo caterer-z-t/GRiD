@@ -63,3 +63,9 @@ files/diploid_calls.txt
 
 # Playground files + directories
 playground/
+
+# === Ignore R history files ===
+.Rhistory
+docs/source/paper_sphinx.md
+
+.claude/

@@ -1,43 +1,32 @@
-GRiD Core Module
-================
+Core
+====
 
-Overview
---------
+``grid.cli``
+------------
 
-.. include:: ../../../grid/README.md
-   :parser: myst_parser.sphinx_
-
-Python API Documentation
-------------------------
-
-grid.__init__
-~~~~~~~~~~~~~
-
-.. automodule:: grid
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-grid.cli
-~~~~~~~~
+Click-based command-line interface. Entry point is ``grid WGS <config>``.
 
 .. automodule:: grid.cli
    :members:
    :undoc-members:
    :show-inheritance:
 
-grid.config
-~~~~~~~~~~~
+``grid.pipeline``
+-----------------
 
-.. automodule:: grid.config
+Orchestrates the full WGS pipeline from a loaded config dict.
+
+.. automodule:: grid.pipeline
    :members:
    :undoc-members:
    :show-inheritance:
 
-grid.pipeline
-~~~~~~~~~~~~~
+``grid.config``
+---------------
 
-.. automodule:: grid.pipeline
+Config validation — called at pipeline startup before any steps run.
+
+.. automodule:: grid.config
    :members:
    :undoc-members:
    :show-inheritance:

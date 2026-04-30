@@ -1,28 +1,11 @@
-Neighbor Finding Module
-=======================
+Nearest-Neighbor Identification
+================================
 
-Overview
---------
-
-.. include:: ../../../grid/utils/find_neighbors_dir/README.md
-   :parser: myst_parser.sphinx_
-
-Python API Documentation
-------------------------
-
-grid.utils.find_neighbors
-~~~~~~~~~~~~~~~~~~~~~~~~~~
+Identifies the top-N nearest neighbors per individual in normalized depth space
+using Euclidean distance (scikit-learn). Neighbors serve as an ancestry-matched
+reference panel for diploid copy number normalization.
 
 .. automodule:: grid.utils.find_neighbors
    :members:
    :undoc-members:
    :show-inheritance:
-
-grid.utils.find_neighbors_dir
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. automodule:: grid.utils.find_neighbors_dir
-   :members:
-   :undoc-members:
-   :private-members:
-   :special-members:

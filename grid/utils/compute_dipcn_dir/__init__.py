@@ -1,11 +1,3 @@
-# grid/utils/compute_dipcn_dir/__init__.py
-"""
-Diploid copy number computation utilities.
-
-This package contains modular components for computing diploid copy numbers
-for LPA KIV-2 repeats using neighbor-based normalization.
-"""
-
 from .normalize_sample_id import normalize_sample_id
 from .load_count_results import load_count_results
 from .load_neighbor_results import load_neighbor_results
@@ -23,3 +15,14 @@ __all__ = [
     'compute_diploid_cn_for_exon',
     'write_dipcn_output'
 ]
+
+
+from importlib.metadata import version, PackageNotFoundError
+
+try:
+    __version__ = version("GRiD")
+except PackageNotFoundError:
+    __version__ = "unknown"
+
+__author__ = "Zachary Caterer"
+__email__ = "ztcaterer@colorado.edu"

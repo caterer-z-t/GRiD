@@ -1,28 +1,10 @@
-Mosdepth Coverage Analysis
-==========================
+Coverage Estimation
+===================
 
-Overview
---------
+Runs `mosdepth <https://github.com/brentp/mosdepth>`_ across all samples in binned mode,
+then computes an overlap-weighted mean depth for the KIV-2 region.
 
-.. include:: ../../../grid/utils/mosdepth_dir/README.md
-   :parser: myst_parser.sphinx_
-
-Python API Documentation
-------------------------
-
-grid.utils.run_mosdepth
-~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. automodule:: grid.utils.run_mosdepth
+.. automodule:: grid.utils.mosdepth
    :members:
    :undoc-members:
    :show-inheritance:
-
-grid.utils.mosdepth_dir
-~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. automodule:: grid.utils.mosdepth_dir
-   :members:
-   :undoc-members:
-   :private-members:
-   :special-members:

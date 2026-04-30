@@ -1,12 +1,16 @@
-name: Docs
+name: Docs Preview
+
+# Builds and deploys docs for any branch except main.
+# Published to: caterer-z-t.github.io/GRiD/dev/
+# The main docs (root of gh-pages) are left untouched via keep_files: true.
 
 on:
   push:
-    branches: [main]
+    branches-ignore: [main]
 
 jobs:
-  build-and-deploy:
-    name: Build and deploy documentation
+  build-and-deploy-preview:
+    name: Build and deploy preview documentation
     runs-on: ubuntu-latest
 
     steps:
@@ -24,9 +28,11 @@ jobs:
       - name: Build docs
         run: make -C docs html
 
-      - name: Deploy to GitHub Pages
+      - name: Deploy preview to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./docs/build/html
           publish_branch: gh-pages
+          destination_dir: dev
+          keep_files: true

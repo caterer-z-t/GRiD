@@ -22,13 +22,9 @@ count_reads:
   min_mapq: 1
   flags:
     - 83   # proper pair, reverse strand
-    # - 99     
     - 147  # proper pair, mate reverse
-    # - 163
     - 81   # reverse, mate forward (unpaired-ish)
-    # - 97
     - 145  # mate reverse
-    # - 161
 
 mosdepth:
   run: True
@@ -59,8 +55,9 @@ compute_diploid_genotypes:
   output_file_prefix: "diploid_genotypes"
 
 compute_haploid_genotypes:
-  run: False
+  run: True
   output_file_prefix: "haploid_genotypes"
-  phased_vcf: "/nas/longleaf/home/catererz/epi/GRiD/files/phased_genotypes.vcf.gz"
-  ilash_output: "/nas/longleaf/home/catererz/epi/GRiD/files/ilash_output.tsv"
   ibs_output: "/nas/longleaf/home/catererz/epi/GRiD/files/ibs_output.tsv"
+  min_neighbors: 1
+  max_neighbors: 10
+  n_iters: 100

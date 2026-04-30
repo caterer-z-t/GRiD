@@ -75,7 +75,7 @@ def read_neighbors_file(neighbors_file, IDtoInd, hap_nbrs, MAX_NBR):
     return hap_nbrs
 
 
-def HI_inference(config, console):
+def hi_inference(config, console):
     """
     Imputes haplotype-specific IRRs from sample-level IRRs and haplotype neighbors, using an iterative approach.
 

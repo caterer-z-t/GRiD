@@ -7,7 +7,7 @@ authors:
 
 title: "GRiD: Genomic Repeat inference from Depth"
 # This version is updated using `cz bump` command
-version: "0.1.0"
+version: "1.0.0"
 license: MIT License
 repository-code: "https://github.com/caterer-z-t/GRiD"
 doi: # Add DOI here when available

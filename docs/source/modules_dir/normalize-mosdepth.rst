@@ -1,28 +1,11 @@
-Mosdepth Coverage Normalization
-================================
+Coverage Normalization
+======================
 
-Overview
---------
+Normalizes mosdepth coverage in two steps: within-individual (divide by sample mean)
+and across-individual (z-score transformation). High-variance regions are then selected
+to reduce noise before neighbor computation.
 
-.. include:: ../../../grid/utils/normalize_mosdepth_dir/README.md
-   :parser: myst_parser.sphinx_
-
-Python API Documentation
-------------------------
-
-grid.utils.run_normalized_mosdepth
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. automodule:: grid.utils.run_normalized_mosdepth
+.. automodule:: grid.utils.normalize_mosdepth
    :members:
    :undoc-members:
    :show-inheritance:
-
-grid.utils.normalize_mosdepth_dir
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. automodule:: grid.utils.normalize_mosdepth_dir
-   :members:
-   :undoc-members:
-   :private-members:
-   :special-members:

@@ -1,0 +1,32 @@
+[changelog]
+header = """
+# Changelog
+
+All notable changes to GRiD are documented here.
+Dates reflect the tag release date.
+
+"""
+body = """
+## [{{ version | trim_start_matches(pat="v") }}] — {{ timestamp | date(format="%Y-%m-%d") }}
+
+{% for commit in commits %}\
+- {{ commit.message | upper_first | trim }} \
+([`{{ commit.id | truncate(length=7, end="") }}`](https://github.com/caterer-z-t/GRiD/commit/{{ commit.id }})) \
+— {{ commit.author.name }}
+{% endfor %}
+"""
+trim = true
+footer = ""
+
+[git]
+conventional_commits = false   # works with any commit style
+filter_unconventional = false
+commit_parsers = [
+    # skip automated changelog commits
+    { message = "^chore: update CHANGELOG", skip = true },
+    { message = ".*", group = "Changes" },
+]
+filter_commits = false
+tag_pattern = "v[0-9].*"
+topo_order = false
+sort_commits = "newest"
