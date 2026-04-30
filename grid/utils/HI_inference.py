@@ -2,11 +2,7 @@
 import math
 from pathlib import Path
 
-from .utils import (
-    open_maybe_gz,
-    log, 
-    progress_bar
-)
+from .utils import open_maybe_gz, log, progress_bar
 
 
 def read_dip_cn_file(dip_cn_file, IDs, IRRs, IDtoInd):
@@ -19,7 +15,7 @@ def read_dip_cn_file(dip_cn_file, IDs, IRRs, IDtoInd):
         IRRs: list to populate with sample-level IRRs
         IDtoInd: dict to populate mapping sample ID to index in IRRs and IDs lists
 
-    Returns:        
+    Returns:
         IRRs: list of sample-level IRRs
         IDs: list of sample IDs
         IDtoInd: dict mapping sample ID to index in IRRs and IDs lists
@@ -37,6 +33,7 @@ def read_dip_cn_file(dip_cn_file, IDs, IRRs, IDtoInd):
             IRRs.append(irr)
     return IRRs, IDs, IDtoInd
 
+
 def read_neighbors_file(neighbors_file, IDtoInd, hap_nbrs, MAX_NBR):
     """
     Reads the neighbors file and populates the hap_nbrs structure.
@@ -44,7 +41,7 @@ def read_neighbors_file(neighbors_file, IDtoInd, hap_nbrs, MAX_NBR):
     Args:
         neighbors_file: Path to input file containing haplotype neighbor info (ID, hap, nbr_ID, ...)
         IDtoInd: dict mapping sample ID to index in IRRs and IDs lists
-        hap_nbrs: list to populate with neighbor indices for each haplotype 
+        hap_nbrs: list to populate with neighbor indices for each haplotype
         MAX_NBR: maximum number of neighbors to store per haplotype
     Returns:
         hap_nbrs: list of neighbor indices for each haplotype
@@ -93,21 +90,23 @@ def hi_inference(config, console):
      - hap1imp, hap2imp: mean-imputed haplotype-specific IRRs based on neighbors (for samples with no phased neighbors)
     """
     try:
-        output_file_prefix = config.get('HI_inference', {}).get('output_file_prefix', None)
-        output_file_type   = config.get('output_file_type', 'tsv')
-        output_dir         = config.get('output_dir', '.')
-        output_file        = Path(f"{output_dir}/{output_file_prefix}.{output_file_type}")
+        output_file_prefix = config.get("HI_inference", {}).get("output_file_prefix", None)
+        output_file_type = config.get("output_file_type", "tsv")
+        output_dir = config.get("output_dir", ".")
+        output_file = Path(f"{output_dir}/{output_file_prefix}.{output_file_type}")
 
-        dip_cn_file_prefix = config['compute_diploid_genotypes'].get('output_file_prefix', None)
+        dip_cn_file_prefix = config["compute_diploid_genotypes"].get("output_file_prefix", None)
         dip_cn_file = Path(f"{output_dir}/{dip_cn_file_prefix}.{output_file_type}")
 
-        zMax                  = config['mosdepth']['neighbors'].get('zmax', 2.0)
-        neighbors_file_prefix = config['mosdepth']['neighbors'].get('output_file_prefix', None)
-        neighbors_file        = Path(f"{output_dir}/{neighbors_file_prefix}.zMax{zMax:.1f}.{output_file_type}.gz")
+        zMax = config["mosdepth"]["neighbors"].get("zmax", 2.0)
+        neighbors_file_prefix = config["mosdepth"]["neighbors"].get("output_file_prefix", None)
+        neighbors_file = Path(
+            f"{output_dir}/{neighbors_file_prefix}.zMax{zMax:.1f}.{output_file_type}.gz"
+        )
 
-        MIN_NBR = config.get('HI_inference', {}).get('min_neighbors', 1)
-        MAX_NBR = config.get('HI_inference', {}).get('max_neighbors', 10)
-        N_ITERS = config.get('HI_inference', {}).get('n_iters', 20)
+        MIN_NBR = config.get("HI_inference", {}).get("min_neighbors", 1)
+        MAX_NBR = config.get("HI_inference", {}).get("max_neighbors", 10)
+        N_ITERS = config.get("HI_inference", {}).get("n_iters", 20)
 
     except Exception as e:
         log(console, f"Config error: {e}", style="danger")
@@ -136,16 +135,22 @@ def hi_inference(config, console):
             tot_nbrs += len(hap_nbrs[2 * i]) + len(hap_nbrs[2 * i + 1])
             mean_IRRs += IRRs[i]
 
-    log(console, f"Read hap neighbors; phasing {N_to_phase} samples with >={MIN_NBR} neighbors for both haps")
+    log(
+        console,
+        f"Read hap neighbors; phasing {N_to_phase} samples with >={MIN_NBR} neighbors for both haps",
+    )
     if N_to_phase > 0:
-        log(console, f"Average number of neighbors to use per hap: {tot_nbrs / (2.0 * N_to_phase):.4f}")
+        log(
+            console,
+            f"Average number of neighbors to use per hap: {tot_nbrs / (2.0 * N_to_phase):.4f}",
+        )
         mean_IRRs /= N_to_phase
 
     with open_maybe_gz(output_file, "wt") as fout:
         fout.write("ID\tIRRs\thap1phased\thap2phased\thap1imp\thap2imp\n")
 
         for iter_ in range(N_ITERS):
-            last_iter = (iter_ == N_ITERS - 1)
+            last_iter = iter_ == N_ITERS - 1
 
             for i in range(N):
                 hap_nbr_sum = [1e-9, 1e-9]

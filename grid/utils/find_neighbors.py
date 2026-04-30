@@ -4,10 +4,8 @@ import numpy as np
 from sklearn.neighbors import NearestNeighbors
 import gzip
 
-from .utils import (
-    log,
-    progress_bar
-)
+from .utils import log, progress_bar
+
 
 # In[1]: Main function to find neighbors
 def find_neighbors(config, console):
@@ -29,18 +27,20 @@ def find_neighbors(config, console):
         console: Rich console for logging
     """
     try:
-        threads    = config.get('threads', 1)
-        zmax       = config['mosdepth']['neighbors'].get('zmax', 2.0)
-        sigma2_max = config['mosdepth']['neighbors'].get('sigma2_max', 1000.0)
-        n_neighbors = config['mosdepth']['neighbors'].get('num_neighbors', 500)  # C++ outputs 500
-        frac_r     = config['mosdepth']['neighbors'].get('frac_r', 1.0)          # C++ hardcodes 1
+        threads = config.get("threads", 1)
+        zmax = config["mosdepth"]["neighbors"].get("zmax", 2.0)
+        sigma2_max = config["mosdepth"]["neighbors"].get("sigma2_max", 1000.0)
+        n_neighbors = config["mosdepth"]["neighbors"].get("num_neighbors", 500)  # C++ outputs 500
+        frac_r = config["mosdepth"]["neighbors"].get("frac_r", 1.0)  # C++ hardcodes 1
 
-        input_file_prefix = config['mosdepth']['normalize'].get('output_file_prefix')
-        output_file_type   = config.get('output_file_type', 'tsv')
-        output_dir        = config.get('output_dir', '.')
-        input_file        = Path(f"{output_dir}/{input_file_prefix}.{output_file_type}.gz")
+        input_file_prefix = config["mosdepth"]["normalize"].get("output_file_prefix")
+        output_file_type = config.get("output_file_type", "tsv")
+        output_dir = config.get("output_dir", ".")
+        input_file = Path(f"{output_dir}/{input_file_prefix}.{output_file_type}.gz")
 
-        output_prefix = config['mosdepth']['neighbors'].get('output_file_prefix', 'neighbor_coverage')
+        output_prefix = config["mosdepth"]["neighbors"].get(
+            "output_file_prefix", "neighbor_coverage"
+        )
         # C++ writes one file per batch; Python processes all at once → single output file
         output_file = Path(output_dir) / f"{output_prefix}.zMax{zmax:.1f}.{output_file_type}.gz"
     except Exception as e:
@@ -51,7 +51,7 @@ def find_neighbors(config, console):
 
     # --- Step 1 & 2: read file ---
     individuals, sigma2ratios, data_matrix, scales = read_normalized_data(input_file)
-    N, R = data_matrix.shape   # [individuals x regions]
+    N, R = data_matrix.shape  # [individuals x regions]
 
     # --- Step 3: clip z-scores and replace NaN → 0  ---
     clipped = np.clip(data_matrix, -zmax, zmax)
@@ -62,7 +62,7 @@ def find_neighbors(config, console):
         sigma2ratios, frac_r=frac_r, sigma2_max=sigma2_max, console=console
     )
 
-    filtered = clipped[:, valid_indices]   # [individuals x R_use]
+    filtered = clipped[:, valid_indices]  # [individuals x R_use]
 
     # --- Step 5 & 6: find neighbors and write output ---
     with progress_bar(console, total=N, description="Finding neighbors...") as (progress, task):
@@ -96,9 +96,9 @@ def read_normalized_data(input_file: Path):
         data_matrix  : np.ndarray shape [N x Rwant] of z-scores
         scales       : dict {sample_id: scale_value}
     """
-    individuals  = []
-    scales       = {}
-    rows         = []
+    individuals = []
+    scales = {}
+    rows = []
     sigma2ratios = None
 
     with gzip.open(input_file, "rt") as f:
@@ -108,33 +108,27 @@ def read_normalized_data(input_file: Path):
         # Header row 1: N, Rwant, varRatio_1 ... varRatio_Rwant
         parts = f.readline().strip().split("\t")
         # parts[0]=N, parts[1]=Rwant, parts[2:]=ratios
-        sigma2ratios = np.array([
-            np.nan if v in ("NA", "nan") else float(v)
-            for v in parts[2:]
-        ])
+        sigma2ratios = np.array([np.nan if v in ("NA", "nan") else float(v) for v in parts[2:]])
 
         # Data rows: ID, scale, z_1 ... z_Rwant
         for line in f:
             parts = line.strip().split("\t")
             ind_id = parts[0]
-            scale  = float(parts[1])
-            zvals  = [
-                np.nan if v in ("NA", "nan") else float(v)
-                for v in parts[2:]
-            ]
+            scale = float(parts[1])
+            zvals = [np.nan if v in ("NA", "nan") else float(v) for v in parts[2:]]
             individuals.append(ind_id)
             scales[ind_id] = scale
             rows.append(zvals)
 
-    data_matrix = np.array(rows, dtype=float)   # [N x Rwant]
+    data_matrix = np.array(rows, dtype=float)  # [N x Rwant]
     return individuals, sigma2ratios, data_matrix, scales
 
 
 # In[3]: Filter regions by variance ratio
 def filter_regions_by_variance(
     sigma2ratios: np.ndarray,
-    frac_r:      float = 1.0,
-    sigma2_max:  float = 1000.0,
+    frac_r: float = 1.0,
+    sigma2_max: float = 1000.0,
     console=None,
 ) -> tuple[np.ndarray, int]:
     """
@@ -154,36 +148,38 @@ def filter_regions_by_variance(
     R = len(sigma2ratios)
 
     # Use only finite ratios to compute the lower-bound threshold
-    finite_mask  = np.isfinite(sigma2ratios)
-    finite_vals  = np.sort(sigma2ratios[finite_mask])
+    finite_mask = np.isfinite(sigma2ratios)
+    finite_vals = np.sort(sigma2ratios[finite_mask])
 
     if len(finite_vals) == 0:
         log(console, "Warning: no finite variance ratios — keeping all regions", style="warning")
         return np.arange(R), R
 
-    # When frac_r=1.0 this index is 0, so sigma2min = the smallest finite ratio 
-    lower_idx  = int(R * (1.0 - frac_r))
-    lower_idx  = min(lower_idx, len(finite_vals) - 1)
+    # When frac_r=1.0 this index is 0, so sigma2min = the smallest finite ratio
+    lower_idx = int(R * (1.0 - frac_r))
+    lower_idx = min(lower_idx, len(finite_vals) - 1)
     sigma2_min = float(finite_vals[lower_idx])
 
     extreme_count = int(np.sum(sigma2ratios > sigma2_max))
     if extreme_count and console:
-        log(console,
+        log(
+            console,
             f"Removed {extreme_count} / {R} regions with sigma2ratio > {sigma2_max}",
-            style="warning")
+            style="warning",
+        )
 
-    valid_mask    = finite_mask & (sigma2ratios >= sigma2_min) & (sigma2ratios <= sigma2_max)
+    valid_mask = finite_mask & (sigma2ratios >= sigma2_min) & (sigma2ratios <= sigma2_max)
     valid_indices = np.where(valid_mask)[0]
-    R_use         = len(valid_indices)
+    R_use = len(valid_indices)
 
     return valid_indices, R_use
 
 
 # In[4]: Find neighbors using sklearn
 def find_neighbors_sklearn(
-    data_matrix:  np.ndarray,
-    individuals:  list[str],
-    n_neighbors:  int = 500,
+    data_matrix: np.ndarray,
+    individuals: list[str],
+    n_neighbors: int = 500,
 ) -> dict[str, list[tuple[str, float]]]:
     """
     Find nearest neighbors using scikit-learn's NearestNeighbors.
@@ -206,7 +202,7 @@ def find_neighbors_sklearn(
         Length of each list = min(n_neighbors, N-1).
     """
     N = len(individuals)
-    k = min(n_neighbors + 1, N)   # +1 because sklearn includes self
+    k = min(n_neighbors + 1, N)  # +1 because sklearn includes self
 
     nbrs = NearestNeighbors(
         n_neighbors=k,
@@ -221,9 +217,9 @@ def find_neighbors_sklearn(
         neighbor_list = []
         for j, dist in zip(indices[i], distances[i]):
             if j == i:
-                continue   # exclude self (C++ sets dist[n_i] = 1e9 then sorts)
+                continue  # exclude self (C++ sets dist[n_i] = 1e9 then sorts)
             # Store squared distance to match C++ accumulation of sq(z - zs[r])
-            neighbor_list.append((individuals[j], dist ** 2))
+            neighbor_list.append((individuals[j], dist**2))
             if len(neighbor_list) == n_neighbors:
                 break
         results[ind] = neighbor_list
@@ -234,10 +230,10 @@ def find_neighbors_sklearn(
 # In[5]: Save neighbors
 def save_neighbors(
     neighbors_dict: dict[str, list[tuple[str, float]]],
-    scales:         dict[str, float],
-    output_file:    Path,
-    zmax:           float,
-    R_use:          int,
+    scales: dict[str, float],
+    output_file: Path,
+    zmax: float,
+    R_use: int,
 ) -> None:
     """
     Write neighbors to a gzipped text file.
@@ -260,7 +256,7 @@ def save_neighbors(
         R_use          : number of regions used, for distance normalisation
     """
     if R_use == 0:
-        R_use = 1   # guard against division by zero
+        R_use = 1  # guard against division by zero
 
     with gzip.open(output_file, "wt") as out:
         for ind, neighbors in neighbors_dict.items():

@@ -21,42 +21,110 @@ REQUIRED_FILES_TOP_LEVEL = ["samples_file", "reference_genome"]
 STEP_SCHEMA = [
     # index
     {"path": ("index", "output_file_prefix"), "default": "'output'"},
-
     # count_reads
     {"path": ("count_reads", "min_mapq"), "gate": ("count_reads",), "default": "1"},
-    {"path": ("count_reads", "output_file_prefix"), "gate": ("count_reads",), "default": "'output'"},
+    {
+        "path": ("count_reads", "output_file_prefix"),
+        "gate": ("count_reads",),
+        "default": "'output'",
+    },
     {"path": ("count_reads", "flags"), "gate": ("count_reads",), "required": True},
-
     # mosdepth
     {"path": ("mosdepth", "output_file_prefix"), "gate": ("mosdepth",), "default": "'output'"},
     {"path": ("mosdepth", "bin_size"), "gate": ("mosdepth",), "default": "1000"},
     {"path": ("mosdepth", "mode"), "gate": ("mosdepth",), "default": "'fast'"},
-    {"path": ("mosdepth", "work_dir"), "gate": ("mosdepth",), "default": "output_dir/mosdepth_workdir"},
+    {
+        "path": ("mosdepth", "work_dir"),
+        "gate": ("mosdepth",),
+        "default": "output_dir/mosdepth_workdir",
+    },
     {"path": ("mosdepth", "remove_intermediate"), "gate": ("mosdepth",), "default": "True"},
-
     # mosdepth.normalize
-    {"path": ("mosdepth", "normalize", "min_depth"), "gate": ("mosdepth", "normalize"), "default": "20"},
-    {"path": ("mosdepth", "normalize", "max_depth"), "gate": ("mosdepth", "normalize"), "default": "100"},
-    {"path": ("mosdepth", "normalize", "top_frac"), "gate": ("mosdepth", "normalize"), "default": "0.1"},
-    {"path": ("mosdepth", "normalize", "output_file_prefix"), "gate": ("mosdepth", "normalize"), "default": "'output'"},
-    {"path": ("mosdepth", "normalize", "repeat_mask_file"), "gate": ("mosdepth", "normalize"), "required": True, "is_file": True},
-
+    {
+        "path": ("mosdepth", "normalize", "min_depth"),
+        "gate": ("mosdepth", "normalize"),
+        "default": "20",
+    },
+    {
+        "path": ("mosdepth", "normalize", "max_depth"),
+        "gate": ("mosdepth", "normalize"),
+        "default": "100",
+    },
+    {
+        "path": ("mosdepth", "normalize", "top_frac"),
+        "gate": ("mosdepth", "normalize"),
+        "default": "0.1",
+    },
+    {
+        "path": ("mosdepth", "normalize", "output_file_prefix"),
+        "gate": ("mosdepth", "normalize"),
+        "default": "'output'",
+    },
+    {
+        "path": ("mosdepth", "normalize", "repeat_mask_file"),
+        "gate": ("mosdepth", "normalize"),
+        "required": True,
+        "is_file": True,
+    },
     # mosdepth.neighbors
-    {"path": ("mosdepth", "neighbors", "output_file_prefix"), "gate": ("mosdepth", "neighbors"), "default": "'output'"},
-    {"path": ("mosdepth", "neighbors", "num_neighbors"), "gate": ("mosdepth", "neighbors"), "default": "5"},
-    {"path": ("mosdepth", "neighbors", "zmax"), "gate": ("mosdepth", "neighbors"), "default": "2.0"},
-    {"path": ("mosdepth", "neighbors", "sigma2_max"), "gate": ("mosdepth", "neighbors"), "default": "1000"},
-
+    {
+        "path": ("mosdepth", "neighbors", "output_file_prefix"),
+        "gate": ("mosdepth", "neighbors"),
+        "default": "'output'",
+    },
+    {
+        "path": ("mosdepth", "neighbors", "num_neighbors"),
+        "gate": ("mosdepth", "neighbors"),
+        "default": "5",
+    },
+    {
+        "path": ("mosdepth", "neighbors", "zmax"),
+        "gate": ("mosdepth", "neighbors"),
+        "default": "2.0",
+    },
+    {
+        "path": ("mosdepth", "neighbors", "sigma2_max"),
+        "gate": ("mosdepth", "neighbors"),
+        "default": "1000",
+    },
     # compute_diploid_genotypes
-    {"path": ("compute_diploid_genotypes", "output_file_prefix"), "gate": ("compute_diploid_genotypes",), "default": "'output'"},
-
+    {
+        "path": ("compute_diploid_genotypes", "output_file_prefix"),
+        "gate": ("compute_diploid_genotypes",),
+        "default": "'output'",
+    },
     # compute_haploid_genotypes
-    {"path": ("compute_haploid_genotypes", "phased_vcf"), "gate": ("compute_haploid_genotypes",), "required": True, "is_file": True},
-    {"path": ("compute_haploid_genotypes", "ibs_output"), "gate": ("compute_haploid_genotypes",), "required": True},
-    {"path": ("compute_haploid_genotypes", "output_file_prefix"), "gate": ("compute_haploid_genotypes",), "default": "'output'"},
-    {"path": ("compute_haploid_genotypes", "min_neighbors"), "gate": ("compute_haploid_genotypes",), "default": "1"},
-    {"path": ("compute_haploid_genotypes", "max_neighbors"), "gate": ("compute_haploid_genotypes",), "default": "10"},
-    {"path": ("compute_haploid_genotypes", "n_iters"), "gate": ("compute_haploid_genotypes",), "default": "100"},
+    {
+        "path": ("compute_haploid_genotypes", "phased_vcf"),
+        "gate": ("compute_haploid_genotypes",),
+        "required": True,
+        "is_file": True,
+    },
+    {
+        "path": ("compute_haploid_genotypes", "ibs_output"),
+        "gate": ("compute_haploid_genotypes",),
+        "required": True,
+    },
+    {
+        "path": ("compute_haploid_genotypes", "output_file_prefix"),
+        "gate": ("compute_haploid_genotypes",),
+        "default": "'output'",
+    },
+    {
+        "path": ("compute_haploid_genotypes", "min_neighbors"),
+        "gate": ("compute_haploid_genotypes",),
+        "default": "1",
+    },
+    {
+        "path": ("compute_haploid_genotypes", "max_neighbors"),
+        "gate": ("compute_haploid_genotypes",),
+        "default": "10",
+    },
+    {
+        "path": ("compute_haploid_genotypes", "n_iters"),
+        "gate": ("compute_haploid_genotypes",),
+        "default": "100",
+    },
 ]
 
 
@@ -122,4 +190,8 @@ def error_check_config(config, console):
     if warnings:
         for w in warnings:
             log(console, w, style="warning")
-        log(console, f"{len(warnings)} config warning(s) found. Please review. This may affect the results.", style="warning")
+        log(
+            console,
+            f"{len(warnings)} config warning(s) found. Please review. This may affect the results.",
+            style="warning",
+        )

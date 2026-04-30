@@ -7,7 +7,10 @@ from pyfaidx import Fasta
 
 console = Console()
 
-def extract_reference(reference_fa: str, bed_file: str, output_dir: str, output_prefix: str = "ref_lpa"):
+
+def extract_reference(
+    reference_fa: str, bed_file: str, output_dir: str, output_prefix: str = "ref_lpa"
+):
     """
     Extracts sequences from a reference FASTA for regions listed in a BED file.
 

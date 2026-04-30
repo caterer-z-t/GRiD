@@ -4,6 +4,7 @@ import yaml
 from pathlib import Path
 from typing import Set
 
+
 # In[2]: Function to load read count flags from config file
 def load_flags(config_file: str, parameter: str) -> Set[int]:
     """
@@ -23,7 +24,7 @@ def load_flags(config_file: str, parameter: str) -> Set[int]:
 
     # Support both possible formats
     if parameter in cfg:
-        flags = cfg[parameter]['flags']
+        flags = cfg[parameter]["flags"]
     else:
         raise ValueError(f"No '{parameter}' or 'read-count.{parameter}' found in {config_file}")
 

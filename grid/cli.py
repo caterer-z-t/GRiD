@@ -10,22 +10,24 @@ from . import __version__
 from .utils.utils import log
 
 # In[1]: CLI Setup
-grid_theme = Theme({
-    # Classic functional
-    "info": "#0a9396",        # Dark Cyan / Oceanic for info messages
-    "warning": "#ee9b00",     # Golden Orange for warnings
-    "danger": "#9b2226",      # Brown Red / strong red for errors
-    "success": "#00ff00",     # Classic bright green for successes
-
-    # Decorative / background
-    "custom.bg": "white on #005f73",  # Dark Teal background with white text
-    "banner": "bold #d90429",   # Wheat on Ink Black
-    "highlight": "#94d2bd",           # Pearl Aqua for highlights or subtle emphasis
-    "accent": "#ca6702",              # Burnt Caramel for accents/buttons
-    "alert": "#bb3e03",               # Rusty Spice for attention
-    "critical": "#ae2012"             # Oxidized Iron for urgent messages
-})
+grid_theme = Theme(
+    {
+        # Classic functional
+        "info": "#0a9396",  # Dark Cyan / Oceanic for info messages
+        "warning": "#ee9b00",  # Golden Orange for warnings
+        "danger": "#9b2226",  # Brown Red / strong red for errors
+        "success": "#00ff00",  # Classic bright green for successes
+        # Decorative / background
+        "custom.bg": "white on #005f73",  # Dark Teal background with white text
+        "banner": "bold #d90429",  # Wheat on Ink Black
+        "highlight": "#94d2bd",  # Pearl Aqua for highlights or subtle emphasis
+        "accent": "#ca6702",  # Burnt Caramel for accents/buttons
+        "alert": "#bb3e03",  # Rusty Spice for attention
+        "critical": "#ae2012",  # Oxidized Iron for urgent messages
+    }
+)
 console = Console(theme=grid_theme)
+
 
 def print_banner():
     """Print ASCII banner."""
@@ -37,30 +39,40 @@ def print_banner():
     ║                      Version {version}                        ║
     ║                                                           ║
     ╚═══════════════════════════════════════════════════════════╝
-    """.format(version=__version__)
+    """.format(
+        version=__version__
+    )
     log(console, banner, style="banner")
 
 
-@click.group(context_settings=dict(help_option_names=['-h', '--help']))
-@click.option('-v', '--version', is_flag=True, is_eager=True, expose_value=False,
-              help="Show the GRiD version", callback=lambda ctx, param, value: print_version_and_exit(value))
-
+@click.group(context_settings=dict(help_option_names=["-h", "--help"]))
+@click.option(
+    "-v",
+    "--version",
+    is_flag=True,
+    is_eager=True,
+    expose_value=False,
+    help="Show the GRiD version",
+    callback=lambda ctx, param, value: print_version_and_exit(value),
+)
 def cli():
     """
     GRiD - Genomic Repeat inference from Depth
-    
+
     A modular pipeline for estimating copy number variants in the LPA gene's KIV-2 VNTR region.
     """
     pass
+
 
 def print_version_and_exit(value):
     if value:
         log(console, f"GRiD version: {__version__}", style="info")
         raise SystemExit(0)
 
+
 # In[2]: Whole Genome VNTR Copy Number Estimation Command
 @cli.command()
-@click.argument('config', type=click.Path(exists=True))
+@click.argument("config", type=click.Path(exists=True))
 def WGS(config):
     """
     Whole Genome Sequencing (WGS) pipeline for estimating LPA KIV-2 copy numbers.
@@ -72,12 +84,14 @@ def WGS(config):
         Haplotype KIV-2 copy number estimates for each sample in the input CRAMs, saved to an output file specified in the config.
     """
     from .pipeline import run_wgs_pipeline
+
     print_banner()
     try:
         run_wgs_pipeline(console=console, config=config)
     except Exception as e:
         log(console, f"✗ WGS pipeline failed: {str(e)}", style="danger")
         sys.exit(1)
+
 
 # In[3]: Whole Exome VNTR Copy Number Estimation Command
 # @cli.command()
@@ -94,7 +108,7 @@ def WGS(config):
 #     """
 #     from .pipeline import run_wes_pipeline
 #     print_banner()
-#     try:        
+#     try:
 #         run_wes_pipeline(console=console, config=config)
 #     except Exception as e:
 #         log(console, f"✗ WES pipeline failed: {str(e)}", style="danger")
@@ -108,7 +122,7 @@ def WGS(config):
 # def crai(cram, reference):
 #     """
 #     Ensure CRAI index exists for a CRAM file.
-    
+
 #     Args:
 #         cram: Path to the CRAM file.
 #         reference: Path to the reference genome FASTA.
@@ -136,7 +150,7 @@ def WGS(config):
 # def batch_crai(cram_dir, reference, threads):
 #     """
 #     Ensure CRAI indices exist for all CRAM files in a directory.
-    
+
 #     Args:
 #         cram_dir: Directory containing CRAM files.
 #         reference: Path to the reference genome FASTA.
@@ -155,7 +169,7 @@ def WGS(config):
 #     except Exception as e:
 #         console.print(f"[red]✗ Batch CRAI creation failed: {str(e)}[/red]")
 #         sys.exit(1)
-        
+
 # In[4]: CLI Command for Subsetting CRAM
 # @cli.command()
 # @click.option('-c', '--cram', required=True, type=click.Path(exists=True), help='Input CRAM file')
@@ -168,7 +182,7 @@ def WGS(config):
 # def subset(cram, region, output, reference):
 #     """
 #     Subset a CRAM file to a specific genomic region.
-    
+
 #     Args:
 #         cram: Input CRAM file.
 #         region: Genomic region in 'chr:start-end' format.
@@ -183,7 +197,7 @@ def WGS(config):
 #     """
 #     from .utils.subset_cram import subset_cram
 #     from .helper.create_region import create_region_string
-    
+
 #     region = create_region_string(region, chrom, start, end)
 
 #     print_banner()
@@ -207,7 +221,7 @@ def WGS(config):
 # def batch_subset(cram_dir, region, chrom, start, end, output_dir, reference):
 #     """
 #     Subset all CRAM files in a directory to a specific genomic region.
-    
+
 #     Args:
 #         cram_dir: Directory containing CRAM files.
 #         region: Genomic region in 'chr:start-end' format.
@@ -221,7 +235,7 @@ def WGS(config):
 #     """
 #     from .utils.batch_subset_cram import batch_subset_cram
 #     from .helper.create_region import create_region_string
-    
+
 #     region = create_region_string(region, chrom, start, end)
 
 #     print_banner()
@@ -271,7 +285,7 @@ def WGS(config):
 #     print_banner()
 
 #     from .utils.count_reads_old import count_reads
-    
+
 #     try:
 #         count_reads(cram_dir, output_file, ref_fasta, chrom, start, end, config, threads)
 #     except Exception as e:
@@ -296,9 +310,9 @@ def WGS(config):
 # ):
 #     """Run mosdepth on all CRAMs in a directory and extract coverage for the LPA VNTR region."""
 #     print_banner()
-    
-#     from .utils.run_mosdepth import run_mosdepth 
-    
+
+#     from .utils.run_mosdepth import run_mosdepth
+
 #     try:
 #         run_mosdepth(
 #             cram_dir=cram_dir,
@@ -330,14 +344,14 @@ def WGS(config):
 # @click.option("--top-frac", required=False, default=0.1, type=float, help="Top fraction of high-variance regions to keep (default: 0.1)")
 # @click.option("-t", "--threads", required=False, default=1, type=int, help="Number of threads for parallel processing (default: 1)")
 # def normalize_mosdepth(
-#     mosdepth_dir, output_file, repeat_mask, chrom, start, end, 
+#     mosdepth_dir, output_file, repeat_mask, chrom, start, end,
 #     min_depth, max_depth, top_frac, threads
 # ):
 #     """Normalize mosdepth coverage across all samples in a directory."""
 #     print_banner()
-    
+
 #     from .utils.run_normalized_mosdepth import run_normalize_mosdepth
-    
+
 #     try:
 #         run_normalize_mosdepth(
 #             mosdepth_dir=mosdepth_dir,
@@ -373,9 +387,9 @@ def WGS(config):
 # ):
 #     """Normalize mosdepth coverage across all samples in a directory."""
 #     print_banner()
-    
+
 #     from .utils.normalize_mosdepth_dir.normalize_mosdepth import run_normalize_mosdepth
-    
+
 #     try:
 #         run_normalize_mosdepth(
 #             mosdepth_dir=mosdepth_dir,
@@ -392,7 +406,7 @@ def WGS(config):
 #     except Exception as e:
 #         console.print(f"[red]✗ Mosdepth normalization failed: {str(e)}[/red]")
 #         sys.exit(1)
-        
+
 # In[9]: Find Neighbors Command
 # @cli.command()
 # @click.option("-i", "--input-file", required=True, type=click.Path(exists=True),
@@ -427,7 +441,7 @@ def WGS(config):
 # @click.option("-r", "--read-counts-file", required=True, type=click.Path(exists=True),
 #               help="File containing read counts for each sample")
 # @click.option("-n", "--neighbors-file", required=True, type=click.Path(exists=True),
-#               help="Gzipped neighbors file from find_neighbors")    
+#               help="Gzipped neighbors file from find_neighbors")
 # @click.option("-o", "--output-dir", required=True, type=click.Path(),
 #               help="Directory to save diploid CN output files")
 # @click.option("-N", "--n-nbr", default=300, show_default=True, type=int,
@@ -576,12 +590,12 @@ def WGS(config):
 #     Estimate LPA KIV2 copy numbers from exon1A and exon1B diploid copy numbers.
 
 #     Formula:
-#         diploid_estimate = 34.9 × exon1A + 5.2 × exon1B - 1  
+#         diploid_estimate = 34.9 × exon1A + 5.2 × exon1B - 1
 #         haploid_estimate = diploid_estimate / 2
 #     """
 #     from .utils.estimate_kiv import compute_kiv_estimates
 #     print_banner()
-    
+
 #     try:
 #         # Compute estimates - pass string paths
 #         _ = compute_kiv_estimates(
@@ -590,10 +604,11 @@ def WGS(config):
 #             exon1b_file=exon1b,
 #             console=console
 #         )
-    
+
 #     except Exception as e:
 #         console.print(f"[red]✗ KIV2 estimation failed: {e}[/red]")
 #         sys.exit(1)
+
 
 # In[ ]: Main Entry Point
 def main():
@@ -607,6 +622,7 @@ def main():
         log(console, f"\nUnexpected error: {str(e)}", style="danger")
         sys.exit(1)
 
+
 # In[ ]: Run Main
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

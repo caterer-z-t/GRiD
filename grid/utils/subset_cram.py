@@ -3,6 +3,7 @@
 from pathlib import Path
 import pysam
 
+
 # In[2]: Define function to subset CRAM file
 def subset_cram(cram_path: str, region: str, output_path: str, reference: str = None) -> str:
     """
@@ -22,8 +23,11 @@ def subset_cram(cram_path: str, region: str, output_path: str, reference: str = 
         raise FileNotFoundError(f"CRAM file not found: {cram_path}")
 
     out_file = Path(output_path)
-    with pysam.AlignmentFile(str(cram_file), "rc", reference_filename=reference) as in_bam, \
-         pysam.AlignmentFile(str(out_file), "wc", template=in_bam, reference_filename=reference) as out_bam:
+    with pysam.AlignmentFile(
+        str(cram_file), "rc", reference_filename=reference
+    ) as in_bam, pysam.AlignmentFile(
+        str(out_file), "wc", template=in_bam, reference_filename=reference
+    ) as out_bam:
         for read in in_bam.fetch(region=region):
             out_bam.write(read)
 

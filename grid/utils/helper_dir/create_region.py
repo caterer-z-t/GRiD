@@ -5,6 +5,7 @@ from rich.console import Console
 
 console = Console()
 
+
 # In[2]: Define function to create region string
 def create_region_string(region: str, chrom: str, start: int, end: int) -> str:
     """
@@ -23,6 +24,8 @@ def create_region_string(region: str, chrom: str, start: int, end: int) -> str:
         if chrom and start is not None and end is not None:
             region = f"{chrom}:{start}-{end}"
         else:
-            console.print("[red]✗ You must provide either a full region or chromosome, start, and end separately.[/red]")
+            console.print(
+                "[red]✗ You must provide either a full region or chromosome, start, and end separately.[/red]"
+            )
             sys.exit(1)
     return region

@@ -3,6 +3,7 @@
 from pathlib import Path
 import pysam
 
+
 # In[2]: Function to Ensure CRAI Index
 def ensure_crai(cram_path: str, reference: str = None) -> str:
     """

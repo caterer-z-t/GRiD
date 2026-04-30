@@ -7,13 +7,13 @@ from .compute_diploid_cn import compute_diploid_cn_for_exon
 from .write_dipcn_output import write_dipcn_output
 
 __all__ = [
-    'normalize_sample_id',
-    'load_count_results',
-    'load_neighbor_results',
-    'get_exon_count',
-    'validate_sample_overlap',
-    'compute_diploid_cn_for_exon',
-    'write_dipcn_output'
+    "normalize_sample_id",
+    "load_count_results",
+    "load_neighbor_results",
+    "get_exon_count",
+    "validate_sample_overlap",
+    "compute_diploid_cn_for_exon",
+    "write_dipcn_output",
 ]
 
 

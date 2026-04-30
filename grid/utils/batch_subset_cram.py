@@ -6,6 +6,7 @@ from functools import partial
 from rich.console import Console
 from rich.progress import Progress, SpinnerColumn, TextColumn, BarColumn, TaskProgressColumn
 
+
 def batch_subset_cram(cram_dir, region, output_dir, reference, console):
     """
     Subset all CRAM files in a directory for a specific genomic region.
@@ -16,7 +17,7 @@ def batch_subset_cram(cram_dir, region, output_dir, reference, console):
         output_dir: Directory to save subset CRAM files.
         reference: Reference genome FASTA (required for CRAM output).
         console: Console object for logging.
-        
+
     Returns:
         List of paths to the subset CRAM files.
     """
@@ -27,20 +28,15 @@ def batch_subset_cram(cram_dir, region, output_dir, reference, console):
 
     write_lock = Lock()
 
-    process_func = partial(
-        subset_cram,
-        region=region,
-        reference=reference
-    )
+    process_func = partial(subset_cram, region=region, reference=reference)
 
     with Progress(
         SpinnerColumn(),
         TextColumn("[progress.description]{task.description}"),
         BarColumn(),
         TaskProgressColumn(),
-        console=console
+        console=console,
     ) as progress:
-
         task = progress.add_task("[bold green] Subsetting CRAM files...", total=len(cram_files))
 
         subset_cram_files = []

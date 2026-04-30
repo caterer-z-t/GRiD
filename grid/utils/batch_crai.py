@@ -10,6 +10,7 @@ from rich.progress import Progress, SpinnerColumn, TextColumn, BarColumn, TaskPr
 
 from .ensure_crai import ensure_crai
 
+
 # In[2]: Function to Batch Create CRAI Indexes
 def batch_crai(cram_dir, reference, console, threads=1):
     """
@@ -29,19 +30,15 @@ def batch_crai(cram_dir, reference, console, threads=1):
     if not cram_path.is_dir():
         raise NotADirectoryError(f"Provided path is not a directory: {cram_dir}")
 
-    process_func = partial(
-        ensure_crai,
-        reference=reference
-        )
+    process_func = partial(ensure_crai, reference=reference)
 
     with Progress(
         SpinnerColumn(),
         TextColumn("[progress.description]{task.description}"),
         BarColumn(),
         TaskProgressColumn(),
-        console=console
+        console=console,
     ) as progress:
-
         cram_list = list(cram_path.glob("*.cram"))
         task = progress.add_task("[bold green] Creating CRAI indexes...", total=len(cram_list))
 

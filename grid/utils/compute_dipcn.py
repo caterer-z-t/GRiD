@@ -3,17 +3,11 @@ import pandas as pd
 import gzip
 from pathlib import Path
 
-from .utils import (
-    log,
-    progress_bar
-)
+from .utils import log, progress_bar
 
 
 # In[1]: Main function
-def compute_diploid_genotypes(
-        config,
-        console
-) -> None:
+def compute_diploid_genotypes(config, console) -> None:
     """
     Replicate the awk normalization exactly:
 
@@ -27,19 +21,23 @@ def compute_diploid_genotypes(
         console: Rich console for logging
     """
     try:
-        output_file_prefix = config.get('compute_diploid_genotypes', {}).get('output_file_prefix', None)
-        output_file_type   = config.get('output_file_type', 'tsv')
-        output_dir         = config.get('output_dir', '.')
-        output_file        = Path(f"{output_dir}/{output_file_prefix}.{output_file_type}")
+        output_file_prefix = config.get("compute_diploid_genotypes", {}).get(
+            "output_file_prefix", None
+        )
+        output_file_type = config.get("output_file_type", "tsv")
+        output_dir = config.get("output_dir", ".")
+        output_file = Path(f"{output_dir}/{output_file_prefix}.{output_file_type}")
 
-        n_nbr = config.get('compute_diploid_genotypes', {}).get('n_nbr', 300)
+        n_nbr = config.get("compute_diploid_genotypes", {}).get("n_nbr", 300)
 
-        read_counts_file_prefix = config['count_reads'].get('output_file_prefix', None)
+        read_counts_file_prefix = config["count_reads"].get("output_file_prefix", None)
         read_counts_file = Path(f"{output_dir}/{read_counts_file_prefix}.{output_file_type}")
 
-        zMax                  = config['mosdepth']['neighbors'].get('zmax', 2.0)
-        neighbors_file_prefix = config['mosdepth']['neighbors'].get('output_file_prefix', None)
-        neighbors_file        = Path(f"{output_dir}/{neighbors_file_prefix}.zMax{zMax:.1f}.{output_file_type}.gz")
+        zMax = config["mosdepth"]["neighbors"].get("zmax", 2.0)
+        neighbors_file_prefix = config["mosdepth"]["neighbors"].get("output_file_prefix", None)
+        neighbors_file = Path(
+            f"{output_dir}/{neighbors_file_prefix}.zMax{zMax:.1f}.{output_file_type}.gz"
+        )
     except Exception as e:
         log(console, f"Config error: {e}", style="danger")
         return
@@ -57,7 +55,10 @@ def compute_diploid_genotypes(
     dipcn_list: list[tuple[str, float]] = []
     missing_ids: set[str] = set()
 
-    with progress_bar(console, total=len(neighbors), description="Computing dipCN...") as (progress, task):
+    with progress_bar(console, total=len(neighbors), description="Computing dipCN...") as (
+        progress,
+        task,
+    ):
         for sample_id, nbr_list in neighbors.items():
             sample_scale = sample_scales.get(sample_id)
             if sample_scale is None or sample_id not in reads:
@@ -87,10 +88,12 @@ def compute_diploid_genotypes(
             progress.advance(task)
 
     if missing_ids:
-        log(console,
+        log(
+            console,
             f"Warning: {len(missing_ids)} neighbor IDs not found in read counts "
             f"(showing up to 5: {list(missing_ids)[:5]})",
-            style="warning")
+            style="warning",
+        )
 
     # --- Save ---
     dipcn_df = pd.DataFrame(dipcn_list, columns=["Sample", "Norm_Reads"])
@@ -99,7 +102,9 @@ def compute_diploid_genotypes(
 
 
 # In[2]: Load neighbors
-def load_neighbors(neighbors_file: Path) -> tuple[dict[str, list[tuple[str, float]]], dict[str, float]]:
+def load_neighbors(
+    neighbors_file: Path,
+) -> tuple[dict[str, list[tuple[str, float]]], dict[str, float]]:
     """
     Parse the gzipped neighbors file.
 
