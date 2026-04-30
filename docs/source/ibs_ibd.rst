@@ -8,7 +8,7 @@ the closest haplotype matches for each individual using the Positional Burrows-W
 Transform (PBWT).
 
 This page covers how to obtain the source, compile it, prepare the required inputs,
-and run it to generate the neighbors file used by ``HI_inference``.
+and run it to generate the neighbors file used by ``hi_inference``.
 
 .. note::
 
