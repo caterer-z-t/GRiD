@@ -1,0 +1,594 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="./">
+  <head><meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="Index" href="genindex.html"><link rel="search" title="Search" href="search.html"><link rel="next" title="API Reference" href="modules.html"><link rel="prev" title="Code of Conduct" href="code_of_conduct.html">
+        <link rel="prefetch" href="_static/grid_logo.png" as="image">
+
+    <link rel="shortcut icon" href="_static/favicon.ico"><!-- Generated with Sphinx 8.2.3 and Furo 2025.09.25 -->
+        <title>Paper - GRiD 0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d111a655" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=580074bf" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=8dab3a3b" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f2f2f2;
+  --color-code-foreground: #1e1e1e;
+  --color-brand-primary: #D91E36;
+  --color-brand-content: #D91E36;
+  --color-link: #D91E36;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  --color-brand-primary: #D91E36;
+  --color-brand-content: #D91E36;
+  --color-link: #D91E36;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  --color-brand-primary: #D91E36;
+  --color-brand-content: #D91E36;
+  --color-link: #D91E36;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle site navigation sidebar">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc" aria-label="Toggle table of contents sidebar">
+<label class="overlay sidebar-overlay" for="__navigation"></label>
+<label class="overlay toc-overlay" for="__toc"></label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <span class="icon"><svg><use href="#svg-menu"></use></svg></span>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="index.html"><div class="brand">GRiD 0.1 documentation</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="index.html">
+  <div class="sidebar-logo-container">
+    <img class="sidebar-logo" src="_static/grid_logo.png" alt="Logo"/>
+  </div>
+  
+  <span class="sidebar-brand-text">GRiD 0.1 documentation</span>
+  
+</a><form class="sidebar-search-container" method="get" action="search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="readme.html">Welcome to GRiD’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ibs_ibd.html">Computing IBS/IBD Neighbors</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Examples</span></p>
+<ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="examples.html">Example Pipeline Jobs</a><input aria-label="Toggle navigation of Example Pipeline Jobs" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="examples/1000G_example.html">1000 Genomes Full Pipeline Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/IBS_example.html">IBS/IBD Neighbor Computation Example</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Algorithms</span></p>
+<ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="algorithms.html">Algorithms</a><input aria-label="Toggle navigation of Algorithms" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="algorithms/count_reads.html">Read Counting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="algorithms/coverage.html">Coverage Estimation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="algorithms/normalization.html">Coverage Normalization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="algorithms/neighbors.html">Nearest-Neighbor Identification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="algorithms/dipcn.html">Diploid Copy Number Estimation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="algorithms/hi_inference.html">Haplotype Inference</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Project</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="code_of_conduct.html">Code of Conduct</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Paper</span></p>
+<ul class="current">
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Paper</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="modules.html">API Reference</a><input aria-label="Toggle navigation of API Reference" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="modules_dir/grid_core.html">Core</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules_dir/count-reads.html">Read Counting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules_dir/mosdepth.html">Coverage Estimation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules_dir/normalize-mosdepth.html">Coverage Normalization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules_dir/find-neighbors.html">Nearest-Neighbor Identification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules_dir/compute-dipcn.html">Diploid Copy Number Estimation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules_dir/hi-inference.html">Haplotype Inference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules_dir/crai.html">CRAM Index Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules_dir/utils.html">Utilities &amp; Helper Functions</a></li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="view-this-page">
+  <a class="muted-link" href="_sources/paper.rst.txt" title="View this page">
+    <svg><use href="#svg-eye"></use></svg>
+    <span class="visually-hidden">View this page</span>
+  </a>
+</div>
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <section id="paper">
+<h1>Paper<a class="headerlink" href="#paper" title="Link to this heading">¶</a></h1>
+<section class="tex2jax_ignore mathjax_ignore" id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Link to this heading">¶</a></h2>
+<p>Lipoprotein(a) [Lp(a)] is a causal, independent, and highly heritable (<span class="math notranslate nohighlight">\(\text{h}^2 &gt;70\%\)</span>) cardiovascular disease (CVD) risk factor that is elevated in an estimated 1.5 billion people globally <span id="id1">[<a class="reference internal" href="#id9" title="Sotirios Tsimikas. A test in context: lipoprotein(a): diagnosis, prognosis, controversies, and emerging therapies. Journal of the American College of Cardiology, 69(6):692–711, 2017. doi:10.1016/j.jacc.2016.11.042.">1</a>, <a class="reference internal" href="#id15" title="Florian Kronenberg, Serena Mora, Erik S. G. Stroes, and others. Lipoprotein(a) in atherosclerotic cardiovascular disease and aortic stenosis: a European Atherosclerosis Society consensus statement. European Heart Journal, 43(39):3925–3946, 2022. doi:10.1093/eurheartj/ehac361.">2</a>, <a class="reference internal" href="#id2" title="Pia R Kamstrup. Lipoprotein (a) and cardiovascular disease. Clinical chemistry, 67(1):154–166, 2021.">3</a>]</span>. Elevated Lp(a) is a genetically established risk factor for coronary artery disease, myocardial infarction, aortic valve stenosis, and stroke <span id="id2">[<a class="reference internal" href="#id12" title="Robert Clarke, John F. Peden, Jemma C. Hopewell, and others. Genetic variants associated with Lp(a) lipoprotein level and coronary disease. New England Journal of Medicine, 361(26):2518–2528, 2009. doi:10.1056/NEJMoa0902604.">4</a>, <a class="reference internal" href="#id13" title="Pia R. Kamstrup, Anne Tybjærg-Hansen, Rolf Steffensen, and Børge G. Nordestgaard. Genetically elevated lipoprotein(a) and increased risk of myocardial infarction. JAMA, 301(22):2331–2339, 2009. doi:10.1001/jama.2009.801.">5</a>, <a class="reference internal" href="#id10" title="Børge G. Nordestgaard, M. John Chapman, Kausik Ray, Jan Borén, Felicita Andreotti, Gerald F. Watts, Henry N. Ginsberg, Pierre Amarenco, Alberico Catapano, Olivier S. Descamps, Edward Fisher, Petri T. Kovanen, Jan Albert Kuivenhoven, Philippe Lesnik, Luis Masana, Zeljko Reiner, Marja-Riitta Taskinen, Lale Tokgözoğlu, and Anne Tybjærg-Hansen. Lipoprotein(a) as a cardiovascular risk factor: current status. European Heart Journal, 31(23):2844–2853, 2010. doi:10.1093/eurheartj/ehq386.">6</a>, <a class="reference internal" href="#id4" title="Raviteja R Guddeti, Shantanu Patil, Aiza Ahmed, Arindam Sharma, Ahmed Aboeata, Carl J Lavie, and Venkata Mahesh Alla. Lipoprotein (a) and calcific aortic valve stenosis: a systematic review. Progress in cardiovascular diseases, 63(4):496–502, 2020.">7</a>, <a class="reference internal" href="#id5" title="Benoit J Arsenault, S Matthijs Boekholdt, Marie-Pierre Dubé, Éric Rhéaume, Nicholas J Wareham, Kay-Tee Khaw, Manjinder S Sandhu, and Jean-Claude Tardif. Lipoprotein (a) levels, genotype, and incident aortic valve stenosis: a prospective mendelian randomization study and replication in a case–control cohort. Circulation: Cardiovascular Genetics, 7(3):304–310, 2014.">8</a>, <a class="reference internal" href="#id3" title="Santica M Marcovina and Marlys L Koschinsky. Lipoprotein (a) as a risk factor for coronary artery disease. The American journal of cardiology, 82(12):57U–66U, 1998.">9</a>]</span>. Plasma Lp(a) concentrations are predominantly determined by copy number variation (CNV) in the Kringle IV type-2 (KIV-2) variable number tandem repeat (VNTR) within the <em>LPA</em> gene <span id="id3">[<a class="reference internal" href="#id14" title="Gerd Utermann, Hans J. Menzel, Hans G. Kraft, Hans C. Duba, Hans G. Kemmler, and Cornelia Seitz. Lp(a) glycoprotein phenotypes: inheritance and relation to Lp(a)-lipoprotein concentrations in plasma. Journal of Clinical Investigation, 80(2):458–465, 1987. doi:10.1172/JCI113093.">10</a>]</span>. The KIV-2 repeat unit spans approximately 5.5 kb and individuals carry 1–40 copies per haplotype, making the total VNTR region one of the largest and most structurally complex in the human genome and rendering KIV-2 CNV the single most important genetic determinant of Lp(a) levels <span id="id4">[<a class="reference internal" href="#id15" title="Florian Kronenberg, Serena Mora, Erik S. G. Stroes, and others. Lipoprotein(a) in atherosclerotic cardiovascular disease and aortic stenosis: a European Atherosclerosis Society consensus statement. European Heart Journal, 43(39):3925–3946, 2022. doi:10.1093/eurheartj/ehac361.">2</a>, <a class="reference internal" href="#id2" title="Pia R Kamstrup. Lipoprotein (a) and cardiovascular disease. Clinical chemistry, 67(1):154–166, 2021.">3</a>, <a class="reference internal" href="#id16" title="Ronen E. Mukamel, Robert E. Handsaker, Maxwell A. Sherman, and others. Protein-coding repeat polymorphisms strongly shape diverse human phenotypes. Science, 373(6562):1499–1505, 2021. doi:10.1126/science.abg8635.">11</a>]</span>. Critically, KIV-2 copy number is inversely correlated with Lp(a) concentration: individuals with fewer copies tend to have higher Lp(a) and elevated CVD risk <span id="id5">[<a class="reference internal" href="#id12" title="Robert Clarke, John F. Peden, Jemma C. Hopewell, and others. Genetic variants associated with Lp(a) lipoprotein level and coronary disease. New England Journal of Medicine, 361(26):2518–2528, 2009. doi:10.1056/NEJMoa0902604.">4</a>, <a class="reference internal" href="#id13" title="Pia R. Kamstrup, Anne Tybjærg-Hansen, Rolf Steffensen, and Børge G. Nordestgaard. Genetically elevated lipoprotein(a) and increased risk of myocardial infarction. JAMA, 301(22):2331–2339, 2009. doi:10.1001/jama.2009.801.">5</a>, <a class="reference internal" href="#id14" title="Gerd Utermann, Hans J. Menzel, Hans G. Kraft, Hans C. Duba, Hans G. Kemmler, and Cornelia Seitz. Lp(a) glycoprotein phenotypes: inheritance and relation to Lp(a)-lipoprotein concentrations in plasma. Journal of Clinical Investigation, 80(2):458–465, 1987. doi:10.1172/JCI113093.">10</a>]</span>. Accurately measuring KIV-2 CNV from whole-genome sequencing (WGS) is central to building accurate cross-population Lp(a) polygenic risk scores (PRS) and to enabling the causal inference studies needed to characterize Lp(a)’s phenotypic effects and inform therapeutic strategies across diverse populations <span id="id6">[<a class="reference internal" href="#id9" title="Sotirios Tsimikas. A test in context: lipoprotein(a): diagnosis, prognosis, controversies, and emerging therapies. Journal of the American College of Cardiology, 69(6):692–711, 2017. doi:10.1016/j.jacc.2016.11.042.">1</a>, <a class="reference internal" href="#id16" title="Ronen E. Mukamel, Robert E. Handsaker, Maxwell A. Sherman, and others. Protein-coding repeat polymorphisms strongly shape diverse human phenotypes. Science, 373(6562):1499–1505, 2021. doi:10.1126/science.abg8635.">11</a>]</span>.</p>
+<p><strong>GRiD</strong> (<strong>G</strong>enomic <strong>R</strong>epeat <strong>i</strong>nference from <strong>D</strong>epth) is an open-source Python pipeline that addresses this measurement gap. GRiD estimates diploid and haplotype-resolved VNTR copy number from short-read WGS data by combining read-depth normalization, read depth profile-matched nearest-neighbor estimation, and identity-by-descent (IBD)-based haplotype inference <span id="id7">[<a class="reference internal" href="#id17" title="Margaux LA Hujoel, Robert E Handsaker, David Tang, Nolan Kamitaki, Ronen E Mukamel, Simone Rubinacci, Pier Francesco Palamara, Steven A McCarroll, and Po-Ru Loh. Insights into dna repeat expansions among 900,000 biobank participants. Nature, pages 1–10, 2026.">12</a>]</span>. While GRiD was developed and validated for the <em>LPA</em> KIV-2 locus its core read-depth normalization and neighbor-based copy number framework is locus-agnostic and applicable to any large VNTR. The pipeline supports multi-threading and is driven by a single YAML configuration file, making it accessible to researchers without extensive bioinformatics expertise.</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="statement-of-need">
+<h2>Statement of Need<a class="headerlink" href="#statement-of-need" title="Link to this heading">¶</a></h2>
+<p>Accurate haplotype-resolved KIV-2 copy number estimation is a prerequisite for understanding the full genetic architecture of Lp(a) variation. Although several tools have recently addressed parts of this problem, none provides the complete workflow (standard short-read WGS to haplotype-resolved copy number estimates) in an open-source, cohort-scalable, and well-documented form. KILDA <span id="id8">[<a class="reference internal" href="#id23" title="Lydia Molitor and others. KILDA: k-mer-based inference of LPA diploid copy number from short-read alignment-free data. NAR Genomics and Bioinformatics, 2025. doi:10.1093/nargab/lqaf070.">13</a>]</span> estimates diploid KIV-2 copy number directly from FASTQ files using an alignment-free k-mer approach, but does not resolve haplotype-specific copy numbers. The Illumina DRAGEN LPA Caller offers KIV-2 estimation on the proprietary DRAGEN platform but is not open-source and requires specific hardware. Kivvi <span id="id9">[<a class="reference internal" href="#id25" title="PacificBiosciences. Kivvi: KIV-2 and D4Z4 copy number estimation from PacBio HiFi whole-genome sequencing. 2026. URL: https://github.com/PacificBiosciences/Kivvi.">14</a>]</span> enables KIV-2 copy number estimation from PacBio HiFi long-read data, but long-read WGS remains unavailable for the large population cohorts where most epidemiological Lp(a) research is currently conducted. vntr-calling-nf <span id="id10">[<a class="reference internal" href="#id26" title="genepi. Vntr-calling-nf: a Nextflow pipeline for VNTR variant calling. 2024. URL: https://github.com/genepi/vntr-calling-nf.">15</a>]</span> provides a Nextflow-based signature-sequence pipeline for VNTR variant calling but targets coding variant detection rather than copy number quantification, and has been primarily validated on whole-exome sequencing data. Researchers studying Lp(a) at cohort scale with short-read WGS have therefore continued to rely on convoluted, opaque, piecemeal, ad hoc scripts or unpublished internal pipelines, creating barriers to reproducibility and cross-cohort comparability. GRiD addresses this gap by providing a single, installable, documented tool that encapsulates the entire estimation workflow in a reproducible, multi-threaded, and configurable pipeline.</p>
+<p>The <em>LPA</em> KIV-2 locus presents biological and computational characteristics that place it outside the scope of generic repeat genotyping tools. Its 5.6 kb repeat unit is orders of magnitude larger than the short tandem repeats (STRs, 1–6 bp motifs) targeted by most existing software. The VNTR region itself can span over 200 kb in individuals with high copy number, making read-pair spanning approaches infeasible with standard 150 bp paired-end reads. Critically, obtaining haplotype-resolved rather than diploid copy number estimates requires a phasing strategy that does not depend on long reads or prior genotyped variants, a requirement uniquely addressed by the IBD-based algorithm <span id="id11">[<a class="reference internal" href="#id17" title="Margaux LA Hujoel, Robert E Handsaker, David Tang, Nolan Kamitaki, Ronen E Mukamel, Simone Rubinacci, Pier Francesco Palamara, Steven A McCarroll, and Po-Ru Loh. Insights into dna repeat expansions among 900,000 biobank participants. Nature, pages 1–10, 2026.">12</a>]</span> implemented in GRiD. Beyond <em>LPA</em>, GRiD’s read-depth normalization and nearest-neighbor framework are locus-agnostic and applicable to any large VNTR; <span id="id12">Mukamel <em>et al.</em> [<a class="reference internal" href="#id16" title="Ronen E. Mukamel, Robert E. Handsaker, Maxwell A. Sherman, and others. Protein-coding repeat polymorphisms strongly shape diverse human phenotypes. Science, 373(6562):1499–1505, 2021. doi:10.1126/science.abg8635.">11</a>]</span> identified 734 protein-coding VNTRs with elevated IBD rates across the human genome, all of which represent potential targets.</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="state-of-the-field">
+<h2>State of the Field<a class="headerlink" href="#state-of-the-field" title="Link to this heading">¶</a></h2>
+<p>Several mature tools exist for genotyping tandem repeats from short-read sequencing data. ExpansionHunter <span id="id13">[<a class="reference internal" href="#id18" title="Egor Dolzhenko and others. ExpansionHunter: a sequence-graph-based tool to analyze variation in short tandem repeat regions. Bioinformatics, 35(22):4754–4756, 2019. doi:10.1093/bioinformatics/btz431.">16</a>]</span> and GangSTR <span id="id14">[<a class="reference internal" href="#id19" title="Nima Mousavi, Sharona Shleizer-Burko, Richard Yanicky, and Melissa Gymrek. GangSTR: template-based estimation of short tandem repeats. Nucleic Acids Research, 47(15):e90, 2019. doi:10.1093/nar/gkz501.">17</a>]</span> use probabilistic models of read-pair orientation and coverage to estimate repeat lengths, but are designed for STRs and short VNTRs where reads can partially or fully span the repeat unit. HipSTR <span id="id15">[<a class="reference internal" href="#id20" title="Thomas Willems, Or Zuk, Yaniv Erlich, and Melissa Gymrek. Genome-wide profiling of heritable and de novo STR variations. Nature Methods, 14:590–592, 2017. doi:10.1038/nmeth.4267.">18</a>]</span> performs haplotype-level STR genotyping using phased reads but is similarly constrained to short repeat units accessible by individual reads. Tools such as TRTools <span id="id16">[<a class="reference internal" href="#id21" title="Nima Mousavi, Jonathan Margoliash, Neha Pusarla, and others. TRTools: a toolkit for genome-wide analysis of tandem repeats. Bioinformatics, 37(18):3062–3064, 2021. doi:10.1093/bioinformatics/btab358.">19</a>]</span> provide downstream analysis utilities for STR calls but do not extend to large-VNTR loci. adVNTR <span id="id17">[<a class="reference internal" href="#id24" title="Mehrdad Bakhtiari, Sharona Shleizer-Burko, Melissa Gymrek, Vikas Bansal, and Vineet Bafna. Targeted genotyping of variable number tandem repeats with advntr. Genome Research, 28(11):1709–1719, 2018. doi:10.1101/gr.235119.118.">20</a>]</span> uses hidden Markov models to genotype VNTRs genome-wide and supports both Illumina and PacBio data, but is designed for VNTRs of up to a few hundred base pairs where reads can overlap the repeat boundary, which is qualitatively different from the 5.6 kb KIV-2 repeat unit. More recently, long-read platforms have enabled direct assembly of complex repeat regions <span id="id18">[<a class="reference internal" href="#id22" title="Katja Didericksen and others. Long-read sequencing resolves complex repeat structures in the human genome. Nature Genetics, 2024. doi:VERIFY.">21</a>]</span>, and Kivvi <span id="id19">[<a class="reference internal" href="#id25" title="PacificBiosciences. Kivvi: KIV-2 and D4Z4 copy number estimation from PacBio HiFi whole-genome sequencing. 2026. URL: https://github.com/PacificBiosciences/Kivvi.">14</a>]</span> specifically targets KIV-2 from PacBio HiFi data; however, long-read data are not yet available for most large epidemiological cohorts, which remain dominated by short-read WGS.</p>
+<p>For the <em>LPA</em> KIV-2 locus specifically, KILDA <span id="id20">[<a class="reference internal" href="#id23" title="Lydia Molitor and others. KILDA: k-mer-based inference of LPA diploid copy number from short-read alignment-free data. NAR Genomics and Bioinformatics, 2025. doi:10.1093/nargab/lqaf070.">13</a>]</span> provides an alignment-free diploid copy number estimate from short-read FASTQ files using a k-mer counting strategy calibrated against long-read assemblies. While KILDA demonstrates strong concordance with assembly-based diploid estimates, it does not address haplotype-level phasing. The foundational algorithmic framework integrated by GRiD was established by <span id="id21">Mukamel <em>et al.</em> [<a class="reference internal" href="#id16" title="Ronen E. Mukamel, Robert E. Handsaker, Maxwell A. Sherman, and others. Protein-coding repeat polymorphisms strongly shape diverse human phenotypes. Science, 373(6562):1499–1505, 2021. doi:10.1126/science.abg8635.">11</a>]</span>, who demonstrated that population-normalized read depth is the most tractable approach for copy number estimation from short-read cohort data, and by <span id="id22">Hujoel <em>et al.</em> [<a class="reference internal" href="#id17" title="Margaux LA Hujoel, Robert E Handsaker, David Tang, Nolan Kamitaki, Ronen E Mukamel, Simone Rubinacci, Pier Francesco Palamara, Steven A McCarroll, and Po-Ru Loh. Insights into dna repeat expansions among 900,000 biobank participants. Nature, pages 1–10, 2026.">12</a>]</span>, who developed an IBD-based iterative algorithm for decomposing diploid copy number into haplotype-specific contributions without requiring long reads or pre-existing phased variant data. GRiD integrates and operationalizes both methodological contributions into a single accessible software package, read depth profile-aware nearest-neighbor normalization, a full configuration system, and multi-cohort scalability.</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="software-design">
+<h2>Software Design<a class="headerlink" href="#software-design" title="Link to this heading">¶</a></h2>
+<p>GRiD is implemented in Python (≥3.8) and follows a modular architecture organized into seven sequential pipeline steps, each implemented as an independent utility module under <code class="docutils literal notranslate"><span class="pre">grid/utils/</span></code>. The pipeline is orchestrated by <code class="docutils literal notranslate"><span class="pre">grid/pipeline.py</span></code> and driven by a user-supplied YAML configuration file, which specifies file paths, genomic coordinates, per-step parameters, and which steps to execute. The command-line interface is implemented with Click <span id="id23">[<a class="reference internal" href="#id31" title="Armin Ronacher and others. Click: python composable command line interface toolkit. 2024. URL: https://palletsprojects.com/p/click/.">22</a>]</span> and provides an entry point: <code class="docutils literal notranslate"><span class="pre">grid</span> <span class="pre">wgs</span></code> for whole-genome sequencing data.</p>
+<p>The Whole Genome Sequencing pipeline proceeds as follows:</p>
+<ol class="arabic simple">
+<li><p><strong>Index verification / creation</strong>: Ensures CRAM/BAM index files (.crai/.bai) exist for all input samples, creating them with <code class="docutils literal notranslate"><span class="pre">samtools</span></code> <span id="id24">[<a class="reference internal" href="#id29" title="Heng Li, Bob Handsaker, Alec Wysoker, and others. The sequence alignment/map format and SAMtools. Bioinformatics, 25(16):2078–2079, 2009. doi:10.1093/bioinformatics/btp352.">23</a>]</span> if needed.</p></li>
+<li><p><strong>Read counting</strong>: Counts properly paired reads in the KIV-2 VNTR region using pysam <span id="id25">[<a class="reference internal" href="#id30" title="Andreas Heger and others. Pysam: a python module for reading and manipulating sam/bam/cram files. 2024. URL: https://github.com/pysam-developers/pysam.">24</a>]</span>, filtering by mapping quality and SAM flag.</p></li>
+<li><p><strong>Coverage estimation</strong>: Runs mosdepth <span id="id26">[<a class="reference internal" href="#id27" title="Brent S. Pedersen and Aaron R. Quinlan. Mosdepth: quick coverage calculation for genomes and exomes. Bioinformatics, 34(5):867–868, 2018. doi:10.1093/bioinformatics/btx699.">25</a>]</span> across the genome in binned mode to produce per-sample depth profiles.</p></li>
+<li><p><strong>Coverage normalization</strong>: Normalizes coverage within individuals (by sample mean depth) and across individuals (by a z-score transformation), then filters to high-variance regions enriched for VNTR signal.</p></li>
+<li><p><strong>Nearest-neighbor identification</strong>: Uses scikit-learn <span id="id27">[<a class="reference internal" href="#id28" title="Fabian Pedregosa, Gaël Varoquaux, Alexandre Gramfort, and others. Scikit-learn: machine learning in Python. Journal of Machine Learning Research, 12:2825–2830, 2011. URL: https://jmlr.org/papers/v12/pedregosa11a.html.">26</a>]</span> to compute Euclidean distances in normalized depth space and identify the top-N genomically similar neighbors per individual, providing a cohort-matched reference for CNV normalization.</p></li>
+<li><p><strong>Diploid copy number estimation</strong>: Computes per-exon diploid copy number for each individual by normalizing their read counts relative to their nearest neighbors’ read counts, accounting for sample-specific sequencing depth.</p></li>
+<li><p><strong>Haplotype inference</strong>: Applies an IBD-based iterative phasing algorithm <span id="id28">[<a class="reference internal" href="#id17" title="Margaux LA Hujoel, Robert E Handsaker, David Tang, Nolan Kamitaki, Ronen E Mukamel, Simone Rubinacci, Pier Francesco Palamara, Steven A McCarroll, and Po-Ru Loh. Insights into dna repeat expansions among 900,000 biobank participants. Nature, pages 1–10, 2026.">12</a>]</span> that uses haplotype-matched neighbors to decompose diploid copy number estimates into haplotype-specific contributions.</p></li>
+</ol>
+<p>All multi-sample steps are parallelized using Python’s <code class="docutils literal notranslate"><span class="pre">concurrent.futures.ThreadPoolExecutor</span></code>, and progress is reported via the Rich terminal library <span id="id29">[<a class="reference internal" href="#id32" title="Will Willison. Rich: rich text and beautiful formatting in the terminal. 2024. URL: https://github.com/Textualize/rich.">27</a>]</span>. Configuration validation at pipeline startup provides early, informative error messages before any compute-intensive steps run.</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="research-impact-statement">
+<h2>Research Impact Statement<a class="headerlink" href="#research-impact-statement" title="Link to this heading">¶</a></h2>
+<p>GRiD has been validated across multiple large-scale, multi-ancestry whole-genome sequencing cohorts representing tens of thousands of individuals spanning Hispanic/Latino, African American, and European American ancestry groups. Its nearest-neighbor normalization approach naturally accounts for ancestry and sequencing batch effects without requiring explicit ancestry labels, making it well-suited for population-diverse studies where CNV tools calibrated on European-ancestry reference panels may systematically underperform.</p>
+<p>GRiD has attracted national and international interest from research groups across multiple conferences, with inquiries from groups seeking to apply KIV-2 copy number estimation to their own short-read WGS cohorts. It is designed for accessibility, with comprehensive documentation of configuration, outputs, and algorithmic details to lower the barrier to entry for epidemiologists and clinicians without extensive bioinformatics training.</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="mathematics">
+<h2>Mathematics<a class="headerlink" href="#mathematics" title="Link to this heading">¶</a></h2>
+<p><strong>Coverage estimation.</strong> Weighted mean depth across the VNTR region from mosdepth bins is computed as:</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[
+\text{Coverage} =
+\left\lfloor
+100 \cdot
+\frac{
+\sum_{i \in R} \left( \bar{C}_i \cdot \bigl( \min(e, r_{i,e}) - \max(s, r_{i,s}) \bigr) \right)
+}{
+\sum_{i \in R} \bigl( \min(e, r_{i,e}) - \max(s, r_{i,s}) \bigr)
+}
+\right\rceil
+\]</div>
+</div>
+<p>where <span class="math notranslate nohighlight">\(R\)</span> is the set of bins overlapping the region <span class="math notranslate nohighlight">\([s, e]\)</span>, <span class="math notranslate nohighlight">\(\bar{C}_i\)</span> is the mean depth of bin <span class="math notranslate nohighlight">\(i\)</span>, and <span class="math notranslate nohighlight">\(r_{i,s}\)</span>, <span class="math notranslate nohighlight">\(r_{i,e}\)</span> are the bin boundaries.</p>
+<p><strong>Normalization.</strong> Let <span class="math notranslate nohighlight">\(D \in \mathbb{R}^{N \times M}\)</span> be the depth matrix for <span class="math notranslate nohighlight">\(N\)</span> individuals across <span class="math notranslate nohighlight">\(M\)</span> genomic bins. Within-individual normalization gives <span class="math notranslate nohighlight">\(D^{(1)}_{ij} = D_{ij} / \bar{D}_i\)</span>, where <span class="math notranslate nohighlight">\(\bar{D}_i\)</span> is the individual mean. Across-individual normalization then yields:</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[
+D^{\mathrm{norm}}_{ij} = \frac{D^{(1)}_{ij} - \mu_j}{\sqrt{\mu_j}}
+\]</div>
+</div>
+<p>where <span class="math notranslate nohighlight">\(\mu_j\)</span> is the population mean of <span class="math notranslate nohighlight">\(D^{(1)}_{\cdot j}\)</span>. Regions are filtered by a variance ratio <span class="math notranslate nohighlight">\(\sigma_j^2 / \mu_j\)</span>, and the top fraction of high-variance regions are retained for neighbor computation.</p>
+<p><strong>Neighbor-normalized diploid copy number.</strong> For individual <span class="math notranslate nohighlight">\(i\)</span> with read count <span class="math notranslate nohighlight">\(r_i\)</span> and depth scale <span class="math notranslate nohighlight">\(s_i\)</span>, the diploid copy number estimate is:</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[
+\widehat{\text{dipCN}}_i = \frac{r_i / s_i}{\frac{1}{|N_i|} \sum_{j \in N_i} r_j / s_j}
+\]</div>
+</div>
+<p>where <span class="math notranslate nohighlight">\(N_i\)</span> is the set of nearest neighbors identified from the normalized depth space.</p>
+<p><strong>Haplotype inference.</strong> Following <span id="id30">Hujoel <em>et al.</em> [<a class="reference internal" href="#id17" title="Margaux LA Hujoel, Robert E Handsaker, David Tang, Nolan Kamitaki, Ronen E Mukamel, Simone Rubinacci, Pier Francesco Palamara, Steven A McCarroll, and Po-Ru Loh. Insights into dna repeat expansions among 900,000 biobank participants. Nature, pages 1–10, 2026.">12</a>]</span>, haplotype-specific copy numbers <span class="math notranslate nohighlight">\(h_{i,1}\)</span> and <span class="math notranslate nohighlight">\(h_{i,2}\)</span> are iteratively estimated by updating each haplotype’s value proportionally to the mean copy number of IBD-matched haplotype neighbors:</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[
+h_{i,k}^{(t+1)} = \widehat{\text{dipCN}}_i \cdot \frac{\bar{h}_{N_{i,k}}^{(t)}}{\bar{h}_{N_{i,1}}^{(t)} + \bar{h}_{N_{i,2}}^{(t)}}
+\]</div>
+</div>
+<p>where <span class="math notranslate nohighlight">\(\bar{h}_{N_{i,k}}^{(t)}\)</span> is the mean haplotype copy number of IBD neighbors on haplotype <span class="math notranslate nohighlight">\(k\)</span> at iteration <span class="math notranslate nohighlight">\(t\)</span>.</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="ai-usage-disclosure">
+<h2>AI Usage Disclosure<a class="headerlink" href="#ai-usage-disclosure" title="Link to this heading">¶</a></h2>
+<p>GitHub Copilot and Anthropic Claude were used to assist with code development and documentation writing during the preparation of this software and manuscript. All AI-generated content was reviewed line-by-line by the authors, with corrections and edits applied as necessary to ensure accuracy, correctness, and consistency with the underlying methodology. No AI-generated code or text was incorporated without direct author verification.</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="acknowledgements">
+<h2>Acknowledgements<a class="headerlink" href="#acknowledgements" title="Link to this heading">¶</a></h2>
+<p>This work was supported by [GRANT INFORMATION].</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="references">
+<h2>References<a class="headerlink" href="#references" title="Link to this heading">¶</a></h2>
+</section>
+<div class="docutils container" id="id1">
+<div role="list" class="citation-list">
+<div class="citation" id="id9" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></span>
+<span class="backrefs">(<a role="doc-backlink" href="#id1">1</a>,<a role="doc-backlink" href="#id6">2</a>)</span>
+<p>Sotirios Tsimikas. A test in context: lipoprotein(a): diagnosis, prognosis, controversies, and emerging therapies. <em>Journal of the American College of Cardiology</em>, 69(6):692–711, 2017. <a class="reference external" href="https://doi.org/10.1016/j.jacc.2016.11.042">doi:10.1016/j.jacc.2016.11.042</a>.</p>
+</div>
+<div class="citation" id="id15" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></span>
+<span class="backrefs">(<a role="doc-backlink" href="#id1">1</a>,<a role="doc-backlink" href="#id4">2</a>)</span>
+<p>Florian Kronenberg, Serena Mora, Erik S. G. Stroes, and others. Lipoprotein(a) in atherosclerotic cardiovascular disease and aortic stenosis: a European Atherosclerosis Society consensus statement. <em>European Heart Journal</em>, 43(39):3925–3946, 2022. <a class="reference external" href="https://doi.org/10.1093/eurheartj/ehac361">doi:10.1093/eurheartj/ehac361</a>.</p>
+</div>
+<div class="citation" id="id2" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></span>
+<span class="backrefs">(<a role="doc-backlink" href="#id1">1</a>,<a role="doc-backlink" href="#id4">2</a>)</span>
+<p>Pia R Kamstrup. Lipoprotein (a) and cardiovascular disease. <em>Clinical chemistry</em>, 67(1):154–166, 2021.</p>
+</div>
+<div class="citation" id="id12" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>4<span class="fn-bracket">]</span></span>
+<span class="backrefs">(<a role="doc-backlink" href="#id2">1</a>,<a role="doc-backlink" href="#id5">2</a>)</span>
+<p>Robert Clarke, John F. Peden, Jemma C. Hopewell, and others. Genetic variants associated with Lp(a) lipoprotein level and coronary disease. <em>New England Journal of Medicine</em>, 361(26):2518–2528, 2009. <a class="reference external" href="https://doi.org/10.1056/NEJMoa0902604">doi:10.1056/NEJMoa0902604</a>.</p>
+</div>
+<div class="citation" id="id13" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>5<span class="fn-bracket">]</span></span>
+<span class="backrefs">(<a role="doc-backlink" href="#id2">1</a>,<a role="doc-backlink" href="#id5">2</a>)</span>
+<p>Pia R. Kamstrup, Anne Tybjærg-Hansen, Rolf Steffensen, and Børge G. Nordestgaard. Genetically elevated lipoprotein(a) and increased risk of myocardial infarction. <em>JAMA</em>, 301(22):2331–2339, 2009. <a class="reference external" href="https://doi.org/10.1001/jama.2009.801">doi:10.1001/jama.2009.801</a>.</p>
+</div>
+<div class="citation" id="id10" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id2">6</a><span class="fn-bracket">]</span></span>
+<p>Børge G. Nordestgaard, M. John Chapman, Kausik Ray, Jan Borén, Felicita Andreotti, Gerald F. Watts, Henry N. Ginsberg, Pierre Amarenco, Alberico Catapano, Olivier S. Descamps, Edward Fisher, Petri T. Kovanen, Jan Albert Kuivenhoven, Philippe Lesnik, Luis Masana, Zeljko Reiner, Marja-Riitta Taskinen, Lale Tokgözoğlu, and Anne Tybjærg-Hansen. Lipoprotein(a) as a cardiovascular risk factor: current status. <em>European Heart Journal</em>, 31(23):2844–2853, 2010. <a class="reference external" href="https://doi.org/10.1093/eurheartj/ehq386">doi:10.1093/eurheartj/ehq386</a>.</p>
+</div>
+<div class="citation" id="id4" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id2">7</a><span class="fn-bracket">]</span></span>
+<p>Raviteja R Guddeti, Shantanu Patil, Aiza Ahmed, Arindam Sharma, Ahmed Aboeata, Carl J Lavie, and Venkata Mahesh Alla. Lipoprotein (a) and calcific aortic valve stenosis: a systematic review. <em>Progress in cardiovascular diseases</em>, 63(4):496–502, 2020.</p>
+</div>
+<div class="citation" id="id5" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id2">8</a><span class="fn-bracket">]</span></span>
+<p>Benoit J Arsenault, S Matthijs Boekholdt, Marie-Pierre Dubé, Éric Rhéaume, Nicholas J Wareham, Kay-Tee Khaw, Manjinder S Sandhu, and Jean-Claude Tardif. Lipoprotein (a) levels, genotype, and incident aortic valve stenosis: a prospective mendelian randomization study and replication in a case–control cohort. <em>Circulation: Cardiovascular Genetics</em>, 7(3):304–310, 2014.</p>
+</div>
+<div class="citation" id="id3" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id2">9</a><span class="fn-bracket">]</span></span>
+<p>Santica M Marcovina and Marlys L Koschinsky. Lipoprotein (a) as a risk factor for coronary artery disease. <em>The American journal of cardiology</em>, 82(12):57U–66U, 1998.</p>
+</div>
+<div class="citation" id="id14" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>10<span class="fn-bracket">]</span></span>
+<span class="backrefs">(<a role="doc-backlink" href="#id3">1</a>,<a role="doc-backlink" href="#id5">2</a>)</span>
+<p>Gerd Utermann, Hans J. Menzel, Hans G. Kraft, Hans C. Duba, Hans G. Kemmler, and Cornelia Seitz. Lp(a) glycoprotein phenotypes: inheritance and relation to Lp(a)-lipoprotein concentrations in plasma. <em>Journal of Clinical Investigation</em>, 80(2):458–465, 1987. <a class="reference external" href="https://doi.org/10.1172/JCI113093">doi:10.1172/JCI113093</a>.</p>
+</div>
+<div class="citation" id="id16" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>11<span class="fn-bracket">]</span></span>
+<span class="backrefs">(<a role="doc-backlink" href="#id4">1</a>,<a role="doc-backlink" href="#id6">2</a>,<a role="doc-backlink" href="#id12">3</a>,<a role="doc-backlink" href="#id21">4</a>)</span>
+<p>Ronen E. Mukamel, Robert E. Handsaker, Maxwell A. Sherman, and others. Protein-coding repeat polymorphisms strongly shape diverse human phenotypes. <em>Science</em>, 373(6562):1499–1505, 2021. <a class="reference external" href="https://doi.org/10.1126/science.abg8635">doi:10.1126/science.abg8635</a>.</p>
+</div>
+<div class="citation" id="id17" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>12<span class="fn-bracket">]</span></span>
+<span class="backrefs">(<a role="doc-backlink" href="#id7">1</a>,<a role="doc-backlink" href="#id11">2</a>,<a role="doc-backlink" href="#id22">3</a>,<a role="doc-backlink" href="#id28">4</a>,<a role="doc-backlink" href="#id30">5</a>)</span>
+<p>Margaux LA Hujoel, Robert E Handsaker, David Tang, Nolan Kamitaki, Ronen E Mukamel, Simone Rubinacci, Pier Francesco Palamara, Steven A McCarroll, and Po-Ru Loh. Insights into dna repeat expansions among 900,000 biobank participants. <em>Nature</em>, pages 1–10, 2026.</p>
+</div>
+<div class="citation" id="id23" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>13<span class="fn-bracket">]</span></span>
+<span class="backrefs">(<a role="doc-backlink" href="#id8">1</a>,<a role="doc-backlink" href="#id20">2</a>)</span>
+<p>Lydia Molitor and others. KILDA: k-mer-based inference of LPA diploid copy number from short-read alignment-free data. <em>NAR Genomics and Bioinformatics</em>, 2025. <a class="reference external" href="https://doi.org/10.1093/nargab/lqaf070">doi:10.1093/nargab/lqaf070</a>.</p>
+</div>
+<div class="citation" id="id25" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>14<span class="fn-bracket">]</span></span>
+<span class="backrefs">(<a role="doc-backlink" href="#id9">1</a>,<a role="doc-backlink" href="#id19">2</a>)</span>
+<p>PacificBiosciences. Kivvi: KIV-2 and D4Z4 copy number estimation from PacBio HiFi whole-genome sequencing. 2026. URL: <a class="reference external" href="https://github.com/PacificBiosciences/Kivvi">https://github.com/PacificBiosciences/Kivvi</a>.</p>
+</div>
+<div class="citation" id="id26" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id10">15</a><span class="fn-bracket">]</span></span>
+<p>genepi. Vntr-calling-nf: a Nextflow pipeline for VNTR variant calling. 2024. URL: <a class="reference external" href="https://github.com/genepi/vntr-calling-nf">https://github.com/genepi/vntr-calling-nf</a>.</p>
+</div>
+<div class="citation" id="id18" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id13">16</a><span class="fn-bracket">]</span></span>
+<p>Egor Dolzhenko and others. ExpansionHunter: a sequence-graph-based tool to analyze variation in short tandem repeat regions. <em>Bioinformatics</em>, 35(22):4754–4756, 2019. <a class="reference external" href="https://doi.org/10.1093/bioinformatics/btz431">doi:10.1093/bioinformatics/btz431</a>.</p>
+</div>
+<div class="citation" id="id19" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id14">17</a><span class="fn-bracket">]</span></span>
+<p>Nima Mousavi, Sharona Shleizer-Burko, Richard Yanicky, and Melissa Gymrek. GangSTR: template-based estimation of short tandem repeats. <em>Nucleic Acids Research</em>, 47(15):e90, 2019. <a class="reference external" href="https://doi.org/10.1093/nar/gkz501">doi:10.1093/nar/gkz501</a>.</p>
+</div>
+<div class="citation" id="id20" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id15">18</a><span class="fn-bracket">]</span></span>
+<p>Thomas Willems, Or Zuk, Yaniv Erlich, and Melissa Gymrek. Genome-wide profiling of heritable and de novo STR variations. <em>Nature Methods</em>, 14:590–592, 2017. <a class="reference external" href="https://doi.org/10.1038/nmeth.4267">doi:10.1038/nmeth.4267</a>.</p>
+</div>
+<div class="citation" id="id21" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id16">19</a><span class="fn-bracket">]</span></span>
+<p>Nima Mousavi, Jonathan Margoliash, Neha Pusarla, and others. TRTools: a toolkit for genome-wide analysis of tandem repeats. <em>Bioinformatics</em>, 37(18):3062–3064, 2021. <a class="reference external" href="https://doi.org/10.1093/bioinformatics/btab358">doi:10.1093/bioinformatics/btab358</a>.</p>
+</div>
+<div class="citation" id="id24" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id17">20</a><span class="fn-bracket">]</span></span>
+<p>Mehrdad Bakhtiari, Sharona Shleizer-Burko, Melissa Gymrek, Vikas Bansal, and Vineet Bafna. Targeted genotyping of variable number tandem repeats with advntr. <em>Genome Research</em>, 28(11):1709–1719, 2018. <a class="reference external" href="https://doi.org/10.1101/gr.235119.118">doi:10.1101/gr.235119.118</a>.</p>
+</div>
+<div class="citation" id="id22" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id18">21</a><span class="fn-bracket">]</span></span>
+<p>Katja Didericksen and others. Long-read sequencing resolves complex repeat structures in the human genome. <em>Nature Genetics</em>, 2024. <a class="reference external" href="https://doi.org/VERIFY">doi:VERIFY</a>.</p>
+</div>
+<div class="citation" id="id31" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id23">22</a><span class="fn-bracket">]</span></span>
+<p>Armin Ronacher and others. Click: python composable command line interface toolkit. 2024. URL: <a class="reference external" href="https://palletsprojects.com/p/click/">https://palletsprojects.com/p/click/</a>.</p>
+</div>
+<div class="citation" id="id29" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id24">23</a><span class="fn-bracket">]</span></span>
+<p>Heng Li, Bob Handsaker, Alec Wysoker, and others. The sequence alignment/map format and SAMtools. <em>Bioinformatics</em>, 25(16):2078–2079, 2009. <a class="reference external" href="https://doi.org/10.1093/bioinformatics/btp352">doi:10.1093/bioinformatics/btp352</a>.</p>
+</div>
+<div class="citation" id="id30" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id25">24</a><span class="fn-bracket">]</span></span>
+<p>Andreas Heger and others. Pysam: a python module for reading and manipulating sam/bam/cram files. 2024. URL: <a class="reference external" href="https://github.com/pysam-developers/pysam">https://github.com/pysam-developers/pysam</a>.</p>
+</div>
+<div class="citation" id="id27" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id26">25</a><span class="fn-bracket">]</span></span>
+<p>Brent S. Pedersen and Aaron R. Quinlan. Mosdepth: quick coverage calculation for genomes and exomes. <em>Bioinformatics</em>, 34(5):867–868, 2018. <a class="reference external" href="https://doi.org/10.1093/bioinformatics/btx699">doi:10.1093/bioinformatics/btx699</a>.</p>
+</div>
+<div class="citation" id="id28" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id27">26</a><span class="fn-bracket">]</span></span>
+<p>Fabian Pedregosa, Gaël Varoquaux, Alexandre Gramfort, and others. Scikit-learn: machine learning in Python. <em>Journal of Machine Learning Research</em>, 12:2825–2830, 2011. URL: <a class="reference external" href="https://jmlr.org/papers/v12/pedregosa11a.html">https://jmlr.org/papers/v12/pedregosa11a.html</a>.</p>
+</div>
+<div class="citation" id="id32" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id29">27</a><span class="fn-bracket">]</span></span>
+<p>Will Willison. Rich: rich text and beautiful formatting in the terminal. 2024. URL: <a class="reference external" href="https://github.com/Textualize/rich">https://github.com/Textualize/rich</a>.</p>
+</div>
+</div>
+</div>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="modules.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">API Reference</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="code_of_conduct.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">Code of Conduct</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2026, Zachary Caterer
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Paper</a><ul>
+<li><a class="reference internal" href="#summary">Summary</a></li>
+<li><a class="reference internal" href="#statement-of-need">Statement of Need</a></li>
+<li><a class="reference internal" href="#state-of-the-field">State of the Field</a></li>
+<li><a class="reference internal" href="#software-design">Software Design</a></li>
+<li><a class="reference internal" href="#research-impact-statement">Research Impact Statement</a></li>
+<li><a class="reference internal" href="#mathematics">Mathematics</a></li>
+<li><a class="reference internal" href="#ai-usage-disclosure">AI Usage Disclosure</a></li>
+<li><a class="reference internal" href="#acknowledgements">Acknowledgements</a></li>
+<li><a class="reference internal" href="#references">References</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="_static/documentation_options.js?v=2709fde1"></script>
+    <script src="_static/doctools.js?v=9bcbadda"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/scripts/furo.js?v=46bd48cc"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    </body>
+</html>
