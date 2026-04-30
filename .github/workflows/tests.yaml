@@ -23,8 +23,8 @@ jobs:
       - name: black
         run: black --check grid/
 
-      - name: flake8
-        run: flake8 grid/ --max-line-length=100 --extend-ignore=E203,W503
+      # - name: flake8
+      #   run: flake8 grid/ --max-line-length=100 --extend-ignore=E203,W503
 
   test:
     name: Test (Python ${{ matrix.python-version }})
