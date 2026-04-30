@@ -348,7 +348,7 @@ def process_one_individual(
 
 
 def build_depth_matrix(
-    regions_to_extract: dict[str, list[tuple[int, int, float]]]
+    regions_to_extract: dict[str, list[tuple[int, int, float]]],
 ) -> dict[str, dict[tuple[int, int], float]]:
     """
     Build depth matrix from extracted regions.

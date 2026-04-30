@@ -1,4 +1,5 @@
 """Command-line interface for LPA KIV-CNV pipeline."""
+
 # In[0]: Imports
 import sys
 import click
@@ -39,9 +40,7 @@ def print_banner():
     ║                      Version {version}                        ║
     ║                                                           ║
     ╚═══════════════════════════════════════════════════════════╝
-    """.format(
-        version=__version__
-    )
+    """.format(version=__version__)
     log(console, banner, style="banner")
 
 
