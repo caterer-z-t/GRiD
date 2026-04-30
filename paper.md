@@ -18,6 +18,12 @@ authors:
     affiliation: 1
   - name: Qiang An
     affiliation: 3
+  - name: Maisy Brasher
+    orcid: 0000-0002-4020-6551
+    affiliation: 1
+  - name: Joanne Cole
+    orcid: 0000-0001-9520-2788
+    affiliation: 1
   - name: Ethan Lange
     affiliation: 1
     orcid: 0000-0001-7075-4287
