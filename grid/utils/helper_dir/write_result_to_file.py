@@ -1,5 +1,7 @@
 # grid/utils/helper_dir/write_result_to_file.py
 # In[1]: Imports
+from __future__ import annotations
+
 from pathlib import Path
 from threading import Lock
 from rich.console import Console
