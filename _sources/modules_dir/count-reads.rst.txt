@@ -1,30 +1,10 @@
-Read Counting Module
-====================
+Read Counting
+=============
 
-Overview
---------
-
-.. include:: ../../../grid/utils/count_reads_dir/README.md
-   :parser: myst_parser.sphinx_
-
-Python API Documentation
-------------------------
-
-grid.utils.count_reads
-~~~~~~~~~~~~~~~~~~~~~~~
+Counts properly paired reads within the KIV-2 VNTR region for each sample,
+filtered by mapping quality and SAM flag as specified in the config.
 
 .. automodule:: grid.utils.count_reads
    :members:
    :undoc-members:
-   :private-members:
-   :special-members:
-
-
-grid.utils.count_reads_dir
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. automodule:: grid.utils.count_reads_dir
-   :members:
-   :undoc-members:
-   :private-members:
-   :special-members:
+   :show-inheritance:

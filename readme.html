@@ -3,11 +3,11 @@
   <head><meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="index" title="Index" href="genindex.html"><link rel="search" title="Search" href="search.html"><link rel="next" title="Example Pipeline Jobs" href="examples.html"><link rel="prev" title="GRiD" href="index.html">
+<link rel="index" title="Index" href="genindex.html"><link rel="search" title="Search" href="search.html"><link rel="next" title="Getting Started" href="getting_started.html"><link rel="prev" title="GRiD — Genomic Repeat inference from Depth" href="index.html">
         <link rel="prefetch" href="_static/grid_logo.png" as="image">
 
     <link rel="shortcut icon" href="_static/favicon.ico"><!-- Generated with Sphinx 8.2.3 and Furo 2025.09.25 -->
-        <title>Welcome to GRiD’s documentation! - GRiD v0 documentation</title>
+        <title>Welcome to GRiD’s documentation! - GRiD 0.1 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d111a655" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=580074bf" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
@@ -172,7 +172,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="index.html"><div class="brand">GRiD v0 documentation</div></a>
+      <a href="index.html"><div class="brand">GRiD 0.1 documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -196,7 +196,7 @@
     <img class="sidebar-logo" src="_static/grid_logo.png" alt="Logo"/>
   </div>
   
-  <span class="sidebar-brand-text">GRiD v0 documentation</span>
+  <span class="sidebar-brand-text">GRiD 0.1 documentation</span>
   
 </a><form class="sidebar-search-container" method="get" action="search.html" role="search">
   <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
@@ -204,30 +204,53 @@
   <input type="hidden" name="area" value="default">
 </form>
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
-  <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+  <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
 <ul class="current">
 <li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Welcome to GRiD’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ibs_ibd.html">Computing IBS/IBD Neighbors</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Examples</span></p>
+<ul>
 <li class="toctree-l1 has-children"><a class="reference internal" href="examples.html">Example Pipeline Jobs</a><input aria-label="Toggle navigation of Example Pipeline Jobs" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="examples/SOL_sbatch.html">SLURM Job Example</a></li>
-<li class="toctree-l2"><a class="reference internal" href="examples/SOL_python.html">Python Pipeline Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/1000G_example.html">1000 Genomes Full Pipeline Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/IBS_example.html">IBS/IBD Neighbor Computation Example</a></li>
 </ul>
 </li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Algorithms</span></p>
+<ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="algorithms.html">Algorithms</a><input aria-label="Toggle navigation of Algorithms" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="algorithms/count_reads.html">Read Counting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="algorithms/coverage.html">Coverage Estimation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="algorithms/normalization.html">Coverage Normalization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="algorithms/neighbors.html">Nearest-Neighbor Identification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="algorithms/dipcn.html">Diploid Copy Number Estimation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="algorithms/hi_inference.html">Haplotype Inference</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Project</span></p>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="code_of_conduct.html">Code of Conduct</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="modules.html">Modules</a><input aria-label="Toggle navigation of Modules" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="modules_dir/grid_core.html">GRiD Core Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="modules_dir/utilities_overview.html">Utilities Overview</a></li>
-<li class="toctree-l2"><a class="reference internal" href="modules_dir/helper-functions.html">Helper Functions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="modules_dir/count-reads.html">Read Counting Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="modules_dir/mosdepth.html">Mosdepth Coverage Analysis</a></li>
-<li class="toctree-l2"><a class="reference internal" href="modules_dir/normalize-mosdepth.html">Mosdepth Coverage Normalization</a></li>
-<li class="toctree-l2"><a class="reference internal" href="modules_dir/find-neighbors.html">Neighbor Finding Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="modules_dir/lpa-realign.html">LPA Realignment Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="modules_dir/compute-dipcn.html">Diploid Copy Number Computation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="modules_dir/estimate-kiv.html">KIV-2 Copy Number Estimation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Paper</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="paper.html">Paper</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="modules.html">API Reference</a><input aria-label="Toggle navigation of API Reference" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="modules_dir/grid_core.html">Core</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules_dir/count-reads.html">Read Counting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules_dir/mosdepth.html">Coverage Estimation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules_dir/normalize-mosdepth.html">Coverage Normalization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules_dir/find-neighbors.html">Nearest-Neighbor Identification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules_dir/compute-dipcn.html">Diploid Copy Number Estimation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules_dir/hi-inference.html">Haplotype Inference</a></li>
 <li class="toctree-l2"><a class="reference internal" href="modules_dir/crai.html">CRAM Index Management</a></li>
-<li class="toctree-l2"><a class="reference internal" href="modules_dir/subset.html">CRAM Subsetting</a></li>
-<li class="toctree-l2"><a class="reference internal" href="modules_dir/extract-reference.html">Extract Reference Sequences</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules_dir/utils.html">Utilities &amp; Helper Functions</a></li>
 </ul>
 </li>
 </ul>
@@ -270,223 +293,174 @@
         <article role="main" id="furo-main-content">
           <section id="welcome-to-grid-s-documentation">
 <h1>Welcome to GRiD’s documentation!<a class="headerlink" href="#welcome-to-grid-s-documentation" title="Link to this heading">¶</a></h1>
-<section id="grid-genomic-repeat-inference-from-depth">
-<h2>GRiD - Genomic Repeat inference from Depth<a class="headerlink" href="#grid-genomic-repeat-inference-from-depth" title="Link to this heading">¶</a></h2>
-<section id="lpa-kiv-2-copy-number-variant-estimation-pipeline">
-<h3>LPA KIV-2 Copy Number Variant Estimation Pipeline<a class="headerlink" href="#lpa-kiv-2-copy-number-variant-estimation-pipeline" title="Link to this heading">¶</a></h3>
-<p><strong>GRiD</strong> is a modular, extensible pipeline for estimating copy number variants (CNVs) in the <em>LPA</em> gene’s <strong>KIV-2 VNTR</strong> region using short-read sequencing data.</p>
-<p>Although currently specialized for <em>LPA</em>, GRiD is designed with modularity in mind — future extensions to other repeat loci are encouraged.</p>
-<p>Based on the methodology from:</p>
-<ul class="simple">
-<li><p><a class="reference external" href="https://doi.org/10.1126/science.abg8289">Mukamel et al. (2021)</a> - Original pipeline</p></li>
-<li><p><a class="reference external" href="https://github.com/alexliyihao/vntrwrap">Hao (2024)</a> - C++/shell implementation</p></li>
-</ul>
-</section>
+<section class="tex2jax_ignore mathjax_ignore" id="grid-genomic-repeat-inference-from-depth">
+<h2>GRiD — Genomic Repeat inference from Depth<a class="headerlink" href="#grid-genomic-repeat-inference-from-depth" title="Link to this heading">¶</a></h2>
+<p><a class="reference external" href="https://www.python.org/"><img alt="Python" src="https://img.shields.io/badge/python-3.8%2B-blue?logo=python&amp;logoColor=white" /></a>
+<a class="reference external" href="https://github.com/psf/black"><img alt="Code style: black" src="https://img.shields.io/badge/code%20style-black-000000.svg" /></a>
+<a class="reference external" href="https://docs.pytest.org/"><img alt="pytest" src="https://img.shields.io/badge/tested%20with-pytest-0A9EDC?logo=pytest&amp;logoColor=white" /></a>
+<a class="reference external" href="https://codecov.io/gh/caterer-z-t/GRiD"><img alt="Coverage" src="https://codecov.io/gh/caterer-z-t/GRiD/branch/main/graph/badge.svg" /></a>
+<a class="reference external" href="https://joss.theoj.org"><img alt="DOI" src="https://joss.theoj.org/papers/placeholder/status.svg" /></a>
+<a class="reference external" href="https://github.com/caterer-z-t/GRiD/issues"><img alt="GitHub issues" src="https://img.shields.io/github/issues/caterer-z-t/GRiD" /></a>
+<a class="reference external" href="https://github.com/caterer-z-t/GRiD/stargazers"><img alt="GitHub stars" src="https://img.shields.io/github/stars/caterer-z-t/GRiD?style=social" /></a>
+<a class="reference external" href="https://github.com/caterer-z-t/GRiD"><img alt="Visits" src="https://visitor-badge.laobi.icu/badge?page_id=caterer-z-t.GRiD" /></a></p>
+<p><strong>GRiD</strong> is a Python pipeline for haplotype-resolved VNTR copy number estimation from short-read whole-genome sequencing data. It was developed for and validated on the KIV-2 VNTR in the <em>LPA</em> gene, but the core depth-normalization framework is applicable to any large VNTR locus.</p>
+<p>The <em>LPA</em> KIV-2 repeat is one of the largest and most structurally complex VNTRs in the human genome (spanning up to 200 kb) making standard STR and CNV tools inadequate. GRiD addresses this by combining read-depth normalization, ancestry-matched nearest-neighbor estimation, and IBD-based haplotype inference into a single, configurable pipeline.</p>
+<hr class="docutils" />
 <section id="installation">
 <h3>Installation<a class="headerlink" href="#installation" title="Link to this heading">¶</a></h3>
-<p>It is strongly recommended to use a dedicated environment (e.g., <code class="docutils literal notranslate"><span class="pre">conda</span></code>, <code class="docutils literal notranslate"><span class="pre">micromamba</span></code>, or <code class="docutils literal notranslate"><span class="pre">venv</span></code>).</p>
-<section id="from-source">
-<h4>From source<a class="headerlink" href="#from-source" title="Link to this heading">¶</a></h4>
+<p>Requires Python ≥ 3.8 and <a class="reference external" href="https://github.com/brentp/mosdepth"><code class="docutils literal notranslate"><span class="pre">mosdepth</span></code></a> available on your <code class="docutils literal notranslate"><span class="pre">PATH</span></code>.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/caterer-z-t/GRiD.git
 <span class="nb">cd</span><span class="w"> </span>GRiD
 
-<span class="c1"># Create environment (recommended)</span>
-conda<span class="w"> </span>env<span class="w"> </span>create<span class="w"> </span>-n<span class="w"> </span>grid-env<span class="w"> </span>-f<span class="w"> </span>env.yaml
+<span class="c1"># Create environment</span>
+conda<span class="w"> </span>env<span class="w"> </span>create<span class="w"> </span>-f<span class="w"> </span>env.yaml
 conda<span class="w"> </span>activate<span class="w"> </span>grid-env
 
-<span class="c1"># Install in editable mode (for now, we will incoorperate this into pypi + conda)</span>
+<span class="c1"># Install</span>
 pip<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </span>.
 </pre></div>
 </div>
 </section>
-</section>
-<section id="usage">
-<h3>Usage<a class="headerlink" href="#usage" title="Link to this heading">¶</a></h3>
-<p>GRiD provides a modular <strong>command-line interface (CLI)</strong> for reproducible and scalable execution on Linux or HPC environments (e.g., UNC Longleaf).</p>
-<section id="basic-example">
-<h4>Basic Example<a class="headerlink" href="#basic-example" title="Link to this heading">¶</a></h4>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>grid<span class="w"> </span>count-reads<span class="w"> </span>--cram-dir<span class="w"> </span>data/CRAMs<span class="w"> </span><span class="se">\</span>
-<span class="w">                 </span>--output-file<span class="w"> </span>output/counts.tsv<span class="w"> </span><span class="se">\</span>
-<span class="w">                 </span>--ref-fasta<span class="w"> </span>refs/hs37d5.fa<span class="w"> </span><span class="se">\</span>
-<span class="w">                 </span>--chrom<span class="w"> </span>chr6<span class="w"> </span><span class="se">\</span>
-<span class="w">                 </span>--start<span class="w"> </span><span class="m">160000000</span><span class="w"> </span><span class="se">\</span>
-<span class="w">                 </span>--end<span class="w"> </span><span class="m">160100000</span><span class="w"> </span><span class="se">\</span>
-<span class="w">                 </span>--config<span class="w"> </span>config.yaml
+<hr class="docutils" />
+<section id="quick-start">
+<h3>Quick Start<a class="headerlink" href="#quick-start" title="Link to this heading">¶</a></h3>
+<p>GRiD is driven by a single YAML configuration file. Copy and edit the example config:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cp<span class="w"> </span>grid/example_config.yaml<span class="w"> </span>my_config.yaml
+<span class="c1"># edit my_config.yaml with your file paths and parameters</span>
 </pre></div>
 </div>
+<p>Run the full WGS pipeline:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>grid<span class="w"> </span>wgs<span class="w"> </span>my_config.yaml
+</pre></div>
+</div>
+<p>See <a class="reference external" href="https://github.com/caterer-z-t/GRiD/tree/main/grid/example_config.yaml"><code class="docutils literal notranslate"><span class="pre">grid/example_config.yaml</span></code></a> for a fully annotated configuration reference.</p>
 </section>
-<section id="basic-pipeline-run">
-<h4>Basic Pipeline Run<a class="headerlink" href="#basic-pipeline-run" title="Link to this heading">¶</a></h4>
-<p>For large CRAM datasets, the CLI is the recommended interface.
-See <a class="reference external" href="https://caterer-z-t.github.io/GRiD/examples/SOL_sbatch.html">examples/SOL.sh</a> for an example SLURM submission script.</p>
-<blockquote>
-<div><p><strong>Note:</strong>
-The included <code class="docutils literal notranslate"><span class="pre">SOL.sh</span></code> script demonstrates use on the <strong>Study of Latinas (SOL)</strong> dataset, subset via a <a class="reference external" href="https://app.terra.bio/">Terra</a> workflow and executed on UNC Longleaf (Red Hat 9.6).
-See <a class="reference external" href="https://help.rc.unc.edu/longleaf-cluster/">Longleaf</a> documentation for environment-specific details.</p>
-</div></blockquote>
-</section>
-<section id="configuration">
-<h4>Configuration<a class="headerlink" href="#configuration" title="Link to this heading">¶</a></h4>
-<p>GRiD uses YAML configuration files for flexible setup.</p>
-<p>Customize paths, genomic coordinates, and environment parameters in your <code class="docutils literal notranslate"><span class="pre">config.yaml</span></code> before execution.</p>
-</section>
-</section>
-<section id="pipeline-steps">
-<h3>Pipeline Steps<a class="headerlink" href="#pipeline-steps" title="Link to this heading">¶</a></h3>
+<hr class="docutils" />
+<section id="pipeline">
+<h3>Pipeline<a class="headerlink" href="#pipeline" title="Link to this heading">¶</a></h3>
+<p>GRiD runs seven sequential steps, each controlled by a <code class="docutils literal notranslate"><span class="pre">run:</span> <span class="pre">True/False</span></code> flag in the config:</p>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Step</p></th>
+<th class="head"><p>Module</p></th>
 <th class="head"><p>Description</p></th>
+<th class="head"><p>Locus-specific?</p></th>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p>1. <strong>GCloud Copy</strong></p></td>
-<td><p><em>(Deprecated)</em> Copy files from Google Cloud Storage.</p></td>
+<tr class="row-even"><td><p>1</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ensure_crai</span></code></p></td>
+<td><p>Verify or create CRAM index files</p></td>
+<td><p>No</p></td>
 </tr>
-<tr class="row-odd"><td><p>2. <strong>Count Reads</strong></p></td>
-<td><p>Count reads within VNTR regions for each CRAM.</p></td>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">count_reads</span></code></p></td>
+<td><p>Count properly paired reads in the target VNTR region</p></td>
+<td><p>No</p></td>
 </tr>
-<tr class="row-even"><td><p>3. <strong>Mosdepth Coverage</strong></p></td>
-<td><p>Compute read coverage using <code class="docutils literal notranslate"><span class="pre">mosdepth</span></code>.</p></td>
+<tr class="row-even"><td><p>3</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">mosdepth</span></code></p></td>
+<td><p>Compute binned read depth across the genome</p></td>
+<td><p>No</p></td>
 </tr>
-<tr class="row-odd"><td><p>4. <strong>Normalize Coverage</strong></p></td>
-<td><p>Normalize per-sample coverage values.</p></td>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">normalize_mosdepth</span></code></p></td>
+<td><p>Normalize coverage within and across individuals</p></td>
+<td><p>No</p></td>
 </tr>
-<tr class="row-even"><td><p>5. <strong>Find Neighbors</strong></p></td>
-<td><p>Identify similar samples for reference-based normalization.</p></td>
+<tr class="row-even"><td><p>5</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">find_neighbors</span></code></p></td>
+<td><p>Identify read depth-matched nearest neighbors</p></td>
+<td><p>No</p></td>
 </tr>
-<tr class="row-odd"><td><p>6. <strong>Extract Reference</strong></p></td>
-<td><p>Extract VNTR reference sequences.</p></td>
+<tr class="row-odd"><td><p>6</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">compute_dipcn</span></code></p></td>
+<td><p>Estimate diploid copy number via neighbor normalization</p></td>
+<td><p>No</p></td>
 </tr>
-<tr class="row-even"><td><p>7. <strong>Realign Reads</strong></p></td>
-<td><p>Realign reads to the extracted VNTR reference.</p></td>
-</tr>
-<tr class="row-odd"><td><p>8. <strong>Compute Diploid CN</strong></p></td>
-<td><p>Estimate diploid copy numbers.</p></td>
-</tr>
-<tr class="row-even"><td><p>9. <strong>Estimate KIV CN</strong></p></td>
-<td><p>Estimate KIV-2 copy number per individual.</p></td>
+<tr class="row-even"><td><p>7</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">hi_inference</span></code></p></td>
+<td><p>Infer haplotype-specific copy numbers via IBD phasing</p></td>
+<td><p>No*</p></td>
 </tr>
 </tbody>
 </table>
 </div>
-<p>Each step corresponds to a CLI command (e.g., <code class="docutils literal notranslate"><span class="pre">grid</span> <span class="pre">mosdepth</span></code>, <code class="docutils literal notranslate"><span class="pre">grid</span> <span class="pre">normalize-mosdepth</span></code>, etc.).</p>
-<p>Run <code class="docutils literal notranslate"><span class="pre">grid</span> <span class="pre">--help</span></code> for a full command list.</p>
-<p>Additionally, each of the corresponding commands also have inline documentation, run <code class="docutils literal notranslate"><span class="pre">grid</span> <span class="pre">mosdepth</span> <span class="pre">--help</span></code>, <code class="docutils literal notranslate"><span class="pre">grid</span> <span class="pre">normalize-mosdepth</span> <span class="pre">--help</span></code> for stepwise parameters.</p>
+<p><span class="math notranslate nohighlight">\(*\)</span> Step 7 requires a Identity By Descent/State output file from <a class="reference external" href="https://doi.org/10.1038/s41586-025-09886-z">Hujoel 2026 Nature</a> <code class="docutils literal notranslate"><span class="pre">.cpp</span></code> file; for further information and how to obtain this file, please see <a class="reference external" href="https://caterer-z-t.github.io/GRiD/IBS_IBD.html">IBS/IBD</a> page of our documentation.</p>
+<p>For full algorithmic details, see the <a class="reference external" href="https://caterer-z-t.github.io/GRiD/algorithms.html">Algorithms page</a> of our documentation.</p>
 </section>
-<section id="pipeline-orchestration">
-<h3>Pipeline Orchestration<a class="headerlink" href="#pipeline-orchestration" title="Link to this heading">¶</a></h3>
-<p>The <code class="docutils literal notranslate"><span class="pre">grid/utils/</span></code> directory contains all computational logic and helper scripts.</p>
-<div class="table-wrapper colwidths-auto docutils container">
-<table class="docutils align-default">
-<thead>
-<tr class="row-odd"><th class="head"><p>Module</p></th>
-<th class="head"><p>Description</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ensure_crai.py</span></code></p></td>
-<td><p>Ensures CRAM index (.crai) files exist</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">count_reads.py</span></code></p></td>
-<td><p>Counts paired reads in VNTR region</p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">run_mosdepth.py</span></code></p></td>
-<td><p>Computes coverage using <code class="docutils literal notranslate"><span class="pre">mosdepth</span></code></p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">run_normalized_mosdepth.py</span></code></p></td>
-<td><p>Normalizes coverage across samples</p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">find_neighbors.py</span></code></p></td>
-<td><p>Identifies nearest neighbors for normalization</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">extract_reference.py</span></code></p></td>
-<td><p>Extracts VNTR reference sequences</p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">align_lpa.py</span></code></p></td>
-<td><p>Realigns reads to <em>LPA</em> reference</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">compute_dipcn.py</span></code></p></td>
-<td><p>Computes diploid copy number estimates</p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">estimate_kiv.py</span></code></p></td>
-<td><p>Derives KIV-2 CN estimates</p></td>
-</tr>
-</tbody>
-</table>
+<hr class="docutils" />
+<section id="configuration">
+<h3>Configuration<a class="headerlink" href="#configuration" title="Link to this heading">¶</a></h3>
+<p>All parameters are set in a YAML file. Top-level fields define global settings; each step has its own section with a <code class="docutils literal notranslate"><span class="pre">run</span></code> flag and step-specific options.</p>
+<div style="padding:10px; border-left:4px solid #FF7800;">
+<strong>Note:</strong> Each step is controlled by a <code>run: True/False</code> flag. Setting a step to <code>False</code> skips it entirely — and because the pipeline is sequential, any downstream step that depends on its output will also fail to run correctly. Enable steps in order and ensure all prerequisite steps have been run at least once before skipping them.
 </div>
-<p>Each utility can be imported directly in Python, e.g.:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">grid.utils.run_mosdepth</span><span class="w"> </span><span class="kn">import</span> <span class="n">run_mosdepth</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">samples_file</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;path/to/sample_ids.txt&quot;</span>
+<span class="nt">directory_loc</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;path/to/crams/&quot;</span>
+<span class="nt">reference_genome</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;path/to/hg38.fa&quot;</span>
+<span class="nt">output_dir</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;path/to/output/&quot;</span>
+<span class="nt">threads</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">8</span>
+<span class="nt">file_type</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;cram&quot;</span>
+<span class="nt">chrom</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;chr6&quot;</span>
+<span class="nt">start_bp</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">160605062</span>
+<span class="nt">end_bp</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">160647661</span>
 
-<span class="n">run_mosdepth</span><span class="p">(</span>
-    <span class="n">cram_dir</span><span class="o">=</span><span class="s2">&quot;data/crams&quot;</span><span class="p">,</span>
-    <span class="n">output_file</span><span class="o">=</span><span class="s2">&quot;out/mosdepth.tsv&quot;</span><span class="p">,</span>
-    <span class="n">ref_fasta</span><span class="o">=</span><span class="s2">&quot;refs/hs37d5.fa&quot;</span><span class="p">,</span>
-    <span class="n">chrom</span><span class="o">=</span><span class="s2">&quot;chr6&quot;</span><span class="p">,</span>
-    <span class="n">start</span><span class="o">=</span><span class="mi">160000000</span><span class="p">,</span>
-    <span class="n">end</span><span class="o">=</span><span class="mi">160100000</span>
-<span class="p">)</span>
+<span class="nt">mosdepth</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">True</span>
+<span class="w">  </span><span class="nt">bin_size</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">...</span>
+
+<span class="nt">compute_haploid_genotypes</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">True</span>
+<span class="w">  </span><span class="nt">ibs_output</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;path/to/ibs_neighbors_chr6.tsv.gz&quot;</span>
+<span class="w">  </span><span class="nt">min_neighbors</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
+<span class="w">  </span><span class="nt">max_neighbors</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10</span>
+<span class="w">  </span><span class="nt">n_iters</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">100</span>
 </pre></div>
 </div>
+<p>See <a class="reference internal" href="#./grid/example_config.yaml"><span class="xref myst"><code class="docutils literal notranslate"><span class="pre">grid/example_config.yaml</span></code></span></a> for all available options and their defaults.</p>
+<p>For a full breakdown of every parameter, how to obtain required input files, and configuration tips see the <a class="reference external" href="https://caterer-z-t.github.io/GRiD/getting_started.html">Getting Started page</a>.</p>
 </section>
-<section id="development">
-<h3>Development<a class="headerlink" href="#development" title="Link to this heading">¶</a></h3>
-<section id="code-style">
-<h4>Code Style<a class="headerlink" href="#code-style" title="Link to this heading">¶</a></h4>
-<p>We follow standard Python formatting and type-checking conventions:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>black<span class="w"> </span>grid/
-isort<span class="w"> </span>grid/
-flake8<span class="w"> </span>grid/
-mypy<span class="w"> </span>grid/
-</pre></div>
-</div>
+<hr class="docutils" />
+<section id="hpc-usage">
+<h3>HPC Usage<a class="headerlink" href="#hpc-usage" title="Link to this heading">¶</a></h3>
+<p>For large cohorts on SLURM-based clusters, see <a class="reference internal" href="#./examples/1000G_example.sh"><span class="xref myst"><code class="docutils literal notranslate"><span class="pre">examples/SOL.sh</span></code></span></a> for an example submission script used on the 1000 Genomes on University of North Carolina’s Super Computing Cluster Longleaf.</p>
 </section>
-<section id="build-documentation">
-<h4>Build Documentation<a class="headerlink" href="#build-documentation" title="Link to this heading">¶</a></h4>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>activate<span class="w"> </span>grid-env
-pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>docs/requirements.txt
-make<span class="w"> </span>-C<span class="w"> </span>docs<span class="w"> </span>html
-</pre></div>
-</div>
-<p>Documentation is built with Sphinx and published via ReadTheDocs:</p>
-<blockquote>
-<div><p><a class="reference external" href="https://caterer-z-t.github.io/GRiD">caterer-z-t.github.io/GRiD</a></p>
-</div></blockquote>
-</section>
-</section>
+<hr class="docutils" />
 <section id="citation">
 <h3>Citation<a class="headerlink" href="#citation" title="Link to this heading">¶</a></h3>
-<p>If you use this pipeline, please cite:</p>
+<p>If you use GRiD, please cite:</p>
+<div class="highlight-bibtex notranslate"><div class="highlight"><pre><span></span><span class="nc">@software</span><span class="p">{</span><span class="nl">caterer2026</span><span class="p">,</span>
+<span class="w">    </span><span class="na">author</span><span class="w">  </span><span class="p">=</span><span class="w"> </span><span class="s">{Caterer, Zachary, Lin Meng, An Qiang, Lange Ethan, Gignoux Christopher, Graff Mariaelisa, Avery Christy, Stanislawski Maggie}</span><span class="p">,</span>
+<span class="w">    </span><span class="na">title</span><span class="w">   </span><span class="p">=</span><span class="w"> </span><span class="s">{GRiD: Genomic Repeat Inference from Depth}</span><span class="p">,</span>
+<span class="w">    </span><span class="na">year</span><span class="w">    </span><span class="p">=</span><span class="w"> </span><span class="s">{2026}</span><span class="p">,</span>
+<span class="w">    </span><span class="na">url</span><span class="w">     </span><span class="p">=</span><span class="w"> </span><span class="s">{https://github.com/caterer-z-t/GRiD}</span><span class="p">,</span>
+<span class="w">    </span><span class="na">version</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">{1.0.0}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>GRiD builds on methods from:</p>
 <ul class="simple">
-<li><p>Mukamel et al. (2021) <a class="reference external" href="https://doi.org/10.1126/science.abg8289">Original methodology</a></p></li>
-<li><p>Hao et al. (2024) <a class="reference external" href="https://github.com/alexliyihao/vntrwrap">Implementation</a></p></li>
-<li><p>This pipeline <a class="reference external" href="https://caterer-z-t.github.io/GRiD/CITATION.cff">Your paper when published</a></p></li>
+<li><p>Mukamel et al. (2021) <a class="reference external" href="https://doi.org/10.1126/science.abg8635">doi:10.1126/science.abg8635</a></p></li>
+<li><p>Hujoel et al. (2026) <a class="reference external" href="https://doi.org/10.1038/s41586-025-09886-z">doi:10.1038/s41586-025-09886-z</a></p></li>
 </ul>
 </section>
+<hr class="docutils" />
 <section id="license">
 <h3>License<a class="headerlink" href="#license" title="Link to this heading">¶</a></h3>
-<p>Released under <a class="reference external" href="https://caterer-z-t.github.io/GRiD/LICENSE">MIT License</a></p>
+<p>Released under the <a class="reference internal" href="#./LICENSE"><span class="xref myst">MIT License</span></a>.</p>
 </section>
 <section id="support">
 <h3>Support<a class="headerlink" href="#support" title="Link to this heading">¶</a></h3>
 <ul class="simple">
-<li><p><a class="reference external" href="https://caterer-z-t.github.io/GRiD">Documentation</a></p></li>
 <li><p><a class="reference external" href="https://github.com/caterer-z-t/GRiD/issues">Issues</a></p></li>
 <li><p><a class="reference external" href="https://github.com/caterer-z-t/GRiD/discussions">Discussions</a></p></li>
-<li><p><a class="reference external" href="https://caterer-z-t.github.io/GRiD/contributing.html">Contributing</a></p></li>
-<li><p><a class="reference external" href="https://caterer-z-t.github.io/GRiD/code_of_conduct.html">Code of Conduct</a></p></li>
+<li><p><a class="reference internal" href="#./CONTRIBUTING.md"><span class="xref myst">Contributing</span></a></p></li>
+<li><p><a class="reference internal" href="#./CODE_OF_CONDUCT.md"><span class="xref myst">Code of Conduct</span></a></p></li>
 </ul>
 </section>
-</section>
-<section id="to-do-s">
-<h2>To-Do’s<a class="headerlink" href="#to-do-s" title="Link to this heading">¶</a></h2>
-<ul class="simple">
-<li><p>[] Add/Implement <code class="docutils literal notranslate"><span class="pre">pipeline.py</span></code> and <code class="docutils literal notranslate"><span class="pre">config.py</span></code> for unified <code class="docutils literal notranslate"><span class="pre">grid</span> <span class="pre">run</span> <span class="pre">[args]</span></code> entrypoint</p></li>
-<li><p>[] Finish README Documentation</p></li>
-<li><p>[] Add test suite</p></li>
-<li><p>[] CI/CD workflows</p></li>
-</ul>
 </section>
 </section>
 
@@ -495,12 +469,12 @@ make<span class="w"> </span>-C<span class="w"> </span>docs<span class="w"> </spa
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="examples.html">
+          <a class="next-page" href="getting_started.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">Example Pipeline Jobs</div>
+                <div class="title">Getting Started</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
@@ -519,7 +493,7 @@ make<span class="w"> </span>-C<span class="w"> </span>docs<span class="w"> </spa
         <div class="bottom-of-page">
           <div class="left-details">
             <div class="copyright">
-                Copyright &#169; 2025, Zachary Caterer
+                Copyright &#169; 2026, Zachary Caterer
             </div>
             Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
             
@@ -546,31 +520,17 @@ make<span class="w"> </span>-C<span class="w"> </span>docs<span class="w"> </spa
           <div class="toc-tree">
             <ul>
 <li><a class="reference internal" href="#">Welcome to GRiD’s documentation!</a><ul>
-<li><a class="reference internal" href="#grid-genomic-repeat-inference-from-depth">GRiD - Genomic Repeat inference from Depth</a><ul>
-<li><a class="reference internal" href="#lpa-kiv-2-copy-number-variant-estimation-pipeline">LPA KIV-2 Copy Number Variant Estimation Pipeline</a></li>
-<li><a class="reference internal" href="#installation">Installation</a><ul>
-<li><a class="reference internal" href="#from-source">From source</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#usage">Usage</a><ul>
-<li><a class="reference internal" href="#basic-example">Basic Example</a></li>
-<li><a class="reference internal" href="#basic-pipeline-run">Basic Pipeline Run</a></li>
+<li><a class="reference internal" href="#grid-genomic-repeat-inference-from-depth">GRiD — Genomic Repeat inference from Depth</a><ul>
+<li><a class="reference internal" href="#installation">Installation</a></li>
+<li><a class="reference internal" href="#quick-start">Quick Start</a></li>
+<li><a class="reference internal" href="#pipeline">Pipeline</a></li>
 <li><a class="reference internal" href="#configuration">Configuration</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#pipeline-steps">Pipeline Steps</a></li>
-<li><a class="reference internal" href="#pipeline-orchestration">Pipeline Orchestration</a></li>
-<li><a class="reference internal" href="#development">Development</a><ul>
-<li><a class="reference internal" href="#code-style">Code Style</a></li>
-<li><a class="reference internal" href="#build-documentation">Build Documentation</a></li>
-</ul>
-</li>
+<li><a class="reference internal" href="#hpc-usage">HPC Usage</a></li>
 <li><a class="reference internal" href="#citation">Citation</a></li>
 <li><a class="reference internal" href="#license">License</a></li>
 <li><a class="reference internal" href="#support">Support</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#to-do-s">To-Do’s</a></li>
 </ul>
 </li>
 </ul>
@@ -582,11 +542,13 @@ make<span class="w"> </span>-C<span class="w"> </span>docs<span class="w"> </spa
       
     </aside>
   </div>
-</div><script src="_static/documentation_options.js?v=f8c80a57"></script>
+</div><script src="_static/documentation_options.js?v=2709fde1"></script>
     <script src="_static/doctools.js?v=9bcbadda"></script>
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/scripts/furo.js?v=46bd48cc"></script>
     <script src="_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="_static/copybutton.js?v=f281be69"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     </body>
 </html>

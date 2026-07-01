@@ -3,11 +3,11 @@
   <head><meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="index" title="Index" href="genindex.html"><link rel="search" title="Search" href="search.html"><link rel="next" title="GRiD Core Module" href="modules_dir/grid_core.html"><link rel="prev" title="Code of Conduct" href="code_of_conduct.html">
+<link rel="index" title="Index" href="genindex.html"><link rel="search" title="Search" href="search.html"><link rel="next" title="Core" href="modules_dir/grid_core.html"><link rel="prev" title="Paper" href="paper.html">
         <link rel="prefetch" href="_static/grid_logo.png" as="image">
 
     <link rel="shortcut icon" href="_static/favicon.ico"><!-- Generated with Sphinx 8.2.3 and Furo 2025.09.25 -->
-        <title>Modules - GRiD v0 documentation</title>
+        <title>API Reference - GRiD 0.1 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d111a655" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=580074bf" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
@@ -172,7 +172,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="index.html"><div class="brand">GRiD v0 documentation</div></a>
+      <a href="index.html"><div class="brand">GRiD 0.1 documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -196,7 +196,7 @@
     <img class="sidebar-logo" src="_static/grid_logo.png" alt="Logo"/>
   </div>
   
-  <span class="sidebar-brand-text">GRiD v0 documentation</span>
+  <span class="sidebar-brand-text">GRiD 0.1 documentation</span>
   
 </a><form class="sidebar-search-container" method="get" action="search.html" role="search">
   <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
@@ -204,30 +204,53 @@
   <input type="hidden" name="area" value="default">
 </form>
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
-  <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
-<ul class="current">
+  <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="readme.html">Welcome to GRiD’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ibs_ibd.html">Computing IBS/IBD Neighbors</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Examples</span></p>
+<ul>
 <li class="toctree-l1 has-children"><a class="reference internal" href="examples.html">Example Pipeline Jobs</a><input aria-label="Toggle navigation of Example Pipeline Jobs" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="examples/SOL_sbatch.html">SLURM Job Example</a></li>
-<li class="toctree-l2"><a class="reference internal" href="examples/SOL_python.html">Python Pipeline Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/1000G_example.html">1000 Genomes Full Pipeline Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/IBS_example.html">IBS/IBD Neighbor Computation Example</a></li>
 </ul>
 </li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Algorithms</span></p>
+<ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="algorithms.html">Algorithms</a><input aria-label="Toggle navigation of Algorithms" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="algorithms/count_reads.html">Read Counting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="algorithms/coverage.html">Coverage Estimation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="algorithms/normalization.html">Coverage Normalization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="algorithms/neighbors.html">Nearest-Neighbor Identification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="algorithms/dipcn.html">Diploid Copy Number Estimation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="algorithms/hi_inference.html">Haplotype Inference</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Project</span></p>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="code_of_conduct.html">Code of Conduct</a></li>
-<li class="toctree-l1 current has-children current-page"><a class="current reference internal" href="#">Modules</a><input aria-label="Toggle navigation of Modules" checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="modules_dir/grid_core.html">GRiD Core Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="modules_dir/utilities_overview.html">Utilities Overview</a></li>
-<li class="toctree-l2"><a class="reference internal" href="modules_dir/helper-functions.html">Helper Functions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="modules_dir/count-reads.html">Read Counting Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="modules_dir/mosdepth.html">Mosdepth Coverage Analysis</a></li>
-<li class="toctree-l2"><a class="reference internal" href="modules_dir/normalize-mosdepth.html">Mosdepth Coverage Normalization</a></li>
-<li class="toctree-l2"><a class="reference internal" href="modules_dir/find-neighbors.html">Neighbor Finding Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="modules_dir/lpa-realign.html">LPA Realignment Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="modules_dir/compute-dipcn.html">Diploid Copy Number Computation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="modules_dir/estimate-kiv.html">KIV-2 Copy Number Estimation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Paper</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="paper.html">Paper</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul class="current">
+<li class="toctree-l1 current has-children current-page"><a class="current reference internal" href="#">API Reference</a><input aria-label="Toggle navigation of API Reference" checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="modules_dir/grid_core.html">Core</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules_dir/count-reads.html">Read Counting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules_dir/mosdepth.html">Coverage Estimation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules_dir/normalize-mosdepth.html">Coverage Normalization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules_dir/find-neighbors.html">Nearest-Neighbor Identification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules_dir/compute-dipcn.html">Diploid Copy Number Estimation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules_dir/hi-inference.html">Haplotype Inference</a></li>
 <li class="toctree-l2"><a class="reference internal" href="modules_dir/crai.html">CRAM Index Management</a></li>
-<li class="toctree-l2"><a class="reference internal" href="modules_dir/subset.html">CRAM Subsetting</a></li>
-<li class="toctree-l2"><a class="reference internal" href="modules_dir/extract-reference.html">Extract Reference Sequences</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules_dir/utils.html">Utilities &amp; Helper Functions</a></li>
 </ul>
 </li>
 </ul>
@@ -268,9 +291,8 @@
           </label>
         </div>
         <article role="main" id="furo-main-content">
-          <section id="modules">
-<h1>Modules<a class="headerlink" href="#modules" title="Link to this heading">¶</a></h1>
-<p>This section documents the Python modules in GRiD.</p>
+          <section id="api-reference">
+<h1>API Reference<a class="headerlink" href="#api-reference" title="Link to this heading">¶</a></h1>
 <section id="command-line-interface">
 <h2>Command-Line Interface<a class="headerlink" href="#command-line-interface" title="Link to this heading">¶</a></h2>
 <section id="grid">
@@ -287,633 +309,56 @@
 <dd><p>Show the GRiD version</p>
 </dd></dl>
 
-<section id="grid-compute-dipcn">
-<h4>compute-dipcn<a class="headerlink" href="#grid-compute-dipcn" title="Link to this heading">¶</a></h4>
-<p>Compute diploid copy numbers for LPA KIV-2 repeats.</p>
-<p>Uses neighbor-based normalization to compute dipCN for each exon type:
-1B_KIV3, 1B_notKIV3, 1B, and 1A.</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>grid<span class="w"> </span>compute-dipcn<span class="w"> </span><span class="o">[</span>OPTIONS<span class="o">]</span>
-</pre></div>
-</div>
-<p class="rubric">Options</p>
-<dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-grid-compute-dipcn-c">
-<span id="cmdoption-grid-compute-dipcn-count-file"></span><span class="sig-name descname"><span class="pre">-c</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--count-file</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;count_file&gt;</span></span><a class="headerlink" href="#cmdoption-grid-compute-dipcn-c" title="Link to this definition">¶</a></dt>
-<dd><p><strong>Required</strong> Realignment output file with read counts</p>
-</dd></dl>
-
-<dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-grid-compute-dipcn-n">
-<span id="cmdoption-grid-compute-dipcn-neighbor-file"></span><span class="sig-name descname"><span class="pre">-n</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--neighbor-file</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;neighbor_file&gt;</span></span><a class="headerlink" href="#cmdoption-grid-compute-dipcn-n" title="Link to this definition">¶</a></dt>
-<dd><p><strong>Required</strong> Find neighbors output file (can be gzipped)</p>
-</dd></dl>
-
-<dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-grid-compute-dipcn-o">
-<span id="cmdoption-grid-compute-dipcn-output-prefix"></span><span class="sig-name descname"><span class="pre">-o</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--output-prefix</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;output_prefix&gt;</span></span><a class="headerlink" href="#cmdoption-grid-compute-dipcn-o" title="Link to this definition">¶</a></dt>
-<dd><p><strong>Required</strong> Output prefix for diploid CN files</p>
-</dd></dl>
-
-<dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-grid-compute-dipcn-N">
-<span id="cmdoption-grid-compute-dipcn-n-neighbors"></span><span class="sig-name descname"><span class="pre">-N</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--n-neighbors</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;n_neighbors&gt;</span></span><a class="headerlink" href="#cmdoption-grid-compute-dipcn-N" title="Link to this definition">¶</a></dt>
-<dd><p>Number of top neighbors to use</p>
-<dl class="field-list simple">
-<dt class="field-odd">Default<span class="colon">:</span></dt>
-<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">200</span></code></p>
-</dd>
-</dl>
-</dd></dl>
-
-</section>
-<section id="grid-count-reads">
-<h4>count-reads<a class="headerlink" href="#grid-count-reads" title="Link to this heading">¶</a></h4>
-<p>Count properly paired reads in a specified LPA VNTR region for all CRAMs.</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>grid<span class="w"> </span>count-reads<span class="w"> </span><span class="o">[</span>OPTIONS<span class="o">]</span>
-</pre></div>
-</div>
-<p class="rubric">Options</p>
-<dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-grid-count-reads-C">
-<span id="cmdoption-grid-count-reads-cram-dir"></span><span class="sig-name descname"><span class="pre">-C</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--cram-dir</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;cram_dir&gt;</span></span><a class="headerlink" href="#cmdoption-grid-count-reads-C" title="Link to this definition">¶</a></dt>
-<dd><p><strong>Required</strong> Directory with CRAM files</p>
-</dd></dl>
-
-<dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-grid-count-reads-o">
-<span id="cmdoption-grid-count-reads-output-file"></span><span class="sig-name descname"><span class="pre">-o</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--output-file</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;output_file&gt;</span></span><a class="headerlink" href="#cmdoption-grid-count-reads-o" title="Link to this definition">¶</a></dt>
-<dd><p><strong>Required</strong> Output TSV file</p>
-</dd></dl>
-
-<dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-grid-count-reads-r">
-<span id="cmdoption-grid-count-reads-ref-fasta"></span><span class="sig-name descname"><span class="pre">-r</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--ref-fasta</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;ref_fasta&gt;</span></span><a class="headerlink" href="#cmdoption-grid-count-reads-r" title="Link to this definition">¶</a></dt>
-<dd><p><strong>Required</strong> Reference genome FASTA</p>
-</dd></dl>
-
-<dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-grid-count-reads-c">
-<span id="cmdoption-grid-count-reads-chrom"></span><span class="sig-name descname"><span class="pre">-c</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--chrom</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;chrom&gt;</span></span><a class="headerlink" href="#cmdoption-grid-count-reads-c" title="Link to this definition">¶</a></dt>
-<dd><p><strong>Required</strong> Chromosome (e.g., chr6)</p>
-</dd></dl>
-
-<dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-grid-count-reads-s">
-<span id="cmdoption-grid-count-reads-start"></span><span class="sig-name descname"><span class="pre">-s</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--start</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;start&gt;</span></span><a class="headerlink" href="#cmdoption-grid-count-reads-s" title="Link to this definition">¶</a></dt>
-<dd><p><strong>Required</strong> Start position</p>
-</dd></dl>
-
-<dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-grid-count-reads-e">
-<span id="cmdoption-grid-count-reads-end"></span><span class="sig-name descname"><span class="pre">-e</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--end</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;end&gt;</span></span><a class="headerlink" href="#cmdoption-grid-count-reads-e" title="Link to this definition">¶</a></dt>
-<dd><p><strong>Required</strong> End position</p>
-</dd></dl>
-
-<dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-grid-count-reads-config">
-<span class="sig-name descname"><span class="pre">--config</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;config&gt;</span></span><a class="headerlink" href="#cmdoption-grid-count-reads-config" title="Link to this definition">¶</a></dt>
-<dd><p><strong>Required</strong> Path to YAML config file</p>
-</dd></dl>
-
-<dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-grid-count-reads-t">
-<span id="cmdoption-grid-count-reads-threads"></span><span class="sig-name descname"><span class="pre">-t</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--threads</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;threads&gt;</span></span><a class="headerlink" href="#cmdoption-grid-count-reads-t" title="Link to this definition">¶</a></dt>
-<dd><p>Number of threads for parallel processing (default: 1)</p>
-</dd></dl>
-
-</section>
-<section id="grid-crai">
-<h4>crai<a class="headerlink" href="#grid-crai" title="Link to this heading">¶</a></h4>
-<p>Ensure CRAI index exists for a CRAM file.</p>
+<section id="grid-wgs">
+<h4>wgs<a class="headerlink" href="#grid-wgs" title="Link to this heading">¶</a></h4>
+<p>Whole Genome Sequencing (WGS) pipeline for estimating LPA KIV-2 copy numbers.</p>
 <dl class="simple">
-<dt>Args:</dt><dd><p>cram: Path to the CRAM file.
-reference: Path to the reference genome FASTA.</p>
+<dt>Args:</dt><dd><p>config: Path to YAML configuration file specifying input CRAMs, reference genome, and pipeline</p>
 </dd>
-<dt>Returns:</dt><dd><p>Path to the CRAI index file.</p>
-</dd>
-</dl>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>grid<span class="w"> </span>crai<span class="w"> </span><span class="o">[</span>OPTIONS<span class="o">]</span>
-</pre></div>
-</div>
-<p class="rubric">Options</p>
-<dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-grid-crai-c">
-<span id="cmdoption-grid-crai-cram"></span><span class="sig-name descname"><span class="pre">-c</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--cram</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;cram&gt;</span></span><a class="headerlink" href="#cmdoption-grid-crai-c" title="Link to this definition">¶</a></dt>
-<dd><p><strong>Required</strong> Input CRAM file</p>
-</dd></dl>
-
-<dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-grid-crai-r">
-<span id="cmdoption-grid-crai-reference"></span><span class="sig-name descname"><span class="pre">-r</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--reference</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;reference&gt;</span></span><a class="headerlink" href="#cmdoption-grid-crai-r" title="Link to this definition">¶</a></dt>
-<dd><p><strong>Required</strong> Reference genome FASTA</p>
-</dd></dl>
-
-</section>
-<section id="grid-estimate-kiv">
-<h4>estimate-kiv<a class="headerlink" href="#grid-estimate-kiv" title="Link to this heading">¶</a></h4>
-<p>Estimate LPA KIV2 copy numbers from exon1A and exon1B diploid copy numbers.</p>
-<dl class="simple">
-<dt>Formula:</dt><dd><p>diploid_estimate = 34.9 × exon1A + 5.2 × exon1B - 1
-haploid_estimate = diploid_estimate / 2</p>
+<dt>Returns:</dt><dd><p>Haplotype KIV-2 copy number estimates for each sample in the input CRAMs, saved to an output file specified in the config.</p>
 </dd>
 </dl>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>grid<span class="w"> </span>estimate-kiv<span class="w"> </span><span class="o">[</span>OPTIONS<span class="o">]</span>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>grid<span class="w"> </span>wgs<span class="w"> </span><span class="o">[</span>OPTIONS<span class="o">]</span><span class="w"> </span>CONFIG
 </pre></div>
 </div>
-<p class="rubric">Options</p>
+<p class="rubric">Arguments</p>
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-grid-estimate-kiv-a">
-<span id="cmdoption-grid-estimate-kiv-exon1a"></span><span class="sig-name descname"><span class="pre">-a</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--exon1a</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;exon1a&gt;</span></span><a class="headerlink" href="#cmdoption-grid-estimate-kiv-a" title="Link to this definition">¶</a></dt>
-<dd><p><strong>Required</strong> Exon1A diploid CN file (<a href="#id1"><span class="problematic" id="id2">*</span></a>.exon1A.dipCN.txt)</p>
-</dd></dl>
-
-<dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-grid-estimate-kiv-b">
-<span id="cmdoption-grid-estimate-kiv-exon1b"></span><span class="sig-name descname"><span class="pre">-b</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--exon1b</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;exon1b&gt;</span></span><a class="headerlink" href="#cmdoption-grid-estimate-kiv-b" title="Link to this definition">¶</a></dt>
-<dd><p><strong>Required</strong> Exon1B diploid CN file (<a href="#id3"><span class="problematic" id="id4">*</span></a>.exon1B.dipCN.txt)</p>
-</dd></dl>
-
-<dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-grid-estimate-kiv-o">
-<span id="cmdoption-grid-estimate-kiv-output"></span><span class="sig-name descname"><span class="pre">-o</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--output</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;output&gt;</span></span><a class="headerlink" href="#cmdoption-grid-estimate-kiv-o" title="Link to this definition">¶</a></dt>
-<dd><p><strong>Required</strong> Output file path for KIV2 copy number estimates</p>
-</dd></dl>
-
-<dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-grid-estimate-kiv-f">
-<span id="cmdoption-grid-estimate-kiv-format"></span><span class="sig-name descname"><span class="pre">-f</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--format</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;format&gt;</span></span><a class="headerlink" href="#cmdoption-grid-estimate-kiv-f" title="Link to this definition">¶</a></dt>
-<dd><p>Output file format</p>
-<dl class="field-list simple">
-<dt class="field-odd">Default<span class="colon">:</span></dt>
-<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">'tsv'</span></code></p>
-</dd>
-<dt class="field-even">Options<span class="colon">:</span></dt>
-<dd class="field-even"><p>tsv | txt | csv</p>
-</dd>
-</dl>
-</dd></dl>
-
-</section>
-<section id="grid-extract-reference">
-<h4>extract-reference<a class="headerlink" href="#grid-extract-reference" title="Link to this heading">¶</a></h4>
-<p>Extract FASTA sequences from a reference genome based on BED regions.</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>grid<span class="w"> </span>extract-reference<span class="w"> </span><span class="o">[</span>OPTIONS<span class="o">]</span>
-</pre></div>
-</div>
-<p class="rubric">Options</p>
-<dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-grid-extract-reference-r">
-<span id="cmdoption-grid-extract-reference-reference-fa"></span><span class="sig-name descname"><span class="pre">-r</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--reference-fa</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;reference_fa&gt;</span></span><a class="headerlink" href="#cmdoption-grid-extract-reference-r" title="Link to this definition">¶</a></dt>
-<dd><p><strong>Required</strong> Path to reference genome FASTA (e.g., hs37d5.fa)</p>
-</dd></dl>
-
-<dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-grid-extract-reference-b">
-<span id="cmdoption-grid-extract-reference-bed-file"></span><span class="sig-name descname"><span class="pre">-b</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--bed-file</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;bed_file&gt;</span></span><a class="headerlink" href="#cmdoption-grid-extract-reference-b" title="Link to this definition">¶</a></dt>
-<dd><p><strong>Required</strong> BED file defining regions to extract</p>
-</dd></dl>
-
-<dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-grid-extract-reference-o">
-<span id="cmdoption-grid-extract-reference-output-dir"></span><span class="sig-name descname"><span class="pre">-o</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--output-dir</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;output_dir&gt;</span></span><a class="headerlink" href="#cmdoption-grid-extract-reference-o" title="Link to this definition">¶</a></dt>
-<dd><p><strong>Required</strong> Output directory for FASTA file</p>
-</dd></dl>
-
-<dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-grid-extract-reference-f">
-<span id="cmdoption-grid-extract-reference-output-prefix"></span><span class="sig-name descname"><span class="pre">-f</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--output-prefix</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;output_prefix&gt;</span></span><a class="headerlink" href="#cmdoption-grid-extract-reference-f" title="Link to this definition">¶</a></dt>
-<dd><p>Prefix for output FASTA file</p>
-<dl class="field-list simple">
-<dt class="field-odd">Default<span class="colon">:</span></dt>
-<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">'ref_lpa'</span></code></p>
-</dd>
-</dl>
-</dd></dl>
-
-</section>
-<section id="grid-find-neighbors">
-<h4>find-neighbors<a class="headerlink" href="#grid-find-neighbors" title="Link to this heading">¶</a></h4>
-<p>Find nearest neighbors among individuals using normalized z-depths.</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>grid<span class="w"> </span>find-neighbors<span class="w"> </span><span class="o">[</span>OPTIONS<span class="o">]</span>
-</pre></div>
-</div>
-<p class="rubric">Options</p>
-<dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-grid-find-neighbors-i">
-<span id="cmdoption-grid-find-neighbors-input-file"></span><span class="sig-name descname"><span class="pre">-i</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--input-file</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;input_file&gt;</span></span><a class="headerlink" href="#cmdoption-grid-find-neighbors-i" title="Link to this definition">¶</a></dt>
-<dd><p><strong>Required</strong> Input normalized z-depth file (.gz) from normalize_mosdepth</p>
-</dd></dl>
-
-<dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-grid-find-neighbors-o">
-<span id="cmdoption-grid-find-neighbors-output-file"></span><span class="sig-name descname"><span class="pre">-o</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--output-file</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;output_file&gt;</span></span><a class="headerlink" href="#cmdoption-grid-find-neighbors-o" title="Link to this definition">¶</a></dt>
-<dd><p><strong>Required</strong> Output file (will be gzipped and converted to .zMax{zmax}.txt.gz)</p>
-</dd></dl>
-
-<dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-grid-find-neighbors-z">
-<span id="cmdoption-grid-find-neighbors-zmax"></span><span class="sig-name descname"><span class="pre">-z</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--zmax</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;zmax&gt;</span></span><a class="headerlink" href="#cmdoption-grid-find-neighbors-z" title="Link to this definition">¶</a></dt>
-<dd><p>Maximum z-score clipping threshold</p>
-<dl class="field-list simple">
-<dt class="field-odd">Default<span class="colon">:</span></dt>
-<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">2.0</span></code></p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-grid-find-neighbors-n">
-<span id="cmdoption-grid-find-neighbors-n-neighbors"></span><span class="sig-name descname"><span class="pre">-n</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--n-neighbors</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;n_neighbors&gt;</span></span><a class="headerlink" href="#cmdoption-grid-find-neighbors-n" title="Link to this definition">¶</a></dt>
-<dd><p>Number of nearest neighbors to find</p>
-<dl class="field-list simple">
-<dt class="field-odd">Default<span class="colon">:</span></dt>
-<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">500</span></code></p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-grid-find-neighbors-sigma2-max">
-<span class="sig-name descname"><span class="pre">--sigma2-max</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;sigma2_max&gt;</span></span><a class="headerlink" href="#cmdoption-grid-find-neighbors-sigma2-max" title="Link to this definition">¶</a></dt>
-<dd><p>Maximum variance threshold for filtering regions</p>
-<dl class="field-list simple">
-<dt class="field-odd">Default<span class="colon">:</span></dt>
-<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">1000.0</span></code></p>
-</dd>
-</dl>
-</dd></dl>
-
-</section>
-<section id="grid-gcloud-copy">
-<h4>gcloud-copy<a class="headerlink" href="#grid-gcloud-copy" title="Link to this heading">¶</a></h4>
-<p>Copy CRAM files from a Google Cloud bucket to a local directory.</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>grid<span class="w"> </span>gcloud-copy<span class="w"> </span><span class="o">[</span>OPTIONS<span class="o">]</span>
-</pre></div>
-</div>
-<p class="rubric">Options</p>
-<dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-grid-gcloud-copy-b">
-<span id="cmdoption-grid-gcloud-copy-bucket-path"></span><span class="sig-name descname"><span class="pre">-b</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--bucket-path</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;bucket_path&gt;</span></span><a class="headerlink" href="#cmdoption-grid-gcloud-copy-b" title="Link to this definition">¶</a></dt>
-<dd><p><strong>Required</strong> Google Cloud Storage bucket path (e.g., gs://your-bucket/path/)</p>
-</dd></dl>
-
-<dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-grid-gcloud-copy-C">
-<span id="cmdoption-grid-gcloud-copy-cram-dir"></span><span class="sig-name descname"><span class="pre">-C</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--cram-dir</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;cram_dir&gt;</span></span><a class="headerlink" href="#cmdoption-grid-gcloud-copy-C" title="Link to this definition">¶</a></dt>
-<dd><p>Local directory to copy CRAM files into</p>
-</dd></dl>
-
-</section>
-<section id="grid-lpa-realign">
-<h4>lpa-realign<a class="headerlink" href="#grid-lpa-realign" title="Link to this heading">¶</a></h4>
-<p>Realign reads in LPA KIV-2 region for all CRAMs in a directory.</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>grid<span class="w"> </span>lpa-realign<span class="w"> </span><span class="o">[</span>OPTIONS<span class="o">]</span>
-</pre></div>
-</div>
-<p class="rubric">Options</p>
-<dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-grid-lpa-realign-C">
-<span id="cmdoption-grid-lpa-realign-cram-dir"></span><span class="sig-name descname"><span class="pre">-C</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--cram-dir</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;cram_dir&gt;</span></span><a class="headerlink" href="#cmdoption-grid-lpa-realign-C" title="Link to this definition">¶</a></dt>
-<dd><p><strong>Required</strong> Directory with CRAM files</p>
-</dd></dl>
-
-<dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-grid-lpa-realign-o">
-<span id="cmdoption-grid-lpa-realign-output-file"></span><span class="sig-name descname"><span class="pre">-o</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--output-file</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;output_file&gt;</span></span><a class="headerlink" href="#cmdoption-grid-lpa-realign-o" title="Link to this definition">¶</a></dt>
-<dd><p><strong>Required</strong> Output TSV file</p>
-</dd></dl>
-
-<dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-grid-lpa-realign-r">
-<span id="cmdoption-grid-lpa-realign-ref-fasta"></span><span class="sig-name descname"><span class="pre">-r</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--ref-fasta</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;ref_fasta&gt;</span></span><a class="headerlink" href="#cmdoption-grid-lpa-realign-r" title="Link to this definition">¶</a></dt>
-<dd><p><strong>Required</strong> Reference genome FASTA</p>
-</dd></dl>
-
-<dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-grid-lpa-realign-f">
-<span id="cmdoption-grid-lpa-realign-lpa-ref-fasta"></span><span class="sig-name descname"><span class="pre">-f</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--lpa-ref-fasta</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;lpa_ref_fasta&gt;</span></span><a class="headerlink" href="#cmdoption-grid-lpa-realign-f" title="Link to this definition">¶</a></dt>
-<dd><p><strong>Required</strong> LPA KIV-2 reference FASTA for realignment</p>
-</dd></dl>
-
-<dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-grid-lpa-realign-P">
-<span id="cmdoption-grid-lpa-realign-positions-file"></span><span class="sig-name descname"><span class="pre">-P</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--positions-file</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;positions_file&gt;</span></span><a class="headerlink" href="#cmdoption-grid-lpa-realign-P" title="Link to this definition">¶</a></dt>
-<dd><p><strong>Required</strong> Hardcoded positions file for LPA KIV-2</p>
-</dd></dl>
-
-<dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-grid-lpa-realign-g">
-<span id="cmdoption-grid-lpa-realign-genome-build"></span><span class="sig-name descname"><span class="pre">-g</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--genome-build</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;genome_build&gt;</span></span><a class="headerlink" href="#cmdoption-grid-lpa-realign-g" title="Link to this definition">¶</a></dt>
-<dd><p>Genome build</p>
-<dl class="field-list simple">
-<dt class="field-odd">Default<span class="colon">:</span></dt>
-<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">'hg38'</span></code></p>
-</dd>
-<dt class="field-even">Options<span class="colon">:</span></dt>
-<dd class="field-even"><p>hg19 | hg37 | hg38</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-grid-lpa-realign-c">
-<span id="cmdoption-grid-lpa-realign-chrom"></span><span class="sig-name descname"><span class="pre">-c</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--chrom</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;chrom&gt;</span></span><a class="headerlink" href="#cmdoption-grid-lpa-realign-c" title="Link to this definition">¶</a></dt>
-<dd><p><strong>Required</strong> Chromosome (e.g., chr6)</p>
-</dd></dl>
-
-<dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-grid-lpa-realign-s">
-<span id="cmdoption-grid-lpa-realign-start"></span><span class="sig-name descname"><span class="pre">-s</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--start</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;start&gt;</span></span><a class="headerlink" href="#cmdoption-grid-lpa-realign-s" title="Link to this definition">¶</a></dt>
-<dd><p><strong>Required</strong> Start position (0-based)</p>
-</dd></dl>
-
-<dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-grid-lpa-realign-e">
-<span id="cmdoption-grid-lpa-realign-end"></span><span class="sig-name descname"><span class="pre">-e</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--end</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;end&gt;</span></span><a class="headerlink" href="#cmdoption-grid-lpa-realign-e" title="Link to this definition">¶</a></dt>
-<dd><p><strong>Required</strong> End position (0-based)</p>
-</dd></dl>
-
-<dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-grid-lpa-realign-t">
-<span id="cmdoption-grid-lpa-realign-threads"></span><span class="sig-name descname"><span class="pre">-t</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--threads</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;threads&gt;</span></span><a class="headerlink" href="#cmdoption-grid-lpa-realign-t" title="Link to this definition">¶</a></dt>
-<dd><p>Number of threads for parallel processing (default: 1)</p>
-</dd></dl>
-
-</section>
-<section id="grid-mosdepth">
-<h4>mosdepth<a class="headerlink" href="#grid-mosdepth" title="Link to this heading">¶</a></h4>
-<p>Run mosdepth on all CRAMs in a directory and extract coverage for the LPA VNTR region.</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>grid<span class="w"> </span>mosdepth<span class="w"> </span><span class="o">[</span>OPTIONS<span class="o">]</span>
-</pre></div>
-</div>
-<p class="rubric">Options</p>
-<dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-grid-mosdepth-C">
-<span id="cmdoption-grid-mosdepth-cram-dir"></span><span class="sig-name descname"><span class="pre">-C</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--cram-dir</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;cram_dir&gt;</span></span><a class="headerlink" href="#cmdoption-grid-mosdepth-C" title="Link to this definition">¶</a></dt>
-<dd><p><strong>Required</strong> Directory with CRAM files</p>
-</dd></dl>
-
-<dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-grid-mosdepth-o">
-<span id="cmdoption-grid-mosdepth-output-file"></span><span class="sig-name descname"><span class="pre">-o</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--output-file</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;output_file&gt;</span></span><a class="headerlink" href="#cmdoption-grid-mosdepth-o" title="Link to this definition">¶</a></dt>
-<dd><p><strong>Required</strong> Output TSV file</p>
-</dd></dl>
-
-<dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-grid-mosdepth-r">
-<span id="cmdoption-grid-mosdepth-ref-fasta"></span><span class="sig-name descname"><span class="pre">-r</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--ref-fasta</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;ref_fasta&gt;</span></span><a class="headerlink" href="#cmdoption-grid-mosdepth-r" title="Link to this definition">¶</a></dt>
-<dd><p><strong>Required</strong> Reference genome FASTA</p>
-</dd></dl>
-
-<dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-grid-mosdepth-c">
-<span id="cmdoption-grid-mosdepth-chrom"></span><span class="sig-name descname"><span class="pre">-c</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--chrom</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;chrom&gt;</span></span><a class="headerlink" href="#cmdoption-grid-mosdepth-c" title="Link to this definition">¶</a></dt>
-<dd><p><strong>Required</strong> Chromosome (e.g., chr6)</p>
-</dd></dl>
-
-<dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-grid-mosdepth-s">
-<span id="cmdoption-grid-mosdepth-start"></span><span class="sig-name descname"><span class="pre">-s</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--start</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;start&gt;</span></span><a class="headerlink" href="#cmdoption-grid-mosdepth-s" title="Link to this definition">¶</a></dt>
-<dd><p><strong>Required</strong> Start position</p>
-</dd></dl>
-
-<dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-grid-mosdepth-e">
-<span id="cmdoption-grid-mosdepth-end"></span><span class="sig-name descname"><span class="pre">-e</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--end</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;end&gt;</span></span><a class="headerlink" href="#cmdoption-grid-mosdepth-e" title="Link to this definition">¶</a></dt>
-<dd><p><strong>Required</strong> End position</p>
-</dd></dl>
-
-<dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-grid-mosdepth-n">
-<span id="cmdoption-grid-mosdepth-region-name"></span><span class="sig-name descname"><span class="pre">-n</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--region-name</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;region_name&gt;</span></span><a class="headerlink" href="#cmdoption-grid-mosdepth-n" title="Link to this definition">¶</a></dt>
-<dd><p><strong>Required</strong> Name of the region for mosdepth output (default: LPA_VNTR)</p>
-</dd></dl>
-
-<dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-grid-mosdepth-w">
-<span id="cmdoption-grid-mosdepth-work-dir"></span><span class="sig-name descname"><span class="pre">-w</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--work-dir</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;work_dir&gt;</span></span><a class="headerlink" href="#cmdoption-grid-mosdepth-w" title="Link to this definition">¶</a></dt>
-<dd><p>Working directory for intermediate files</p>
-</dd></dl>
-
-<dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-grid-mosdepth-by">
-<span class="sig-name descname"><span class="pre">--by</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;by&gt;</span></span><a class="headerlink" href="#cmdoption-grid-mosdepth-by" title="Link to this definition">¶</a></dt>
-<dd><p>Bin size for mosdepth –by (Default: 1000)</p>
-</dd></dl>
-
-<dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-grid-mosdepth-fast">
-<span id="cmdoption-grid-mosdepth-no-fast"></span><span class="sig-name descname"><span class="pre">--fast</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--no-fast</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-grid-mosdepth-fast" title="Link to this definition">¶</a></dt>
-<dd><p>Enable or disable mosdepth –fast-mode</p>
-</dd></dl>
-
-<dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-grid-mosdepth-t">
-<span id="cmdoption-grid-mosdepth-threads"></span><span class="sig-name descname"><span class="pre">-t</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--threads</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;threads&gt;</span></span><a class="headerlink" href="#cmdoption-grid-mosdepth-t" title="Link to this definition">¶</a></dt>
-<dd><p>Number of threads for parallel processing (default: 1)</p>
-</dd></dl>
-
-</section>
-<section id="grid-normalize-mosdepth">
-<h4>normalize-mosdepth<a class="headerlink" href="#grid-normalize-mosdepth" title="Link to this heading">¶</a></h4>
-<p>Normalize mosdepth coverage across all samples in a directory.</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>grid<span class="w"> </span>normalize-mosdepth<span class="w"> </span><span class="o">[</span>OPTIONS<span class="o">]</span>
-</pre></div>
-</div>
-<p class="rubric">Options</p>
-<dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-grid-normalize-mosdepth-M">
-<span id="cmdoption-grid-normalize-mosdepth-mosdepth-dir"></span><span class="sig-name descname"><span class="pre">-M</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--mosdepth-dir</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;mosdepth_dir&gt;</span></span><a class="headerlink" href="#cmdoption-grid-normalize-mosdepth-M" title="Link to this definition">¶</a></dt>
-<dd><p><strong>Required</strong> Directory with mosdepth files</p>
-</dd></dl>
-
-<dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-grid-normalize-mosdepth-o">
-<span id="cmdoption-grid-normalize-mosdepth-output-file"></span><span class="sig-name descname"><span class="pre">-o</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--output-file</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;output_file&gt;</span></span><a class="headerlink" href="#cmdoption-grid-normalize-mosdepth-o" title="Link to this definition">¶</a></dt>
-<dd><p><strong>Required</strong> Normalized output file (.gz)</p>
-</dd></dl>
-
-<dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-grid-normalize-mosdepth-r">
-<span id="cmdoption-grid-normalize-mosdepth-repeat-mask"></span><span class="sig-name descname"><span class="pre">-r</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--repeat-mask</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;repeat_mask&gt;</span></span><a class="headerlink" href="#cmdoption-grid-normalize-mosdepth-r" title="Link to this definition">¶</a></dt>
-<dd><p><strong>Required</strong> Repeat mask BED file</p>
-</dd></dl>
-
-<dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-grid-normalize-mosdepth-c">
-<span id="cmdoption-grid-normalize-mosdepth-chrom"></span><span class="sig-name descname"><span class="pre">-c</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--chrom</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;chrom&gt;</span></span><a class="headerlink" href="#cmdoption-grid-normalize-mosdepth-c" title="Link to this definition">¶</a></dt>
-<dd><p><strong>Required</strong> Chromosome (e.g., chr6)</p>
-</dd></dl>
-
-<dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-grid-normalize-mosdepth-s">
-<span id="cmdoption-grid-normalize-mosdepth-start"></span><span class="sig-name descname"><span class="pre">-s</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--start</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;start&gt;</span></span><a class="headerlink" href="#cmdoption-grid-normalize-mosdepth-s" title="Link to this definition">¶</a></dt>
-<dd><p><strong>Required</strong> Start coordinate</p>
-</dd></dl>
-
-<dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-grid-normalize-mosdepth-e">
-<span id="cmdoption-grid-normalize-mosdepth-end"></span><span class="sig-name descname"><span class="pre">-e</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--end</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;end&gt;</span></span><a class="headerlink" href="#cmdoption-grid-normalize-mosdepth-e" title="Link to this definition">¶</a></dt>
-<dd><p><strong>Required</strong> End coordinate</p>
-</dd></dl>
-
-<dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-grid-normalize-mosdepth-min-depth">
-<span class="sig-name descname"><span class="pre">--min-depth</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;min_depth&gt;</span></span><a class="headerlink" href="#cmdoption-grid-normalize-mosdepth-min-depth" title="Link to this definition">¶</a></dt>
-<dd><p>Minimum depth to keep (default: 20)</p>
-</dd></dl>
-
-<dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-grid-normalize-mosdepth-max-depth">
-<span class="sig-name descname"><span class="pre">--max-depth</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;max_depth&gt;</span></span><a class="headerlink" href="#cmdoption-grid-normalize-mosdepth-max-depth" title="Link to this definition">¶</a></dt>
-<dd><p>Maximum depth to keep (default: 100)</p>
-</dd></dl>
-
-<dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-grid-normalize-mosdepth-top-frac">
-<span class="sig-name descname"><span class="pre">--top-frac</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;top_frac&gt;</span></span><a class="headerlink" href="#cmdoption-grid-normalize-mosdepth-top-frac" title="Link to this definition">¶</a></dt>
-<dd><p>Top fraction of high-variance regions to keep (default: 0.1)</p>
-</dd></dl>
-
-<dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-grid-normalize-mosdepth-t">
-<span id="cmdoption-grid-normalize-mosdepth-threads"></span><span class="sig-name descname"><span class="pre">-t</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--threads</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;threads&gt;</span></span><a class="headerlink" href="#cmdoption-grid-normalize-mosdepth-t" title="Link to this definition">¶</a></dt>
-<dd><p>Number of threads for parallel processing (default: 1)</p>
-</dd></dl>
-
-</section>
-<section id="grid-subset">
-<h4>subset<a class="headerlink" href="#grid-subset" title="Link to this heading">¶</a></h4>
-<p>Subset a CRAM file to a specific genomic region.</p>
-<dl class="simple">
-<dt>Args:</dt><dd><p>cram: Input CRAM file.
-region: Genomic region in ‘chr:start-end’ format.
-chrom: Chromosome (if region not provided).
-start: Start position (if region not provided).
-end: End position (if region not provided).
-output: Output CRAM file path.
-reference: Reference genome FASTA.</p>
-</dd>
-<dt>Returns:</dt><dd><p>Path to the subset CRAM file.</p>
-</dd>
-</dl>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>grid<span class="w"> </span>subset<span class="w"> </span><span class="o">[</span>OPTIONS<span class="o">]</span>
-</pre></div>
-</div>
-<p class="rubric">Options</p>
-<dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-grid-subset-c">
-<span id="cmdoption-grid-subset-cram"></span><span class="sig-name descname"><span class="pre">-c</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--cram</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;cram&gt;</span></span><a class="headerlink" href="#cmdoption-grid-subset-c" title="Link to this definition">¶</a></dt>
-<dd><p><strong>Required</strong> Input CRAM file</p>
-</dd></dl>
-
-<dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-grid-subset-r">
-<span id="cmdoption-grid-subset-region"></span><span class="sig-name descname"><span class="pre">-r</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--region</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;region&gt;</span></span><a class="headerlink" href="#cmdoption-grid-subset-r" title="Link to this definition">¶</a></dt>
-<dd><p>Genomic region (e.g., ‘chr6:160000000-160100000’)</p>
-</dd></dl>
-
-<dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-grid-subset-C">
-<span id="cmdoption-grid-subset-chrom"></span><span class="sig-name descname"><span class="pre">-C</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--chrom</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;chrom&gt;</span></span><a class="headerlink" href="#cmdoption-grid-subset-C" title="Link to this definition">¶</a></dt>
-<dd><p>Chromosome (e.g., chr6)</p>
-</dd></dl>
-
-<dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-grid-subset-s">
-<span id="cmdoption-grid-subset-start"></span><span class="sig-name descname"><span class="pre">-s</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--start</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;start&gt;</span></span><a class="headerlink" href="#cmdoption-grid-subset-s" title="Link to this definition">¶</a></dt>
-<dd><p>Start position (e.g., 160000000)</p>
-</dd></dl>
-
-<dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-grid-subset-e">
-<span id="cmdoption-grid-subset-end"></span><span class="sig-name descname"><span class="pre">-e</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--end</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;end&gt;</span></span><a class="headerlink" href="#cmdoption-grid-subset-e" title="Link to this definition">¶</a></dt>
-<dd><p>End position (e.g., 160100000)</p>
-</dd></dl>
-
-<dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-grid-subset-o">
-<span id="cmdoption-grid-subset-output"></span><span class="sig-name descname"><span class="pre">-o</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--output</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;output&gt;</span></span><a class="headerlink" href="#cmdoption-grid-subset-o" title="Link to this definition">¶</a></dt>
-<dd><p><strong>Required</strong> Output subset CRAM file</p>
-</dd></dl>
-
-<dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-grid-subset-R">
-<span id="cmdoption-grid-subset-reference"></span><span class="sig-name descname"><span class="pre">-R</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--reference</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;reference&gt;</span></span><a class="headerlink" href="#cmdoption-grid-subset-R" title="Link to this definition">¶</a></dt>
-<dd><p><strong>Required</strong> Reference genome FASTA</p>
+<dt class="sig sig-object std" id="cmdoption-grid-wgs-arg-CONFIG">
+<span class="sig-name descname"><span class="pre">CONFIG</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-grid-wgs-arg-CONFIG" title="Link to this definition">¶</a></dt>
+<dd><p>Required argument</p>
 </dd></dl>
 
 </section>
 </section>
 </section>
-<section id="module-documentation">
-<h2>Module Documentation<a class="headerlink" href="#module-documentation" title="Link to this heading">¶</a></h2>
+<hr class="docutils" />
+<section id="core">
+<h2>Core<a class="headerlink" href="#core" title="Link to this heading">¶</a></h2>
 <div class="toctree-wrapper compound">
-<p class="caption" role="heading"><span class="caption-text">Core Modules</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="modules_dir/grid_core.html">GRiD Core Module</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="modules_dir/grid_core.html#overview">Overview</a></li>
-<li class="toctree-l2"><a class="reference internal" href="modules_dir/grid_core.html#python-api-documentation">Python API Documentation</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="modules_dir/utilities_overview.html">Utilities Overview</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="modules_dir/utilities_overview.html#grid-utilities-module">GRiD Utilities Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="modules_dir/utilities_overview.html#python-api-documentation">Python API Documentation</a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="modules_dir/grid_core.html">Core</a></li>
 </ul>
 </div>
+</section>
+<section id="pipeline-steps">
+<h2>Pipeline Steps<a class="headerlink" href="#pipeline-steps" title="Link to this heading">¶</a></h2>
 <div class="toctree-wrapper compound">
-<p class="caption" role="heading"><span class="caption-text">Utility Modules</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="modules_dir/helper-functions.html">Helper Functions</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="modules_dir/helper-functions.html#overview">Overview</a></li>
-<li class="toctree-l2"><a class="reference internal" href="modules_dir/helper-functions.html#python-api-documentation">Python API Documentation</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="modules_dir/count-reads.html">Read Counting Module</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="modules_dir/count-reads.html#overview">Overview</a></li>
-<li class="toctree-l2"><a class="reference internal" href="modules_dir/count-reads.html#python-api-documentation">Python API Documentation</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="modules_dir/mosdepth.html">Mosdepth Coverage Analysis</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="modules_dir/mosdepth.html#overview">Overview</a></li>
-<li class="toctree-l2"><a class="reference internal" href="modules_dir/mosdepth.html#python-api-documentation">Python API Documentation</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="modules_dir/normalize-mosdepth.html">Mosdepth Coverage Normalization</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="modules_dir/normalize-mosdepth.html#overview">Overview</a></li>
-<li class="toctree-l2"><a class="reference internal" href="modules_dir/normalize-mosdepth.html#python-api-documentation">Python API Documentation</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="modules_dir/find-neighbors.html">Neighbor Finding Module</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="modules_dir/find-neighbors.html#overview">Overview</a></li>
-<li class="toctree-l2"><a class="reference internal" href="modules_dir/find-neighbors.html#python-api-documentation">Python API Documentation</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="modules_dir/lpa-realign.html">LPA Realignment Module</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="modules_dir/lpa-realign.html#overview">Overview</a></li>
-<li class="toctree-l2"><a class="reference internal" href="modules_dir/lpa-realign.html#python-api-documentation">Python API Documentation</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="modules_dir/compute-dipcn.html">Diploid Copy Number Computation</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="modules_dir/compute-dipcn.html#overview">Overview</a></li>
-<li class="toctree-l2"><a class="reference internal" href="modules_dir/compute-dipcn.html#python-api-documentation">Python API Documentation</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="modules_dir/estimate-kiv.html">KIV-2 Copy Number Estimation</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="modules_dir/estimate-kiv.html#overview">Overview</a></li>
-<li class="toctree-l2"><a class="reference internal" href="modules_dir/estimate-kiv.html#python-api-documentation">Python API Documentation</a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="modules_dir/count-reads.html">Read Counting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modules_dir/mosdepth.html">Coverage Estimation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modules_dir/normalize-mosdepth.html">Coverage Normalization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modules_dir/find-neighbors.html">Nearest-Neighbor Identification</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modules_dir/compute-dipcn.html">Diploid Copy Number Estimation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modules_dir/hi-inference.html">Haplotype Inference</a></li>
 </ul>
 </div>
+</section>
+<section id="utilities">
+<h2>Utilities<a class="headerlink" href="#utilities" title="Link to this heading">¶</a></h2>
 <div class="toctree-wrapper compound">
-<p class="caption" role="heading"><span class="caption-text">Support Modules</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="modules_dir/crai.html">CRAM Index Management</a></li>
-<li class="toctree-l1"><a class="reference internal" href="modules_dir/subset.html">CRAM Subsetting</a></li>
-<li class="toctree-l1"><a class="reference internal" href="modules_dir/extract-reference.html">Extract Reference Sequences</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modules_dir/utils.html">Utilities &amp; Helper Functions</a></li>
 </ul>
 </div>
 </section>
@@ -929,18 +374,18 @@ reference: Reference genome FASTA.</p>
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">GRiD Core Module</div>
+                <div class="title">Core</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="code_of_conduct.html">
+          <a class="prev-page" href="paper.html">
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title">Code of Conduct</div>
+                <div class="title">Paper</div>
                 
               </div>
             </a>
@@ -948,7 +393,7 @@ reference: Reference genome FASTA.</p>
         <div class="bottom-of-page">
           <div class="left-details">
             <div class="copyright">
-                Copyright &#169; 2025, Zachary Caterer
+                Copyright &#169; 2026, Zachary Caterer
             </div>
             Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
             
@@ -974,27 +419,17 @@ reference: Reference genome FASTA.</p>
         <div class="toc-tree-container">
           <div class="toc-tree">
             <ul>
-<li><a class="reference internal" href="#">Modules</a><ul>
+<li><a class="reference internal" href="#">API Reference</a><ul>
 <li><a class="reference internal" href="#command-line-interface">Command-Line Interface</a><ul>
 <li><a class="reference internal" href="#grid">grid</a><ul>
-<li><a class="reference internal" href="#grid-compute-dipcn">compute-dipcn</a></li>
-<li><a class="reference internal" href="#grid-count-reads">count-reads</a></li>
-<li><a class="reference internal" href="#grid-crai">crai</a></li>
-<li><a class="reference internal" href="#grid-estimate-kiv">estimate-kiv</a></li>
-<li><a class="reference internal" href="#grid-extract-reference">extract-reference</a></li>
-<li><a class="reference internal" href="#grid-find-neighbors">find-neighbors</a></li>
-<li><a class="reference internal" href="#grid-gcloud-copy">gcloud-copy</a></li>
-<li><a class="reference internal" href="#grid-lpa-realign">lpa-realign</a></li>
-<li><a class="reference internal" href="#grid-mosdepth">mosdepth</a></li>
-<li><a class="reference internal" href="#grid-normalize-mosdepth">normalize-mosdepth</a></li>
-<li><a class="reference internal" href="#grid-subset">subset</a></li>
+<li><a class="reference internal" href="#grid-wgs">wgs</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a class="reference internal" href="#module-documentation">Module Documentation</a><ul>
-</ul>
-</li>
+<li><a class="reference internal" href="#core">Core</a></li>
+<li><a class="reference internal" href="#pipeline-steps">Pipeline Steps</a></li>
+<li><a class="reference internal" href="#utilities">Utilities</a></li>
 </ul>
 </li>
 </ul>
@@ -1006,7 +441,7 @@ reference: Reference genome FASTA.</p>
       
     </aside>
   </div>
-</div><script src="_static/documentation_options.js?v=f8c80a57"></script>
+</div><script src="_static/documentation_options.js?v=2709fde1"></script>
     <script src="_static/doctools.js?v=9bcbadda"></script>
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/scripts/furo.js?v=46bd48cc"></script>

@@ -3,11 +3,11 @@
   <head><meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="index" title="Index" href="../genindex.html"><link rel="search" title="Search" href="../search.html"><link rel="next" title="Utilities Overview" href="utilities_overview.html"><link rel="prev" title="Modules" href="../modules.html">
+<link rel="index" title="Index" href="../genindex.html"><link rel="search" title="Search" href="../search.html"><link rel="next" title="Read Counting" href="count-reads.html"><link rel="prev" title="API Reference" href="../modules.html">
         <link rel="prefetch" href="../_static/grid_logo.png" as="image">
 
     <link rel="shortcut icon" href="../_static/favicon.ico"><!-- Generated with Sphinx 8.2.3 and Furo 2025.09.25 -->
-        <title>GRiD Core Module - GRiD v0 documentation</title>
+        <title>Core - GRiD 0.1 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d111a655" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=580074bf" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
@@ -172,7 +172,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../index.html"><div class="brand">GRiD v0 documentation</div></a>
+      <a href="../index.html"><div class="brand">GRiD 0.1 documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -196,7 +196,7 @@
     <img class="sidebar-logo" src="../_static/grid_logo.png" alt="Logo"/>
   </div>
   
-  <span class="sidebar-brand-text">GRiD v0 documentation</span>
+  <span class="sidebar-brand-text">GRiD 0.1 documentation</span>
   
 </a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
   <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
@@ -204,30 +204,53 @@
   <input type="hidden" name="area" value="default">
 </form>
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
-  <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
-<ul class="current">
+  <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="../readme.html">Welcome to GRiD’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ibs_ibd.html">Computing IBS/IBD Neighbors</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Examples</span></p>
+<ul>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../examples.html">Example Pipeline Jobs</a><input aria-label="Toggle navigation of Example Pipeline Jobs" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../examples/SOL_sbatch.html">SLURM Job Example</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../examples/SOL_python.html">Python Pipeline Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/1000G_example.html">1000 Genomes Full Pipeline Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/IBS_example.html">IBS/IBD Neighbor Computation Example</a></li>
 </ul>
 </li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Algorithms</span></p>
+<ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../algorithms.html">Algorithms</a><input aria-label="Toggle navigation of Algorithms" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../algorithms/count_reads.html">Read Counting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../algorithms/coverage.html">Coverage Estimation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../algorithms/normalization.html">Coverage Normalization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../algorithms/neighbors.html">Nearest-Neighbor Identification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../algorithms/dipcn.html">Diploid Copy Number Estimation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../algorithms/hi_inference.html">Haplotype Inference</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Project</span></p>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="../contributing.html">Contributing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../code_of_conduct.html">Code of Conduct</a></li>
-<li class="toctree-l1 current has-children"><a class="reference internal" href="../modules.html">Modules</a><input aria-label="Toggle navigation of Modules" checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul class="current">
-<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">GRiD Core Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="utilities_overview.html">Utilities Overview</a></li>
-<li class="toctree-l2"><a class="reference internal" href="helper-functions.html">Helper Functions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="count-reads.html">Read Counting Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="mosdepth.html">Mosdepth Coverage Analysis</a></li>
-<li class="toctree-l2"><a class="reference internal" href="normalize-mosdepth.html">Mosdepth Coverage Normalization</a></li>
-<li class="toctree-l2"><a class="reference internal" href="find-neighbors.html">Neighbor Finding Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="lpa-realign.html">LPA Realignment Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="compute-dipcn.html">Diploid Copy Number Computation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="estimate-kiv.html">KIV-2 Copy Number Estimation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Paper</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../paper.html">Paper</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul class="current">
+<li class="toctree-l1 current has-children"><a class="reference internal" href="../modules.html">API Reference</a><input aria-label="Toggle navigation of API Reference" checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul class="current">
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">Core</a></li>
+<li class="toctree-l2"><a class="reference internal" href="count-reads.html">Read Counting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mosdepth.html">Coverage Estimation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="normalize-mosdepth.html">Coverage Normalization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="find-neighbors.html">Nearest-Neighbor Identification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="compute-dipcn.html">Diploid Copy Number Estimation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hi-inference.html">Haplotype Inference</a></li>
 <li class="toctree-l2"><a class="reference internal" href="crai.html">CRAM Index Management</a></li>
-<li class="toctree-l2"><a class="reference internal" href="subset.html">CRAM Subsetting</a></li>
-<li class="toctree-l2"><a class="reference internal" href="extract-reference.html">Extract Reference Sequences</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils.html">Utilities &amp; Helper Functions</a></li>
 </ul>
 </li>
 </ul>
@@ -268,89 +291,12 @@
           </label>
         </div>
         <article role="main" id="furo-main-content">
-          <section id="grid-core-module">
-<h1>GRiD Core Module<a class="headerlink" href="#grid-core-module" title="Link to this heading">¶</a></h1>
-<section id="overview">
-<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">¶</a></h2>
-<section id="grid-core-module">
-<h3>GRiD Core Module<a class="headerlink" href="#grid-core-module" title="Link to this heading">¶</a></h3>
-<p>This directory contains the core implementation of the GRiD pipeline for LPA KIV-2 copy number variant estimation.</p>
-<section id="structure">
-<h4>Structure<a class="headerlink" href="#structure" title="Link to this heading">¶</a></h4>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>grid/
-├── cli.py              # Command-line interface with all pipeline commands
-├── config.py           # Configuration management (in development)
-├── config.yaml         # Example configuration file
-├── pipeline.py         # Unified pipeline orchestration (in development)
-├── utils/              # Core computational modules and utilities
-└── README.md           # This file
-</pre></div>
-</div>
-</section>
-<section id="key-components">
-<h4>Key Components<a class="headerlink" href="#key-components" title="Link to this heading">¶</a></h4>
-<section id="cli-py">
-<h5><code class="docutils literal notranslate"><span class="pre">cli.py</span></code><a class="headerlink" href="#cli-py" title="Link to this heading">¶</a></h5>
-<p>The main entry point for all GRiD commands. Provides a rich CLI interface with commands for:</p>
-<ul class="simple">
-<li><p>CRAM file indexing and subsetting</p></li>
-<li><p>Read counting in VNTR regions</p></li>
-<li><p>Coverage analysis with mosdepth</p></li>
-<li><p>Neighbor finding and normalization</p></li>
-<li><p>Reference extraction</p></li>
-<li><p>LPA realignment</p></li>
-<li><p>Copy number estimation</p></li>
-</ul>
-<p>Run <code class="docutils literal notranslate"><span class="pre">grid</span> <span class="pre">--help</span></code> to see all available commands.</p>
-</section>
-<section id="config-yaml">
-<h5><code class="docutils literal notranslate"><span class="pre">config.yaml</span></code><a class="headerlink" href="#config-yaml" title="Link to this heading">¶</a></h5>
-<p>Example configuration file for setting up genomic coordinates, file paths, and pipeline parameters.</p>
-</section>
-<section id="utils">
-<h5><code class="docutils literal notranslate"><span class="pre">utils/</span></code><a class="headerlink" href="#utils" title="Link to this heading">¶</a></h5>
-<p>Contains all computational logic organized into modular Python scripts and subdirectories. See <code class="docutils literal notranslate"><span class="pre">utils/README.md</span></code> for detailed module information.</p>
-</section>
-</section>
-<section id="usage">
-<h4>Usage<a class="headerlink" href="#usage" title="Link to this heading">¶</a></h4>
-<p>All commands are accessed through the <code class="docutils literal notranslate"><span class="pre">grid</span></code> CLI:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get help</span>
-grid<span class="w"> </span>--help
-grid<span class="w"> </span>&lt;command&gt;<span class="w"> </span>--help
-
-<span class="c1"># Example: Count reads</span>
-grid<span class="w"> </span>count-reads<span class="w"> </span>--cram-dir<span class="w"> </span>data/CRAMs<span class="w"> </span><span class="se">\</span>
-<span class="w">                 </span>--output-file<span class="w"> </span>output/counts.tsv<span class="w"> </span><span class="se">\</span>
-<span class="w">                 </span>--ref-fasta<span class="w"> </span>refs/hs37d5.fa<span class="w"> </span><span class="se">\</span>
-<span class="w">                 </span>--chrom<span class="w"> </span>chr6<span class="w"> </span><span class="se">\</span>
-<span class="w">                 </span>--start<span class="w"> </span><span class="m">160000000</span><span class="w"> </span><span class="se">\</span>
-<span class="w">                 </span>--end<span class="w"> </span><span class="m">160100000</span><span class="w"> </span><span class="se">\</span>
-<span class="w">                 </span>--config<span class="w"> </span>config.yaml
-</pre></div>
-</div>
-</section>
-<section id="future-development">
-<h4>Future Development<a class="headerlink" href="#future-development" title="Link to this heading">¶</a></h4>
-<ul class="simple">
-<li><p>[ ] Implement <code class="docutils literal notranslate"><span class="pre">pipeline.py</span></code> for unified <code class="docutils literal notranslate"><span class="pre">grid</span> <span class="pre">run</span></code> command</p></li>
-<li><p>[ ] Enhance <code class="docutils literal notranslate"><span class="pre">config.py</span></code> for advanced configuration management</p></li>
-<li><p>[ ] Add Python API for programmatic access</p></li>
-</ul>
-</section>
-</section>
-</section>
-<section id="python-api-documentation">
-<h2>Python API Documentation<a class="headerlink" href="#python-api-documentation" title="Link to this heading">¶</a></h2>
-<section id="module-grid">
-<span id="grid-init"></span><h3>grid.__init__<a class="headerlink" href="#module-grid" title="Link to this heading">¶</a></h3>
-<p>GRiD - Genomic Repeat inference from Depth</p>
-<p>LPA KIV-2 Copy Number Variant Estimation Pipeline</p>
-<p>A modular pipeline for estimating copy number variants in the LPA gene’s KIV-2 VNTR region.</p>
-</section>
-<section id="module-grid.cli">
-<span id="grid-cli"></span><h3>grid.cli<a class="headerlink" href="#module-grid.cli" title="Link to this heading">¶</a></h3>
-<p>Command-line interface for LPA KIV-CNV pipeline.</p>
+          <section id="core">
+<h1>Core<a class="headerlink" href="#core" title="Link to this heading">¶</a></h1>
+<section id="grid-cli">
+<h2><code class="docutils literal notranslate"><span class="pre">grid.cli</span></code><a class="headerlink" href="#grid-cli" title="Link to this heading">¶</a></h2>
+<p>Click-based command-line interface. Entry point is <code class="docutils literal notranslate"><span class="pre">grid</span> <span class="pre">WGS</span> <span class="pre">&lt;config&gt;</span></code>.</p>
+<p id="module-grid.cli">Command-line interface for LPA KIV-CNV pipeline.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="grid.cli.main">
 <span class="sig-prename descclassname"><span class="pre">grid.cli.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#grid.cli.main" title="Link to this definition">¶</a></dt>
@@ -369,12 +315,45 @@ grid<span class="w"> </span>count-reads<span class="w"> </span>--cram-dir<span c
 <dd></dd></dl>
 
 </section>
-<section id="module-grid.config">
-<span id="grid-config"></span><h3>grid.config<a class="headerlink" href="#module-grid.config" title="Link to this heading">¶</a></h3>
+<section id="grid-pipeline">
+<h2><code class="docutils literal notranslate"><span class="pre">grid.pipeline</span></code><a class="headerlink" href="#grid-pipeline" title="Link to this heading">¶</a></h2>
+<p>Orchestrates the full WGS pipeline from a loaded config dict.</p>
+<dl class="py function" id="module-grid.pipeline">
+<dt class="sig sig-object py" id="grid.pipeline.run_wgs_pipeline">
+<span class="sig-prename descclassname"><span class="pre">grid.pipeline.</span></span><span class="sig-name descname"><span class="pre">run_wgs_pipeline</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">console</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">config</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#grid.pipeline.run_wgs_pipeline" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
 </section>
-<section id="module-grid.pipeline">
-<span id="grid-pipeline"></span><h3>grid.pipeline<a class="headerlink" href="#module-grid.pipeline" title="Link to this heading">¶</a></h3>
-</section>
+<section id="grid-config">
+<h2><code class="docutils literal notranslate"><span class="pre">grid.config</span></code><a class="headerlink" href="#grid-config" title="Link to this heading">¶</a></h2>
+<p>Config validation — called at pipeline startup before any steps run.</p>
+<dl class="py function" id="module-grid.config">
+<dt class="sig sig-object py" id="grid.config._get_nested">
+<span class="sig-prename descclassname"><span class="pre">grid.config.</span></span><span class="sig-name descname"><span class="pre">_get_nested</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">keys</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#grid.config._get_nested" title="Link to this definition">¶</a></dt>
+<dd><p>Navigate a nested dict by key path, returning None if any key is missing.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="grid.config._is_enabled">
+<span class="sig-prename descclassname"><span class="pre">grid.config.</span></span><span class="sig-name descname"><span class="pre">_is_enabled</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gate</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#grid.config._is_enabled" title="Link to this definition">¶</a></dt>
+<dd><p>Return True if the config section at gate path has run=True.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="grid.config.error_check_config">
+<span class="sig-prename descclassname"><span class="pre">grid.config.</span></span><span class="sig-name descname"><span class="pre">error_check_config</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">console</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#grid.config.error_check_config" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="grid.config.validate_steps">
+<span class="sig-prename descclassname"><span class="pre">grid.config.</span></span><span class="sig-name descname"><span class="pre">validate_steps</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">errors</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">warnings</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#grid.config.validate_steps" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="grid.config.validate_top_level">
+<span class="sig-prename descclassname"><span class="pre">grid.config.</span></span><span class="sig-name descname"><span class="pre">validate_top_level</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">errors</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">warnings</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#grid.config.validate_top_level" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
 </section>
 </section>
 
@@ -383,12 +362,12 @@ grid<span class="w"> </span>count-reads<span class="w"> </span>--cram-dir<span c
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="utilities_overview.html">
+          <a class="next-page" href="count-reads.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">Utilities Overview</div>
+                <div class="title">Read Counting</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
@@ -399,7 +378,7 @@ grid<span class="w"> </span>count-reads<span class="w"> </span>--cram-dir<span c
                   <span>Previous</span>
                 </div>
                 
-                <div class="title">Modules</div>
+                <div class="title">API Reference</div>
                 
               </div>
             </a>
@@ -407,7 +386,7 @@ grid<span class="w"> </span>count-reads<span class="w"> </span>--cram-dir<span c
         <div class="bottom-of-page">
           <div class="left-details">
             <div class="copyright">
-                Copyright &#169; 2025, Zachary Caterer
+                Copyright &#169; 2026, Zachary Caterer
             </div>
             Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
             
@@ -433,32 +412,23 @@ grid<span class="w"> </span>count-reads<span class="w"> </span>--cram-dir<span c
         <div class="toc-tree-container">
           <div class="toc-tree">
             <ul>
-<li><a class="reference internal" href="#">GRiD Core Module</a><ul>
-<li><a class="reference internal" href="#overview">Overview</a><ul>
-<li><a class="reference internal" href="#grid-core-module">GRiD Core Module</a><ul>
-<li><a class="reference internal" href="#structure">Structure</a></li>
-<li><a class="reference internal" href="#key-components">Key Components</a><ul>
-<li><a class="reference internal" href="#cli-py"><code class="docutils literal notranslate"><span class="pre">cli.py</span></code></a></li>
-<li><a class="reference internal" href="#config-yaml"><code class="docutils literal notranslate"><span class="pre">config.yaml</span></code></a></li>
-<li><a class="reference internal" href="#utils"><code class="docutils literal notranslate"><span class="pre">utils/</span></code></a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#usage">Usage</a></li>
-<li><a class="reference internal" href="#future-development">Future Development</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a class="reference internal" href="#python-api-documentation">Python API Documentation</a><ul>
-<li><a class="reference internal" href="#module-grid">grid.__init__</a></li>
-<li><a class="reference internal" href="#module-grid.cli">grid.cli</a><ul>
+<li><a class="reference internal" href="#">Core</a><ul>
+<li><a class="reference internal" href="#grid-cli"><code class="docutils literal notranslate"><span class="pre">grid.cli</span></code></a><ul>
 <li><a class="reference internal" href="#grid.cli.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
 <li><a class="reference internal" href="#grid.cli.print_banner"><code class="docutils literal notranslate"><span class="pre">print_banner()</span></code></a></li>
 <li><a class="reference internal" href="#grid.cli.print_version_and_exit"><code class="docutils literal notranslate"><span class="pre">print_version_and_exit()</span></code></a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#module-grid.config">grid.config</a></li>
-<li><a class="reference internal" href="#module-grid.pipeline">grid.pipeline</a></li>
+<li><a class="reference internal" href="#grid-pipeline"><code class="docutils literal notranslate"><span class="pre">grid.pipeline</span></code></a><ul>
+<li><a class="reference internal" href="#grid.pipeline.run_wgs_pipeline"><code class="docutils literal notranslate"><span class="pre">run_wgs_pipeline()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#grid-config"><code class="docutils literal notranslate"><span class="pre">grid.config</span></code></a><ul>
+<li><a class="reference internal" href="#grid.config._get_nested"><code class="docutils literal notranslate"><span class="pre">_get_nested()</span></code></a></li>
+<li><a class="reference internal" href="#grid.config._is_enabled"><code class="docutils literal notranslate"><span class="pre">_is_enabled()</span></code></a></li>
+<li><a class="reference internal" href="#grid.config.error_check_config"><code class="docutils literal notranslate"><span class="pre">error_check_config()</span></code></a></li>
+<li><a class="reference internal" href="#grid.config.validate_steps"><code class="docutils literal notranslate"><span class="pre">validate_steps()</span></code></a></li>
+<li><a class="reference internal" href="#grid.config.validate_top_level"><code class="docutils literal notranslate"><span class="pre">validate_top_level()</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -472,7 +442,7 @@ grid<span class="w"> </span>count-reads<span class="w"> </span>--cram-dir<span c
       
     </aside>
   </div>
-</div><script src="../_static/documentation_options.js?v=f8c80a57"></script>
+</div><script src="../_static/documentation_options.js?v=2709fde1"></script>
     <script src="../_static/doctools.js?v=9bcbadda"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/scripts/furo.js?v=46bd48cc"></script>

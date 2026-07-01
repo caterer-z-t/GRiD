@@ -1,7 +1,5 @@
-Modules
-=======
-
-This section documents the Python modules in GRiD.
+API Reference
+=============
 
 Command-Line Interface
 ----------------------
@@ -10,33 +8,34 @@ Command-Line Interface
    :prog: grid
    :show-nested:
 
-Module Documentation
---------------------
+----
+
+Core
+----
 
 .. toctree::
-   :maxdepth: 2
-   :caption: Core Modules
+   :maxdepth: 1
 
    modules_dir/grid_core
-   modules_dir/utilities_overview
+
+Pipeline Steps
+--------------
 
 .. toctree::
-   :maxdepth: 2
-   :caption: Utility Modules
+   :maxdepth: 1
 
-   modules_dir/helper-functions
    modules_dir/count-reads
    modules_dir/mosdepth
    modules_dir/normalize-mosdepth
    modules_dir/find-neighbors
-   modules_dir/lpa-realign
    modules_dir/compute-dipcn
-   modules_dir/estimate-kiv
+   modules_dir/hi-inference
+
+Utilities
+---------
 
 .. toctree::
    :maxdepth: 1
-   :caption: Support Modules
 
    modules_dir/crai
-   modules_dir/subset
-   modules_dir/extract-reference
+   modules_dir/utils

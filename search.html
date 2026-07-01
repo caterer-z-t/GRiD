@@ -8,7 +8,7 @@
 
     <link rel="shortcut icon" href="_static/favicon.ico"><!-- Generated with Sphinx 8.2.3 and Furo 2025.09.25 -->
 <meta name="robots" content="noindex" />
-<title>Search - GRiD v0 documentation</title><link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d111a655" />
+<title>Search - GRiD 0.1 documentation</title><link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d111a655" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=580074bf" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=8dab3a3b" />
@@ -172,7 +172,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="index.html"><div class="brand">GRiD v0 documentation</div></a>
+      <a href="index.html"><div class="brand">GRiD 0.1 documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -196,7 +196,7 @@
     <img class="sidebar-logo" src="_static/grid_logo.png" alt="Logo"/>
   </div>
   
-  <span class="sidebar-brand-text">GRiD v0 documentation</span>
+  <span class="sidebar-brand-text">GRiD 0.1 documentation</span>
   
 </a><form class="sidebar-search-container" method="get" action="#" role="search">
   <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
@@ -204,30 +204,53 @@
   <input type="hidden" name="area" value="default">
 </form>
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
-  <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+  <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="readme.html">Welcome to GRiD’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ibs_ibd.html">Computing IBS/IBD Neighbors</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Examples</span></p>
+<ul>
 <li class="toctree-l1 has-children"><a class="reference internal" href="examples.html">Example Pipeline Jobs</a><input aria-label="Toggle navigation of Example Pipeline Jobs" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="examples/SOL_sbatch.html">SLURM Job Example</a></li>
-<li class="toctree-l2"><a class="reference internal" href="examples/SOL_python.html">Python Pipeline Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/1000G_example.html">1000 Genomes Full Pipeline Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/IBS_example.html">IBS/IBD Neighbor Computation Example</a></li>
 </ul>
 </li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Algorithms</span></p>
+<ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="algorithms.html">Algorithms</a><input aria-label="Toggle navigation of Algorithms" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="algorithms/count_reads.html">Read Counting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="algorithms/coverage.html">Coverage Estimation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="algorithms/normalization.html">Coverage Normalization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="algorithms/neighbors.html">Nearest-Neighbor Identification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="algorithms/dipcn.html">Diploid Copy Number Estimation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="algorithms/hi_inference.html">Haplotype Inference</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Project</span></p>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="code_of_conduct.html">Code of Conduct</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="modules.html">Modules</a><input aria-label="Toggle navigation of Modules" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="modules_dir/grid_core.html">GRiD Core Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="modules_dir/utilities_overview.html">Utilities Overview</a></li>
-<li class="toctree-l2"><a class="reference internal" href="modules_dir/helper-functions.html">Helper Functions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="modules_dir/count-reads.html">Read Counting Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="modules_dir/mosdepth.html">Mosdepth Coverage Analysis</a></li>
-<li class="toctree-l2"><a class="reference internal" href="modules_dir/normalize-mosdepth.html">Mosdepth Coverage Normalization</a></li>
-<li class="toctree-l2"><a class="reference internal" href="modules_dir/find-neighbors.html">Neighbor Finding Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="modules_dir/lpa-realign.html">LPA Realignment Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="modules_dir/compute-dipcn.html">Diploid Copy Number Computation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="modules_dir/estimate-kiv.html">KIV-2 Copy Number Estimation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Paper</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="paper.html">Paper</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="modules.html">API Reference</a><input aria-label="Toggle navigation of API Reference" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="modules_dir/grid_core.html">Core</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules_dir/count-reads.html">Read Counting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules_dir/mosdepth.html">Coverage Estimation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules_dir/normalize-mosdepth.html">Coverage Normalization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules_dir/find-neighbors.html">Nearest-Neighbor Identification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules_dir/compute-dipcn.html">Diploid Copy Number Estimation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules_dir/hi-inference.html">Haplotype Inference</a></li>
 <li class="toctree-l2"><a class="reference internal" href="modules_dir/crai.html">CRAM Index Management</a></li>
-<li class="toctree-l2"><a class="reference internal" href="modules_dir/subset.html">CRAM Subsetting</a></li>
-<li class="toctree-l2"><a class="reference internal" href="modules_dir/extract-reference.html">Extract Reference Sequences</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules_dir/utils.html">Utilities &amp; Helper Functions</a></li>
 </ul>
 </li>
 </ul>
@@ -285,7 +308,7 @@
         <div class="bottom-of-page">
           <div class="left-details">
             <div class="copyright">
-                Copyright &#169; 2025, Zachary Caterer
+                Copyright &#169; 2026, Zachary Caterer
             </div>
             Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
             
@@ -305,7 +328,7 @@
       
     </aside>
   </div>
-</div><script src="_static/documentation_options.js?v=f8c80a57"></script>
+</div><script src="_static/documentation_options.js?v=2709fde1"></script>
     <script src="_static/doctools.js?v=9bcbadda"></script>
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/scripts/furo.js?v=46bd48cc"></script>

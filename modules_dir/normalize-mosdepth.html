@@ -3,11 +3,11 @@
   <head><meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="index" title="Index" href="../genindex.html"><link rel="search" title="Search" href="../search.html"><link rel="next" title="Neighbor Finding Module" href="find-neighbors.html"><link rel="prev" title="Mosdepth Coverage Analysis" href="mosdepth.html">
+<link rel="index" title="Index" href="../genindex.html"><link rel="search" title="Search" href="../search.html"><link rel="next" title="Nearest-Neighbor Identification" href="find-neighbors.html"><link rel="prev" title="Coverage Estimation" href="mosdepth.html">
         <link rel="prefetch" href="../_static/grid_logo.png" as="image">
 
     <link rel="shortcut icon" href="../_static/favicon.ico"><!-- Generated with Sphinx 8.2.3 and Furo 2025.09.25 -->
-        <title>Mosdepth Coverage Normalization - GRiD v0 documentation</title>
+        <title>Coverage Normalization - GRiD 0.1 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d111a655" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=580074bf" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
@@ -172,7 +172,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../index.html"><div class="brand">GRiD v0 documentation</div></a>
+      <a href="../index.html"><div class="brand">GRiD 0.1 documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -196,7 +196,7 @@
     <img class="sidebar-logo" src="../_static/grid_logo.png" alt="Logo"/>
   </div>
   
-  <span class="sidebar-brand-text">GRiD v0 documentation</span>
+  <span class="sidebar-brand-text">GRiD 0.1 documentation</span>
   
 </a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
   <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
@@ -204,30 +204,53 @@
   <input type="hidden" name="area" value="default">
 </form>
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
-  <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
-<ul class="current">
+  <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="../readme.html">Welcome to GRiD’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ibs_ibd.html">Computing IBS/IBD Neighbors</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Examples</span></p>
+<ul>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../examples.html">Example Pipeline Jobs</a><input aria-label="Toggle navigation of Example Pipeline Jobs" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../examples/SOL_sbatch.html">SLURM Job Example</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../examples/SOL_python.html">Python Pipeline Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/1000G_example.html">1000 Genomes Full Pipeline Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/IBS_example.html">IBS/IBD Neighbor Computation Example</a></li>
 </ul>
 </li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Algorithms</span></p>
+<ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../algorithms.html">Algorithms</a><input aria-label="Toggle navigation of Algorithms" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../algorithms/count_reads.html">Read Counting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../algorithms/coverage.html">Coverage Estimation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../algorithms/normalization.html">Coverage Normalization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../algorithms/neighbors.html">Nearest-Neighbor Identification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../algorithms/dipcn.html">Diploid Copy Number Estimation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../algorithms/hi_inference.html">Haplotype Inference</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Project</span></p>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="../contributing.html">Contributing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../code_of_conduct.html">Code of Conduct</a></li>
-<li class="toctree-l1 current has-children"><a class="reference internal" href="../modules.html">Modules</a><input aria-label="Toggle navigation of Modules" checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="grid_core.html">GRiD Core Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="utilities_overview.html">Utilities Overview</a></li>
-<li class="toctree-l2"><a class="reference internal" href="helper-functions.html">Helper Functions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="count-reads.html">Read Counting Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="mosdepth.html">Mosdepth Coverage Analysis</a></li>
-<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">Mosdepth Coverage Normalization</a></li>
-<li class="toctree-l2"><a class="reference internal" href="find-neighbors.html">Neighbor Finding Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="lpa-realign.html">LPA Realignment Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="compute-dipcn.html">Diploid Copy Number Computation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="estimate-kiv.html">KIV-2 Copy Number Estimation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Paper</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../paper.html">Paper</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul class="current">
+<li class="toctree-l1 current has-children"><a class="reference internal" href="../modules.html">API Reference</a><input aria-label="Toggle navigation of API Reference" checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="grid_core.html">Core</a></li>
+<li class="toctree-l2"><a class="reference internal" href="count-reads.html">Read Counting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mosdepth.html">Coverage Estimation</a></li>
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">Coverage Normalization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="find-neighbors.html">Nearest-Neighbor Identification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="compute-dipcn.html">Diploid Copy Number Estimation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hi-inference.html">Haplotype Inference</a></li>
 <li class="toctree-l2"><a class="reference internal" href="crai.html">CRAM Index Management</a></li>
-<li class="toctree-l2"><a class="reference internal" href="subset.html">CRAM Subsetting</a></li>
-<li class="toctree-l2"><a class="reference internal" href="extract-reference.html">Extract Reference Sequences</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils.html">Utilities &amp; Helper Functions</a></li>
 </ul>
 </li>
 </ul>
@@ -268,357 +291,14 @@
           </label>
         </div>
         <article role="main" id="furo-main-content">
-          <section id="mosdepth-coverage-normalization">
-<h1>Mosdepth Coverage Normalization<a class="headerlink" href="#mosdepth-coverage-normalization" title="Link to this heading">¶</a></h1>
-<section id="overview">
-<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">¶</a></h2>
-<section id="mosdepth-coverage-normalization-module">
-<h3>Mosdepth Coverage Normalization Module<a class="headerlink" href="#mosdepth-coverage-normalization-module" title="Link to this heading">¶</a></h3>
-<p>Normalize raw coverage data across samples to account for sequencing depth variation and technical artifacts.</p>
-<section id="purpose">
-<h4>Purpose<a class="headerlink" href="#purpose" title="Link to this heading">¶</a></h4>
-<p>Raw coverage values vary widely between samples due to:</p>
-<ul class="simple">
-<li><p>Different sequencing depths (20X vs 60X)</p></li>
-<li><p>Library preparation batch effects</p></li>
-<li><p>GC content bias</p></li>
-<li><p>Mappability differences</p></li>
-</ul>
-<p>This module normalizes coverage using z-score transformation to enable fair comparison across samples.</p>
-</section>
-<section id="main-module">
-<h4>Main Module<a class="headerlink" href="#main-module" title="Link to this heading">¶</a></h4>
-<section id="run-normalized-mosdepth-py">
-<h5><code class="docutils literal notranslate"><span class="pre">run_normalized_mosdepth.py</span></code><a class="headerlink" href="#run-normalized-mosdepth-py" title="Link to this heading">¶</a></h5>
-<p>Located in parent directory: <code class="docutils literal notranslate"><span class="pre">grid/utils/run_normalized_mosdepth.py</span></code></p>
-<p><strong>Key Function:</strong></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">run_normalize_mosdepth</span><span class="p">(</span>
-    <span class="n">mosdepth_dir</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-    <span class="n">output_file</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-    <span class="n">repeat_mask</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-    <span class="n">chrom</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-    <span class="n">start</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
-    <span class="n">end</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
-    <span class="n">min_depth</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">20</span><span class="p">,</span>
-    <span class="n">max_depth</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span>
-    <span class="n">top_frac</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.1</span><span class="p">,</span>
-    <span class="n">threads</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
-</pre></div>
-</div>
-<p><strong>Parameters:</strong></p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">mosdepth_dir</span></code>: Directory with mosdepth <code class="docutils literal notranslate"><span class="pre">.regions.bed.gz</span></code> files</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">output_file</span></code>: Output normalized z-depth file (<code class="docutils literal notranslate"><span class="pre">.gz</span></code>)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">repeat_mask</span></code>: BED file of repeat-masked regions to exclude</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">chrom</span></code>: Chromosome</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">start</span></code>: Region start</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">end</span></code>: Region end</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">min_depth</span></code>: Minimum mean depth threshold (default: 20)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">max_depth</span></code>: Maximum mean depth threshold (default: 100)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">top_frac</span></code>: Top fraction of high-variance regions to keep (default: 0.1)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">threads</span></code>: Parallel processing threads</p></li>
-</ul>
-<p><strong>Output Format:</strong>
-Gzipped TSV with z-transformed depths:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sample_id</span>       <span class="n">position</span>        <span class="n">z_depth</span>
-<span class="n">sample001</span>       <span class="mi">160000000</span>       <span class="mf">1.23</span>
-<span class="n">sample001</span>       <span class="mi">160001000</span>       <span class="o">-</span><span class="mf">0.45</span>
-<span class="n">sample002</span>       <span class="mi">160000000</span>       <span class="mf">0.87</span>
-</pre></div>
-</div>
-</section>
-</section>
-<section id="usage">
-<h4>Usage<a class="headerlink" href="#usage" title="Link to this heading">¶</a></h4>
-<section id="via-cli">
-<h5>Via CLI<a class="headerlink" href="#via-cli" title="Link to this heading">¶</a></h5>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>grid<span class="w"> </span>normalize-mosdepth<span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>--mosdepth-dir<span class="w"> </span>output/mosdepth/<span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>--output-file<span class="w"> </span>output/normalized.zdepth.gz<span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>--repeat-mask<span class="w"> </span>refs/repeat_mask.bed<span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>--chrom<span class="w"> </span>chr6<span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>--start<span class="w"> </span><span class="m">160000000</span><span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>--end<span class="w"> </span><span class="m">160100000</span><span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>--min-depth<span class="w"> </span><span class="m">20</span><span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>--max-depth<span class="w"> </span><span class="m">100</span><span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>--top-frac<span class="w"> </span><span class="m">0</span>.1<span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>--threads<span class="w"> </span><span class="m">4</span>
-</pre></div>
-</div>
-</section>
-<section id="as-python-module">
-<h5>As Python Module<a class="headerlink" href="#as-python-module" title="Link to this heading">¶</a></h5>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">grid.utils.run_normalized_mosdepth</span><span class="w"> </span><span class="kn">import</span> <span class="n">run_normalize_mosdepth</span>
-
-<span class="n">run_normalize_mosdepth</span><span class="p">(</span>
-    <span class="n">mosdepth_dir</span><span class="o">=</span><span class="s2">&quot;output/mosdepth/&quot;</span><span class="p">,</span>
-    <span class="n">output_file</span><span class="o">=</span><span class="s2">&quot;output/normalized.zdepth.gz&quot;</span><span class="p">,</span>
-    <span class="n">repeat_mask</span><span class="o">=</span><span class="s2">&quot;refs/repeat_mask.bed&quot;</span><span class="p">,</span>
-    <span class="n">chrom</span><span class="o">=</span><span class="s2">&quot;chr6&quot;</span><span class="p">,</span>
-    <span class="n">start</span><span class="o">=</span><span class="mi">160000000</span><span class="p">,</span>
-    <span class="n">end</span><span class="o">=</span><span class="mi">160100000</span><span class="p">,</span>
-    <span class="n">min_depth</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span>
-    <span class="n">max_depth</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
-    <span class="n">top_frac</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>
-    <span class="n">threads</span><span class="o">=</span><span class="mi">4</span>
-<span class="p">)</span>
-</pre></div>
-</div>
-</section>
-</section>
-<section id="normalization-algorithm">
-<h4>Normalization Algorithm<a class="headerlink" href="#normalization-algorithm" title="Link to this heading">¶</a></h4>
-<section id="step-1-load-coverage-data">
-<h5>Step 1: Load Coverage Data<a class="headerlink" href="#step-1-load-coverage-data" title="Link to this heading">¶</a></h5>
-<ul class="simple">
-<li><p>Read all mosdepth <code class="docutils literal notranslate"><span class="pre">.regions.bed.gz</span></code> files</p></li>
-<li><p>Extract coverage for target region</p></li>
-<li><p>Create sample × position matrix</p></li>
-</ul>
-</section>
-<section id="step-2-filter-regions">
-<h5>Step 2: Filter Regions<a class="headerlink" href="#step-2-filter-regions" title="Link to this heading">¶</a></h5>
-<p><strong>Repeat Masking:</strong></p>
-<ul class="simple">
-<li><p>Remove positions overlapping repeat-masked regions</p></li>
-<li><p>Prevents bias from low-complexity sequences</p></li>
-</ul>
-<p><strong>Depth Filtering:</strong></p>
-<ul class="simple">
-<li><p>Remove positions with mean depth &lt; <code class="docutils literal notranslate"><span class="pre">min_depth</span></code> (low coverage)</p></li>
-<li><p>Remove positions with mean depth &gt; <code class="docutils literal notranslate"><span class="pre">max_depth</span></code> (extreme outliers)</p></li>
-</ul>
-<p><strong>Variance Selection:</strong></p>
-<ul class="simple">
-<li><p>Calculate variance across samples for each position</p></li>
-<li><p>Keep top <code class="docutils literal notranslate"><span class="pre">top_frac</span></code> of positions by variance</p></li>
-<li><p>Focuses on informative, variable regions</p></li>
-</ul>
-</section>
-<section id="step-3-z-score-transformation">
-<h5>Step 3: Z-Score Transformation<a class="headerlink" href="#step-3-z-score-transformation" title="Link to this heading">¶</a></h5>
-<p>For each sample independently:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">z_depth</span> <span class="o">=</span> <span class="p">(</span><span class="n">depth</span> <span class="o">-</span> <span class="n">mean_depth</span><span class="p">)</span> <span class="o">/</span> <span class="n">std_depth</span>
-</pre></div>
-</div>
-<p>Where:</p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">depth</span></code>: Raw coverage at position</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">mean_depth</span></code>: Sample’s mean coverage across all positions</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">std_depth</span></code>: Sample’s standard deviation</p></li>
-</ul>
-<p><strong>Result:</strong></p>
-<ul class="simple">
-<li><p>Mean = 0, StdDev = 1 for each sample</p></li>
-<li><p>Comparable across samples with different depths</p></li>
-</ul>
-</section>
-</section>
-<section id="output-interpretation">
-<h4>Output Interpretation<a class="headerlink" href="#output-interpretation" title="Link to this heading">¶</a></h4>
-<section id="z-depth-values">
-<h5>Z-Depth Values<a class="headerlink" href="#z-depth-values" title="Link to this heading">¶</a></h5>
-<ul class="simple">
-<li><p><strong>z = 0</strong>: Average coverage for this sample</p></li>
-<li><p><strong>z = +2</strong>: 2 standard deviations above average (potential duplication)</p></li>
-<li><p><strong>z = -2</strong>: 2 standard deviations below average (potential deletion)</p></li>
-<li><p><strong>z &gt; +3</strong>: Very high confidence variant</p></li>
-</ul>
-</section>
-<section id="example-interpretation">
-<h5>Example Interpretation<a class="headerlink" href="#example-interpretation" title="Link to this heading">¶</a></h5>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Sample</span>    <span class="n">Position</span>      <span class="n">Z</span><span class="o">-</span><span class="n">Depth</span>    <span class="n">Interpretation</span>
-<span class="n">S001</span>      <span class="mi">160050000</span>     <span class="mf">2.5</span>        <span class="n">Likely</span> <span class="n">duplication</span>
-<span class="n">S001</span>      <span class="mi">160051000</span>     <span class="mf">2.8</span>        <span class="n">Strong</span> <span class="n">duplication</span> <span class="n">signal</span>
-<span class="n">S001</span>      <span class="mi">160052000</span>     <span class="o">-</span><span class="mf">0.3</span>       <span class="n">Normal</span> <span class="n">coverage</span>
-<span class="n">S002</span>      <span class="mi">160050000</span>     <span class="mf">0.1</span>        <span class="n">Normal</span> <span class="n">coverage</span>
-</pre></div>
-</div>
-<p>Sample S001 likely has a duplication in the 160050000-160051000 region.</p>
-</section>
-</section>
-<section id="parameter-tuning">
-<h4>Parameter Tuning<a class="headerlink" href="#parameter-tuning" title="Link to this heading">¶</a></h4>
-<section id="min-depth-default-20">
-<h5><code class="docutils literal notranslate"><span class="pre">min_depth</span></code> (default: 20)<a class="headerlink" href="#min-depth-default-20" title="Link to this heading">¶</a></h5>
-<ul class="simple">
-<li><p><strong>Purpose:</strong> Filter low-coverage positions</p></li>
-<li><p><strong>Too low:</strong> Include unreliable positions</p></li>
-<li><p><strong>Too high:</strong> Remove informative data</p></li>
-<li><p><strong>Recommendation:</strong></p>
-<ul>
-<li><p>30X WGS: use 15-20</p></li>
-<li><p>60X WGS: use 30-40</p></li>
-</ul>
-</li>
-</ul>
-</section>
-<section id="max-depth-default-100">
-<h5><code class="docutils literal notranslate"><span class="pre">max_depth</span></code> (default: 100)<a class="headerlink" href="#max-depth-default-100" title="Link to this heading">¶</a></h5>
-<ul class="simple">
-<li><p><strong>Purpose:</strong> Remove extreme outliers</p></li>
-<li><p><strong>Too low:</strong> Filter true high-copy variants</p></li>
-<li><p><strong>Too high:</strong> Include technical artifacts</p></li>
-<li><p><strong>Recommendation:</strong></p>
-<ul>
-<li><p>Depends on expected max copy number</p></li>
-<li><p>LPA KIV-2: 100-150 (max ~50 copies × 2 haploids)</p></li>
-</ul>
-</li>
-</ul>
-</section>
-<section id="top-frac-default-0-1">
-<h5><code class="docutils literal notranslate"><span class="pre">top_frac</span></code> (default: 0.1)<a class="headerlink" href="#top-frac-default-0-1" title="Link to this heading">¶</a></h5>
-<ul class="simple">
-<li><p><strong>Purpose:</strong> Focus on most variable positions</p></li>
-<li><p><strong>Range:</strong> 0.05 - 0.3</p></li>
-<li><p><strong>Lower values:</strong> More stringent, fewer positions</p></li>
-<li><p><strong>Higher values:</strong> More positions, may include noise</p></li>
-<li><p><strong>Recommendation:</strong></p>
-<ul>
-<li><p>VNTR analysis: 0.1 (10% most variable)</p></li>
-<li><p>CNV discovery: 0.2 (20% most variable)</p></li>
-</ul>
-</li>
-</ul>
-</section>
-</section>
-<section id="repeat-mask-bed-format">
-<h4>Repeat Mask BED Format<a class="headerlink" href="#repeat-mask-bed-format" title="Link to this heading">¶</a></h4>
-<p>The repeat mask file should be a standard BED file:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">chr6</span>    <span class="mi">160000000</span>    <span class="mi">160001000</span>    <span class="n">SimpleRepeat</span>
-<span class="n">chr6</span>    <span class="mi">160005000</span>    <span class="mi">160005500</span>    <span class="n">LINE</span>
-<span class="n">chr6</span>    <span class="mi">160010000</span>    <span class="mi">160011000</span>    <span class="n">Satellite</span>
-</pre></div>
-</div>
-<p><strong>Purpose:</strong></p>
-<ul class="simple">
-<li><p>Exclude low-complexity sequences</p></li>
-<li><p>Remove problematic alignment regions</p></li>
-<li><p>Focus on informative VNTR sequences</p></li>
-</ul>
-<p><strong>How to generate:</strong></p>
-<ol class="arabic simple">
-<li><p>Download RepeatMasker track from UCSC Genome Browser</p></li>
-<li><p>Filter for target region</p></li>
-<li><p>Optionally keep only certain repeat types</p></li>
-</ol>
-</section>
-<section id="technical-details">
-<h4>Technical Details<a class="headerlink" href="#technical-details" title="Link to this heading">¶</a></h4>
-<section id="performance">
-<h5>Performance<a class="headerlink" href="#performance" title="Link to this heading">¶</a></h5>
-<ul class="simple">
-<li><p><strong>Parallelization:</strong> Sample-level parallel processing</p></li>
-<li><p><strong>Memory:</strong> Entire dataset loaded into memory (~GB for 1000 samples)</p></li>
-<li><p><strong>Speed:</strong> ~5-10 minutes for 1000 samples, 100kb region</p></li>
-</ul>
-</section>
-<section id="dependencies">
-<h5>Dependencies<a class="headerlink" href="#dependencies" title="Link to this heading">¶</a></h5>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">pandas</span></code>, <code class="docutils literal notranslate"><span class="pre">numpy</span></code> - Data processing</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">scipy</span></code> - Statistical functions</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">multiprocessing</span></code> - Parallel execution</p></li>
-</ul>
-</section>
-</section>
-<section id="quality-control">
-<h4>Quality Control<a class="headerlink" href="#quality-control" title="Link to this heading">¶</a></h4>
-<section id="expected-results">
-<h5>Expected Results<a class="headerlink" href="#expected-results" title="Link to this heading">¶</a></h5>
-<p>After normalization:</p>
-<ul class="simple">
-<li><p>All samples have mean ≈ 0, std ≈ 1</p></li>
-<li><p>High-copy regions show consistently high z-scores</p></li>
-<li><p>Low-noise regions show z-scores near 0</p></li>
-</ul>
-</section>
-<section id="diagnostic-plots-manual">
-<h5>Diagnostic Plots (manual)<a class="headerlink" href="#diagnostic-plots-manual" title="Link to this heading">¶</a></h5>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
-
-<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;normalized.zdepth.gz&quot;</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="n">sample_means</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;sample_id&quot;</span><span class="p">)[</span><span class="s2">&quot;z_depth&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
-
-<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">sample_means</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Mean Z-Depth&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Samples&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Should be centered at 0&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</section>
-</section>
-<section id="troubleshooting">
-<h4>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Link to this heading">¶</a></h4>
-<p><strong>All z-scores near zero:</strong></p>
-<ul class="simple">
-<li><p>Region may not have sufficient variation</p></li>
-<li><p>Try reducing <code class="docutils literal notranslate"><span class="pre">top_frac</span></code> threshold</p></li>
-<li><p>Check that region contains actual VNTRs</p></li>
-</ul>
-<p><strong>Extreme z-scores (|z| &gt; 10):</strong></p>
-<ul class="simple">
-<li><p>May indicate technical artifacts</p></li>
-<li><p>Check for alignment issues</p></li>
-<li><p>Verify repeat mask is correct</p></li>
-</ul>
-<p><strong>Memory errors:</strong></p>
-<ul class="simple">
-<li><p>Reduce number of samples processed at once</p></li>
-<li><p>Increase system RAM</p></li>
-<li><p>Use smaller genomic region</p></li>
-</ul>
-</section>
-</section>
-</section>
-<section id="python-api-documentation">
-<h2>Python API Documentation<a class="headerlink" href="#python-api-documentation" title="Link to this heading">¶</a></h2>
-<section id="module-grid.utils.run_normalized_mosdepth">
-<span id="grid-utils-run-normalized-mosdepth"></span><h3>grid.utils.run_normalized_mosdepth<a class="headerlink" href="#module-grid.utils.run_normalized_mosdepth" title="Link to this heading">¶</a></h3>
-<dl class="py function">
-<dt class="sig sig-object py" id="grid.utils.run_normalized_mosdepth.run_normalize_mosdepth">
-<span class="sig-prename descclassname"><span class="pre">grid.utils.run_normalized_mosdepth.</span></span><span class="sig-name descname"><span class="pre">run_normalize_mosdepth</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mosdepth_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">repeat_mask</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">chrom</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_depth</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">20</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_depth</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">top_frac</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threads</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">console</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#grid.utils.run_normalized_mosdepth.run_normalize_mosdepth" title="Link to this definition">¶</a></dt>
-<dd><p>Normalize mosdepth coverage across all samples in a directory.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>mosdepth_dir</strong> (<em>str</em>) – Directory containing mosdepth output files</p></li>
-<li><p><strong>output_file</strong> (<em>str</em>) – Path to output normalized .tsv.gz file</p></li>
-<li><p><strong>repeat_mask</strong> (<em>str</em>) – Path to repeat mask file</p></li>
-<li><p><strong>chrom</strong> (<em>str</em>) – Chromosome name</p></li>
-<li><p><strong>start</strong> (<em>int</em>) – Start position</p></li>
-<li><p><strong>end</strong> (<em>int</em>) – End position</p></li>
-<li><p><strong>min_depth</strong> (<em>int</em>) – Minimum depth threshold for regions</p></li>
-<li><p><strong>max_depth</strong> (<em>int</em>) – Maximum depth threshold for regions</p></li>
-<li><p><strong>top_frac</strong> (<em>float</em>) – Fraction of high-variance regions to select</p></li>
-<li><p><strong>threads</strong> (<em>int</em>) – Number of threads for parallel processing</p></li>
-<li><p><strong>console</strong> (<em>Console</em>)</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>None</p>
-</dd>
-</dl>
-</dd></dl>
-
-</section>
-<section id="module-grid.utils.normalize_mosdepth_dir">
-<span id="grid-utils-normalize-mosdepth-dir"></span><h3>grid.utils.normalize_mosdepth_dir<a class="headerlink" href="#module-grid.utils.normalize_mosdepth_dir" title="Link to this heading">¶</a></h3>
-<dl class="py function">
-<dt class="sig sig-object py" id="grid.utils.normalize_mosdepth_dir._process_one_individual">
-<span class="sig-prename descclassname"><span class="pre">grid.utils.normalize_mosdepth_dir.</span></span><span class="sig-name descname"><span class="pre">_process_one_individual</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">args_tuple</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#grid.utils.normalize_mosdepth_dir._process_one_individual" title="Link to this definition">¶</a></dt>
-<dd><p>This runs in its own process. Returns (individual_id, [(start,end,depth),…])
-args_tuple contains:</p>
-<p>individual_id, global_dist_file, chromosome, start, end, min_depth, max_depth, excluded</p>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="grid.utils.normalize_mosdepth_dir.build_depth_matrix">
-<span class="sig-prename descclassname"><span class="pre">grid.utils.normalize_mosdepth_dir.</span></span><span class="sig-name descname"><span class="pre">build_depth_matrix</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">regions_to_extract</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#grid.utils.normalize_mosdepth_dir.build_depth_matrix" title="Link to this definition">¶</a></dt>
+          <section id="coverage-normalization">
+<h1>Coverage Normalization<a class="headerlink" href="#coverage-normalization" title="Link to this heading">¶</a></h1>
+<p>Normalizes mosdepth coverage in two steps: within-individual (divide by sample mean)
+and across-individual (z-score transformation). High-variance regions are then selected
+to reduce noise before neighbor computation.</p>
+<dl class="py function" id="module-grid.utils.normalize_mosdepth">
+<dt class="sig sig-object py" id="grid.utils.normalize_mosdepth.build_depth_matrix">
+<span class="sig-prename descclassname"><span class="pre">grid.utils.normalize_mosdepth.</span></span><span class="sig-name descname"><span class="pre">build_depth_matrix</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">regions_to_extract</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#grid.utils.normalize_mosdepth.build_depth_matrix" title="Link to this definition">¶</a></dt>
 <dd><p>Build depth matrix from extracted regions.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -634,8 +314,8 @@ args_tuple contains:</p>
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="grid.utils.normalize_mosdepth_dir.build_matrix_from_regions">
-<span class="sig-prename descclassname"><span class="pre">grid.utils.normalize_mosdepth_dir.</span></span><span class="sig-name descname"><span class="pre">build_matrix_from_regions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">regions_to_extract</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">individuals_order</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#grid.utils.normalize_mosdepth_dir.build_matrix_from_regions" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="grid.utils.normalize_mosdepth.build_matrix_from_regions">
+<span class="sig-prename descclassname"><span class="pre">grid.utils.normalize_mosdepth.</span></span><span class="sig-name descname"><span class="pre">build_matrix_from_regions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">regions_to_extract</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">individuals_order</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#grid.utils.normalize_mosdepth.build_matrix_from_regions" title="Link to this definition">¶</a></dt>
 <dd><p>Build numpy matrix from regions_to_extract.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -656,52 +336,75 @@ mat: numpy array of shape (n_individuals, n_regions) with depths</p>
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="grid.utils.normalize_mosdepth_dir.extract_regions">
-<span class="sig-prename descclassname"><span class="pre">grid.utils.normalize_mosdepth_dir.</span></span><span class="sig-name descname"><span class="pre">extract_regions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">individuals</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">chromosome</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_depth</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">20</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_depth</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">excluded</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">progress</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">task</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#grid.utils.normalize_mosdepth_dir.extract_regions" title="Link to this definition">¶</a></dt>
-<dd><p>Extract depth regions passing filters and not overlapping repeats.</p>
+<dt class="sig sig-object py" id="grid.utils.normalize_mosdepth.compute_population_mean_depths">
+<span class="sig-prename descclassname"><span class="pre">grid.utils.normalize_mosdepth.</span></span><span class="sig-name descname"><span class="pre">compute_population_mean_depths</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">individuals</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mosdepth_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">chromosome</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">excluded</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threads</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">console</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#grid.utils.normalize_mosdepth.compute_population_mean_depths" title="Link to this definition">¶</a></dt>
+<dd><p>Compute the population mean depth for every region across all individuals.</p>
+<p>This mirrors the C++ first pass (batches 0–9) that computes mean_depths[]
+and uses it as the depth filter threshold — so the region mask is universal
+(same regions included/excluded for every sample) rather than per-sample.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>individuals</strong> (<em>dict</em><em>[</em><em>str</em><em>, </em><em>Path</em><em>]</em>) – dict mapping sample IDs to their mosdepth.global.dist file paths</p></li>
-<li><p><strong>chromosome</strong> (<em>str</em>) – Chromosome name to extract</p></li>
-<li><p><strong>start</strong> (<em>int</em>) – Start position of region</p></li>
-<li><p><strong>end</strong> (<em>int</em>) – End position of region</p></li>
-<li><p><strong>min_depth</strong> (<em>int</em>) – Minimum depth threshold</p></li>
-<li><p><strong>max_depth</strong> (<em>int</em>) – Maximum depth threshold</p></li>
-<li><p><strong>excluded</strong> (<em>dict</em><em>[</em><em>str</em><em>, </em><em>set</em><em>[</em><em>int</em><em>]</em><em>]</em>) – dict mapping chromosome to set of 1kb bins to exclude (from repeat mask)</p></li>
-<li><p><strong>progress</strong> – Optional Rich Progress object for updates</p></li>
-<li><p><strong>task</strong> – Optional Rich Progress task ID for updates</p></li>
+<li><p><strong>individuals</strong> (<em>dict</em><em>[</em><em>str</em><em>, </em><em>Path</em><em>]</em>) – {sample_id: bed_gz_path}</p></li>
+<li><p><strong>mosdepth_dir</strong> (<em>str</em>) – directory with mosdepth output (passed through to reader)</p></li>
+<li><p><strong>chromosome</strong> (<em>str</em>) – target chromosome (or None for all)</p></li>
+<li><p><strong>start/end</strong> – target region bounds (or None for whole chromosome)</p></li>
+<li><p><strong>excluded</strong> (<em>dict</em><em>[</em><em>str</em><em>, </em><em>set</em><em>[</em><em>int</em><em>]</em><em>]</em>) – repeat-mask kb bins {chrom: set(kb)}</p></li>
+<li><p><strong>threads</strong> (<em>int</em>) – worker threads for parallel reading</p></li>
+<li><p><strong>console</strong> – Rich console for logging</p></li>
+<li><p><strong>start</strong> (<em>int</em>)</p></li>
+<li><p><strong>end</strong> (<em>int</em>)</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>[(start, end, depth), …]} for extracted regions</p>
+<dd class="field-even"><p>population_mean_depth}</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Dictionary mapping {sample_id</p>
+<dd class="field-odd"><p>{(region_start, region_end)</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="grid.utils.normalize_mosdepth_dir.get_individuals">
-<span class="sig-prename descclassname"><span class="pre">grid.utils.normalize_mosdepth_dir.</span></span><span class="sig-name descname"><span class="pre">get_individuals</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mosdepth_dir</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#grid.utils.normalize_mosdepth_dir.get_individuals" title="Link to this definition">¶</a></dt>
-<dd><p>Map sample IDs to their mosdepth.global.dist files.</p>
+<dt class="sig sig-object py" id="grid.utils.normalize_mosdepth.filter_empty_samples">
+<span class="sig-prename descclassname"><span class="pre">grid.utils.normalize_mosdepth.</span></span><span class="sig-name descname"><span class="pre">filter_empty_samples</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">regions_to_extract</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">console</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#grid.utils.normalize_mosdepth.filter_empty_samples" title="Link to this definition">¶</a></dt>
+<dd><p>Remove samples that have zero regions.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>mosdepth_dir</strong> (<em>str</em>) – Directory containing mosdepth output files</p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>regions_to_extract</strong> (<em>dict</em><em>[</em><em>str</em><em>, </em><em>list</em><em>[</em><em>tuple</em><em>[</em><em>int</em><em>, </em><em>int</em><em>, </em><em>float</em><em>]</em><em>]</em><em>]</em>) – dict of {sample_id: [(start, end, depth), …]}</p></li>
+<li><p><strong>console</strong> – optional Rich console for logging</p></li>
+</ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Dictionary mapping sample IDs to their global.dist file paths</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>dict[str, <em>Path</em>]</p>
+<dd class="field-even"><p>Filtered dictionary with only samples that have ≥1 region</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="grid.utils.normalize_mosdepth_dir.load_repeat_mask">
-<span class="sig-prename descclassname"><span class="pre">grid.utils.normalize_mosdepth_dir.</span></span><span class="sig-name descname"><span class="pre">load_repeat_mask</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">repeat_bed</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#grid.utils.normalize_mosdepth_dir.load_repeat_mask" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="grid.utils.normalize_mosdepth.find_bed_gz_for_individual">
+<span class="sig-prename descclassname"><span class="pre">grid.utils.normalize_mosdepth.</span></span><span class="sig-name descname"><span class="pre">find_bed_gz_for_individual</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">individual_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mosdepth_dir</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#grid.utils.normalize_mosdepth.find_bed_gz_for_individual" title="Link to this definition">¶</a></dt>
+<dd><p>Find the .regions.bed.gz file for a given individual in the mosdepth directory.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>individual_id</strong> (<em>str</em>) – Sample ID to find</p></li>
+<li><p><strong>mosdepth_dir</strong> (<em>str</em>) – Directory containing mosdepth output files</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Path to the individual’s .regions.bed.gz file, or Path to non-existent file if not found</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>Path</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="grid.utils.normalize_mosdepth.load_repeat_mask">
+<span class="sig-prename descclassname"><span class="pre">grid.utils.normalize_mosdepth.</span></span><span class="sig-name descname"><span class="pre">load_repeat_mask</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">repeat_bed</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#grid.utils.normalize_mosdepth.load_repeat_mask" title="Link to this definition">¶</a></dt>
 <dd><p>Load repeat regions into {chrom: set(kb_bins)}.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -717,22 +420,62 @@ mat: numpy array of shape (n_individuals, n_regions) with depths</p>
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="grid.utils.normalize_mosdepth_dir.normalize_matrix">
-<span class="sig-prename descclassname"><span class="pre">grid.utils.normalize_mosdepth_dir.</span></span><span class="sig-name descname"><span class="pre">normalize_matrix</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mat</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#grid.utils.normalize_mosdepth_dir.normalize_matrix" title="Link to this definition">¶</a></dt>
-<dd><p>Normalize the depth matrix in two steps:
-1) Within-individual normalization (row-wise): divide each depth by the individual’s mean
-2) Across-individual normalization (column-wise): for each region, compute mean (mu) and variance (var)</p>
-<ul class="simple">
-<li><p>Transform each depth x to (x - mu) / sqrt(mu) where mu &gt; 0</p></li>
-<li><p>Also compute variance ratio var/mu for each region.</p></li>
-</ul>
+<dt class="sig sig-object py" id="grid.utils.normalize_mosdepth.map_mosdepth_files_to_samples">
+<span class="sig-prename descclassname"><span class="pre">grid.utils.normalize_mosdepth.</span></span><span class="sig-name descname"><span class="pre">map_mosdepth_files_to_samples</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mosdepth_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">samples</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#grid.utils.normalize_mosdepth.map_mosdepth_files_to_samples" title="Link to this definition">¶</a></dt>
+<dd><p>Map sample IDs to their mosdepth.global.dist files.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>mat</strong> – numpy array of shape (n_individuals, n_regions) with raw depths</p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>mosdepth_dir</strong> (<em>str</em>) – Directory containing mosdepth output files</p></li>
+<li><p><strong>samples</strong> (<em>list</em><em>[</em><em>str</em><em>]</em>) – List of sample IDs</p></li>
+</ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>numpy array of same shape with normalized depths
-variance_ratios: dict of {region_index: variance_ratio}</p>
+<dd class="field-even"><p>Dictionary mapping sample IDs to their global.dist file paths</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict[str, <em>Path</em>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="grid.utils.normalize_mosdepth.norm_chrom">
+<span class="sig-prename descclassname"><span class="pre">grid.utils.normalize_mosdepth.</span></span><span class="sig-name descname"><span class="pre">norm_chrom</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">chrom</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#grid.utils.normalize_mosdepth.norm_chrom" title="Link to this definition">¶</a></dt>
+<dd><p>Normalise a chromosome name to ‘chrN’ form.
+‘6’ -&gt; ‘chr6’, ‘chr6’ -&gt; ‘chr6’, ‘chrX’ -&gt; ‘chrX’</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>chrom</strong> (<em>str</em>)</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="grid.utils.normalize_mosdepth.normalize_matrix">
+<span class="sig-prename descclassname"><span class="pre">grid.utils.normalize_mosdepth.</span></span><span class="sig-name descname"><span class="pre">normalize_matrix</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mat</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#grid.utils.normalize_mosdepth.normalize_matrix" title="Link to this definition">¶</a></dt>
+<dd><p>Normalize the depth matrix to match C++ normalize_mosdepth_inflow logic.</p>
+<dl class="simple">
+<dt>Steps:</dt><dd><ol class="arabic simple">
+<li><p>Row-wise (within-individual): divide each row by its mean depth.</p></li>
+<li><p>Column-wise (across-individual): for each region compute mu and sigma2,
+then transform x -&gt; (x - mu) / sqrt(mu).</p></li>
+<li><p>Compute variance ratios (100 * sigma2 / mu) for every region.</p></li>
+<li><p>Median-based rescaling: multiply all values by 1/sqrt(median_ratio/100)
+so the output approximates true z-scores (matches C++ <cite>scale</cite> factor).</p></li>
+</ol>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>mat</strong> – numpy array shape (n_individuals, n_regions) with raw depths.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>numpy array same shape, rescaled z-scores.
+variance_ratios: dict {region_index: 100*sigma2/mu} for non-NaN regions.</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>normalized_mat</p>
@@ -741,25 +484,30 @@ variance_ratios: dict of {region_index: variance_ratio}</p>
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="grid.utils.normalize_mosdepth_dir.regions_bed_gz">
-<span class="sig-prename descclassname"><span class="pre">grid.utils.normalize_mosdepth_dir.</span></span><span class="sig-name descname"><span class="pre">regions_bed_gz</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">global_dist_file</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#grid.utils.normalize_mosdepth_dir.regions_bed_gz" title="Link to this definition">¶</a></dt>
-<dd><p>Get the path to the regions BED file corresponding to a global distribution file.</p>
+<dt class="sig sig-object py" id="grid.utils.normalize_mosdepth.normalize_mosdepth">
+<span class="sig-prename descclassname"><span class="pre">grid.utils.normalize_mosdepth.</span></span><span class="sig-name descname"><span class="pre">normalize_mosdepth</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">console</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#grid.utils.normalize_mosdepth.normalize_mosdepth" title="Link to this definition">¶</a></dt>
+<dd><p>Normalizes mosdepth coverage for all samples in the config file.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>global_dist_file</strong> (<em>Path</em>) – Path to the mosdepth.global.dist.txt file</p>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Path to the corresponding .regions.bed.gz file</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><em>Path</em></p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>config</strong> (<em>dict</em>) – The configuration data loaded from the config file.</p></li>
+<li><p><strong>console</strong> (<em>Console</em>) – The Rich console object for logging.</p></li>
+</ul>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="grid.utils.normalize_mosdepth_dir.select_high_variance_regions">
-<span class="sig-prename descclassname"><span class="pre">grid.utils.normalize_mosdepth_dir.</span></span><span class="sig-name descname"><span class="pre">select_high_variance_regions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">variance_ratios</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">top_frac</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#grid.utils.normalize_mosdepth_dir.select_high_variance_regions" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="grid.utils.normalize_mosdepth.process_one_individual">
+<span class="sig-prename descclassname"><span class="pre">grid.utils.normalize_mosdepth.</span></span><span class="sig-name descname"><span class="pre">process_one_individual</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">individual_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mosdepth_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">chromosome</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">valid_regions</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">excluded</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#grid.utils.normalize_mosdepth.process_one_individual" title="Link to this definition">¶</a></dt>
+<dd><p>This runs in its own process. Returns (individual_id, [(start,end,depth),…])
+args_tuple contains:</p>
+<p>individual_id, mosdepth_dir, chromosome, start, end, min_depth, max_depth, excluded</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="grid.utils.normalize_mosdepth.select_high_variance_regions">
+<span class="sig-prename descclassname"><span class="pre">grid.utils.normalize_mosdepth.</span></span><span class="sig-name descname"><span class="pre">select_high_variance_regions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">variance_ratios</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">top_frac</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.9</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#grid.utils.normalize_mosdepth.select_high_variance_regions" title="Link to this definition">¶</a></dt>
 <dd><p>Select top fraction of regions by variance ratio.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -778,24 +526,63 @@ variance_ratios: dict of {region_index: variance_ratio}</p>
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="grid.utils.normalize_mosdepth_dir.write_normalized_output">
-<span class="sig-prename descclassname"><span class="pre">grid.utils.normalize_mosdepth_dir.</span></span><span class="sig-name descname"><span class="pre">write_normalized_output</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mat</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">individuals_order</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">regions_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">selected_indices</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_file</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#grid.utils.normalize_mosdepth_dir.write_normalized_output" title="Link to this definition">¶</a></dt>
-<dd><p>Write normalized matrix to gzipped TSV.</p>
+<dt class="sig sig-object py" id="grid.utils.normalize_mosdepth.write_normalized_output">
+<span class="sig-prename descclassname"><span class="pre">grid.utils.normalize_mosdepth.</span></span><span class="sig-name descname"><span class="pre">write_normalized_output</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mat</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">individuals_order</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">selected_indices</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col_means</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col_vars</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">individual_raw_means</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ratio_mult</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100.0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#grid.utils.normalize_mosdepth.write_normalized_output" title="Link to this definition">¶</a></dt>
+<dd><p>Write normalised matrix in the C++-compatible format.</p>
+<section id="file-layout">
+<h2>File layout<a class="headerlink" href="#file-layout" title="Link to this heading">¶</a></h2>
+<p>Line 0  : N &lt;tab&gt; Rwant &lt;tab&gt; mu_1 &lt;tab&gt; mu_2 …
+Line 1  : N &lt;tab&gt; Rwant &lt;tab&gt; varRatio_1 &lt;tab&gt; varRatio_2 …
+Line 2+ : ID &lt;tab&gt; indiv_scale &lt;tab&gt; z_1 &lt;tab&gt; z_2 …</p>
+<dl class="field-list simple">
+<dt class="field-odd">param mat<span class="colon">:</span></dt>
+<dd class="field-odd"><p>normalised + rescaled matrix (n_individuals × n_regions).</p>
+</dd>
+<dt class="field-even">param individuals_order<span class="colon">:</span></dt>
+<dd class="field-even"><p>list of sample IDs.</p>
+</dd>
+<dt class="field-odd">param regions_list<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list of (start, end) tuples for all regions.</p>
+</dd>
+<dt class="field-even">param selected_indices<span class="colon">:</span></dt>
+<dd class="field-even"><p>indices of high-variance regions to keep.</p>
+</dd>
+<dt class="field-odd">param output_file<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Path for the output .tsv.gz file.</p>
+</dd>
+<dt class="field-even">param col_means<span class="colon">:</span></dt>
+<dd class="field-even"><p>per-region means (length = n_regions).</p>
+</dd>
+<dt class="field-odd">param col_vars<span class="colon">:</span></dt>
+<dd class="field-odd"><p>per-region variances ddof=1 (length = n_regions).</p>
+</dd>
+<dt class="field-even">param individual_raw_means<span class="colon">:</span></dt>
+<dd class="field-even"><p>per-sample mean depth before any normalisation
+(used to write the <cite>scale</cite> column; matches C++
+<cite>0.01f*scales[n]</cite> where scales[n] was in units
+of 0.01x, so the written value is in 1x units).</p>
+</dd>
+<dt class="field-odd">param ratio_mult<span class="colon">:</span></dt>
+<dd class="field-odd"><p>multiplier used for variance ratios (default 100).</p>
+</dd>
+</dl>
+</section>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>mat</strong> (<em>ndarray</em>) – normalized matrix (n_individuals × n_regions)</p></li>
-<li><p><strong>individuals_order</strong> (<em>list</em><em>[</em><em>str</em><em>]</em>) – list of sample IDs</p></li>
-<li><p><strong>regions_list</strong> (<em>list</em><em>[</em><em>tuple</em><em>[</em><em>int</em><em>, </em><em>int</em><em>]</em><em>]</em>) – list of region tuples</p></li>
-<li><p><strong>selected_indices</strong> (<em>list</em><em>[</em><em>int</em><em>]</em>) – list of region indices to keep</p></li>
-<li><p><strong>output_file</strong> (<em>Path</em>) – Path to write .tsv.gz file</p></li>
+<li><p><strong>mat</strong> (<em>ndarray</em>)</p></li>
+<li><p><strong>individuals_order</strong> (<em>list</em>)</p></li>
+<li><p><strong>selected_indices</strong> (<em>list</em>)</p></li>
+<li><p><strong>output_file</strong> (<em>Path</em>)</p></li>
+<li><p><strong>col_means</strong> (<em>ndarray</em>)</p></li>
+<li><p><strong>col_vars</strong> (<em>ndarray</em>)</p></li>
+<li><p><strong>individual_raw_means</strong> (<em>ndarray</em>)</p></li>
+<li><p><strong>ratio_mult</strong> (<em>float</em>)</p></li>
 </ul>
 </dd>
 </dl>
 </dd></dl>
 
-</section>
-</section>
 </section>
 
         </article>
@@ -808,7 +595,7 @@ variance_ratios: dict of {region_index: variance_ratio}</p>
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">Neighbor Finding Module</div>
+                <div class="title">Nearest-Neighbor Identification</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
@@ -819,7 +606,7 @@ variance_ratios: dict of {region_index: variance_ratio}</p>
                   <span>Previous</span>
                 </div>
                 
-                <div class="title">Mosdepth Coverage Analysis</div>
+                <div class="title">Coverage Estimation</div>
                 
               </div>
             </a>
@@ -827,7 +614,7 @@ variance_ratios: dict of {region_index: variance_ratio}</p>
         <div class="bottom-of-page">
           <div class="left-details">
             <div class="copyright">
-                Copyright &#169; 2025, Zachary Caterer
+                Copyright &#169; 2026, Zachary Caterer
             </div>
             Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
             
@@ -853,72 +640,20 @@ variance_ratios: dict of {region_index: variance_ratio}</p>
         <div class="toc-tree-container">
           <div class="toc-tree">
             <ul>
-<li><a class="reference internal" href="#">Mosdepth Coverage Normalization</a><ul>
-<li><a class="reference internal" href="#overview">Overview</a><ul>
-<li><a class="reference internal" href="#mosdepth-coverage-normalization-module">Mosdepth Coverage Normalization Module</a><ul>
-<li><a class="reference internal" href="#purpose">Purpose</a></li>
-<li><a class="reference internal" href="#main-module">Main Module</a><ul>
-<li><a class="reference internal" href="#run-normalized-mosdepth-py"><code class="docutils literal notranslate"><span class="pre">run_normalized_mosdepth.py</span></code></a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#usage">Usage</a><ul>
-<li><a class="reference internal" href="#via-cli">Via CLI</a></li>
-<li><a class="reference internal" href="#as-python-module">As Python Module</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#normalization-algorithm">Normalization Algorithm</a><ul>
-<li><a class="reference internal" href="#step-1-load-coverage-data">Step 1: Load Coverage Data</a></li>
-<li><a class="reference internal" href="#step-2-filter-regions">Step 2: Filter Regions</a></li>
-<li><a class="reference internal" href="#step-3-z-score-transformation">Step 3: Z-Score Transformation</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#output-interpretation">Output Interpretation</a><ul>
-<li><a class="reference internal" href="#z-depth-values">Z-Depth Values</a></li>
-<li><a class="reference internal" href="#example-interpretation">Example Interpretation</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#parameter-tuning">Parameter Tuning</a><ul>
-<li><a class="reference internal" href="#min-depth-default-20"><code class="docutils literal notranslate"><span class="pre">min_depth</span></code> (default: 20)</a></li>
-<li><a class="reference internal" href="#max-depth-default-100"><code class="docutils literal notranslate"><span class="pre">max_depth</span></code> (default: 100)</a></li>
-<li><a class="reference internal" href="#top-frac-default-0-1"><code class="docutils literal notranslate"><span class="pre">top_frac</span></code> (default: 0.1)</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#repeat-mask-bed-format">Repeat Mask BED Format</a></li>
-<li><a class="reference internal" href="#technical-details">Technical Details</a><ul>
-<li><a class="reference internal" href="#performance">Performance</a></li>
-<li><a class="reference internal" href="#dependencies">Dependencies</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#quality-control">Quality Control</a><ul>
-<li><a class="reference internal" href="#expected-results">Expected Results</a></li>
-<li><a class="reference internal" href="#diagnostic-plots-manual">Diagnostic Plots (manual)</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#troubleshooting">Troubleshooting</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a class="reference internal" href="#python-api-documentation">Python API Documentation</a><ul>
-<li><a class="reference internal" href="#module-grid.utils.run_normalized_mosdepth">grid.utils.run_normalized_mosdepth</a><ul>
-<li><a class="reference internal" href="#grid.utils.run_normalized_mosdepth.run_normalize_mosdepth"><code class="docutils literal notranslate"><span class="pre">run_normalize_mosdepth()</span></code></a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#module-grid.utils.normalize_mosdepth_dir">grid.utils.normalize_mosdepth_dir</a><ul>
-<li><a class="reference internal" href="#grid.utils.normalize_mosdepth_dir._process_one_individual"><code class="docutils literal notranslate"><span class="pre">_process_one_individual()</span></code></a></li>
-<li><a class="reference internal" href="#grid.utils.normalize_mosdepth_dir.build_depth_matrix"><code class="docutils literal notranslate"><span class="pre">build_depth_matrix()</span></code></a></li>
-<li><a class="reference internal" href="#grid.utils.normalize_mosdepth_dir.build_matrix_from_regions"><code class="docutils literal notranslate"><span class="pre">build_matrix_from_regions()</span></code></a></li>
-<li><a class="reference internal" href="#grid.utils.normalize_mosdepth_dir.extract_regions"><code class="docutils literal notranslate"><span class="pre">extract_regions()</span></code></a></li>
-<li><a class="reference internal" href="#grid.utils.normalize_mosdepth_dir.get_individuals"><code class="docutils literal notranslate"><span class="pre">get_individuals()</span></code></a></li>
-<li><a class="reference internal" href="#grid.utils.normalize_mosdepth_dir.load_repeat_mask"><code class="docutils literal notranslate"><span class="pre">load_repeat_mask()</span></code></a></li>
-<li><a class="reference internal" href="#grid.utils.normalize_mosdepth_dir.normalize_matrix"><code class="docutils literal notranslate"><span class="pre">normalize_matrix()</span></code></a></li>
-<li><a class="reference internal" href="#grid.utils.normalize_mosdepth_dir.regions_bed_gz"><code class="docutils literal notranslate"><span class="pre">regions_bed_gz()</span></code></a></li>
-<li><a class="reference internal" href="#grid.utils.normalize_mosdepth_dir.select_high_variance_regions"><code class="docutils literal notranslate"><span class="pre">select_high_variance_regions()</span></code></a></li>
-<li><a class="reference internal" href="#grid.utils.normalize_mosdepth_dir.write_normalized_output"><code class="docutils literal notranslate"><span class="pre">write_normalized_output()</span></code></a></li>
-</ul>
-</li>
-</ul>
-</li>
+<li><a class="reference internal" href="#">Coverage Normalization</a><ul>
+<li><a class="reference internal" href="#grid.utils.normalize_mosdepth.build_depth_matrix"><code class="docutils literal notranslate"><span class="pre">build_depth_matrix()</span></code></a></li>
+<li><a class="reference internal" href="#grid.utils.normalize_mosdepth.build_matrix_from_regions"><code class="docutils literal notranslate"><span class="pre">build_matrix_from_regions()</span></code></a></li>
+<li><a class="reference internal" href="#grid.utils.normalize_mosdepth.compute_population_mean_depths"><code class="docutils literal notranslate"><span class="pre">compute_population_mean_depths()</span></code></a></li>
+<li><a class="reference internal" href="#grid.utils.normalize_mosdepth.filter_empty_samples"><code class="docutils literal notranslate"><span class="pre">filter_empty_samples()</span></code></a></li>
+<li><a class="reference internal" href="#grid.utils.normalize_mosdepth.find_bed_gz_for_individual"><code class="docutils literal notranslate"><span class="pre">find_bed_gz_for_individual()</span></code></a></li>
+<li><a class="reference internal" href="#grid.utils.normalize_mosdepth.load_repeat_mask"><code class="docutils literal notranslate"><span class="pre">load_repeat_mask()</span></code></a></li>
+<li><a class="reference internal" href="#grid.utils.normalize_mosdepth.map_mosdepth_files_to_samples"><code class="docutils literal notranslate"><span class="pre">map_mosdepth_files_to_samples()</span></code></a></li>
+<li><a class="reference internal" href="#grid.utils.normalize_mosdepth.norm_chrom"><code class="docutils literal notranslate"><span class="pre">norm_chrom()</span></code></a></li>
+<li><a class="reference internal" href="#grid.utils.normalize_mosdepth.normalize_matrix"><code class="docutils literal notranslate"><span class="pre">normalize_matrix()</span></code></a></li>
+<li><a class="reference internal" href="#grid.utils.normalize_mosdepth.normalize_mosdepth"><code class="docutils literal notranslate"><span class="pre">normalize_mosdepth()</span></code></a></li>
+<li><a class="reference internal" href="#grid.utils.normalize_mosdepth.process_one_individual"><code class="docutils literal notranslate"><span class="pre">process_one_individual()</span></code></a></li>
+<li><a class="reference internal" href="#grid.utils.normalize_mosdepth.select_high_variance_regions"><code class="docutils literal notranslate"><span class="pre">select_high_variance_regions()</span></code></a></li>
+<li><a class="reference internal" href="#grid.utils.normalize_mosdepth.write_normalized_output"><code class="docutils literal notranslate"><span class="pre">write_normalized_output()</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -930,7 +665,7 @@ variance_ratios: dict of {region_index: variance_ratio}</p>
       
     </aside>
   </div>
-</div><script src="../_static/documentation_options.js?v=f8c80a57"></script>
+</div><script src="../_static/documentation_options.js?v=2709fde1"></script>
     <script src="../_static/doctools.js?v=9bcbadda"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/scripts/furo.js?v=46bd48cc"></script>

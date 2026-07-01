@@ -3,11 +3,11 @@
   <head><meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="index" title="Index" href="../genindex.html"><link rel="search" title="Search" href="../search.html"><link rel="next" title="Mosdepth Coverage Analysis" href="mosdepth.html"><link rel="prev" title="Helper Functions" href="helper-functions.html">
+<link rel="index" title="Index" href="../genindex.html"><link rel="search" title="Search" href="../search.html"><link rel="next" title="Coverage Estimation" href="mosdepth.html"><link rel="prev" title="Core" href="grid_core.html">
         <link rel="prefetch" href="../_static/grid_logo.png" as="image">
 
     <link rel="shortcut icon" href="../_static/favicon.ico"><!-- Generated with Sphinx 8.2.3 and Furo 2025.09.25 -->
-        <title>Read Counting Module - GRiD v0 documentation</title>
+        <title>Read Counting - GRiD 0.1 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d111a655" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=580074bf" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
@@ -172,7 +172,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../index.html"><div class="brand">GRiD v0 documentation</div></a>
+      <a href="../index.html"><div class="brand">GRiD 0.1 documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -196,7 +196,7 @@
     <img class="sidebar-logo" src="../_static/grid_logo.png" alt="Logo"/>
   </div>
   
-  <span class="sidebar-brand-text">GRiD v0 documentation</span>
+  <span class="sidebar-brand-text">GRiD 0.1 documentation</span>
   
 </a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
   <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
@@ -204,30 +204,53 @@
   <input type="hidden" name="area" value="default">
 </form>
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
-  <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
-<ul class="current">
+  <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="../readme.html">Welcome to GRiD’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ibs_ibd.html">Computing IBS/IBD Neighbors</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Examples</span></p>
+<ul>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../examples.html">Example Pipeline Jobs</a><input aria-label="Toggle navigation of Example Pipeline Jobs" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../examples/SOL_sbatch.html">SLURM Job Example</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../examples/SOL_python.html">Python Pipeline Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/1000G_example.html">1000 Genomes Full Pipeline Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/IBS_example.html">IBS/IBD Neighbor Computation Example</a></li>
 </ul>
 </li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Algorithms</span></p>
+<ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../algorithms.html">Algorithms</a><input aria-label="Toggle navigation of Algorithms" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../algorithms/count_reads.html">Read Counting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../algorithms/coverage.html">Coverage Estimation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../algorithms/normalization.html">Coverage Normalization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../algorithms/neighbors.html">Nearest-Neighbor Identification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../algorithms/dipcn.html">Diploid Copy Number Estimation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../algorithms/hi_inference.html">Haplotype Inference</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Project</span></p>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="../contributing.html">Contributing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../code_of_conduct.html">Code of Conduct</a></li>
-<li class="toctree-l1 current has-children"><a class="reference internal" href="../modules.html">Modules</a><input aria-label="Toggle navigation of Modules" checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="grid_core.html">GRiD Core Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="utilities_overview.html">Utilities Overview</a></li>
-<li class="toctree-l2"><a class="reference internal" href="helper-functions.html">Helper Functions</a></li>
-<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">Read Counting Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="mosdepth.html">Mosdepth Coverage Analysis</a></li>
-<li class="toctree-l2"><a class="reference internal" href="normalize-mosdepth.html">Mosdepth Coverage Normalization</a></li>
-<li class="toctree-l2"><a class="reference internal" href="find-neighbors.html">Neighbor Finding Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="lpa-realign.html">LPA Realignment Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="compute-dipcn.html">Diploid Copy Number Computation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="estimate-kiv.html">KIV-2 Copy Number Estimation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Paper</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../paper.html">Paper</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul class="current">
+<li class="toctree-l1 current has-children"><a class="reference internal" href="../modules.html">API Reference</a><input aria-label="Toggle navigation of API Reference" checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="grid_core.html">Core</a></li>
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">Read Counting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mosdepth.html">Coverage Estimation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="normalize-mosdepth.html">Coverage Normalization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="find-neighbors.html">Nearest-Neighbor Identification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="compute-dipcn.html">Diploid Copy Number Estimation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hi-inference.html">Haplotype Inference</a></li>
 <li class="toctree-l2"><a class="reference internal" href="crai.html">CRAM Index Management</a></li>
-<li class="toctree-l2"><a class="reference internal" href="subset.html">CRAM Subsetting</a></li>
-<li class="toctree-l2"><a class="reference internal" href="extract-reference.html">Extract Reference Sequences</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils.html">Utilities &amp; Helper Functions</a></li>
 </ul>
 </li>
 </ul>
@@ -268,207 +291,19 @@
           </label>
         </div>
         <article role="main" id="furo-main-content">
-          <section id="read-counting-module">
-<h1>Read Counting Module<a class="headerlink" href="#read-counting-module" title="Link to this heading">¶</a></h1>
-<section id="overview">
-<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">¶</a></h2>
-<section id="read-counting-module">
-<h3>Read Counting Module<a class="headerlink" href="#read-counting-module" title="Link to this heading">¶</a></h3>
-<p>Count properly paired reads within specified genomic regions (e.g., LPA KIV-2 VNTR) across multiple CRAM files.</p>
-<section id="purpose">
-<h4>Purpose<a class="headerlink" href="#purpose" title="Link to this heading">¶</a></h4>
-<p>This module is the first analytical step in the GRiD pipeline. It quantifies how many properly paired, mapped reads overlap with the repeat region of interest. These counts are essential for downstream copy number estimation.</p>
-</section>
-<section id="main-module">
-<h4>Main Module<a class="headerlink" href="#main-module" title="Link to this heading">¶</a></h4>
-<section id="count-reads-py">
-<h5><code class="docutils literal notranslate"><span class="pre">count_reads.py</span></code><a class="headerlink" href="#count-reads-py" title="Link to this heading">¶</a></h5>
-<p>Located in parent directory: <code class="docutils literal notranslate"><span class="pre">grid/utils/count_reads.py</span></code></p>
-<p><strong>Key Function:</strong></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">count_reads</span><span class="p">(</span>
-    <span class="n">cram_dir</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-    <span class="n">output_file</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-    <span class="n">ref_fasta</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-    <span class="n">chrom</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-    <span class="n">start</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
-    <span class="n">end</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
-    <span class="n">config</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-    <span class="n">threads</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
-</pre></div>
-</div>
-<p><strong>Parameters:</strong></p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">cram_dir</span></code>: Directory containing CRAM files</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">output_file</span></code>: Output TSV file path</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">ref_fasta</span></code>: Reference genome FASTA (for CRAM decoding)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">chrom</span></code>: Chromosome name (e.g., “chr6”)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">start</span></code>: Region start coordinate (0-based)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">end</span></code>: Region end coordinate (0-based)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">config</span></code>: YAML config with SAM flag filters</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">threads</span></code>: Parallel processing threads</p></li>
-</ul>
-<p><strong>Output Format:</strong></p>
-<div class="highlight-txt notranslate"><div class="highlight"><pre><span></span>sample_id       read_count
-sample001       1234
-sample002       2345
-sample003       3456
-</pre></div>
-</div>
-</section>
-</section>
-<section id="usage">
-<h4>Usage<a class="headerlink" href="#usage" title="Link to this heading">¶</a></h4>
-<section id="via-cli">
-<h5>Via CLI<a class="headerlink" href="#via-cli" title="Link to this heading">¶</a></h5>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>grid<span class="w"> </span>count-reads<span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>--cram-dir<span class="w"> </span>data/CRAMs<span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>--output-file<span class="w"> </span>output/read_counts.tsv<span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>--ref-fasta<span class="w"> </span>refs/hs37d5.fa<span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>--chrom<span class="w"> </span>chr6<span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>--start<span class="w"> </span><span class="m">160000000</span><span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>--end<span class="w"> </span><span class="m">160100000</span><span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>--config<span class="w"> </span>config.yaml<span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>--threads<span class="w"> </span><span class="m">4</span>
-</pre></div>
-</div>
-</section>
-<section id="as-python-module">
-<h5>As Python Module<a class="headerlink" href="#as-python-module" title="Link to this heading">¶</a></h5>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">grid.utils.count_reads</span><span class="w"> </span><span class="kn">import</span> <span class="n">count_reads</span>
-
-<span class="n">count_reads</span><span class="p">(</span>
-    <span class="n">cram_dir</span><span class="o">=</span><span class="s2">&quot;data/CRAMs&quot;</span><span class="p">,</span>
-    <span class="n">output_file</span><span class="o">=</span><span class="s2">&quot;output/counts.tsv&quot;</span><span class="p">,</span>
-    <span class="n">ref_fasta</span><span class="o">=</span><span class="s2">&quot;refs/hs37d5.fa&quot;</span><span class="p">,</span>
-    <span class="n">chrom</span><span class="o">=</span><span class="s2">&quot;chr6&quot;</span><span class="p">,</span>
-    <span class="n">start</span><span class="o">=</span><span class="mi">160000000</span><span class="p">,</span>
-    <span class="n">end</span><span class="o">=</span><span class="mi">160100000</span><span class="p">,</span>
-    <span class="n">config</span><span class="o">=</span><span class="s2">&quot;config.yaml&quot;</span><span class="p">,</span>
-    <span class="n">threads</span><span class="o">=</span><span class="mi">4</span>
-<span class="p">)</span>
-</pre></div>
-</div>
-</section>
-</section>
-<section id="sam-flag-filtering">
-<h4>SAM Flag Filtering<a class="headerlink" href="#sam-flag-filtering" title="Link to this heading">¶</a></h4>
-<p>Reads are filtered based on flags specified in the YAML config:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">sam_flags</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">required_flags</span><span class="p">:</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">PROPER_PAIR</span><span class="w">    </span><span class="c1"># Read is properly paired</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">READ_MAPPED</span><span class="w">    </span><span class="c1"># Read is mapped</span>
-<span class="w">  </span><span class="nt">excluded_flags</span><span class="p">:</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DUPLICATE</span><span class="w">      </span><span class="c1"># PCR/optical duplicate</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SECONDARY</span><span class="w">      </span><span class="c1"># Secondary alignment</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SUPPLEMENTARY</span><span class="w">  </span><span class="c1"># Supplementary alignment</span>
-</pre></div>
-</div>
-<p><strong>Common Required Flags:</strong></p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">PROPER_PAIR</span></code> (0x2): Both reads in pair properly aligned</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">READ_MAPPED</span></code> (0x1): Read is mapped to reference</p></li>
-</ul>
-<p><strong>Common Excluded Flags:</strong></p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">DUPLICATE</span></code> (0x400): PCR or optical duplicate</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">SECONDARY</span></code> (0x100): Not primary alignment</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">SUPPLEMENTARY</span></code> (0x800): Supplementary alignment</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">QCFAIL</span></code> (0x200): Fails quality checks</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">UNMAPPED</span></code> (0x4): Read unmapped</p></li>
-</ul>
-</section>
-<section id="technical-details">
-<h4>Technical Details<a class="headerlink" href="#technical-details" title="Link to this heading">¶</a></h4>
-<section id="algorithm">
-<h5>Algorithm<a class="headerlink" href="#algorithm" title="Link to this heading">¶</a></h5>
-<ol class="arabic simple">
-<li><p>Discover all CRAM files in specified directory</p></li>
-<li><p>For each CRAM:</p>
-<ul class="simple">
-<li><p>Ensure .crai index exists</p></li>
-<li><p>Open CRAM with reference genome</p></li>
-<li><p>Fetch reads overlapping target region</p></li>
-<li><p>Filter reads by SAM flags</p></li>
-<li><p>Count properly paired reads</p></li>
-</ul>
-</li>
-<li><p>Write results to TSV</p></li>
-</ol>
-</section>
-<section id="performance">
-<h5>Performance<a class="headerlink" href="#performance" title="Link to this heading">¶</a></h5>
-<ul class="simple">
-<li><p><strong>Parallelization:</strong> Uses multiprocessing to process CRAMs concurrently</p></li>
-<li><p><strong>Memory:</strong> Streams reads, minimal memory footprint</p></li>
-<li><p><strong>Speed:</strong> ~30-60 seconds per CRAM (varies by region size and coverage)</p></li>
-</ul>
-</section>
-<section id="dependencies">
-<h5>Dependencies<a class="headerlink" href="#dependencies" title="Link to this heading">¶</a></h5>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">pysam</span></code> - CRAM/BAM reading</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">pandas</span></code> - Data output</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">multiprocessing</span></code> - Parallel execution</p></li>
-</ul>
-</section>
-</section>
-<section id="troubleshooting">
-<h4>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Link to this heading">¶</a></h4>
-<p><strong>CRAM index missing:</strong></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Error</span><span class="p">:</span> <span class="n">index</span> <span class="n">file</span> <span class="o">&lt;</span><span class="n">file</span><span class="o">&gt;.</span><span class="n">crai</span> <span class="n">does</span> <span class="ow">not</span> <span class="n">exist</span>
-</pre></div>
-</div>
-<p>→ Run <code class="docutils literal notranslate"><span class="pre">grid</span> <span class="pre">crai</span></code> or ensure index files exist</p>
-<p><strong>Reference mismatch:</strong></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Error</span><span class="p">:</span> <span class="p">[</span><span class="n">E</span><span class="p">::</span><span class="n">hts_open_format</span><span class="p">]</span> <span class="n">fail</span> <span class="n">to</span> <span class="nb">open</span> <span class="n">file</span>
-</pre></div>
-</div>
-<p>→ Verify reference FASTA matches CRAM build (hg19/hg38)</p>
-<p><strong>No reads found:</strong></p>
-<ul class="simple">
-<li><p>Check chromosome naming (“chr6” vs “6”)</p></li>
-<li><p>Verify coordinates are correct for genome build</p></li>
-<li><p>Ensure region overlaps with sequencing data</p></li>
-</ul>
-</section>
-</section>
-</section>
-<section id="python-api-documentation">
-<h2>Python API Documentation<a class="headerlink" href="#python-api-documentation" title="Link to this heading">¶</a></h2>
-<section id="module-grid.utils.count_reads">
-<span id="grid-utils-count-reads"></span><h3>grid.utils.count_reads<a class="headerlink" href="#module-grid.utils.count_reads" title="Link to this heading">¶</a></h3>
-<dl class="py function">
+          <section id="read-counting">
+<h1>Read Counting<a class="headerlink" href="#read-counting" title="Link to this heading">¶</a></h1>
+<p>Counts properly paired reads within the KIV-2 VNTR region for each sample,
+filtered by mapping quality and SAM flag as specified in the config.</p>
+<dl class="py function" id="module-grid.utils.count_reads">
 <dt class="sig sig-object py" id="grid.utils.count_reads.count_reads">
-<span class="sig-prename descclassname"><span class="pre">grid.utils.count_reads.</span></span><span class="sig-name descname"><span class="pre">count_reads</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cram_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ref_fasta</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">chrom</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">config_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threads</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#grid.utils.count_reads.count_reads" title="Link to this definition">¶</a></dt>
-<dd><p>Count reads for all CRAMs in a directory using parallel processing.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>cram_dir</strong> (<em>str</em>) – Directory containing CRAM files</p></li>
-<li><p><strong>output_file</strong> (<em>str</em>) – Path to output TSV file</p></li>
-<li><p><strong>ref_fasta</strong> (<em>str</em>) – Path to reference genome FASTA</p></li>
-<li><p><strong>chrom</strong> (<em>str</em>) – Chromosome name</p></li>
-<li><p><strong>start</strong> (<em>int</em>) – Start position</p></li>
-<li><p><strong>end</strong> (<em>int</em>) – End position</p></li>
-<li><p><strong>config_file</strong> (<em>str</em>) – Path to YAML config file</p></li>
-<li><p><strong>threads</strong> (<em>int</em>) – Number of threads for parallel processing</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
+<span class="sig-prename descclassname"><span class="pre">grid.utils.count_reads.</span></span><span class="sig-name descname"><span class="pre">count_reads</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">console</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#grid.utils.count_reads.count_reads" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
 
-</section>
-<section id="module-grid.utils.count_reads_dir">
-<span id="grid-utils-count-reads-dir"></span><h3>grid.utils.count_reads_dir<a class="headerlink" href="#module-grid.utils.count_reads_dir" title="Link to this heading">¶</a></h3>
-<p>Count reads utilities.</p>
-<p>This package contains modular functions for counting reads
-in directories and processing read count results.</p>
 <dl class="py function">
-<dt class="sig sig-object py" id="grid.utils.count_reads_dir.count_reads_in_region">
-<span class="sig-prename descclassname"><span class="pre">grid.utils.count_reads_dir.</span></span><span class="sig-name descname"><span class="pre">count_reads_in_region</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cram_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ref_fasta</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">chrom</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">proper_flags</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#grid.utils.count_reads_dir.count_reads_in_region" title="Link to this definition">¶</a></dt>
-<dd><p>Count properly paired reads in a genomic region using pysam.
-Ensures CRAI index exists.</p>
+<dt class="sig sig-object py" id="grid.utils.count_reads.count_reads_in_region">
+<span class="sig-prename descclassname"><span class="pre">grid.utils.count_reads.</span></span><span class="sig-name descname"><span class="pre">count_reads_in_region</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cram_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ref_fasta</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">chrom</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">proper_flags</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_mapq</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#grid.utils.count_reads.count_reads_in_region" title="Link to this definition">¶</a></dt>
+<dd><p>Count properly paired reads in a genomic region using pysam.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
@@ -478,6 +313,7 @@ Ensures CRAI index exists.</p>
 <li><p><strong>start</strong> (<em>int</em>)</p></li>
 <li><p><strong>end</strong> (<em>int</em>)</p></li>
 <li><p><strong>proper_flags</strong> (<em>set</em><em>[</em><em>int</em><em>]</em>)</p></li>
+<li><p><strong>min_mapq</strong> (<em>int</em>)</p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
@@ -487,31 +323,49 @@ Ensures CRAI index exists.</p>
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="grid.utils.count_reads_dir.process_single_cram">
-<span class="sig-prename descclassname"><span class="pre">grid.utils.count_reads_dir.</span></span><span class="sig-name descname"><span class="pre">process_single_cram</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cram_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ref_fasta</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">chrom</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">proper_flags</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#grid.utils.count_reads_dir.process_single_cram" title="Link to this definition">¶</a></dt>
-<dd><p>Process a single CRAM file and count reads in region.</p>
+<dt class="sig sig-object py" id="grid.utils.count_reads.process_single_cram">
+<span class="sig-prename descclassname"><span class="pre">grid.utils.count_reads.</span></span><span class="sig-name descname"><span class="pre">process_single_cram</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ref_fasta</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">chrom</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">proper_flags</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_mapq</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">console</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#grid.utils.count_reads.process_single_cram" title="Link to this definition">¶</a></dt>
+<dd><p>Process a single sequence alignment file and count reads in region.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>cram_path</strong> (<em>str</em>) – Path to CRAM file</p></li>
+<li><p><strong>path</strong> (<em>str</em>) – Path to sequence alignment file</p></li>
 <li><p><strong>ref_fasta</strong> (<em>str</em>) – Path to reference genome FASTA</p></li>
 <li><p><strong>chrom</strong> (<em>str</em>) – Chromosome name</p></li>
 <li><p><strong>start</strong> (<em>int</em>) – Start position</p></li>
 <li><p><strong>end</strong> (<em>int</em>) – End position</p></li>
 <li><p><strong>proper_flags</strong> (<em>set</em><em>[</em><em>int</em><em>]</em>) – Set of SAM flags to count</p></li>
+<li><p><strong>min_mapq</strong> (<em>int</em>)</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Tuple of (basename, count) where count is int or “Error”</p>
+<dd class="field-even"><p>Read count or “Error”</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>tuple[str, int | str]</p>
+<dd class="field-odd"><p>int or str</p>
 </dd>
 </dl>
 </dd></dl>
 
-</section>
-</section>
+<dl class="py function">
+<dt class="sig sig-object py" id="grid.utils.count_reads.write_read_results">
+<span class="sig-prename descclassname"><span class="pre">grid.utils.count_reads.</span></span><span class="sig-name descname"><span class="pre">write_read_results</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">output_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">basename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">count</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">write_lock</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#grid.utils.count_reads.write_read_results" title="Link to this definition">¶</a></dt>
+<dd><p>Write a single result to the output file in a thread-safe manner.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>output_file</strong> (<em>Path</em>) – Path to output file</p></li>
+<li><p><strong>basename</strong> (<em>str</em>) – Sample basename</p></li>
+<li><p><strong>count</strong> (<em>int</em><em> | </em><em>str</em>) – Read count or “Error”</p></li>
+<li><p><strong>write_lock</strong> (<em>allocate_lock</em>) – Threading lock for safe file writing</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
 </section>
 
         </article>
@@ -524,18 +378,18 @@ Ensures CRAI index exists.</p>
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">Mosdepth Coverage Analysis</div>
+                <div class="title">Coverage Estimation</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="helper-functions.html">
+          <a class="prev-page" href="grid_core.html">
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title">Helper Functions</div>
+                <div class="title">Core</div>
                 
               </div>
             </a>
@@ -543,7 +397,7 @@ Ensures CRAI index exists.</p>
         <div class="bottom-of-page">
           <div class="left-details">
             <div class="copyright">
-                Copyright &#169; 2025, Zachary Caterer
+                Copyright &#169; 2026, Zachary Caterer
             </div>
             Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
             
@@ -569,43 +423,11 @@ Ensures CRAI index exists.</p>
         <div class="toc-tree-container">
           <div class="toc-tree">
             <ul>
-<li><a class="reference internal" href="#">Read Counting Module</a><ul>
-<li><a class="reference internal" href="#overview">Overview</a><ul>
-<li><a class="reference internal" href="#read-counting-module">Read Counting Module</a><ul>
-<li><a class="reference internal" href="#purpose">Purpose</a></li>
-<li><a class="reference internal" href="#main-module">Main Module</a><ul>
-<li><a class="reference internal" href="#count-reads-py"><code class="docutils literal notranslate"><span class="pre">count_reads.py</span></code></a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#usage">Usage</a><ul>
-<li><a class="reference internal" href="#via-cli">Via CLI</a></li>
-<li><a class="reference internal" href="#as-python-module">As Python Module</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#sam-flag-filtering">SAM Flag Filtering</a></li>
-<li><a class="reference internal" href="#technical-details">Technical Details</a><ul>
-<li><a class="reference internal" href="#algorithm">Algorithm</a></li>
-<li><a class="reference internal" href="#performance">Performance</a></li>
-<li><a class="reference internal" href="#dependencies">Dependencies</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#troubleshooting">Troubleshooting</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a class="reference internal" href="#python-api-documentation">Python API Documentation</a><ul>
-<li><a class="reference internal" href="#module-grid.utils.count_reads">grid.utils.count_reads</a><ul>
+<li><a class="reference internal" href="#">Read Counting</a><ul>
 <li><a class="reference internal" href="#grid.utils.count_reads.count_reads"><code class="docutils literal notranslate"><span class="pre">count_reads()</span></code></a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#module-grid.utils.count_reads_dir">grid.utils.count_reads_dir</a><ul>
-<li><a class="reference internal" href="#grid.utils.count_reads_dir.count_reads_in_region"><code class="docutils literal notranslate"><span class="pre">count_reads_in_region()</span></code></a></li>
-<li><a class="reference internal" href="#grid.utils.count_reads_dir.process_single_cram"><code class="docutils literal notranslate"><span class="pre">process_single_cram()</span></code></a></li>
-</ul>
-</li>
-</ul>
-</li>
+<li><a class="reference internal" href="#grid.utils.count_reads.count_reads_in_region"><code class="docutils literal notranslate"><span class="pre">count_reads_in_region()</span></code></a></li>
+<li><a class="reference internal" href="#grid.utils.count_reads.process_single_cram"><code class="docutils literal notranslate"><span class="pre">process_single_cram()</span></code></a></li>
+<li><a class="reference internal" href="#grid.utils.count_reads.write_read_results"><code class="docutils literal notranslate"><span class="pre">write_read_results()</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -617,7 +439,7 @@ Ensures CRAI index exists.</p>
       
     </aside>
   </div>
-</div><script src="../_static/documentation_options.js?v=f8c80a57"></script>
+</div><script src="../_static/documentation_options.js?v=2709fde1"></script>
     <script src="../_static/doctools.js?v=9bcbadda"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/scripts/furo.js?v=46bd48cc"></script>

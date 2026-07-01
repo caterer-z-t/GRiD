@@ -3,11 +3,11 @@
   <head><meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="index" title="Index" href="../genindex.html"><link rel="search" title="Search" href="../search.html"><link rel="next" title="Mosdepth Coverage Normalization" href="normalize-mosdepth.html"><link rel="prev" title="Read Counting Module" href="count-reads.html">
+<link rel="index" title="Index" href="../genindex.html"><link rel="search" title="Search" href="../search.html"><link rel="next" title="Coverage Normalization" href="normalize-mosdepth.html"><link rel="prev" title="Read Counting" href="count-reads.html">
         <link rel="prefetch" href="../_static/grid_logo.png" as="image">
 
     <link rel="shortcut icon" href="../_static/favicon.ico"><!-- Generated with Sphinx 8.2.3 and Furo 2025.09.25 -->
-        <title>Mosdepth Coverage Analysis - GRiD v0 documentation</title>
+        <title>Coverage Estimation - GRiD 0.1 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d111a655" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=580074bf" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
@@ -172,7 +172,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../index.html"><div class="brand">GRiD v0 documentation</div></a>
+      <a href="../index.html"><div class="brand">GRiD 0.1 documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -196,7 +196,7 @@
     <img class="sidebar-logo" src="../_static/grid_logo.png" alt="Logo"/>
   </div>
   
-  <span class="sidebar-brand-text">GRiD v0 documentation</span>
+  <span class="sidebar-brand-text">GRiD 0.1 documentation</span>
   
 </a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
   <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
@@ -204,30 +204,53 @@
   <input type="hidden" name="area" value="default">
 </form>
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
-  <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
-<ul class="current">
+  <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="../readme.html">Welcome to GRiD’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ibs_ibd.html">Computing IBS/IBD Neighbors</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Examples</span></p>
+<ul>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../examples.html">Example Pipeline Jobs</a><input aria-label="Toggle navigation of Example Pipeline Jobs" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../examples/SOL_sbatch.html">SLURM Job Example</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../examples/SOL_python.html">Python Pipeline Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/1000G_example.html">1000 Genomes Full Pipeline Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/IBS_example.html">IBS/IBD Neighbor Computation Example</a></li>
 </ul>
 </li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Algorithms</span></p>
+<ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../algorithms.html">Algorithms</a><input aria-label="Toggle navigation of Algorithms" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../algorithms/count_reads.html">Read Counting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../algorithms/coverage.html">Coverage Estimation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../algorithms/normalization.html">Coverage Normalization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../algorithms/neighbors.html">Nearest-Neighbor Identification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../algorithms/dipcn.html">Diploid Copy Number Estimation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../algorithms/hi_inference.html">Haplotype Inference</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Project</span></p>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="../contributing.html">Contributing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../code_of_conduct.html">Code of Conduct</a></li>
-<li class="toctree-l1 current has-children"><a class="reference internal" href="../modules.html">Modules</a><input aria-label="Toggle navigation of Modules" checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="grid_core.html">GRiD Core Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="utilities_overview.html">Utilities Overview</a></li>
-<li class="toctree-l2"><a class="reference internal" href="helper-functions.html">Helper Functions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="count-reads.html">Read Counting Module</a></li>
-<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">Mosdepth Coverage Analysis</a></li>
-<li class="toctree-l2"><a class="reference internal" href="normalize-mosdepth.html">Mosdepth Coverage Normalization</a></li>
-<li class="toctree-l2"><a class="reference internal" href="find-neighbors.html">Neighbor Finding Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="lpa-realign.html">LPA Realignment Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="compute-dipcn.html">Diploid Copy Number Computation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="estimate-kiv.html">KIV-2 Copy Number Estimation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Paper</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../paper.html">Paper</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul class="current">
+<li class="toctree-l1 current has-children"><a class="reference internal" href="../modules.html">API Reference</a><input aria-label="Toggle navigation of API Reference" checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="grid_core.html">Core</a></li>
+<li class="toctree-l2"><a class="reference internal" href="count-reads.html">Read Counting</a></li>
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">Coverage Estimation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="normalize-mosdepth.html">Coverage Normalization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="find-neighbors.html">Nearest-Neighbor Identification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="compute-dipcn.html">Diploid Copy Number Estimation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hi-inference.html">Haplotype Inference</a></li>
 <li class="toctree-l2"><a class="reference internal" href="crai.html">CRAM Index Management</a></li>
-<li class="toctree-l2"><a class="reference internal" href="subset.html">CRAM Subsetting</a></li>
-<li class="toctree-l2"><a class="reference internal" href="extract-reference.html">Extract Reference Sequences</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils.html">Utilities &amp; Helper Functions</a></li>
 </ul>
 </li>
 </ul>
@@ -268,298 +291,13 @@
           </label>
         </div>
         <article role="main" id="furo-main-content">
-          <section id="mosdepth-coverage-analysis">
-<h1>Mosdepth Coverage Analysis<a class="headerlink" href="#mosdepth-coverage-analysis" title="Link to this heading">¶</a></h1>
-<section id="overview">
-<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">¶</a></h2>
-<section id="mosdepth-coverage-analysis-module">
-<h3>Mosdepth Coverage Analysis Module<a class="headerlink" href="#mosdepth-coverage-analysis-module" title="Link to this heading">¶</a></h3>
-<p>Compute per-base or binned read depth coverage across genomic regions using the <code class="docutils literal notranslate"><span class="pre">mosdepth</span></code> tool.</p>
-<section id="purpose">
-<h4>Purpose<a class="headerlink" href="#purpose" title="Link to this heading">¶</a></h4>
-<p>This module generates coverage profiles for all samples, which are essential for:</p>
-<ol class="arabic simple">
-<li><p>Identifying high-coverage VNTR regions</p></li>
-<li><p>Normalizing copy number estimates across samples</p></li>
-<li><p>Quality control and outlier detection</p></li>
-</ol>
-</section>
-<section id="main-module">
-<h4>Main Module<a class="headerlink" href="#main-module" title="Link to this heading">¶</a></h4>
-<section id="run-mosdepth-py">
-<h5><code class="docutils literal notranslate"><span class="pre">run_mosdepth.py</span></code><a class="headerlink" href="#run-mosdepth-py" title="Link to this heading">¶</a></h5>
-<p>Located in parent directory: <code class="docutils literal notranslate"><span class="pre">grid/utils/run_mosdepth.py</span></code></p>
-<p><strong>Key Function:</strong></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">run_mosdepth</span><span class="p">(</span>
-    <span class="n">cram_dir</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-    <span class="n">output_file</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-    <span class="n">ref_fasta</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-    <span class="n">chrom</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-    <span class="n">start</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
-    <span class="n">end</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
-    <span class="n">region_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-    <span class="n">work_dir</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;~/mosdepth_work&quot;</span><span class="p">,</span>
-    <span class="n">by</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">,</span>
-    <span class="n">fast_mode</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
-    <span class="n">threads</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
-</pre></div>
-</div>
-<p><strong>Parameters:</strong></p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">cram_dir</span></code>: Directory with CRAM files</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">output_file</span></code>: Final aggregated TSV output</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">ref_fasta</span></code>: Reference genome FASTA</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">chrom</span></code>: Chromosome (e.g., “chr6”)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">start</span></code>: Region start position</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">end</span></code>: Region end position</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">region_name</span></code>: Name for mosdepth output (e.g., “LPA_VNTR”)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">work_dir</span></code>: Temporary directory for mosdepth outputs</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">by</span></code>: Bin size in base pairs (default: 1000)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">fast_mode</span></code>: Use mosdepth –fast-mode (recommended: True)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">threads</span></code>: Parallel processing threads</p></li>
-</ul>
-<p><strong>Output Format:</strong></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sample_id</span>       <span class="n">position</span>        <span class="n">depth</span>
-<span class="n">sample001</span>       <span class="mi">160000000</span>       <span class="mf">45.2</span>
-<span class="n">sample001</span>       <span class="mi">160001000</span>       <span class="mf">48.7</span>
-<span class="n">sample002</span>       <span class="mi">160000000</span>       <span class="mf">52.3</span>
-</pre></div>
-</div>
-</section>
-</section>
-<section id="usage">
-<h4>Usage<a class="headerlink" href="#usage" title="Link to this heading">¶</a></h4>
-<section id="via-cli">
-<h5>Via CLI<a class="headerlink" href="#via-cli" title="Link to this heading">¶</a></h5>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>grid<span class="w"> </span>mosdepth<span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>--cram-dir<span class="w"> </span>data/CRAMs<span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>--output-file<span class="w"> </span>output/coverage.tsv<span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>--ref-fasta<span class="w"> </span>refs/hs37d5.fa<span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>--chrom<span class="w"> </span>chr6<span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>--start<span class="w"> </span><span class="m">160000000</span><span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>--end<span class="w"> </span><span class="m">160100000</span><span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>--region-name<span class="w"> </span>LPA_VNTR<span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>--work-dir<span class="w"> </span>/tmp/mosdepth<span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>--by<span class="w"> </span><span class="m">1000</span><span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>--fast<span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>--threads<span class="w"> </span><span class="m">4</span>
-</pre></div>
-</div>
-</section>
-<section id="as-python-module">
-<h5>As Python Module<a class="headerlink" href="#as-python-module" title="Link to this heading">¶</a></h5>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">grid.utils.run_mosdepth</span><span class="w"> </span><span class="kn">import</span> <span class="n">run_mosdepth</span>
-
-<span class="n">run_mosdepth</span><span class="p">(</span>
-    <span class="n">cram_dir</span><span class="o">=</span><span class="s2">&quot;data/CRAMs&quot;</span><span class="p">,</span>
-    <span class="n">output_file</span><span class="o">=</span><span class="s2">&quot;output/coverage.tsv&quot;</span><span class="p">,</span>
-    <span class="n">ref_fasta</span><span class="o">=</span><span class="s2">&quot;refs/hs37d5.fa&quot;</span><span class="p">,</span>
-    <span class="n">chrom</span><span class="o">=</span><span class="s2">&quot;chr6&quot;</span><span class="p">,</span>
-    <span class="n">start</span><span class="o">=</span><span class="mi">160000000</span><span class="p">,</span>
-    <span class="n">end</span><span class="o">=</span><span class="mi">160100000</span><span class="p">,</span>
-    <span class="n">region_name</span><span class="o">=</span><span class="s2">&quot;LPA_VNTR&quot;</span><span class="p">,</span>
-    <span class="n">by</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span>
-    <span class="n">fast_mode</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-    <span class="n">threads</span><span class="o">=</span><span class="mi">4</span>
-<span class="p">)</span>
-</pre></div>
-</div>
-</section>
-</section>
-<section id="mosdepth-integration">
-<h4>Mosdepth Integration<a class="headerlink" href="#mosdepth-integration" title="Link to this heading">¶</a></h4>
-<p>This module wraps the <code class="docutils literal notranslate"><span class="pre">mosdepth</span></code> tool with GRiD-specific configurations.</p>
-<section id="mosdepth-command-structure">
-<h5>Mosdepth Command Structure<a class="headerlink" href="#mosdepth-command-structure" title="Link to this heading">¶</a></h5>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mosdepth<span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>--by<span class="w"> </span>&lt;bin_size&gt;<span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>--chrom<span class="w"> </span>&lt;chromosome&gt;<span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>--fast-mode<span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>--threads<span class="w"> </span>&lt;n&gt;<span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>&lt;output_prefix&gt;<span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>&lt;input.cram&gt;
-</pre></div>
-</div>
-</section>
-<section id="fast-mode">
-<h5>Fast Mode<a class="headerlink" href="#fast-mode" title="Link to this heading">¶</a></h5>
-<p>The <code class="docutils literal notranslate"><span class="pre">--fast-mode</span></code> flag is enabled by default:</p>
-<ul class="simple">
-<li><p><strong>Faster:</strong> ~3-5x speed improvement</p></li>
-<li><p><strong>Trade-off:</strong> May miss some edge cases in coverage calculation</p></li>
-<li><p><strong>Recommended:</strong> Use for initial analysis and large datasets</p></li>
-</ul>
-</section>
-</section>
-<section id="output-files">
-<h4>Output Files<a class="headerlink" href="#output-files" title="Link to this heading">¶</a></h4>
-<section id="intermediate-files-in-work-dir">
-<h5>Intermediate Files (in work_dir)<a class="headerlink" href="#intermediate-files-in-work-dir" title="Link to this heading">¶</a></h5>
-<p>For each sample, mosdepth generates:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">sample</span><span class="o">&gt;.</span><span class="n">regions</span><span class="o">.</span><span class="n">bed</span><span class="o">.</span><span class="n">gz</span>         <span class="c1"># Per-region coverage summary</span>
-<span class="o">&lt;</span><span class="n">sample</span><span class="o">&gt;.</span><span class="n">mosdepth</span><span class="o">.</span><span class="k">global</span><span class="o">.</span><span class="n">dist</span><span class="o">.</span><span class="n">txt</span>  <span class="c1"># Global coverage distribution</span>
-<span class="o">&lt;</span><span class="n">sample</span><span class="o">&gt;.</span><span class="n">mosdepth</span><span class="o">.</span><span class="n">region</span><span class="o">.</span><span class="n">dist</span><span class="o">.</span><span class="n">txt</span>  <span class="c1"># Region coverage distribution</span>
-</pre></div>
-</div>
-</section>
-<section id="final-output">
-<h5>Final Output<a class="headerlink" href="#final-output" title="Link to this heading">¶</a></h5>
-<p>Aggregated TSV with columns:</p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">sample_id</span></code>: Sample identifier (from CRAM filename)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">position</span></code>: Genomic position (bin start)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">depth</span></code>: Mean coverage depth in that bin</p></li>
-</ul>
-</section>
-</section>
-<section id="technical-details">
-<h4>Technical Details<a class="headerlink" href="#technical-details" title="Link to this heading">¶</a></h4>
-<section id="algorithm">
-<h5>Algorithm<a class="headerlink" href="#algorithm" title="Link to this heading">¶</a></h5>
-<ol class="arabic simple">
-<li><p>Create BED file for target region</p></li>
-<li><p>For each CRAM in parallel:</p>
-<ul class="simple">
-<li><p>Run mosdepth with specified parameters</p></li>
-<li><p>Parse <code class="docutils literal notranslate"><span class="pre">.regions.bed.gz</span></code> output</p></li>
-<li><p>Extract coverage values for target region</p></li>
-</ul>
-</li>
-<li><p>Aggregate all results into single TSV</p></li>
-<li><p>Clean up intermediate files (optional)</p></li>
-</ol>
-</section>
-<section id="performance">
-<h5>Performance<a class="headerlink" href="#performance" title="Link to this heading">¶</a></h5>
-<ul class="simple">
-<li><p><strong>Parallelization:</strong> Process multiple CRAMs simultaneously</p></li>
-<li><p><strong>Memory:</strong> Low memory footprint with streaming</p></li>
-<li><p><strong>Speed:</strong> ~1-2 minutes per CRAM for 100kb region</p></li>
-<li><p><strong>Disk:</strong> Intermediate files are small (&lt;1MB per sample)</p></li>
-</ul>
-</section>
-<section id="dependencies">
-<h5>Dependencies<a class="headerlink" href="#dependencies" title="Link to this heading">¶</a></h5>
-<ul class="simple">
-<li><p><strong>External:</strong> <code class="docutils literal notranslate"><span class="pre">mosdepth</span></code> (must be in PATH)</p></li>
-<li><p><strong>Python:</strong> <code class="docutils literal notranslate"><span class="pre">pandas</span></code>, <code class="docutils literal notranslate"><span class="pre">subprocess</span></code>, <code class="docutils literal notranslate"><span class="pre">pathlib</span></code></p></li>
-</ul>
-</section>
-</section>
-<section id="binning-strategies">
-<h4>Binning Strategies<a class="headerlink" href="#binning-strategies" title="Link to this heading">¶</a></h4>
-<section id="per-base-by-0">
-<h5>Per-base (–by 0)<a class="headerlink" href="#per-base-by-0" title="Link to this heading">¶</a></h5>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>--by<span class="w"> </span><span class="m">0</span>
-</pre></div>
-</div>
-<ul class="simple">
-<li><p>Most detailed coverage profile</p></li>
-<li><p>Large output files</p></li>
-<li><p>Slower processing</p></li>
-<li><p>Use for small regions (&lt;10kb)</p></li>
-</ul>
-</section>
-<section id="fixed-bins-default">
-<h5>Fixed bins (default)<a class="headerlink" href="#fixed-bins-default" title="Link to this heading">¶</a></h5>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>--by<span class="w"> </span><span class="m">1000</span><span class="w">  </span><span class="c1"># 1kb bins</span>
-</pre></div>
-</div>
-<ul class="simple">
-<li><p>Balanced detail vs. speed</p></li>
-<li><p>Recommended for VNTR analysis</p></li>
-<li><p>Typical bin sizes: 500-2000bp</p></li>
-</ul>
-</section>
-<section id="larger-bins">
-<h5>Larger bins<a class="headerlink" href="#larger-bins" title="Link to this heading">¶</a></h5>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>--by<span class="w"> </span><span class="m">5000</span><span class="w">  </span><span class="c1"># 5kb bins</span>
-</pre></div>
-</div>
-<ul class="simple">
-<li><p>Faster processing</p></li>
-<li><p>Less detail</p></li>
-<li><p>Use for genome-wide analysis</p></li>
-</ul>
-</section>
-</section>
-<section id="quality-control">
-<h4>Quality Control<a class="headerlink" href="#quality-control" title="Link to this heading">¶</a></h4>
-<section id="expected-coverage">
-<h5>Expected Coverage<a class="headerlink" href="#expected-coverage" title="Link to this heading">¶</a></h5>
-<p>For 30X WGS data in a VNTR region:</p>
-<ul class="simple">
-<li><p>Single-copy: ~30X coverage</p></li>
-<li><p>Duplicated: ~60X coverage</p></li>
-<li><p>High-copy (10+): 300X+ coverage</p></li>
-</ul>
-</section>
-<section id="outlier-detection">
-<h5>Outlier Detection<a class="headerlink" href="#outlier-detection" title="Link to this heading">¶</a></h5>
-<p>Samples with unusual coverage patterns may indicate:</p>
-<ul class="simple">
-<li><p>Library preparation issues</p></li>
-<li><p>Alignment problems</p></li>
-<li><p>True structural variants</p></li>
-</ul>
-</section>
-</section>
-<section id="troubleshooting">
-<h4>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Link to this heading">¶</a></h4>
-<p><strong>Mosdepth not found:</strong></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Error</span><span class="p">:</span> <span class="n">mosdepth</span><span class="p">:</span> <span class="n">command</span> <span class="ow">not</span> <span class="n">found</span>
-</pre></div>
-</div>
-<p>→ Install mosdepth: <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">install</span> <span class="pre">-c</span> <span class="pre">bioconda</span> <span class="pre">mosdepth</span></code></p>
-<p><strong>Empty output:</strong></p>
-<ul class="simple">
-<li><p>Check BED coordinates match reference</p></li>
-<li><p>Verify CRAM has coverage in region</p></li>
-<li><p>Ensure chromosome naming matches (“chr6” vs “6”)</p></li>
-</ul>
-<p><strong>Slow performance:</strong></p>
-<ul class="simple">
-<li><p>Use <code class="docutils literal notranslate"><span class="pre">--fast</span></code> mode</p></li>
-<li><p>Increase bin size (<code class="docutils literal notranslate"><span class="pre">--by</span></code>)</p></li>
-<li><p>Reduce <code class="docutils literal notranslate"><span class="pre">--threads</span></code> if I/O limited</p></li>
-</ul>
-</section>
-</section>
-</section>
-<section id="python-api-documentation">
-<h2>Python API Documentation<a class="headerlink" href="#python-api-documentation" title="Link to this heading">¶</a></h2>
-<section id="module-grid.utils.run_mosdepth">
-<span id="grid-utils-run-mosdepth"></span><h3>grid.utils.run_mosdepth<a class="headerlink" href="#module-grid.utils.run_mosdepth" title="Link to this heading">¶</a></h3>
-<dl class="py function">
-<dt class="sig sig-object py" id="grid.utils.run_mosdepth.run_mosdepth">
-<span class="sig-prename descclassname"><span class="pre">grid.utils.run_mosdepth.</span></span><span class="sig-name descname"><span class="pre">run_mosdepth</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cram_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ref_fasta</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">chrom</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">region_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">work_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">by</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fast_mode</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threads</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#grid.utils.run_mosdepth.run_mosdepth" title="Link to this definition">¶</a></dt>
-<dd><p>Run mosdepth on all CRAMs in a directory using parallel processing.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>cram_dir</strong> (<em>str</em>) – Directory containing CRAM files</p></li>
-<li><p><strong>output_file</strong> (<em>str</em>) – Path to output TSV file</p></li>
-<li><p><strong>ref_fasta</strong> (<em>str</em>) – Path to reference genome FASTA</p></li>
-<li><p><strong>chrom</strong> (<em>str</em>) – Chromosome name</p></li>
-<li><p><strong>start</strong> (<em>int</em>) – Start position</p></li>
-<li><p><strong>end</strong> (<em>int</em>) – End position</p></li>
-<li><p><strong>work_dir</strong> (<em>str</em>) – Working directory for intermediate files</p></li>
-<li><p><strong>by</strong> (<em>int</em>) – Bin size for mosdepth</p></li>
-<li><p><strong>fast_mode</strong> (<em>bool</em>) – Whether to use fast mode</p></li>
-<li><p><strong>threads</strong> (<em>int</em>) – Number of threads for parallel processing</p></li>
-<li><p><strong>region_name</strong> (<em>str</em>)</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-</section>
-<section id="module-grid.utils.mosdepth_dir">
-<span id="grid-utils-mosdepth-dir"></span><h3>grid.utils.mosdepth_dir<a class="headerlink" href="#module-grid.utils.mosdepth_dir" title="Link to this heading">¶</a></h3>
-<dl class="py function">
-<dt class="sig sig-object py" id="grid.utils.mosdepth_dir.build_mosdepth_command">
-<span class="sig-prename descclassname"><span class="pre">grid.utils.mosdepth_dir.</span></span><span class="sig-name descname"><span class="pre">build_mosdepth_command</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cram_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ref_fasta</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_prefix</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">by</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fast_mode</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#grid.utils.mosdepth_dir.build_mosdepth_command" title="Link to this definition">¶</a></dt>
+          <section id="coverage-estimation">
+<h1>Coverage Estimation<a class="headerlink" href="#coverage-estimation" title="Link to this heading">¶</a></h1>
+<p>Runs <a class="reference external" href="https://github.com/brentp/mosdepth">mosdepth</a> across all samples in binned mode,
+then computes an overlap-weighted mean depth for the KIV-2 region.</p>
+<dl class="py function" id="module-grid.utils.mosdepth">
+<dt class="sig sig-object py" id="grid.utils.mosdepth.build_mosdepth_command">
+<span class="sig-prename descclassname"><span class="pre">grid.utils.mosdepth.</span></span><span class="sig-name descname"><span class="pre">build_mosdepth_command</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cram_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ref_fasta</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_prefix</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">by</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fast_mode</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threads</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#grid.utils.mosdepth.build_mosdepth_command" title="Link to this definition">¶</a></dt>
 <dd><p>Build mosdepth command with appropriate flags.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -569,6 +307,7 @@
 <li><p><strong>output_prefix</strong> (<em>Path</em>) – Output prefix for mosdepth</p></li>
 <li><p><strong>by</strong> (<em>int</em>) – Bin size for coverage calculation</p></li>
 <li><p><strong>fast_mode</strong> (<em>bool</em>) – Whether to use fast mode</p></li>
+<li><p><strong>threads</strong> (<em>int</em>) – Number of threads to use</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
@@ -581,8 +320,8 @@
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="grid.utils.mosdepth_dir.check_mosdepth_available">
-<span class="sig-prename descclassname"><span class="pre">grid.utils.mosdepth_dir.</span></span><span class="sig-name descname"><span class="pre">check_mosdepth_available</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#grid.utils.mosdepth_dir.check_mosdepth_available" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="grid.utils.mosdepth.check_mosdepth_available">
+<span class="sig-prename descclassname"><span class="pre">grid.utils.mosdepth.</span></span><span class="sig-name descname"><span class="pre">check_mosdepth_available</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#grid.utils.mosdepth.check_mosdepth_available" title="Link to this definition">¶</a></dt>
 <dd><p>Check if mosdepth executable is available in PATH.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -598,8 +337,13 @@
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="grid.utils.mosdepth_dir.compute_region_coverage">
-<span class="sig-prename descclassname"><span class="pre">grid.utils.mosdepth_dir.</span></span><span class="sig-name descname"><span class="pre">compute_region_coverage</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">regions_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">chrom</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#grid.utils.mosdepth_dir.compute_region_coverage" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="grid.utils.mosdepth.compute_mosdepth">
+<span class="sig-prename descclassname"><span class="pre">grid.utils.mosdepth.</span></span><span class="sig-name descname"><span class="pre">compute_mosdepth</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">console</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#grid.utils.mosdepth.compute_mosdepth" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="grid.utils.mosdepth.compute_region_coverage">
+<span class="sig-prename descclassname"><span class="pre">grid.utils.mosdepth.</span></span><span class="sig-name descname"><span class="pre">compute_region_coverage</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">regions_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">chrom</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#grid.utils.mosdepth.compute_region_coverage" title="Link to this definition">¶</a></dt>
 <dd><p>Compute average coverage for a genomic region from mosdepth output.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -620,8 +364,29 @@
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="grid.utils.mosdepth_dir.run_mosdepth_single_cram">
-<span class="sig-prename descclassname"><span class="pre">grid.utils.mosdepth_dir.</span></span><span class="sig-name descname"><span class="pre">run_mosdepth_single_cram</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cram_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ref_fasta</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">work_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">chrom</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">region_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">by</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fast_mode</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#grid.utils.mosdepth_dir.run_mosdepth_single_cram" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="grid.utils.mosdepth.remove_intermediate_files">
+<span class="sig-prename descclassname"><span class="pre">grid.utils.mosdepth.</span></span><span class="sig-name descname"><span class="pre">remove_intermediate_files</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">work_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">console</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">include_region_bed_gz</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#grid.utils.mosdepth.remove_intermediate_files" title="Link to this definition">¶</a></dt>
+<dd><p>Remove intermediate mosdepth files from the working directory.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>work_dir</strong> (<em>Path</em>) – Path to working directory</p></li>
+<li><p><strong>console</strong> – Optional console for logging</p></li>
+<li><p><strong>include_region_bed_gz</strong> (<em>bool</em>) – Whether to include regions.bed.gz files in removal</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="grid.utils.mosdepth.run_mosdepth_single_cram">
+<span class="sig-prename descclassname"><span class="pre">grid.utils.mosdepth.</span></span><span class="sig-name descname"><span class="pre">run_mosdepth_single_cram</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cram_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ref_fasta</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">work_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">chrom</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">region_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">by</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fast_mode</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threads</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">console</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#grid.utils.mosdepth.run_mosdepth_single_cram" title="Link to this definition">¶</a></dt>
 <dd><p>Run mosdepth on a single CRAM file and compute coverage for region.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -634,6 +399,7 @@
 <li><p><strong>end</strong> (<em>int</em>) – End position</p></li>
 <li><p><strong>by</strong> (<em>int</em>) – Bin size for mosdepth</p></li>
 <li><p><strong>fast_mode</strong> (<em>bool</em>) – Whether to use fast mode</p></li>
+<li><p><strong>threads</strong> (<em>int</em>) – Number of threads to use</p></li>
 <li><p><strong>region_name</strong> (<em>str</em>)</p></li>
 </ul>
 </dd>
@@ -647,8 +413,8 @@
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="grid.utils.mosdepth_dir.wait_for_mosdepth_output">
-<span class="sig-prename descclassname"><span class="pre">grid.utils.mosdepth_dir.</span></span><span class="sig-name descname"><span class="pre">wait_for_mosdepth_output</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">work_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sample_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_attempts</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sleep_seconds</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#grid.utils.mosdepth_dir.wait_for_mosdepth_output" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="grid.utils.mosdepth.wait_for_mosdepth_output">
+<span class="sig-prename descclassname"><span class="pre">grid.utils.mosdepth.</span></span><span class="sig-name descname"><span class="pre">wait_for_mosdepth_output</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">work_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sample_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">console</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_attempts</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sleep_seconds</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#grid.utils.mosdepth.wait_for_mosdepth_output" title="Link to this definition">¶</a></dt>
 <dd><p>Wait for mosdepth output file to appear.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -672,8 +438,8 @@
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="grid.utils.mosdepth_dir.write_coverage_result">
-<span class="sig-prename descclassname"><span class="pre">grid.utils.mosdepth_dir.</span></span><span class="sig-name descname"><span class="pre">write_coverage_result</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">output_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sample_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">coverage</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">write_lock</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">progress_console</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#grid.utils.mosdepth_dir.write_coverage_result" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="grid.utils.mosdepth.write_coverage_result">
+<span class="sig-prename descclassname"><span class="pre">grid.utils.mosdepth.</span></span><span class="sig-name descname"><span class="pre">write_coverage_result</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">output_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sample_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">coverage</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">write_lock</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#grid.utils.mosdepth.write_coverage_result" title="Link to this definition">¶</a></dt>
 <dd><p>Write coverage result to output file in a thread-safe manner.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -681,8 +447,7 @@
 <li><p><strong>output_file</strong> (<em>Path</em>) – Path to output TSV file</p></li>
 <li><p><strong>sample_name</strong> (<em>str</em>) – Sample name</p></li>
 <li><p><strong>coverage</strong> (<em>int</em>) – Coverage value</p></li>
-<li><p><strong>write_lock</strong> (<em>lock</em>) – Threading lock for safe file writing</p></li>
-<li><p><strong>progress_console</strong> – Optional Progress console for proper rendering</p></li>
+<li><p><strong>write_lock</strong> (<em>allocate_lock</em>) – Threading lock for safe file writing</p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
@@ -691,8 +456,6 @@
 </dl>
 </dd></dl>
 
-</section>
-</section>
 </section>
 
         </article>
@@ -705,7 +468,7 @@
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">Mosdepth Coverage Normalization</div>
+                <div class="title">Coverage Normalization</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
@@ -716,7 +479,7 @@
                   <span>Previous</span>
                 </div>
                 
-                <div class="title">Read Counting Module</div>
+                <div class="title">Read Counting</div>
                 
               </div>
             </a>
@@ -724,7 +487,7 @@
         <div class="bottom-of-page">
           <div class="left-details">
             <div class="copyright">
-                Copyright &#169; 2025, Zachary Caterer
+                Copyright &#169; 2026, Zachary Caterer
             </div>
             Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
             
@@ -750,67 +513,15 @@
         <div class="toc-tree-container">
           <div class="toc-tree">
             <ul>
-<li><a class="reference internal" href="#">Mosdepth Coverage Analysis</a><ul>
-<li><a class="reference internal" href="#overview">Overview</a><ul>
-<li><a class="reference internal" href="#mosdepth-coverage-analysis-module">Mosdepth Coverage Analysis Module</a><ul>
-<li><a class="reference internal" href="#purpose">Purpose</a></li>
-<li><a class="reference internal" href="#main-module">Main Module</a><ul>
-<li><a class="reference internal" href="#run-mosdepth-py"><code class="docutils literal notranslate"><span class="pre">run_mosdepth.py</span></code></a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#usage">Usage</a><ul>
-<li><a class="reference internal" href="#via-cli">Via CLI</a></li>
-<li><a class="reference internal" href="#as-python-module">As Python Module</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#mosdepth-integration">Mosdepth Integration</a><ul>
-<li><a class="reference internal" href="#mosdepth-command-structure">Mosdepth Command Structure</a></li>
-<li><a class="reference internal" href="#fast-mode">Fast Mode</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#output-files">Output Files</a><ul>
-<li><a class="reference internal" href="#intermediate-files-in-work-dir">Intermediate Files (in work_dir)</a></li>
-<li><a class="reference internal" href="#final-output">Final Output</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#technical-details">Technical Details</a><ul>
-<li><a class="reference internal" href="#algorithm">Algorithm</a></li>
-<li><a class="reference internal" href="#performance">Performance</a></li>
-<li><a class="reference internal" href="#dependencies">Dependencies</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#binning-strategies">Binning Strategies</a><ul>
-<li><a class="reference internal" href="#per-base-by-0">Per-base (–by 0)</a></li>
-<li><a class="reference internal" href="#fixed-bins-default">Fixed bins (default)</a></li>
-<li><a class="reference internal" href="#larger-bins">Larger bins</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#quality-control">Quality Control</a><ul>
-<li><a class="reference internal" href="#expected-coverage">Expected Coverage</a></li>
-<li><a class="reference internal" href="#outlier-detection">Outlier Detection</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#troubleshooting">Troubleshooting</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a class="reference internal" href="#python-api-documentation">Python API Documentation</a><ul>
-<li><a class="reference internal" href="#module-grid.utils.run_mosdepth">grid.utils.run_mosdepth</a><ul>
-<li><a class="reference internal" href="#grid.utils.run_mosdepth.run_mosdepth"><code class="docutils literal notranslate"><span class="pre">run_mosdepth()</span></code></a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#module-grid.utils.mosdepth_dir">grid.utils.mosdepth_dir</a><ul>
-<li><a class="reference internal" href="#grid.utils.mosdepth_dir.build_mosdepth_command"><code class="docutils literal notranslate"><span class="pre">build_mosdepth_command()</span></code></a></li>
-<li><a class="reference internal" href="#grid.utils.mosdepth_dir.check_mosdepth_available"><code class="docutils literal notranslate"><span class="pre">check_mosdepth_available()</span></code></a></li>
-<li><a class="reference internal" href="#grid.utils.mosdepth_dir.compute_region_coverage"><code class="docutils literal notranslate"><span class="pre">compute_region_coverage()</span></code></a></li>
-<li><a class="reference internal" href="#grid.utils.mosdepth_dir.run_mosdepth_single_cram"><code class="docutils literal notranslate"><span class="pre">run_mosdepth_single_cram()</span></code></a></li>
-<li><a class="reference internal" href="#grid.utils.mosdepth_dir.wait_for_mosdepth_output"><code class="docutils literal notranslate"><span class="pre">wait_for_mosdepth_output()</span></code></a></li>
-<li><a class="reference internal" href="#grid.utils.mosdepth_dir.write_coverage_result"><code class="docutils literal notranslate"><span class="pre">write_coverage_result()</span></code></a></li>
-</ul>
-</li>
-</ul>
-</li>
+<li><a class="reference internal" href="#">Coverage Estimation</a><ul>
+<li><a class="reference internal" href="#grid.utils.mosdepth.build_mosdepth_command"><code class="docutils literal notranslate"><span class="pre">build_mosdepth_command()</span></code></a></li>
+<li><a class="reference internal" href="#grid.utils.mosdepth.check_mosdepth_available"><code class="docutils literal notranslate"><span class="pre">check_mosdepth_available()</span></code></a></li>
+<li><a class="reference internal" href="#grid.utils.mosdepth.compute_mosdepth"><code class="docutils literal notranslate"><span class="pre">compute_mosdepth()</span></code></a></li>
+<li><a class="reference internal" href="#grid.utils.mosdepth.compute_region_coverage"><code class="docutils literal notranslate"><span class="pre">compute_region_coverage()</span></code></a></li>
+<li><a class="reference internal" href="#grid.utils.mosdepth.remove_intermediate_files"><code class="docutils literal notranslate"><span class="pre">remove_intermediate_files()</span></code></a></li>
+<li><a class="reference internal" href="#grid.utils.mosdepth.run_mosdepth_single_cram"><code class="docutils literal notranslate"><span class="pre">run_mosdepth_single_cram()</span></code></a></li>
+<li><a class="reference internal" href="#grid.utils.mosdepth.wait_for_mosdepth_output"><code class="docutils literal notranslate"><span class="pre">wait_for_mosdepth_output()</span></code></a></li>
+<li><a class="reference internal" href="#grid.utils.mosdepth.write_coverage_result"><code class="docutils literal notranslate"><span class="pre">write_coverage_result()</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -822,7 +533,7 @@
       
     </aside>
   </div>
-</div><script src="../_static/documentation_options.js?v=f8c80a57"></script>
+</div><script src="../_static/documentation_options.js?v=2709fde1"></script>
     <script src="../_static/doctools.js?v=9bcbadda"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/scripts/furo.js?v=46bd48cc"></script>

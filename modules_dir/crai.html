@@ -3,11 +3,11 @@
   <head><meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="index" title="Index" href="../genindex.html"><link rel="search" title="Search" href="../search.html"><link rel="next" title="CRAM Subsetting" href="subset.html"><link rel="prev" title="KIV-2 Copy Number Estimation" href="estimate-kiv.html">
+<link rel="index" title="Index" href="../genindex.html"><link rel="search" title="Search" href="../search.html"><link rel="next" title="Utilities &amp; Helper Functions" href="utils.html"><link rel="prev" title="Haplotype Inference" href="hi-inference.html">
         <link rel="prefetch" href="../_static/grid_logo.png" as="image">
 
     <link rel="shortcut icon" href="../_static/favicon.ico"><!-- Generated with Sphinx 8.2.3 and Furo 2025.09.25 -->
-        <title>CRAM Index Management - GRiD v0 documentation</title>
+        <title>CRAM Index Management - GRiD 0.1 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d111a655" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=580074bf" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
@@ -172,7 +172,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../index.html"><div class="brand">GRiD v0 documentation</div></a>
+      <a href="../index.html"><div class="brand">GRiD 0.1 documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -196,7 +196,7 @@
     <img class="sidebar-logo" src="../_static/grid_logo.png" alt="Logo"/>
   </div>
   
-  <span class="sidebar-brand-text">GRiD v0 documentation</span>
+  <span class="sidebar-brand-text">GRiD 0.1 documentation</span>
   
 </a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
   <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
@@ -204,30 +204,53 @@
   <input type="hidden" name="area" value="default">
 </form>
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
-  <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
-<ul class="current">
+  <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="../readme.html">Welcome to GRiD’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ibs_ibd.html">Computing IBS/IBD Neighbors</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Examples</span></p>
+<ul>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../examples.html">Example Pipeline Jobs</a><input aria-label="Toggle navigation of Example Pipeline Jobs" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../examples/SOL_sbatch.html">SLURM Job Example</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../examples/SOL_python.html">Python Pipeline Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/1000G_example.html">1000 Genomes Full Pipeline Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/IBS_example.html">IBS/IBD Neighbor Computation Example</a></li>
 </ul>
 </li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Algorithms</span></p>
+<ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../algorithms.html">Algorithms</a><input aria-label="Toggle navigation of Algorithms" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../algorithms/count_reads.html">Read Counting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../algorithms/coverage.html">Coverage Estimation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../algorithms/normalization.html">Coverage Normalization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../algorithms/neighbors.html">Nearest-Neighbor Identification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../algorithms/dipcn.html">Diploid Copy Number Estimation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../algorithms/hi_inference.html">Haplotype Inference</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Project</span></p>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="../contributing.html">Contributing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../code_of_conduct.html">Code of Conduct</a></li>
-<li class="toctree-l1 current has-children"><a class="reference internal" href="../modules.html">Modules</a><input aria-label="Toggle navigation of Modules" checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="grid_core.html">GRiD Core Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="utilities_overview.html">Utilities Overview</a></li>
-<li class="toctree-l2"><a class="reference internal" href="helper-functions.html">Helper Functions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="count-reads.html">Read Counting Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="mosdepth.html">Mosdepth Coverage Analysis</a></li>
-<li class="toctree-l2"><a class="reference internal" href="normalize-mosdepth.html">Mosdepth Coverage Normalization</a></li>
-<li class="toctree-l2"><a class="reference internal" href="find-neighbors.html">Neighbor Finding Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="lpa-realign.html">LPA Realignment Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="compute-dipcn.html">Diploid Copy Number Computation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="estimate-kiv.html">KIV-2 Copy Number Estimation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Paper</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../paper.html">Paper</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul class="current">
+<li class="toctree-l1 current has-children"><a class="reference internal" href="../modules.html">API Reference</a><input aria-label="Toggle navigation of API Reference" checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="grid_core.html">Core</a></li>
+<li class="toctree-l2"><a class="reference internal" href="count-reads.html">Read Counting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mosdepth.html">Coverage Estimation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="normalize-mosdepth.html">Coverage Normalization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="find-neighbors.html">Nearest-Neighbor Identification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="compute-dipcn.html">Diploid Copy Number Estimation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hi-inference.html">Haplotype Inference</a></li>
 <li class="toctree-l2 current current-page"><a class="current reference internal" href="#">CRAM Index Management</a></li>
-<li class="toctree-l2"><a class="reference internal" href="subset.html">CRAM Subsetting</a></li>
-<li class="toctree-l2"><a class="reference internal" href="extract-reference.html">Extract Reference Sequences</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils.html">Utilities &amp; Helper Functions</a></li>
 </ul>
 </li>
 </ul>
@@ -270,135 +293,10 @@
         <article role="main" id="furo-main-content">
           <section id="cram-index-management">
 <h1>CRAM Index Management<a class="headerlink" href="#cram-index-management" title="Link to this heading">¶</a></h1>
-<section id="overview">
-<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">¶</a></h2>
-<p>Ensures CRAM index (.crai) files exist for efficient random access to CRAM files.</p>
-<p>CRAM files require an index for efficient random access to specific genomic regions. This utility automatically checks for and creates the necessary <cite>.crai</cite> index file if it doesn’t exist.</p>
-</section>
-<section id="cli-reference">
-<h2>CLI Reference<a class="headerlink" href="#cli-reference" title="Link to this heading">¶</a></h2>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>grid<span class="w"> </span>crai<span class="w"> </span><span class="o">[</span>OPTIONS<span class="o">]</span>
-</pre></div>
-</div>
-<p><strong>Options:</strong></p>
-<dl class="simple">
-<dt><code class="docutils literal notranslate"><span class="pre">-c,</span> <span class="pre">--cram</span> <span class="pre">PATH</span></code></dt><dd><p>Input CRAM file [required]</p>
-</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">-r,</span> <span class="pre">--reference</span> <span class="pre">PATH</span></code></dt><dd><p>Reference genome FASTA [required]</p>
-</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">-h,</span> <span class="pre">--help</span></code></dt><dd><p>Show help message and exit</p>
-</dd>
-</dl>
-</section>
-<section id="usage-examples">
-<h2>Usage Examples<a class="headerlink" href="#usage-examples" title="Link to this heading">¶</a></h2>
-<section id="via-cli">
-<h3>Via CLI<a class="headerlink" href="#via-cli" title="Link to this heading">¶</a></h3>
-<p><strong>Basic usage:</strong></p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>grid<span class="w"> </span>crai<span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>--cram<span class="w"> </span>sample.cram<span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>--reference<span class="w"> </span>refs/hs37d5.fa
-</pre></div>
-</div>
-<p><strong>Process multiple files:</strong></p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Loop through all CRAMs</span>
-<span class="k">for</span><span class="w"> </span>cram<span class="w"> </span><span class="k">in</span><span class="w"> </span>data/CRAMs/*.cram<span class="p">;</span><span class="w"> </span><span class="k">do</span>
-<span class="w">    </span>grid<span class="w"> </span>crai<span class="w"> </span>--cram<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$cram</span><span class="s2">&quot;</span><span class="w"> </span>--reference<span class="w"> </span>refs/hs37d5.fa
-<span class="k">done</span>
-</pre></div>
-</div>
-<p><strong>In a pipeline:</strong></p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Ensure index exists before processing</span>
-grid<span class="w"> </span>crai<span class="w"> </span>-c<span class="w"> </span>sample.cram<span class="w"> </span>-r<span class="w"> </span>refs/hs37d5.fa
-grid<span class="w"> </span>count-reads<span class="w"> </span>-C<span class="w"> </span>data/CRAMs<span class="w"> </span>-o<span class="w"> </span>counts.tsv<span class="w"> </span>...
-</pre></div>
-</div>
-</section>
-<section id="via-python">
-<h3>Via Python<a class="headerlink" href="#via-python" title="Link to this heading">¶</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">grid.utils.ensure_crai</span><span class="w"> </span><span class="kn">import</span> <span class="n">ensure_crai</span>
-
-<span class="c1"># Single file</span>
-<span class="n">crai_path</span> <span class="o">=</span> <span class="n">ensure_crai</span><span class="p">(</span>
-    <span class="n">cram_path</span><span class="o">=</span><span class="s2">&quot;sample.cram&quot;</span><span class="p">,</span>
-    <span class="n">reference</span><span class="o">=</span><span class="s2">&quot;refs/hs37d5.fa&quot;</span>
-<span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Index ready: </span><span class="si">{</span><span class="n">crai_path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-
-<span class="c1"># Multiple files</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
-
-<span class="n">cram_dir</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;data/CRAMs&quot;</span><span class="p">)</span>
-<span class="n">ref_fasta</span> <span class="o">=</span> <span class="s2">&quot;refs/hs37d5.fa&quot;</span>
-
-<span class="k">for</span> <span class="n">cram_file</span> <span class="ow">in</span> <span class="n">cram_dir</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">&quot;*.cram&quot;</span><span class="p">):</span>
-    <span class="n">crai_path</span> <span class="o">=</span> <span class="n">ensure_crai</span><span class="p">(</span><span class="n">cram_path</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">cram_file</span><span class="p">),</span> <span class="n">reference</span><span class="o">=</span><span class="n">ref_fasta</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;✓ </span><span class="si">{</span><span class="n">cram_file</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</section>
-</section>
-<section id="description">
-<h2>Description<a class="headerlink" href="#description" title="Link to this heading">¶</a></h2>
-<p><strong>What it does:</strong></p>
-<ol class="arabic simple">
-<li><p>Checks if <cite>.crai</cite> index exists alongside the CRAM file</p></li>
-<li><p>If missing, creates index using <cite>samtools index</cite></p></li>
-<li><p>Returns path to the index file</p></li>
-<li><p>Validates index is properly created</p></li>
-</ol>
-<p><strong>Why you need it:</strong></p>
-<p>CRAM files are compressed BAM files that require an index for:</p>
-<ul class="simple">
-<li><p><strong>Random access</strong> - Jump to specific genomic regions without reading entire file</p></li>
-<li><p><strong>Parallel processing</strong> - Process different regions simultaneously</p></li>
-<li><p><strong>Memory efficiency</strong> - Read only necessary data</p></li>
-<li><p><strong>Pipeline requirements</strong> - Most downstream tools require indexed CRAMs</p></li>
-</ul>
-<p><strong>Index location:</strong></p>
-<p>The index is created in the same directory as the CRAM with a <cite>.crai</cite> extension:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>data/
-├── sample001.cram
-├── sample001.cram.crai  ← Created automatically
-├── sample002.cram
-└── sample002.cram.crai  ← Created automatically
-</pre></div>
-</div>
-</section>
-<section id="technical-details">
-<h2>Technical Details<a class="headerlink" href="#technical-details" title="Link to this heading">¶</a></h2>
-<p><strong>Algorithm:</strong></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">ensure_crai</span><span class="p">(</span><span class="n">cram_path</span><span class="p">,</span> <span class="n">reference</span><span class="p">):</span>
-    <span class="n">crai_path</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">cram_path</span><span class="si">}</span><span class="s2">.crai&quot;</span>
-
-    <span class="k">if</span> <span class="ow">not</span> <span class="n">exists</span><span class="p">(</span><span class="n">crai_path</span><span class="p">):</span>
-        <span class="c1"># Create index using samtools</span>
-        <span class="n">run</span><span class="p">([</span><span class="s2">&quot;samtools&quot;</span><span class="p">,</span> <span class="s2">&quot;index&quot;</span><span class="p">,</span> <span class="s2">&quot;-@&quot;</span><span class="p">,</span> <span class="s2">&quot;4&quot;</span><span class="p">,</span> <span class="n">cram_path</span><span class="p">])</span>
-
-    <span class="k">return</span> <span class="n">crai_path</span>
-</pre></div>
-</div>
-<p><strong>Performance:</strong></p>
-<ul class="simple">
-<li><p><strong>Speed:</strong> ~1-5 minutes per CRAM (depends on file size)</p></li>
-<li><p><strong>Memory:</strong> &lt;2GB RAM</p></li>
-<li><p><strong>Disk:</strong> Index file is ~0.1% of CRAM size (e.g., 10MB for 10GB CRAM)</p></li>
-<li><p><strong>Threads:</strong> Can specify number of threads with samtools <cite>-&#64;</cite> flag</p></li>
-</ul>
-<p><strong>Index structure:</strong></p>
-<p>The <cite>.crai</cite> file contains:</p>
-<ul class="simple">
-<li><p>Genomic position index for rapid seeking</p></li>
-<li><p>Compression block offsets</p></li>
-<li><p>Metadata for efficient access</p></li>
-<li><p>Binary format (not human-readable)</p></li>
-</ul>
-</section>
-<section id="python-api-documentation">
-<h2>Python API Documentation<a class="headerlink" href="#python-api-documentation" title="Link to this heading">¶</a></h2>
-<section id="module-grid.utils.ensure_crai">
-<span id="grid-utils-ensure-crai"></span><h3>grid.utils.ensure_crai<a class="headerlink" href="#module-grid.utils.ensure_crai" title="Link to this heading">¶</a></h3>
-<dl class="py function">
+<p>Verifies that <code class="docutils literal notranslate"><span class="pre">.crai</span></code> index files exist for all input CRAMs, creating them
+with <code class="docutils literal notranslate"><span class="pre">samtools</span> <span class="pre">index</span></code> if missing. Required before any step that accesses
+specific genomic regions.</p>
+<dl class="py function" id="module-grid.utils.ensure_crai">
 <dt class="sig sig-object py" id="grid.utils.ensure_crai.ensure_crai">
 <span class="sig-prename descclassname"><span class="pre">grid.utils.ensure_crai.</span></span><span class="sig-name descname"><span class="pre">ensure_crai</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cram_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reference</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#grid.utils.ensure_crai.ensure_crai" title="Link to this definition">¶</a></dt>
 <dd><p>Ensure a CRAI index exists for the given CRAM file.</p>
@@ -419,220 +317,29 @@ grid<span class="w"> </span>count-reads<span class="w"> </span>-C<span class="w"
 </dd></dl>
 
 </section>
-</section>
-<section id="common-use-cases">
-<h2>Common Use Cases<a class="headerlink" href="#common-use-cases" title="Link to this heading">¶</a></h2>
-<section id="use-case-1-pipeline-initialization">
-<h3>Use Case 1: Pipeline Initialization<a class="headerlink" href="#use-case-1-pipeline-initialization" title="Link to this heading">¶</a></h3>
-<p>Ensure all CRAMs are indexed before starting analysis:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
-<span class="c1"># prepare_crams.sh</span>
-
-<span class="nv">CRAM_DIR</span><span class="o">=</span><span class="s2">&quot;data/CRAMs&quot;</span>
-<span class="nv">REF</span><span class="o">=</span><span class="s2">&quot;refs/hs37d5.fa&quot;</span>
-
-<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Indexing CRAMs...&quot;</span>
-<span class="k">for</span><span class="w"> </span>cram<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$CRAM_DIR</span><span class="s2">&quot;</span>/*.cram<span class="p">;</span><span class="w"> </span><span class="k">do</span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="o">[</span><span class="w"> </span>!<span class="w"> </span>-f<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">cram</span><span class="si">}</span><span class="s2">.crai&quot;</span><span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
-<span class="w">        </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Indexing </span><span class="k">$(</span>basename<span class="w"> </span><span class="nv">$cram</span><span class="k">)</span><span class="s2">...&quot;</span>
-<span class="w">        </span>grid<span class="w"> </span>crai<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$cram</span><span class="s2">&quot;</span><span class="w"> </span>-r<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$REF</span><span class="s2">&quot;</span>
-<span class="w">    </span><span class="k">else</span>
-<span class="w">        </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;✓ </span><span class="k">$(</span>basename<span class="w"> </span><span class="nv">$cram</span><span class="k">)</span><span class="s2"> already indexed&quot;</span>
-<span class="w">    </span><span class="k">fi</span>
-<span class="k">done</span>
-<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;All CRAMs indexed!&quot;</span>
-</pre></div>
-</div>
-</section>
-<section id="use-case-2-parallel-indexing">
-<h3>Use Case 2: Parallel Indexing<a class="headerlink" href="#use-case-2-parallel-indexing" title="Link to this heading">¶</a></h3>
-<p>Index multiple CRAMs in parallel on HPC:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
-<span class="c1">#SBATCH --array=1-100</span>
-<span class="c1">#SBATCH --cpus-per-task=4</span>
-
-<span class="c1"># Get CRAM file for this array job</span>
-<span class="nv">CRAM</span><span class="o">=</span><span class="k">$(</span>ls<span class="w"> </span>data/CRAMs/*.cram<span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span>-n<span class="w"> </span><span class="si">${</span><span class="nv">SLURM_ARRAY_TASK_ID</span><span class="si">}</span>p<span class="k">)</span>
-
-grid<span class="w"> </span>crai<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$CRAM</span><span class="s2">&quot;</span><span class="w"> </span>-r<span class="w"> </span>refs/hs37d5.fa
-</pre></div>
-</div>
-</section>
-<section id="use-case-3-conditional-indexing">
-<h3>Use Case 3: Conditional Indexing<a class="headerlink" href="#use-case-3-conditional-indexing" title="Link to this heading">¶</a></h3>
-<p>Only create index if it doesn’t exist or is outdated:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">grid.utils.ensure_crai</span><span class="w"> </span><span class="kn">import</span> <span class="n">ensure_crai</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">index_if_needed</span><span class="p">(</span><span class="n">cram_path</span><span class="p">,</span> <span class="n">reference</span><span class="p">,</span> <span class="n">force</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Index CRAM only if needed.&quot;&quot;&quot;</span>
-    <span class="n">cram</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">cram_path</span><span class="p">)</span>
-    <span class="n">crai</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">cram_path</span><span class="si">}</span><span class="s2">.crai&quot;</span><span class="p">)</span>
-
-    <span class="c1"># Check if index exists and is newer than CRAM</span>
-    <span class="k">if</span> <span class="n">crai</span><span class="o">.</span><span class="n">exists</span><span class="p">()</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">force</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">crai</span><span class="o">.</span><span class="n">stat</span><span class="p">()</span><span class="o">.</span><span class="n">st_mtime</span> <span class="o">&gt;</span> <span class="n">cram</span><span class="o">.</span><span class="n">stat</span><span class="p">()</span><span class="o">.</span><span class="n">st_mtime</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;✓ </span><span class="si">{</span><span class="n">cram</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">: Index up to date&quot;</span><span class="p">)</span>
-            <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">crai</span><span class="p">)</span>
-
-    <span class="c1"># Create or recreate index</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Indexing </span><span class="si">{</span><span class="n">cram</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">...&quot;</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">ensure_crai</span><span class="p">(</span><span class="n">cram_path</span><span class="p">,</span> <span class="n">reference</span><span class="p">)</span>
-</pre></div>
-</div>
-</section>
-</section>
-<section id="dependencies">
-<h2>Dependencies<a class="headerlink" href="#dependencies" title="Link to this heading">¶</a></h2>
-<p><strong>Required:</strong></p>
-<ul>
-<li><p><strong>samtools</strong> - Must be installed and in PATH</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Install via conda</span>
-conda<span class="w"> </span>install<span class="w"> </span>-c<span class="w"> </span>bioconda<span class="w"> </span>samtools
-
-<span class="c1"># Verify installation</span>
-samtools<span class="w"> </span>--version
-</pre></div>
-</div>
-</li>
-<li><p><strong>pysam</strong> - Python library for BAM/CRAM handling</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>pysam
-</pre></div>
-</div>
-</li>
-</ul>
-<p><strong>Optional:</strong></p>
-<ul class="simple">
-<li><p><strong>parallel</strong> - GNU parallel for batch indexing</p></li>
-<li><p><strong>slurm</strong> - For HPC array job indexing</p></li>
-</ul>
-</section>
-<section id="troubleshooting">
-<h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Link to this heading">¶</a></h2>
-<p><strong>Error: samtools: command not found</strong></p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Solution: Install samtools
-
-conda install -c bioconda samtools
-# or
-apt-get install samtools  # Ubuntu/Debian
-</pre></div>
-</div>
-<p><strong>Error: [E::hts_open_format] fail to open file</strong></p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Cause: Reference genome mismatch or corrupted CRAM
-
-Solution: Verify reference matches CRAM:
-- Check CRAM header: samtools view -H sample.cram | grep @SQ
-- Ensure reference build matches (hg19 vs hg38)
-- Try redownloading CRAM if corrupted
-</pre></div>
-</div>
-<p><strong>Error: Permission denied</strong></p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Cause: No write permission in CRAM directory
-
-Solution:
-- Check directory permissions: ls -la data/CRAMs
-- Ensure you have write access
-- Or create index in writable location (not recommended)
-</pre></div>
-</div>
-<p><strong>Warning: Index exists but empty</strong></p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Cause: Indexing interrupted or failed
-
-Solution: Remove and recreate
-
-rm sample.cram.crai
-grid crai -c sample.cram -r refs/hs37d5.fa
-</pre></div>
-</div>
-<p><strong>Performance: Indexing very slow</strong></p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Cause: Large CRAM files or slow disk I/O
-
-Solutions:
-- Use SSD instead of HDD if possible
-- Increase samtools threads: modify ensure_crai.py
-- Process in parallel across multiple files
-- Consider pre-indexing large datasets
-</pre></div>
-</div>
-</section>
-<section id="quality-checks">
-<h2>Quality Checks<a class="headerlink" href="#quality-checks" title="Link to this heading">¶</a></h2>
-<p>Verify index integrity:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Check index exists and has content</span>
-ls<span class="w"> </span>-lh<span class="w"> </span>sample.cram.crai
-
-<span class="c1"># Verify CRAM can be accessed with index</span>
-samtools<span class="w"> </span>view<span class="w"> </span>-H<span class="w"> </span>sample.cram<span class="w"> </span>chr6:160000000-160100000
-
-<span class="c1"># Compare indexed vs non-indexed access time</span>
-<span class="nb">time</span><span class="w"> </span>samtools<span class="w"> </span>view<span class="w"> </span>sample.cram<span class="w"> </span>chr6:160000000-160100000<span class="w"> </span>&gt;<span class="w"> </span>/dev/null
-</pre></div>
-</div>
-<p>Expected output:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>-rw-r--r-- 1 user group 15M Oct 30 12:00 sample.cram.crai
-
-# Should complete in &lt;1 second with index
-real    0m0.523s
-</pre></div>
-</div>
-</section>
-<section id="best-practices">
-<h2>Best Practices<a class="headerlink" href="#best-practices" title="Link to this heading">¶</a></h2>
-<ol class="arabic simple">
-<li><p><strong>Index immediately</strong> - Create indices right after downloading/generating CRAMs</p></li>
-<li><p><strong>Store together</strong> - Keep <cite>.crai</cite> files alongside <cite>.cram</cite> files</p></li>
-<li><p><strong>Version control</strong> - Recreate indices if CRAM is modified</p></li>
-<li><p><strong>Backup strategy</strong> - Indices are small, but can be regenerated if lost</p></li>
-<li><p><strong>Parallel processing</strong> - Index multiple CRAMs simultaneously to save time</p></li>
-<li><p><strong>Check integrity</strong> - Verify index works before starting long pipelines</p></li>
-</ol>
-</section>
-<section id="related-commands">
-<h2>Related Commands<a class="headerlink" href="#related-commands" title="Link to this heading">¶</a></h2>
-<p>After ensuring indices exist, proceed with analysis:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># 1. Index CRAMs</span>
-grid<span class="w"> </span>crai<span class="w"> </span>-c<span class="w"> </span>sample.cram<span class="w"> </span>-r<span class="w"> </span>refs/hs37d5.fa
-
-<span class="c1"># 2. Count reads</span>
-grid<span class="w"> </span>count-reads<span class="w"> </span>-C<span class="w"> </span>data/CRAMs<span class="w"> </span>-o<span class="w"> </span>counts.tsv<span class="w"> </span>...
-
-<span class="c1"># 3. Run coverage analysis</span>
-grid<span class="w"> </span>mosdepth<span class="w"> </span>-C<span class="w"> </span>data/CRAMs<span class="w"> </span>-o<span class="w"> </span>coverage.tsv<span class="w"> </span>...
-</pre></div>
-</div>
-</section>
-<section id="see-also">
-<h2>See Also<a class="headerlink" href="#see-also" title="Link to this heading">¶</a></h2>
-<ul class="simple">
-<li><p><a class="reference internal" href="subset.html"><span class="doc">CRAM Subsetting</span></a> - Subset CRAMs to specific regions</p></li>
-<li><p><a class="reference internal" href="count-reads.html"><span class="doc">Read Counting Module</span></a> - Count reads in genomic regions</p></li>
-<li><p><a class="reference internal" href="mosdepth.html"><span class="doc">Mosdepth Coverage Analysis</span></a> - Compute coverage statistics</p></li>
-</ul>
-</section>
-</section>
 
         </article>
       </div>
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="subset.html">
+          <a class="next-page" href="utils.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">CRAM Subsetting</div>
+                <div class="title">Utilities &amp; Helper Functions</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="estimate-kiv.html">
+          <a class="prev-page" href="hi-inference.html">
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title">KIV-2 Copy Number Estimation</div>
+                <div class="title">Haplotype Inference</div>
                 
               </div>
             </a>
@@ -640,7 +347,7 @@ grid<span class="w"> </span>mosdepth<span class="w"> </span>-C<span class="w"> <
         <div class="bottom-of-page">
           <div class="left-details">
             <div class="copyright">
-                Copyright &#169; 2025, Zachary Caterer
+                Copyright &#169; 2026, Zachary Caterer
             </div>
             Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
             
@@ -667,34 +374,7 @@ grid<span class="w"> </span>mosdepth<span class="w"> </span>-C<span class="w"> <
           <div class="toc-tree">
             <ul>
 <li><a class="reference internal" href="#">CRAM Index Management</a><ul>
-<li><a class="reference internal" href="#overview">Overview</a></li>
-<li><a class="reference internal" href="#cli-reference">CLI Reference</a></li>
-<li><a class="reference internal" href="#usage-examples">Usage Examples</a><ul>
-<li><a class="reference internal" href="#via-cli">Via CLI</a></li>
-<li><a class="reference internal" href="#via-python">Via Python</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#description">Description</a></li>
-<li><a class="reference internal" href="#technical-details">Technical Details</a></li>
-<li><a class="reference internal" href="#python-api-documentation">Python API Documentation</a><ul>
-<li><a class="reference internal" href="#module-grid.utils.ensure_crai">grid.utils.ensure_crai</a><ul>
 <li><a class="reference internal" href="#grid.utils.ensure_crai.ensure_crai"><code class="docutils literal notranslate"><span class="pre">ensure_crai()</span></code></a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a class="reference internal" href="#common-use-cases">Common Use Cases</a><ul>
-<li><a class="reference internal" href="#use-case-1-pipeline-initialization">Use Case 1: Pipeline Initialization</a></li>
-<li><a class="reference internal" href="#use-case-2-parallel-indexing">Use Case 2: Parallel Indexing</a></li>
-<li><a class="reference internal" href="#use-case-3-conditional-indexing">Use Case 3: Conditional Indexing</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#dependencies">Dependencies</a></li>
-<li><a class="reference internal" href="#troubleshooting">Troubleshooting</a></li>
-<li><a class="reference internal" href="#quality-checks">Quality Checks</a></li>
-<li><a class="reference internal" href="#best-practices">Best Practices</a></li>
-<li><a class="reference internal" href="#related-commands">Related Commands</a></li>
-<li><a class="reference internal" href="#see-also">See Also</a></li>
 </ul>
 </li>
 </ul>
@@ -706,7 +386,7 @@ grid<span class="w"> </span>mosdepth<span class="w"> </span>-C<span class="w"> <
       
     </aside>
   </div>
-</div><script src="../_static/documentation_options.js?v=f8c80a57"></script>
+</div><script src="../_static/documentation_options.js?v=2709fde1"></script>
     <script src="../_static/doctools.js?v=9bcbadda"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/scripts/furo.js?v=46bd48cc"></script>
