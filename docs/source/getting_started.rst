@@ -297,6 +297,7 @@ its nearest neighbors at the same locus. See :doc:`algorithms/dipcn`.
    compute_diploid_genotypes:
      run: True
      output_file_prefix: "diploid_genotypes"
+     n_nbr: 300
 
 .. list-table::
    :header-rows: 1
@@ -308,13 +309,17 @@ its nearest neighbors at the same locus. See :doc:`algorithms/dipcn`.
      - Set ``True`` to estimate diploid copy numbers.
    * - ``output_file_prefix``
      - Prefix for the diploid CN output file.
+   * - ``n_nbr``
+     - Number of nearest neighbors to use when computing each sample's diploid CN
+       estimate. Default: ``300``. Increase for small cohorts; decrease to restrict
+       to the closest matches.
 
 Step 5 — ``compute_haploid_genotypes``
 ---------------------------------------
 
 Decomposes diploid CN estimates into haplotype-specific copy numbers using an
-iterative IBD-based phasing algorithm. Requires a phased VCF and an IBS neighbors
-file pre-computed by ``computeIBSpbwt``. See :doc:`algorithms/hi_inference` and
+iterative IBD-based phasing algorithm. Requires an IBS neighbors file
+pre-computed by ``computeIBSpbwt``. See :doc:`algorithms/hi_inference` and
 :doc:`ibs_ibd`.
 
 .. code-block:: yaml

@@ -1,7 +1,7 @@
-samples_file: "/nas/longleaf/home/catererz/epi/GRiD/files/SOL_nwd_ids.txt"
-directory_loc: "/proj/epi/Genetic_Data_Center/SOL/cram/SOL"
-reference_genome: "/nas/longleaf/home/catererz/epi/GRiD/files/hg38.fa"
-output_dir: "/nas/longleaf/home/catererz/work/software_dev"
+samples_file: "path/to/sample_ids.txt"
+directory_loc: "path/to/crams/"
+reference_genome: "path/to/hg38.fa"
+output_dir: "path/to/output/"
 threads: 4
 file_type: "cram"
 
@@ -12,7 +12,7 @@ end_bp: 160647661
 
 output_file_type: "tsv"
 
-index: 
+index:
   run: False
   output_file_prefix: "index_file_results"
 
@@ -28,20 +28,20 @@ count_reads:
 
 mosdepth:
   run: True
-  output_file_prefix: "mosdepth_results" 
+  output_file_prefix: "mosdepth_results"
   bin_size: 1000
   mode: "fast"
   region_name: "LPA"
-  work_dir: "/nas/longleaf/home/catererz/work/software_dev/mosdepth_work"
+  work_dir: "path/to/mosdepth_work/"
   remove_intermediate: True
 
-  normalize: 
+  normalize:
     run: True
     min_depth: 20
     max_depth: 100
     top_frac: 0.1
     output_file_prefix: "mosdepth_results_normalized"
-    repeat_mask_file: "/nas/longleaf/home/catererz/epi/GRiD/files/repeat_mask_list.hg38.ucsc_bed"
+    repeat_mask_file: "path/to/repeat_mask.bed"
 
   neighbors:
     run: True
@@ -53,11 +53,12 @@ mosdepth:
 compute_diploid_genotypes:
   run: True
   output_file_prefix: "diploid_genotypes"
+  n_nbr: 300
 
 compute_haploid_genotypes:
   run: True
   output_file_prefix: "haploid_genotypes"
-  ibs_output: "/nas/longleaf/home/catererz/epi/GRiD/files/ibs_output.tsv"
+  ibs_output: "path/to/ibs_neighbors_chr6.tsv.gz"
   min_neighbors: 1
   max_neighbors: 10
   n_iters: 100

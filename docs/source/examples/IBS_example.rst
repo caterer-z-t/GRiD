@@ -2,7 +2,7 @@ IBS/IBD Neighbor Computation Example
 =====================================
 
 This example shows how to run ``computeIBSpbwt`` to produce the IBS neighbors file
-required by GRiD Step 7 (haplotype inference). The script targets *LPA* KIV-2 on
+required by GRiD Step 5 (haplotype inference). The script targets *LPA* KIV-2 on
 chromosome 6 in hg19, but the same pattern applies to any locus — adjust
 ``CHR``, ``FOCAL_BP``, and the matching BGEN/genetic-map files accordingly.
 
@@ -67,7 +67,6 @@ Once complete, point to the output file in your GRiD config:
    compute_haploid_genotypes:
      run: True
      output_file_prefix: "haploid_genotypes"
-     phased_vcf: "path/to/phased.vcf.gz"
      ibs_output: "path/to/ibs_neighbors_chr6.tsv.gz"
      min_neighbors: 1
      max_neighbors: 10

@@ -69,4 +69,5 @@ playground/
 docs/source/paper_sphinx.md
 
 .claude/
-paper/
+paper/*
+.coverage

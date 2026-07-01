@@ -1,7 +1,7 @@
 Diploid Copy Number Estimation
 ===============================
 
-**Pipeline step:** compute_dipcn (Step 7)
+**Pipeline step:** compute_dipcn (Step 4)
 
 **Module:** :mod:`grid.utils.compute_dipcn`
 

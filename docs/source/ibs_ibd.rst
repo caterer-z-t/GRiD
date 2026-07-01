@@ -1,7 +1,7 @@
 Computing IBS/IBD Neighbors
 =======================================================
 
-Step 7 of GRiD (haplotype inference) requires a file of identity-by-descent (IBD) /
+Step 5 of GRiD (haplotype inference) requires a file of identity-by-descent (IBD) /
 identity-by-state (IBS) haplotype neighbors as input. This file is produced by
 ``computeIBSpbwt.cpp``, a C++ program from Hujoel et al. (2026) that identifies
 the closest haplotype matches for each individual using the Positional Burrows-Wheeler
@@ -233,7 +233,7 @@ The output is a tab-separated file with one row per haplotype-neighbor pair:
    * - ``hapNbr``
      - Neighbor haplotype index (1 or 2)
 
-This file is passed directly to GRiD Step 7 via ``compute_haploid_genotypes.ibs_output``
+This file is passed directly to GRiD Step 5 via ``compute_haploid_genotypes.ibs_output``
 in the config.
 
 ----
@@ -248,7 +248,6 @@ Once the neighbors file is generated, point to it in your config:
    compute_haploid_genotypes:
      run: True
      output_file_prefix: "haploid_genotypes"
-     phased_vcf: "path/to/phased.vcf.gz"
      ibs_output: "path/to/ibs_neighbors_chr6.tsv.gz"
      min_neighbors: 1
      max_neighbors: 10
