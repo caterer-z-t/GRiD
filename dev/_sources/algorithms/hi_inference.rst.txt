@@ -1,11 +1,11 @@
 Haplotype Inference
 ===================
 
-**Pipeline step:** compute_haploid_genotypes (Step 8)
+**Pipeline step:** compute_haploid_genotypes (Step 5)
 
 **Module:** :mod:`grid.utils.hi_inference`
 
-Diploid copy number estimates from Step 7 (denoted IRR — individual repeat ratio)
+Diploid copy number estimates from Step 4 (denoted IRR — individual repeat ratio)
 cannot be decomposed into per-haplotype contributions without phase information.
 GRiD uses identity-by-descent (IBD) segments to identify haplotype-matched neighbors
 and infers haplotype-specific copy numbers iteratively, following Hujoel et al. (2026).

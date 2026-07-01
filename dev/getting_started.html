@@ -648,6 +648,7 @@ its nearest neighbors at the same locus. See <a class="reference internal" href=
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">compute_diploid_genotypes</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">True</span>
 <span class="w">  </span><span class="nt">output_file_prefix</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;diploid_genotypes&quot;</span>
+<span class="w">  </span><span class="nt">n_nbr</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">300</span>
 </pre></div>
 </div>
 <div class="table-wrapper colwidths-given docutils container">
@@ -668,6 +669,11 @@ its nearest neighbors at the same locus. See <a class="reference internal" href=
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">output_file_prefix</span></code></p></td>
 <td><p>Prefix for the diploid CN output file.</p></td>
 </tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">n_nbr</span></code></p></td>
+<td><p>Number of nearest neighbors to use when computing each sample’s diploid CN
+estimate. Default: <code class="docutils literal notranslate"><span class="pre">300</span></code>. Increase for small cohorts; decrease to restrict
+to the closest matches.</p></td>
+</tr>
 </tbody>
 </table>
 </div>
@@ -675,8 +681,8 @@ its nearest neighbors at the same locus. See <a class="reference internal" href=
 <section id="step-5-compute-haploid-genotypes">
 <h2>Step 5 — <code class="docutils literal notranslate"><span class="pre">compute_haploid_genotypes</span></code><a class="headerlink" href="#step-5-compute-haploid-genotypes" title="Link to this heading">¶</a></h2>
 <p>Decomposes diploid CN estimates into haplotype-specific copy numbers using an
-iterative IBD-based phasing algorithm. Requires a phased VCF and an IBS neighbors
-file pre-computed by <code class="docutils literal notranslate"><span class="pre">computeIBSpbwt</span></code>. See <a class="reference internal" href="algorithms/hi_inference.html"><span class="doc">Haplotype Inference</span></a> and
+iterative IBD-based phasing algorithm. Requires an IBS neighbors file
+pre-computed by <code class="docutils literal notranslate"><span class="pre">computeIBSpbwt</span></code>. See <a class="reference internal" href="algorithms/hi_inference.html"><span class="doc">Haplotype Inference</span></a> and
 <a class="reference internal" href="ibs_ibd.html"><span class="doc">Computing IBS/IBD Neighbors</span></a>.</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">compute_haploid_genotypes</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">True</span>
@@ -736,10 +742,10 @@ and <a class="reference internal" href="examples/IBS_example.html"><span class="
 <h2>Full Example Config<a class="headerlink" href="#full-example-config" title="Link to this heading">¶</a></h2>
 <div class="literal-block-wrapper docutils container" id="id1">
 <div class="code-block-caption"><span class="caption-text">grid/example_config.yaml</span><a class="headerlink" href="#id1" title="Link to this code">¶</a></div>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="nt">samples_file</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/nas/longleaf/home/catererz/epi/GRiD/files/SOL_nwd_ids.txt&quot;</span>
-<span class="linenos"> 2</span><span class="nt">directory_loc</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/proj/epi/Genetic_Data_Center/SOL/cram/SOL&quot;</span>
-<span class="linenos"> 3</span><span class="nt">reference_genome</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/nas/longleaf/home/catererz/epi/GRiD/files/hg38.fa&quot;</span>
-<span class="linenos"> 4</span><span class="nt">output_dir</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/nas/longleaf/home/catererz/work/software_dev&quot;</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="nt">samples_file</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;path/to/sample_ids.txt&quot;</span>
+<span class="linenos"> 2</span><span class="nt">directory_loc</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;path/to/crams/&quot;</span>
+<span class="linenos"> 3</span><span class="nt">reference_genome</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;path/to/hg38.fa&quot;</span>
+<span class="linenos"> 4</span><span class="nt">output_dir</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;path/to/output/&quot;</span>
 <span class="linenos"> 5</span><span class="nt">threads</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">4</span>
 <span class="linenos"> 6</span><span class="nt">file_type</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;cram&quot;</span>
 <span class="linenos"> 7</span>
@@ -750,7 +756,7 @@ and <a class="reference internal" href="examples/IBS_example.html"><span class="
 <span class="linenos">12</span>
 <span class="linenos">13</span><span class="nt">output_file_type</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;tsv&quot;</span>
 <span class="linenos">14</span>
-<span class="linenos">15</span><span class="nt">index</span><span class="p">:</span><span class="w"> </span>
+<span class="linenos">15</span><span class="nt">index</span><span class="p">:</span>
 <span class="linenos">16</span><span class="w">  </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span>
 <span class="linenos">17</span><span class="w">  </span><span class="nt">output_file_prefix</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;index_file_results&quot;</span>
 <span class="linenos">18</span>
@@ -766,20 +772,20 @@ and <a class="reference internal" href="examples/IBS_example.html"><span class="
 <span class="linenos">28</span>
 <span class="linenos">29</span><span class="nt">mosdepth</span><span class="p">:</span>
 <span class="linenos">30</span><span class="w">  </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">True</span>
-<span class="linenos">31</span><span class="w">  </span><span class="nt">output_file_prefix</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;mosdepth_results&quot;</span><span class="w"> </span>
+<span class="linenos">31</span><span class="w">  </span><span class="nt">output_file_prefix</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;mosdepth_results&quot;</span>
 <span class="linenos">32</span><span class="w">  </span><span class="nt">bin_size</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
 <span class="linenos">33</span><span class="w">  </span><span class="nt">mode</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;fast&quot;</span>
 <span class="linenos">34</span><span class="w">  </span><span class="nt">region_name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;LPA&quot;</span>
-<span class="linenos">35</span><span class="w">  </span><span class="nt">work_dir</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/nas/longleaf/home/catererz/work/software_dev/mosdepth_work&quot;</span>
+<span class="linenos">35</span><span class="w">  </span><span class="nt">work_dir</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;path/to/mosdepth_work/&quot;</span>
 <span class="linenos">36</span><span class="w">  </span><span class="nt">remove_intermediate</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">True</span>
 <span class="linenos">37</span>
-<span class="linenos">38</span><span class="w">  </span><span class="nt">normalize</span><span class="p">:</span><span class="w"> </span>
+<span class="linenos">38</span><span class="w">  </span><span class="nt">normalize</span><span class="p">:</span>
 <span class="linenos">39</span><span class="w">    </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">True</span>
 <span class="linenos">40</span><span class="w">    </span><span class="nt">min_depth</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">20</span>
 <span class="linenos">41</span><span class="w">    </span><span class="nt">max_depth</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">100</span>
 <span class="linenos">42</span><span class="w">    </span><span class="nt">top_frac</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.1</span>
 <span class="linenos">43</span><span class="w">    </span><span class="nt">output_file_prefix</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;mosdepth_results_normalized&quot;</span>
-<span class="linenos">44</span><span class="w">    </span><span class="nt">repeat_mask_file</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/nas/longleaf/home/catererz/epi/GRiD/files/repeat_mask_list.hg38.ucsc_bed&quot;</span>
+<span class="linenos">44</span><span class="w">    </span><span class="nt">repeat_mask_file</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;path/to/repeat_mask.bed&quot;</span>
 <span class="linenos">45</span>
 <span class="linenos">46</span><span class="w">  </span><span class="nt">neighbors</span><span class="p">:</span>
 <span class="linenos">47</span><span class="w">    </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">True</span>
@@ -791,14 +797,15 @@ and <a class="reference internal" href="examples/IBS_example.html"><span class="
 <span class="linenos">53</span><span class="nt">compute_diploid_genotypes</span><span class="p">:</span>
 <span class="linenos">54</span><span class="w">  </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">True</span>
 <span class="linenos">55</span><span class="w">  </span><span class="nt">output_file_prefix</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;diploid_genotypes&quot;</span>
-<span class="linenos">56</span>
-<span class="linenos">57</span><span class="nt">compute_haploid_genotypes</span><span class="p">:</span>
-<span class="linenos">58</span><span class="w">  </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">True</span>
-<span class="linenos">59</span><span class="w">  </span><span class="nt">output_file_prefix</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;haploid_genotypes&quot;</span>
-<span class="linenos">60</span><span class="w">  </span><span class="nt">ibs_output</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/nas/longleaf/home/catererz/epi/GRiD/files/ibs_output.tsv&quot;</span>
-<span class="linenos">61</span><span class="w">  </span><span class="nt">min_neighbors</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
-<span class="linenos">62</span><span class="w">  </span><span class="nt">max_neighbors</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10</span>
-<span class="linenos">63</span><span class="w">  </span><span class="nt">n_iters</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">100</span>
+<span class="linenos">56</span><span class="w">  </span><span class="nt">n_nbr</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">300</span>
+<span class="linenos">57</span>
+<span class="linenos">58</span><span class="nt">compute_haploid_genotypes</span><span class="p">:</span>
+<span class="linenos">59</span><span class="w">  </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">True</span>
+<span class="linenos">60</span><span class="w">  </span><span class="nt">output_file_prefix</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;haploid_genotypes&quot;</span>
+<span class="linenos">61</span><span class="w">  </span><span class="nt">ibs_output</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;path/to/ibs_neighbors_chr6.tsv.gz&quot;</span>
+<span class="linenos">62</span><span class="w">  </span><span class="nt">min_neighbors</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
+<span class="linenos">63</span><span class="w">  </span><span class="nt">max_neighbors</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10</span>
+<span class="linenos">64</span><span class="w">  </span><span class="nt">n_iters</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">100</span>
 </pre></div>
 </div>
 </div>

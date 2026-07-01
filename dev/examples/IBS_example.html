@@ -294,7 +294,7 @@
           <section id="ibs-ibd-neighbor-computation-example">
 <h1>IBS/IBD Neighbor Computation Example<a class="headerlink" href="#ibs-ibd-neighbor-computation-example" title="Link to this heading">¶</a></h1>
 <p>This example shows how to run <code class="docutils literal notranslate"><span class="pre">computeIBSpbwt</span></code> to produce the IBS neighbors file
-required by GRiD Step 7 (haplotype inference). The script targets <em>LPA</em> KIV-2 on
+required by GRiD Step 5 (haplotype inference). The script targets <em>LPA</em> KIV-2 on
 chromosome 6 in hg19, but the same pattern applies to any locus — adjust
 <code class="docutils literal notranslate"><span class="pre">CHR</span></code>, <code class="docutils literal notranslate"><span class="pre">FOCAL_BP</span></code>, and the matching BGEN/genetic-map files accordingly.</p>
 <p>Before running, compile <code class="docutils literal notranslate"><span class="pre">computeIBSpbwt.cpp</span></code> and obtain the required input files.
@@ -541,7 +541,6 @@ See the <a class="reference internal" href="../ibs_ibd.html"><span class="doc">C
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">compute_haploid_genotypes</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">True</span>
 <span class="w">  </span><span class="nt">output_file_prefix</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;haploid_genotypes&quot;</span>
-<span class="w">  </span><span class="nt">phased_vcf</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;path/to/phased.vcf.gz&quot;</span>
 <span class="w">  </span><span class="nt">ibs_output</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;path/to/ibs_neighbors_chr6.tsv.gz&quot;</span>
 <span class="w">  </span><span class="nt">min_neighbors</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
 <span class="w">  </span><span class="nt">max_neighbors</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10</span>

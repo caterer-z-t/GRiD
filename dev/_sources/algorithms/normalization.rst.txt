@@ -1,7 +1,7 @@
 Coverage Normalization
 ======================
 
-**Pipeline step:** normalize_mosdepth (Step 4)
+**Pipeline step:** normalize_mosdepth (Step 3a)
 
 **Module:** :mod:`grid.utils.normalize_mosdepth`
 

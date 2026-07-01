@@ -1,7 +1,7 @@
 Read Counting
 =============
 
-** Pipeline step:** count_reads (Step 2)
+**Pipeline step:** count_reads (Step 2)
 
 **Module:** :mod:`grid.utils.count_reads`
 

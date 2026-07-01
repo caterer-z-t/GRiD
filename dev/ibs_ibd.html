@@ -293,7 +293,7 @@
         <article role="main" id="furo-main-content">
           <section id="computing-ibs-ibd-neighbors">
 <h1>Computing IBS/IBD Neighbors<a class="headerlink" href="#computing-ibs-ibd-neighbors" title="Link to this heading">¶</a></h1>
-<p>Step 7 of GRiD (haplotype inference) requires a file of identity-by-descent (IBD) /
+<p>Step 5 of GRiD (haplotype inference) requires a file of identity-by-descent (IBD) /
 identity-by-state (IBS) haplotype neighbors as input. This file is produced by
 <code class="docutils literal notranslate"><span class="pre">computeIBSpbwt.cpp</span></code>, a C++ program from Hujoel et al. (2026) that identifies
 the closest haplotype matches for each individual using the Positional Burrows-Wheeler
@@ -529,7 +529,7 @@ wget<span class="w"> </span>https://alkesgroup.broadinstitute.org/Eagle/download
 </tbody>
 </table>
 </div>
-<p>This file is passed directly to GRiD Step 7 via <code class="docutils literal notranslate"><span class="pre">compute_haploid_genotypes.ibs_output</span></code>
+<p>This file is passed directly to GRiD Step 5 via <code class="docutils literal notranslate"><span class="pre">compute_haploid_genotypes.ibs_output</span></code>
 in the config.</p>
 </section>
 <hr class="docutils" />
@@ -539,7 +539,6 @@ in the config.</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">compute_haploid_genotypes</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">True</span>
 <span class="w">  </span><span class="nt">output_file_prefix</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;haploid_genotypes&quot;</span>
-<span class="w">  </span><span class="nt">phased_vcf</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;path/to/phased.vcf.gz&quot;</span>
 <span class="w">  </span><span class="nt">ibs_output</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;path/to/ibs_neighbors_chr6.tsv.gz&quot;</span>
 <span class="w">  </span><span class="nt">min_neighbors</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
 <span class="w">  </span><span class="nt">max_neighbors</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10</span>

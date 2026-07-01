@@ -1,7 +1,7 @@
 Nearest-Neighbor Identification
 ================================
 
-**Pipeline step:** find_neighbors (Step 5)
+**Pipeline step:** find_neighbors (Step 3b)
 
 **Module:** :mod:`grid.utils.find_neighbors`
 

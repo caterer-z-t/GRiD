@@ -3,7 +3,7 @@ Example Pipeline Jobs
 
 The GRiD documentation provides examples for running the full pipeline
 on an HPC cluster and for computing the IBS/IBD neighbors required by
-Step 7 (haplotype inference).
+Step 5 (haplotype inference).
 
 .. toctree::
    :maxdepth: 1
