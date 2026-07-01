@@ -1,4 +1,6 @@
 # In[0]: Imports
+from __future__ import annotations
+
 from pathlib import Path
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from threading import Lock
