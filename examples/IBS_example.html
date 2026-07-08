@@ -302,128 +302,128 @@ See the <a class="reference internal" href="../ibs_ibd.html"><span class="doc">C
 <div class="literal-block-wrapper docutils container" id="id1">
 <div class="code-block-caption"><span class="caption-text">IBS_example.sh — SLURM/local script for computing IBS neighbors</span><a class="headerlink" href="#id1" title="Link to this code">¶</a></div>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="linenos">  1</span><span class="ch">#!/bin/bash</span>
-<span class="linenos">  2</span><span class="c1"># =============================================================================</span>
-<span class="linenos">  3</span><span class="c1"># GRiD — IBS/IBD Neighbor Computation</span>
-<span class="linenos">  4</span><span class="c1"># LPA KIV-2 (hg38, chr6) using 1000 Genomes phased panel</span>
-<span class="linenos">  5</span><span class="c1">#</span>
-<span class="linenos">  6</span><span class="c1"># Pre-requisite for GRiD Step 7 (haplotype inference).</span>
-<span class="linenos">  7</span><span class="c1"># Runs computeIBSpbwt from Hujoel et al. (2026) Nature.</span>
-<span class="linenos">  8</span><span class="c1"># Source: https://github.com/mhujoel/STRs/blob/main/cpp_files/computeIBSpbwt.cpp</span>
-<span class="linenos">  9</span><span class="c1">#</span>
-<span class="linenos"> 10</span><span class="c1"># This script:</span>
-<span class="linenos"> 11</span><span class="c1">#   1. Downloads the 1000G phased VCF for chr6 (no login required)</span>
-<span class="linenos"> 12</span><span class="c1">#   2. Extracts the LPA region and converts to BGEN v1.2 via qctool</span>
-<span class="linenos"> 13</span><span class="c1">#   3. Downloads the Eagle hg38 genetic map</span>
-<span class="linenos"> 14</span><span class="c1">#   4. Runs computeIBSpbwt to produce the IBS neighbors file</span>
-<span class="linenos"> 15</span><span class="c1">#</span>
-<span class="linenos"> 16</span><span class="c1"># Usage:</span>
-<span class="linenos"> 17</span><span class="c1">#   bash   IBS_example.sh          # local run</span>
-<span class="linenos"> 18</span><span class="c1">#   sbatch IBS_example.sh          # SLURM submission</span>
-<span class="linenos"> 19</span><span class="c1">#</span>
-<span class="linenos"> 20</span><span class="c1"># Output: ibs_neighbors_chr6.tsv.gz</span>
-<span class="linenos"> 21</span><span class="c1">#   Pass to GRiD via compute_haploid_genotypes.ibs_output in your config.</span>
-<span class="linenos"> 22</span><span class="c1"># =============================================================================</span>
-<span class="linenos"> 23</span><span class="c1">#SBATCH --job-name=grid_IBS</span>
-<span class="linenos"> 24</span><span class="c1">#SBATCH --output=logs/IBS_%j.out</span>
-<span class="linenos"> 25</span><span class="c1">#SBATCH --error=logs/IBS_%j.err</span>
-<span class="linenos"> 26</span><span class="c1">#SBATCH --time=4:00:00</span>
-<span class="linenos"> 27</span><span class="c1">#SBATCH --cpus-per-task=16</span>
-<span class="linenos"> 28</span><span class="c1">#SBATCH --mem=64G</span>
-<span class="linenos"> 29</span>
-<span class="linenos"> 30</span><span class="nb">set</span><span class="w"> </span>-euo<span class="w"> </span>pipefail
-<span class="linenos"> 31</span>
-<span class="linenos"> 32</span><span class="c1"># -----------------------------------------------------------------------</span>
-<span class="linenos"> 33</span><span class="c1"># Dependency check</span>
-<span class="linenos"> 34</span><span class="c1"># -----------------------------------------------------------------------</span>
-<span class="linenos"> 35</span><span class="nv">MISSING</span><span class="o">=()</span>
-<span class="linenos"> 36</span><span class="k">for</span><span class="w"> </span>cmd<span class="w"> </span><span class="k">in</span><span class="w"> </span>qctool<span class="w"> </span>wget<span class="w"> </span>samtools<span class="p">;</span><span class="w"> </span><span class="k">do</span>
-<span class="linenos"> 37</span><span class="w">    </span><span class="nb">command</span><span class="w"> </span>-v<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$cmd</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">&amp;</span>&gt;/dev/null<span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nv">MISSING</span><span class="o">+=(</span><span class="s2">&quot;</span><span class="nv">$cmd</span><span class="s2">&quot;</span><span class="o">)</span>
-<span class="linenos"> 38</span><span class="k">done</span>
-<span class="linenos"> 39</span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="si">${#</span><span class="nv">MISSING</span><span class="p">[@]</span><span class="si">}</span><span class="w"> </span>-gt<span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
-<span class="linenos"> 40</span><span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;ERROR: missing required tools: </span><span class="si">${</span><span class="nv">MISSING</span><span class="p">[*]</span><span class="si">}</span><span class="s2">&quot;</span>
-<span class="linenos"> 41</span><span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;  qctool:   https://www.well.ox.ac.uk/~gav/qctool_v2/&quot;</span>
-<span class="linenos"> 42</span><span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;  samtools: conda install -c bioconda samtools&quot;</span>
-<span class="linenos"> 43</span><span class="w">    </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span>
-<span class="linenos"> 44</span><span class="k">fi</span>
-<span class="linenos"> 45</span>
-<span class="linenos"> 46</span><span class="c1"># -----------------------------------------------------------------------</span>
-<span class="linenos"> 47</span><span class="c1"># Paths — set WORK_DIR or override individual variables</span>
-<span class="linenos"> 48</span><span class="c1"># -----------------------------------------------------------------------</span>
-<span class="linenos"> 49</span><span class="nv">WORK_DIR</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">WORK_DIR</span><span class="k">:-$(</span><span class="nb">pwd</span><span class="k">)</span><span class="p">/1000G_grid_run</span><span class="si">}</span><span class="s2">&quot;</span><span class="w">     </span><span class="c1"># match 1000G_example.sh</span>
-<span class="linenos"> 50</span>
-<span class="linenos"> 51</span><span class="nv">DATA_DIR</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$WORK_DIR</span><span class="s2">/data&quot;</span>
-<span class="linenos"> 52</span><span class="nv">LOG_DIR</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$WORK_DIR</span><span class="s2">/logs&quot;</span>
-<span class="linenos"> 53</span>mkdir<span class="w"> </span>-p<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$DATA_DIR</span><span class="s2">&quot;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$LOG_DIR</span><span class="s2">&quot;</span>
-<span class="linenos"> 54</span>
-<span class="linenos"> 55</span><span class="nv">COMPUTE_IBS</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">COMPUTE_IBS</span><span class="k">:-$(</span><span class="nb">pwd</span><span class="k">)</span><span class="p">/computeIBSpbwt</span><span class="si">}</span><span class="s2">&quot;</span><span class="w">   </span><span class="c1"># compiled binary path</span>
-<span class="linenos"> 56</span>
-<span class="linenos"> 57</span><span class="c1"># -----------------------------------------------------------------------</span>
-<span class="linenos"> 58</span><span class="c1"># 1000 Genomes public URLs</span>
-<span class="linenos"> 59</span><span class="c1"># -----------------------------------------------------------------------</span>
-<span class="linenos"> 60</span><span class="nv">PHASED_VCF_URL</span><span class="o">=</span><span class="s2">&quot;https://ftp.1000genomes.ebi.ac.uk/vol1/ftp/data_collections/1000G_2504_high_coverage/working/20220422_3202_phased_SNV_INDEL_SV/1kGP_high_coverage_Illumina.chr6.filtered.SNV_INDEL_SV_phased_panel.vcf.gz&quot;</span>
-<span class="linenos"> 61</span><span class="nv">GENETIC_MAP_URL</span><span class="o">=</span><span class="s2">&quot;https://alkesgroup.broadinstitute.org/Eagle/downloads/tables/genetic_map_hg38_withX.txt.gz&quot;</span>
-<span class="linenos"> 62</span>
-<span class="linenos"> 63</span><span class="c1"># -----------------------------------------------------------------------</span>
-<span class="linenos"> 64</span><span class="c1"># Parameters</span>
-<span class="linenos"> 65</span><span class="c1"># -----------------------------------------------------------------------</span>
-<span class="linenos"> 66</span><span class="nv">CHR</span><span class="o">=</span><span class="m">6</span>
-<span class="linenos"> 67</span><span class="nv">FOCAL_BP</span><span class="o">=</span><span class="m">160626361</span><span class="w">       </span><span class="c1"># center of LPA KIV-2 VNTR region (hg38)</span>
-<span class="linenos"> 68</span><span class="nv">LPA_REGION</span><span class="o">=</span><span class="s2">&quot;chr6:160605062-160647661&quot;</span>
-<span class="linenos"> 69</span><span class="nv">NUM_NEIGHBORS</span><span class="o">=</span><span class="m">200</span>
-<span class="linenos"> 70</span><span class="nv">THREADS</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">SLURM_CPUS_PER_TASK</span><span class="k">:-$(</span>nproc<span class="k">)</span><span class="si">}</span><span class="s2">&quot;</span>
-<span class="linenos"> 71</span>
-<span class="linenos"> 72</span><span class="nv">PHASED_VCF</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$DATA_DIR</span><span class="s2">/1kGP_chr6_phased.vcf.gz&quot;</span>
-<span class="linenos"> 73</span><span class="nv">LPA_VCF</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$DATA_DIR</span><span class="s2">/1kGP_chr6_LPA_phased.vcf.gz&quot;</span>
-<span class="linenos"> 74</span><span class="nv">BGEN_FILE</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$DATA_DIR</span><span class="s2">/1kGP_chr6_LPA_phased.bgen&quot;</span>
-<span class="linenos"> 75</span><span class="nv">SAMPLE_FILE</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$DATA_DIR</span><span class="s2">/1kGP_chr6_LPA_phased.sample&quot;</span>
-<span class="linenos"> 76</span><span class="nv">GENETIC_MAP</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$DATA_DIR</span><span class="s2">/genetic_map_hg38_chr6.txt&quot;</span>
-<span class="linenos"> 77</span><span class="nv">OUTPUT_FILE</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$DATA_DIR</span><span class="s2">/ibs_neighbors_chr6.tsv.gz&quot;</span>
+<span class="linenos">  2</span>
+<span class="linenos">  3</span><span class="nb">set</span><span class="w"> </span>-euo<span class="w"> </span>pipefail
+<span class="linenos">  4</span>
+<span class="linenos">  5</span>module<span class="w"> </span>load<span class="w"> </span>samtools
+<span class="linenos">  6</span>
+<span class="linenos">  7</span><span class="nv">NUM_NEIGHBORS</span><span class="o">=</span><span class="m">200</span>
+<span class="linenos">  8</span><span class="nv">FOCAL_BP</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="w"> </span><span class="c1"># LPA KIV-2 region center, eg 160,626,361</span>
+<span class="linenos">  9</span><span class="k">while</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="nv">$#</span><span class="w"> </span>-gt<span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="linenos"> 10</span><span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="nv">$1</span><span class="w"> </span><span class="k">in</span>
+<span class="linenos"> 11</span><span class="w">        </span>--neighbors<span class="o">)</span>
+<span class="linenos"> 12</span><span class="w">            </span><span class="nv">NUM_NEIGHBORS</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$2</span><span class="s2">&quot;</span><span class="p">;</span><span class="w"> </span><span class="nb">shift</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="p">;;</span>
+<span class="linenos"> 13</span><span class="w">        </span>--focal-bp<span class="o">)</span>
+<span class="linenos"> 14</span><span class="w">            </span><span class="nv">FOCAL_BP</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$2</span><span class="s2">&quot;</span><span class="p">;</span><span class="w"> </span><span class="nb">shift</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="p">;;</span>
+<span class="linenos"> 15</span><span class="w">        </span>-h<span class="p">|</span>--help<span class="o">)</span>
+<span class="linenos"> 16</span><span class="w">            </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Usage: </span><span class="nv">$0</span><span class="s2"> [--neighbors N]&quot;</span>
+<span class="linenos"> 17</span><span class="w">            </span><span class="nb">exit</span><span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="p">;;</span>
+<span class="linenos"> 18</span><span class="w">        </span>*<span class="o">)</span>
+<span class="linenos"> 19</span><span class="w">            </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Unknown argument: </span><span class="nv">$1</span><span class="s2">&quot;</span>
+<span class="linenos"> 20</span><span class="w">            </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="p">;;</span>
+<span class="linenos"> 21</span><span class="w">    </span><span class="k">esac</span>
+<span class="linenos"> 22</span><span class="k">done</span>
+<span class="linenos"> 23</span>
+<span class="linenos"> 24</span><span class="c1"># Paths and parameters</span>
+<span class="linenos"> 25</span><span class="nv">WORK_DIR</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">WORK_DIR</span><span class="k">:-$(</span><span class="nb">pwd</span><span class="k">)</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="linenos"> 26</span><span class="nv">LOG_DIR</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$WORK_DIR</span><span class="s2">/logs&quot;</span>
+<span class="linenos"> 27</span><span class="nv">DATA_DIR</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$WORK_DIR</span><span class="s2">/data&quot;</span>
+<span class="linenos"> 28</span><span class="nv">OUTPUT_DIR</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$WORK_DIR</span><span class="s2">/output&quot;</span>
+<span class="linenos"> 29</span>mkdir<span class="w"> </span>-p<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$DATA_DIR</span><span class="s2">&quot;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$LOG_DIR</span><span class="s2">&quot;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">&quot;</span>
+<span class="linenos"> 30</span><span class="w"> </span>
+<span class="linenos"> 31</span><span class="nv">THREADS</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">SLURM_CPUS_PER_TASK</span><span class="k">:-$(</span>nproc<span class="k">)</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="linenos"> 32</span>
+<span class="linenos"> 33</span>timestamp<span class="o">()</span><span class="w"> </span><span class="o">{</span><span class="w"> </span>date<span class="w"> </span><span class="s1">&#39;+%Y-%m-%d %H:%M:%S&#39;</span><span class="p">;</span><span class="w"> </span><span class="o">}</span>
+<span class="linenos"> 34</span>log<span class="o">()</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;[</span><span class="k">$(</span>timestamp<span class="k">)</span><span class="s2">] </span><span class="nv">$*</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>tee<span class="w"> </span>-a<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$LOG_DIR</span><span class="s2">/IBS.log&quot;</span><span class="p">;</span><span class="w"> </span><span class="o">}</span>
+<span class="linenos"> 35</span>
+<span class="linenos"> 36</span>download_with_retry<span class="o">()</span><span class="w"> </span><span class="o">{</span>
+<span class="linenos"> 37</span><span class="w">    </span><span class="nb">local</span><span class="w"> </span><span class="nv">url</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span>
+<span class="linenos"> 38</span><span class="w">    </span><span class="nb">local</span><span class="w"> </span><span class="nv">out</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$2</span><span class="s2">&quot;</span>
+<span class="linenos"> 39</span><span class="w">    </span><span class="nb">local</span><span class="w"> </span>attempt
+<span class="linenos"> 40</span><span class="w"> </span>
+<span class="linenos"> 41</span><span class="w">    </span><span class="k">for</span><span class="w"> </span>attempt<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="m">3</span><span class="w"> </span><span class="m">4</span><span class="w"> </span><span class="m">5</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="linenos"> 42</span><span class="w">        </span><span class="k">if</span><span class="w"> </span>wget<span class="w"> </span>-q<span class="w"> </span>--tries<span class="o">=</span><span class="m">1</span><span class="w"> </span>--timeout<span class="o">=</span><span class="m">60</span><span class="w"> </span>-O<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$out</span><span class="s2">&quot;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$url</span><span class="s2">&quot;</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="linenos"> 43</span><span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="m">0</span>
+<span class="linenos"> 44</span><span class="w">        </span><span class="k">fi</span>
+<span class="linenos"> 45</span><span class="w">        </span>rm<span class="w"> </span>-f<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$out</span><span class="s2">&quot;</span>
+<span class="linenos"> 46</span><span class="w">        </span>sleep<span class="w"> </span><span class="k">$((</span><span class="w"> </span><span class="nv">attempt</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">3</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nv">RANDOM</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="m">3</span><span class="w"> </span><span class="k">))</span>
+<span class="linenos"> 47</span><span class="w">    </span><span class="k">done</span>
+<span class="linenos"> 48</span><span class="w"> </span>
+<span class="linenos"> 49</span><span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;ERROR: failed to download </span><span class="nv">$url</span><span class="s2"> after 5 attempts&quot;</span><span class="w"> </span>&gt;<span class="p">&amp;</span><span class="m">2</span>
+<span class="linenos"> 50</span><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="m">1</span>
+<span class="linenos"> 51</span><span class="o">}</span>
+<span class="linenos"> 52</span>
+<span class="linenos"> 53</span><span class="c1"># Dependency check</span>
+<span class="linenos"> 54</span><span class="nv">MISSING</span><span class="o">=()</span>
+<span class="linenos"> 55</span><span class="k">for</span><span class="w"> </span>cmd<span class="w"> </span><span class="k">in</span><span class="w"> </span>qctool<span class="w"> </span>wget<span class="w"> </span>samtools<span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="linenos"> 56</span><span class="w">    </span><span class="nb">command</span><span class="w"> </span>-v<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$cmd</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">&amp;</span>&gt;/dev/null<span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nv">MISSING</span><span class="o">+=(</span><span class="s2">&quot;</span><span class="nv">$cmd</span><span class="s2">&quot;</span><span class="o">)</span>
+<span class="linenos"> 57</span><span class="k">done</span>
+<span class="linenos"> 58</span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="si">${#</span><span class="nv">MISSING</span><span class="p">[@]</span><span class="si">}</span><span class="w"> </span>-gt<span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="linenos"> 59</span><span class="w">    </span>log<span class="w"> </span><span class="s2">&quot;ERROR: missing required tools: </span><span class="si">${</span><span class="nv">MISSING</span><span class="p">[*]</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="linenos"> 60</span><span class="w">    </span>log<span class="w"> </span><span class="s2">&quot;  qctool:   https://www.well.ox.ac.uk/~gav/qctool_v2/&quot;</span>
+<span class="linenos"> 61</span><span class="w">    </span>log<span class="w"> </span><span class="s2">&quot;  samtools: conda install -c bioconda samtools&quot;</span>
+<span class="linenos"> 62</span><span class="w">    </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span>
+<span class="linenos"> 63</span><span class="k">fi</span>
+<span class="linenos"> 64</span>
+<span class="linenos"> 65</span><span class="nv">COMPUTE_IBS</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$WORK_DIR</span><span class="s2">/computeIBSpbwt&quot;</span>
+<span class="linenos"> 66</span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span>!<span class="w"> </span>-f<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$COMPUTE_IBS</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="linenos"> 67</span><span class="w">    </span>log<span class="w"> </span><span class="s2">&quot;Downloading computeIBSpbwt binary...&quot;</span>
+<span class="linenos"> 68</span><span class="w">    </span>download_with_retry<span class="w"> </span><span class="se">\</span>
+<span class="linenos"> 69</span><span class="w">        </span><span class="s2">&quot;https://raw.githubusercontent.com/mhujoel/STRs/main/cpp_files/computeIBSpbwt&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="linenos"> 70</span><span class="w">        </span><span class="s2">&quot;</span><span class="nv">$COMPUTE_IBS</span><span class="s2">&quot;</span>
+<span class="linenos"> 71</span><span class="w">    </span>chmod<span class="w"> </span>+x<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$COMPUTE_IBS</span><span class="s2">&quot;</span>
+<span class="linenos"> 72</span><span class="k">fi</span><span class="w"> </span>
+<span class="linenos"> 73</span>
+<span class="linenos"> 74</span><span class="c1"># 1000 Genomes public URLs</span>
+<span class="linenos"> 75</span><span class="nv">PHASED_VCF_URL</span><span class="o">=</span><span class="s2">&quot;https://ftp.1000genomes.ebi.ac.uk/vol1/ftp/data_collections/1000G_2504_high_coverage/working/20220422_3202_phased_SNV_INDEL_SV/1kGP_high_coverage_Illumina.chr6.filtered.SNV_INDEL_SV_phased_panel.vcf.gz&quot;</span>
+<span class="linenos"> 76</span><span class="nv">GENETIC_MAP_URL</span><span class="o">=</span><span class="s2">&quot;https://alkesgroup.broadinstitute.org/Eagle/downloads/tables/genetic_map_hg38_withX.txt.gz&quot;</span>
+<span class="linenos"> 77</span><span class="nv">REGIONS_FILE_URL</span><span class="o">=</span><span class="s2">&quot;https://raw.githubusercontent.com/caterer-z-t/GRiD/main/files/734_possible_coding_vntr_regions.IBD2R_gt_0.25.uniq.txt&quot;</span>
 <span class="linenos"> 78</span>
-<span class="linenos"> 79</span>timestamp<span class="o">()</span><span class="w"> </span><span class="o">{</span><span class="w"> </span>date<span class="w"> </span><span class="s1">&#39;+%Y-%m-%d %H:%M:%S&#39;</span><span class="p">;</span><span class="w"> </span><span class="o">}</span>
-<span class="linenos"> 80</span>log<span class="o">()</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;[</span><span class="k">$(</span>timestamp<span class="k">)</span><span class="s2">] </span><span class="nv">$*</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>tee<span class="w"> </span>-a<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$LOG_DIR</span><span class="s2">/IBS.log&quot;</span><span class="p">;</span><span class="w"> </span><span class="o">}</span>
-<span class="linenos"> 81</span>
-<span class="linenos"> 82</span>log<span class="w"> </span><span class="s2">&quot;=================================================&quot;</span>
-<span class="linenos"> 83</span>log<span class="w"> </span><span class="s2">&quot;  IBS/IBD Neighbor Computation&quot;</span>
-<span class="linenos"> 84</span>log<span class="w"> </span><span class="s2">&quot;  Locus: LPA KIV-2 (</span><span class="nv">$LPA_REGION</span><span class="s2">, hg38)&quot;</span>
-<span class="linenos"> 85</span>log<span class="w"> </span><span class="s2">&quot;  Threads: </span><span class="nv">$THREADS</span><span class="s2">&quot;</span>
-<span class="linenos"> 86</span>log<span class="w"> </span><span class="s2">&quot;=================================================&quot;</span>
-<span class="linenos"> 87</span>
-<span class="linenos"> 88</span><span class="c1"># Verify computeIBSpbwt binary</span>
-<span class="linenos"> 89</span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span>!<span class="w"> </span>-x<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$COMPUTE_IBS</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
-<span class="linenos"> 90</span><span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;ERROR: computeIBSpbwt binary not found or not executable at: </span><span class="nv">$COMPUTE_IBS</span><span class="s2">&quot;</span>
-<span class="linenos"> 91</span><span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;  Download source: https://github.com/mhujoel/STRs/blob/main/cpp_files/computeIBSpbwt.cpp&quot;</span>
-<span class="linenos"> 92</span><span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;  Then compile and set: export COMPUTE_IBS=/path/to/computeIBSpbwt&quot;</span>
-<span class="linenos"> 93</span><span class="w">    </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span>
-<span class="linenos"> 94</span><span class="k">fi</span>
-<span class="linenos"> 95</span>
-<span class="linenos"> 96</span><span class="c1"># -----------------------------------------------------------------------</span>
-<span class="linenos"> 97</span><span class="c1"># Phase 1 — Download 1000G phased VCF for chr6</span>
-<span class="linenos"> 98</span><span class="c1">#</span>
-<span class="linenos"> 99</span><span class="c1"># The full chr6 phased panel is ~5 GB. We stream only the LPA window</span>
-<span class="linenos">100</span><span class="c1"># into a local subset VCF using tabix (no full download required).</span>
-<span class="linenos">101</span><span class="c1"># -----------------------------------------------------------------------</span>
-<span class="linenos">102</span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span>!<span class="w"> </span>-f<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$LPA_VCF</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
-<span class="linenos">103</span><span class="w">    </span>log<span class="w"> </span><span class="s2">&quot;Streaming LPA region from 1000G phased VCF...&quot;</span>
-<span class="linenos">104</span>
-<span class="linenos">105</span><span class="w">    </span><span class="c1"># Fetch index alongside to enable remote tabix streaming</span>
-<span class="linenos">106</span><span class="w">    </span>wget<span class="w"> </span>-q<span class="w"> </span>-c<span class="w"> </span>-O<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">PHASED_VCF</span><span class="si">}</span><span class="s2">.tbi&quot;</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">PHASED_VCF_URL</span><span class="si">}</span><span class="s2">.tbi&quot;</span>
-<span class="linenos">107</span>
-<span class="linenos">108</span><span class="w">    </span><span class="c1"># Pull only the LPA window — ~1 MB vs 5 GB for full chr6</span>
-<span class="linenos">109</span><span class="w">    </span>tabix<span class="w"> </span>-h<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$PHASED_VCF_URL</span><span class="s2">&quot;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$LPA_REGION</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
-<span class="linenos">110</span><span class="w">        </span><span class="p">|</span><span class="w"> </span>bgzip<span class="w"> </span>&gt;<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$LPA_VCF</span><span class="s2">&quot;</span>
-<span class="linenos">111</span><span class="w">    </span>tabix<span class="w"> </span>-p<span class="w"> </span>vcf<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$LPA_VCF</span><span class="s2">&quot;</span>
-<span class="linenos">112</span>
-<span class="linenos">113</span><span class="w">    </span>log<span class="w"> </span><span class="s2">&quot;LPA phased VCF ready: </span><span class="nv">$LPA_VCF</span><span class="s2">&quot;</span>
-<span class="linenos">114</span><span class="k">else</span>
-<span class="linenos">115</span><span class="w">    </span>log<span class="w"> </span><span class="s2">&quot;LPA phased VCF already present — skipping.&quot;</span>
-<span class="linenos">116</span><span class="k">fi</span>
+<span class="linenos"> 79</span><span class="c1"># Parameters</span>
+<span class="linenos"> 80</span><span class="c1"># Fetch static inputs</span>
+<span class="linenos"> 81</span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span>!<span class="w"> </span>-f<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$DATA_DIR</span><span class="s2">/regions.txt&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="linenos"> 82</span><span class="w">    </span>log<span class="w"> </span><span class="s2">&quot;Downloading VNTR regions file...&quot;</span>
+<span class="linenos"> 83</span><span class="w">    </span>download_with_retry<span class="w"> </span><span class="se">\</span>
+<span class="linenos"> 84</span><span class="w">        </span><span class="s2">&quot;</span><span class="nv">$REGIONS_FILE_URL</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="linenos"> 85</span><span class="w">        </span><span class="s2">&quot;</span><span class="nv">$DATA_DIR</span><span class="s2">/regions.txt&quot;</span>
+<span class="linenos"> 86</span><span class="k">fi</span>
+<span class="linenos"> 87</span><span class="w"> </span>
+<span class="linenos"> 88</span><span class="nb">read</span><span class="w"> </span>-r<span class="w"> </span>CHR<span class="w"> </span>START<span class="w"> </span>END<span class="w"> </span>&lt;<span class="w"> </span>&lt;<span class="o">(</span>awk<span class="w"> </span><span class="s1">&#39;$7==&quot;LPA&quot; {print $1, $2, $3; exit}&#39;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$DATA_DIR</span><span class="s2">/regions.txt&quot;</span><span class="o">)</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nb">true</span>
+<span class="linenos"> 89</span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span>-z<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">CHR</span><span class="k">:-</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">||</span><span class="w"> </span>-z<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">START</span><span class="k">:-</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">||</span><span class="w"> </span>-z<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">END</span><span class="k">:-</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="linenos"> 90</span><span class="w">    </span>log<span class="w"> </span><span class="s2">&quot;ERROR: Could not parse LPA coordinates from regions.txt&quot;</span>
+<span class="linenos"> 91</span><span class="w">    </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span>
+<span class="linenos"> 92</span><span class="k">fi</span>
+<span class="linenos"> 93</span><span class="nv">REGION</span><span class="o">=</span><span class="s2">&quot;chr</span><span class="si">${</span><span class="nv">CHR</span><span class="si">}</span><span class="s2">:</span><span class="si">${</span><span class="nv">START</span><span class="si">}</span><span class="s2">-</span><span class="si">${</span><span class="nv">END</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="linenos"> 94</span>
+<span class="linenos"> 95</span><span class="nv">PHASED_VCF</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$DATA_DIR</span><span class="s2">/1kGP_chr6_phased.vcf.gz&quot;</span>
+<span class="linenos"> 96</span><span class="nv">LPA_VCF</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$DATA_DIR</span><span class="s2">/1kGP_chr6_LPA_phased.vcf.gz&quot;</span>
+<span class="linenos"> 97</span><span class="nv">BGEN_FILE</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$DATA_DIR</span><span class="s2">/1kGP_chr6_LPA_phased.bgen&quot;</span>
+<span class="linenos"> 98</span><span class="nv">SAMPLE_FILE</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$DATA_DIR</span><span class="s2">/1kGP_chr6_LPA_phased.sample&quot;</span>
+<span class="linenos"> 99</span><span class="nv">GENETIC_MAP</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$DATA_DIR</span><span class="s2">/genetic_map_hg38_chr6.txt&quot;</span>
+<span class="linenos">100</span><span class="nv">OUTPUT_FILE</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$DATA_DIR</span><span class="s2">/ibs_neighbors_chr6.tsv.gz&quot;</span>
+<span class="linenos">101</span>
+<span class="linenos">102</span><span class="c1"># Download 1000G phased VCF for chr6</span>
+<span class="linenos">103</span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span>!<span class="w"> </span>-f<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$LPA_VCF</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="linenos">104</span><span class="w">    </span>log<span class="w"> </span><span class="s2">&quot;Streaming LPA region from 1000G phased VCF...&quot;</span>
+<span class="linenos">105</span>
+<span class="linenos">106</span><span class="w">    </span><span class="c1"># Fetch index alongside to enable remote tabix streaming</span>
+<span class="linenos">107</span><span class="w">    </span>download_with_retry<span class="w"> </span><span class="se">\</span>
+<span class="linenos">108</span><span class="w">        </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">PHASED_VCF_URL</span><span class="si">}</span><span class="s2">.tbi&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="linenos">109</span><span class="w">        </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">PHASED_VCF</span><span class="si">}</span><span class="s2">.tbi&quot;</span>
+<span class="linenos">110</span>
+<span class="linenos">111</span><span class="w">    </span><span class="c1"># Pull only the LPA window</span>
+<span class="linenos">112</span><span class="w">    </span>tabix<span class="w"> </span>-h<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$PHASED_VCF_URL</span><span class="s2">&quot;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$REGION</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="linenos">113</span><span class="w">        </span><span class="p">|</span><span class="w"> </span>bgzip<span class="w"> </span>&gt;<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$LPA_VCF</span><span class="s2">&quot;</span>
+<span class="linenos">114</span><span class="w">    </span>tabix<span class="w"> </span>-p<span class="w"> </span>vcf<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$LPA_VCF</span><span class="s2">&quot;</span>
+<span class="linenos">115</span>
+<span class="linenos">116</span><span class="w">    </span>rm<span class="w"> </span>-f<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">PHASED_VCF</span><span class="si">}</span><span class="s2">.tbi&quot;</span>
 <span class="linenos">117</span>
-<span class="linenos">118</span><span class="c1"># -----------------------------------------------------------------------</span>
-<span class="linenos">119</span><span class="c1"># Phase 2 — Convert phased VCF → BGEN v1.2</span>
-<span class="linenos">120</span><span class="c1">#</span>
-<span class="linenos">121</span><span class="c1"># qctool outputs BGEN v1.2, layout 2, 16-bit, phased — the format</span>
-<span class="linenos">122</span><span class="c1"># required by computeIBSpbwt.</span>
-<span class="linenos">123</span><span class="c1"># -----------------------------------------------------------------------</span>
+<span class="linenos">118</span><span class="w">    </span>log<span class="w"> </span><span class="s2">&quot;LPA phased VCF ready: </span><span class="nv">$LPA_VCF</span><span class="s2">&quot;</span>
+<span class="linenos">119</span><span class="k">else</span>
+<span class="linenos">120</span><span class="w">    </span>log<span class="w"> </span><span class="s2">&quot;LPA phased VCF already present — skipping.&quot;</span>
+<span class="linenos">121</span><span class="k">fi</span>
+<span class="linenos">122</span>
+<span class="linenos">123</span><span class="c1"># Phase 2 — Convert phased VCF → BGEN v1.2</span>
 <span class="linenos">124</span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span>!<span class="w"> </span>-f<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$BGEN_FILE</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
 <span class="linenos">125</span><span class="w">    </span>log<span class="w"> </span><span class="s2">&quot;Converting phased VCF to BGEN v1.2...&quot;</span>
 <span class="linenos">126</span><span class="w">    </span>qctool<span class="w"> </span><span class="se">\</span>
@@ -439,45 +439,30 @@ See the <a class="reference internal" href="../ibs_ibd.html"><span class="doc">C
 <span class="linenos">136</span><span class="w">    </span>log<span class="w"> </span><span class="s2">&quot;BGEN file already present — skipping.&quot;</span>
 <span class="linenos">137</span><span class="k">fi</span>
 <span class="linenos">138</span>
-<span class="linenos">139</span><span class="c1"># -----------------------------------------------------------------------</span>
-<span class="linenos">140</span><span class="c1"># Phase 3 — Download Eagle genetic map for hg38</span>
-<span class="linenos">141</span><span class="c1"># -----------------------------------------------------------------------</span>
-<span class="linenos">142</span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span>!<span class="w"> </span>-f<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$GENETIC_MAP</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
-<span class="linenos">143</span><span class="w">    </span>log<span class="w"> </span><span class="s2">&quot;Downloading Eagle hg38 genetic map...&quot;</span>
-<span class="linenos">144</span><span class="w">    </span>wget<span class="w"> </span>-q<span class="w"> </span>-O<span class="w"> </span>-<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$GENETIC_MAP_URL</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
-<span class="linenos">145</span><span class="w">        </span><span class="p">|</span><span class="w"> </span>gunzip<span class="w"> </span><span class="se">\</span>
-<span class="linenos">146</span><span class="w">        </span><span class="p">|</span><span class="w"> </span>awk<span class="w"> </span><span class="s1">&#39;NR==1 || $1==&quot;chr6&quot;&#39;</span><span class="w"> </span><span class="se">\</span>
-<span class="linenos">147</span><span class="w">        </span>&gt;<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$GENETIC_MAP</span><span class="s2">&quot;</span>
-<span class="linenos">148</span><span class="w">    </span>log<span class="w"> </span><span class="s2">&quot;Genetic map ready: </span><span class="nv">$GENETIC_MAP</span><span class="s2">&quot;</span>
-<span class="linenos">149</span><span class="k">else</span>
-<span class="linenos">150</span><span class="w">    </span>log<span class="w"> </span><span class="s2">&quot;Genetic map already present — skipping.&quot;</span>
-<span class="linenos">151</span><span class="k">fi</span>
-<span class="linenos">152</span>
-<span class="linenos">153</span><span class="c1"># -----------------------------------------------------------------------</span>
-<span class="linenos">154</span><span class="c1"># Phase 4 — Run computeIBSpbwt</span>
-<span class="linenos">155</span><span class="c1"># -----------------------------------------------------------------------</span>
-<span class="linenos">156</span>log<span class="w"> </span><span class="s2">&quot;Computing IBS/IBD neighbors...&quot;</span>
-<span class="linenos">157</span>log<span class="w"> </span><span class="s2">&quot;  CHR=</span><span class="nv">$CHR</span><span class="s2">  FOCAL_BP=</span><span class="nv">$FOCAL_BP</span><span class="s2">  NEIGHBORS=</span><span class="nv">$NUM_NEIGHBORS</span><span class="s2">  THREADS=</span><span class="nv">$THREADS</span><span class="s2">&quot;</span>
-<span class="linenos">158</span>
-<span class="linenos">159</span><span class="s2">&quot;</span><span class="nv">$COMPUTE_IBS</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
-<span class="linenos">160</span><span class="w">    </span><span class="s2">&quot;</span><span class="nv">$CHR</span><span class="s2">&quot;</span><span class="w">          </span><span class="se">\</span>
-<span class="linenos">161</span><span class="w">    </span><span class="s2">&quot;</span><span class="nv">$FOCAL_BP</span><span class="s2">&quot;</span><span class="w">     </span><span class="se">\</span>
-<span class="linenos">162</span><span class="w">    </span><span class="s2">&quot;</span><span class="nv">$BGEN_FILE</span><span class="s2">&quot;</span><span class="w">    </span><span class="se">\</span>
-<span class="linenos">163</span><span class="w">    </span><span class="s2">&quot;</span><span class="nv">$SAMPLE_FILE</span><span class="s2">&quot;</span><span class="w">  </span><span class="se">\</span>
-<span class="linenos">164</span><span class="w">    </span><span class="s2">&quot;</span><span class="nv">$GENETIC_MAP</span><span class="s2">&quot;</span><span class="w">  </span><span class="se">\</span>
-<span class="linenos">165</span><span class="w">    </span><span class="s2">&quot;</span><span class="nv">$NUM_NEIGHBORS</span><span class="s2">&quot;</span><span class="se">\</span>
-<span class="linenos">166</span><span class="w">    </span><span class="s2">&quot;</span><span class="nv">$THREADS</span><span class="s2">&quot;</span><span class="w">      </span><span class="se">\</span>
-<span class="linenos">167</span><span class="w">    </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_FILE</span><span class="s2">&quot;</span>
-<span class="linenos">168</span>
-<span class="linenos">169</span>log<span class="w"> </span><span class="s2">&quot;=================================================&quot;</span>
-<span class="linenos">170</span>log<span class="w"> </span><span class="s2">&quot;  Done. IBS neighbors written to:&quot;</span>
-<span class="linenos">171</span>log<span class="w"> </span><span class="s2">&quot;    </span><span class="nv">$OUTPUT_FILE</span><span class="s2">&quot;</span>
-<span class="linenos">172</span>log<span class="w"> </span><span class="s2">&quot;&quot;</span>
-<span class="linenos">173</span>log<span class="w"> </span><span class="s2">&quot;  Add to your GRiD config:&quot;</span>
-<span class="linenos">174</span>log<span class="w"> </span><span class="s2">&quot;    compute_haploid_genotypes:&quot;</span>
-<span class="linenos">175</span>log<span class="w"> </span><span class="s2">&quot;      run: True&quot;</span>
-<span class="linenos">176</span>log<span class="w"> </span><span class="s2">&quot;      ibs_output: \&quot;</span><span class="nv">$OUTPUT_FILE</span><span class="s2">\&quot;&quot;</span>
-<span class="linenos">177</span>log<span class="w"> </span><span class="s2">&quot;=================================================&quot;</span>
+<span class="linenos">139</span><span class="c1"># Download Eagle genetic map for hg38</span>
+<span class="linenos">140</span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span>!<span class="w"> </span>-f<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$GENETIC_MAP</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="linenos">141</span><span class="w">    </span>log<span class="w"> </span><span class="s2">&quot;Downloading Eagle hg38 genetic map...&quot;</span>
+<span class="linenos">142</span><span class="w">    </span>download_with_retry<span class="w"> </span><span class="se">\</span>
+<span class="linenos">143</span><span class="w">        </span><span class="s2">&quot;</span><span class="nv">$GENETIC_MAP_URL</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="linenos">144</span><span class="w">        </span><span class="s2">&quot;</span><span class="nv">$GENETIC_MAP</span><span class="s2">&quot;</span>
+<span class="linenos">145</span><span class="w">    </span>log<span class="w"> </span><span class="s2">&quot;Genetic map ready: </span><span class="nv">$GENETIC_MAP</span><span class="s2">&quot;</span>
+<span class="linenos">146</span><span class="k">else</span>
+<span class="linenos">147</span><span class="w">    </span>log<span class="w"> </span><span class="s2">&quot;Genetic map already present — skipping.&quot;</span>
+<span class="linenos">148</span><span class="k">fi</span>
+<span class="linenos">149</span>
+<span class="linenos">150</span><span class="c1"># Phase 4 — Run computeIBSpbwt</span>
+<span class="linenos">151</span>log<span class="w"> </span><span class="s2">&quot;Computing IBS/IBD neighbors...&quot;</span>
+<span class="linenos">152</span>log<span class="w"> </span><span class="s2">&quot;  CHR=</span><span class="nv">$CHR</span><span class="s2">  FOCAL_BP=</span><span class="nv">$FOCAL_BP</span><span class="s2">  NEIGHBORS=</span><span class="nv">$NUM_NEIGHBORS</span><span class="s2">  THREADS=</span><span class="nv">$THREADS</span><span class="s2">&quot;</span>
+<span class="linenos">153</span>
+<span class="linenos">154</span><span class="s2">&quot;</span><span class="nv">$COMPUTE_IBS</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="linenos">155</span><span class="w">    </span><span class="s2">&quot;</span><span class="nv">$CHR</span><span class="s2">&quot;</span><span class="w">          </span><span class="se">\</span>
+<span class="linenos">156</span><span class="w">    </span><span class="s2">&quot;</span><span class="nv">$FOCAL_BP</span><span class="s2">&quot;</span><span class="w">     </span><span class="se">\</span>
+<span class="linenos">157</span><span class="w">    </span><span class="s2">&quot;</span><span class="nv">$BGEN_FILE</span><span class="s2">&quot;</span><span class="w">    </span><span class="se">\</span>
+<span class="linenos">158</span><span class="w">    </span><span class="s2">&quot;</span><span class="nv">$SAMPLE_FILE</span><span class="s2">&quot;</span><span class="w">  </span><span class="se">\</span>
+<span class="linenos">159</span><span class="w">    </span><span class="s2">&quot;</span><span class="nv">$GENETIC_MAP</span><span class="s2">&quot;</span><span class="w">  </span><span class="se">\</span>
+<span class="linenos">160</span><span class="w">    </span><span class="s2">&quot;</span><span class="nv">$NUM_NEIGHBORS</span><span class="s2">&quot;</span><span class="se">\</span>
+<span class="linenos">161</span><span class="w">    </span><span class="s2">&quot;</span><span class="nv">$THREADS</span><span class="s2">&quot;</span><span class="w">      </span><span class="se">\</span>
+<span class="linenos">162</span><span class="w">    </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_FILE</span><span class="s2">&quot;</span>
 </pre></div>
 </div>
 </div>
