@@ -140,14 +140,13 @@ def check_index(config, console=None):
             if not file_path:
                 results["missing_file"].append(sample)
                 progress.advance(task)
+                continue
 
             if has_index(file_path, file_type):
                 results["has_index"].append(sample)
-                progress.advance(task)
-
             else:
                 results["missing_index"].append(sample)
-                progress.advance(task)
+            progress.advance(task)
 
     if config["index"].get("output_file_prefix"):
         output_file = f"{output_dir}/{config['index']['output_file_prefix']}.{config.get('output_file_type', 'tsv')}"

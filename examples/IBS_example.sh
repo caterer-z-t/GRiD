@@ -1,73 +1,96 @@
 #!/bin/bash
-# =============================================================================
-# GRiD — IBS/IBD Neighbor Computation
-# LPA KIV-2 (hg38, chr6) using 1000 Genomes phased panel
-#
-# Pre-requisite for GRiD Step 7 (haplotype inference).
-# Runs computeIBSpbwt from Hujoel et al. (2026) Nature.
-# Source: https://github.com/mhujoel/STRs/blob/main/cpp_files/computeIBSpbwt.cpp
-#
-# This script:
-#   1. Downloads the 1000G phased VCF for chr6 (no login required)
-#   2. Extracts the LPA region and converts to BGEN v1.2 via qctool
-#   3. Downloads the Eagle hg38 genetic map
-#   4. Runs computeIBSpbwt to produce the IBS neighbors file
-#
-# Usage:
-#   bash   IBS_example.sh          # local run
-#   sbatch IBS_example.sh          # SLURM submission
-#
-# Output: ibs_neighbors_chr6.tsv.gz
-#   Pass to GRiD via compute_haploid_genotypes.ibs_output in your config.
-# =============================================================================
-#SBATCH --job-name=grid_IBS
-#SBATCH --output=logs/IBS_%j.out
-#SBATCH --error=logs/IBS_%j.err
-#SBATCH --time=4:00:00
-#SBATCH --cpus-per-task=16
-#SBATCH --mem=64G
 
 set -euo pipefail
 
-# -----------------------------------------------------------------------
+module load samtools
+
+NUM_NEIGHBORS=200
+FOCAL_BP="" # LPA KIV-2 region center, eg 160,626,361
+while [[ $# -gt 0 ]]; do
+    case $1 in
+        --neighbors)
+            NUM_NEIGHBORS="$2"; shift 2 ;;
+        --focal-bp)
+            FOCAL_BP="$2"; shift 2 ;;
+        -h|--help)
+            echo "Usage: $0 [--neighbors N]"
+            exit 0 ;;
+        *)
+            echo "Unknown argument: $1"
+            exit 1 ;;
+    esac
+done
+
+# Paths and parameters
+WORK_DIR="${WORK_DIR:-$(pwd)}"
+LOG_DIR="$WORK_DIR/logs"
+DATA_DIR="$WORK_DIR/data"
+OUTPUT_DIR="$WORK_DIR/output"
+mkdir -p "$DATA_DIR" "$LOG_DIR" "$OUTPUT_DIR"
+ 
+THREADS="${SLURM_CPUS_PER_TASK:-$(nproc)}"
+
+timestamp() { date '+%Y-%m-%d %H:%M:%S'; }
+log() { echo "[$(timestamp)] $*" | tee -a "$LOG_DIR/IBS.log"; }
+
+download_with_retry() {
+    local url="$1"
+    local out="$2"
+    local attempt
+ 
+    for attempt in 1 2 3 4 5; do
+        if wget -q --tries=1 --timeout=60 -O "$out" "$url"; then
+            return 0
+        fi
+        rm -f "$out"
+        sleep $(( attempt * 3 + RANDOM % 3 ))
+    done
+ 
+    echo "ERROR: failed to download $url after 5 attempts" >&2
+    return 1
+}
+
 # Dependency check
-# -----------------------------------------------------------------------
 MISSING=()
 for cmd in qctool wget samtools; do
     command -v "$cmd" &>/dev/null || MISSING+=("$cmd")
 done
 if [[ ${#MISSING[@]} -gt 0 ]]; then
-    echo "ERROR: missing required tools: ${MISSING[*]}"
-    echo "  qctool:   https://www.well.ox.ac.uk/~gav/qctool_v2/"
-    echo "  samtools: conda install -c bioconda samtools"
+    log "ERROR: missing required tools: ${MISSING[*]}"
+    log "  qctool:   https://www.well.ox.ac.uk/~gav/qctool_v2/"
+    log "  samtools: conda install -c bioconda samtools"
     exit 1
 fi
 
-# -----------------------------------------------------------------------
-# Paths — set WORK_DIR or override individual variables
-# -----------------------------------------------------------------------
-WORK_DIR="${WORK_DIR:-$(pwd)/1000G_grid_run}"     # match 1000G_example.sh
+COMPUTE_IBS="$WORK_DIR/computeIBSpbwt"
+if [[ ! -f "$COMPUTE_IBS" ]]; then
+    log "Downloading computeIBSpbwt binary..."
+    download_with_retry \
+        "https://raw.githubusercontent.com/mhujoel/STRs/main/cpp_files/computeIBSpbwt" \
+        "$COMPUTE_IBS"
+    chmod +x "$COMPUTE_IBS"
+fi 
 
-DATA_DIR="$WORK_DIR/data"
-LOG_DIR="$WORK_DIR/logs"
-mkdir -p "$DATA_DIR" "$LOG_DIR"
-
-COMPUTE_IBS="${COMPUTE_IBS:-$(pwd)/computeIBSpbwt}"   # compiled binary path
-
-# -----------------------------------------------------------------------
 # 1000 Genomes public URLs
-# -----------------------------------------------------------------------
 PHASED_VCF_URL="https://ftp.1000genomes.ebi.ac.uk/vol1/ftp/data_collections/1000G_2504_high_coverage/working/20220422_3202_phased_SNV_INDEL_SV/1kGP_high_coverage_Illumina.chr6.filtered.SNV_INDEL_SV_phased_panel.vcf.gz"
 GENETIC_MAP_URL="https://alkesgroup.broadinstitute.org/Eagle/downloads/tables/genetic_map_hg38_withX.txt.gz"
+REGIONS_FILE_URL="https://raw.githubusercontent.com/caterer-z-t/GRiD/main/files/734_possible_coding_vntr_regions.IBD2R_gt_0.25.uniq.txt"
 
-# -----------------------------------------------------------------------
 # Parameters
-# -----------------------------------------------------------------------
-CHR=6
-FOCAL_BP=160626361       # center of LPA KIV-2 VNTR region (hg38)
-LPA_REGION="chr6:160605062-160647661"
-NUM_NEIGHBORS=200
-THREADS="${SLURM_CPUS_PER_TASK:-$(nproc)}"
+# Fetch static inputs
+if [[ ! -f "$DATA_DIR/regions.txt" ]]; then
+    log "Downloading VNTR regions file..."
+    download_with_retry \
+        "$REGIONS_FILE_URL" \
+        "$DATA_DIR/regions.txt"
+fi
+ 
+read -r CHR START END < <(awk '$7=="LPA" {print $1, $2, $3; exit}' "$DATA_DIR/regions.txt") || true
+if [[ -z "${CHR:-}" || -z "${START:-}" || -z "${END:-}" ]]; then
+    log "ERROR: Could not parse LPA coordinates from regions.txt"
+    exit 1
+fi
+REGION="chr${CHR}:${START}-${END}"
 
 PHASED_VCF="$DATA_DIR/1kGP_chr6_phased.vcf.gz"
 LPA_VCF="$DATA_DIR/1kGP_chr6_LPA_phased.vcf.gz"
@@ -76,51 +99,28 @@ SAMPLE_FILE="$DATA_DIR/1kGP_chr6_LPA_phased.sample"
 GENETIC_MAP="$DATA_DIR/genetic_map_hg38_chr6.txt"
 OUTPUT_FILE="$DATA_DIR/ibs_neighbors_chr6.tsv.gz"
 
-timestamp() { date '+%Y-%m-%d %H:%M:%S'; }
-log() { echo "[$(timestamp)] $*" | tee -a "$LOG_DIR/IBS.log"; }
-
-log "================================================="
-log "  IBS/IBD Neighbor Computation"
-log "  Locus: LPA KIV-2 ($LPA_REGION, hg38)"
-log "  Threads: $THREADS"
-log "================================================="
-
-# Verify computeIBSpbwt binary
-if [[ ! -x "$COMPUTE_IBS" ]]; then
-    echo "ERROR: computeIBSpbwt binary not found or not executable at: $COMPUTE_IBS"
-    echo "  Download source: https://github.com/mhujoel/STRs/blob/main/cpp_files/computeIBSpbwt.cpp"
-    echo "  Then compile and set: export COMPUTE_IBS=/path/to/computeIBSpbwt"
-    exit 1
-fi
-
-# -----------------------------------------------------------------------
-# Phase 1 — Download 1000G phased VCF for chr6
-#
-# The full chr6 phased panel is ~5 GB. We stream only the LPA window
-# into a local subset VCF using tabix (no full download required).
-# -----------------------------------------------------------------------
+# Download 1000G phased VCF for chr6
 if [[ ! -f "$LPA_VCF" ]]; then
     log "Streaming LPA region from 1000G phased VCF..."
 
     # Fetch index alongside to enable remote tabix streaming
-    wget -q -c -O "${PHASED_VCF}.tbi" "${PHASED_VCF_URL}.tbi"
+    download_with_retry \
+        "${PHASED_VCF_URL}.tbi" \
+        "${PHASED_VCF}.tbi"
 
-    # Pull only the LPA window — ~1 MB vs 5 GB for full chr6
-    tabix -h "$PHASED_VCF_URL" "$LPA_REGION" \
+    # Pull only the LPA window
+    tabix -h "$PHASED_VCF_URL" "$REGION" \
         | bgzip > "$LPA_VCF"
     tabix -p vcf "$LPA_VCF"
+
+    rm -f "${PHASED_VCF}.tbi"
 
     log "LPA phased VCF ready: $LPA_VCF"
 else
     log "LPA phased VCF already present — skipping."
 fi
 
-# -----------------------------------------------------------------------
 # Phase 2 — Convert phased VCF → BGEN v1.2
-#
-# qctool outputs BGEN v1.2, layout 2, 16-bit, phased — the format
-# required by computeIBSpbwt.
-# -----------------------------------------------------------------------
 if [[ ! -f "$BGEN_FILE" ]]; then
     log "Converting phased VCF to BGEN v1.2..."
     qctool \
@@ -136,23 +136,18 @@ else
     log "BGEN file already present — skipping."
 fi
 
-# -----------------------------------------------------------------------
-# Phase 3 — Download Eagle genetic map for hg38
-# -----------------------------------------------------------------------
+# Download Eagle genetic map for hg38
 if [[ ! -f "$GENETIC_MAP" ]]; then
     log "Downloading Eagle hg38 genetic map..."
-    wget -q -O - "$GENETIC_MAP_URL" \
-        | gunzip \
-        | awk 'NR==1 || $1=="chr6"' \
-        > "$GENETIC_MAP"
+    download_with_retry \
+        "$GENETIC_MAP_URL" \
+        "$GENETIC_MAP"
     log "Genetic map ready: $GENETIC_MAP"
 else
     log "Genetic map already present — skipping."
 fi
 
-# -----------------------------------------------------------------------
 # Phase 4 — Run computeIBSpbwt
-# -----------------------------------------------------------------------
 log "Computing IBS/IBD neighbors..."
 log "  CHR=$CHR  FOCAL_BP=$FOCAL_BP  NEIGHBORS=$NUM_NEIGHBORS  THREADS=$THREADS"
 
@@ -165,13 +160,3 @@ log "  CHR=$CHR  FOCAL_BP=$FOCAL_BP  NEIGHBORS=$NUM_NEIGHBORS  THREADS=$THREADS"
     "$NUM_NEIGHBORS"\
     "$THREADS"      \
     "$OUTPUT_FILE"
-
-log "================================================="
-log "  Done. IBS neighbors written to:"
-log "    $OUTPUT_FILE"
-log ""
-log "  Add to your GRiD config:"
-log "    compute_haploid_genotypes:"
-log "      run: True"
-log "      ibs_output: \"$OUTPUT_FILE\""
-log "================================================="

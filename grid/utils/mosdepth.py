@@ -53,7 +53,7 @@ def compute_mosdepth(config, console=None):
     files = {
         sample: result
         for sample in samples
-        if (result := find_file(directory_loc, sample, config.get("file_type")))[0] is not None
+        if (result := find_file(directory_loc, sample, config.get("file_type"))) is not None
     }
 
     # Create lock for thread-safe file writing

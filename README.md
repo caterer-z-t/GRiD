@@ -66,7 +66,7 @@ GRiD runs seven sequential steps, each controlled by a `run: True/False` flag in
 | 6 | `compute_dipcn` | Estimate diploid copy number via neighbor normalization | No |
 | 7 | `hi_inference` | Infer haplotype-specific copy numbers via IBD phasing | No* |
 
-$*$ Step 7 requires a Identity By Descent/State output file from [Hujoel 2026 Nature](https://doi.org/10.1038/s41586-025-09886-z) `.cpp` file; for further information and how to obtain this file, please see [IBS/IBD](https://caterer-z-t.github.io/GRiD/IBS_IBD.html) page of our documentation. 
+$*$ Step 7 requires a Identity By Descent/State output file from [Hujoel 2026 Nature](https://doi.org/10.1038/s41586-025-09886-z) `.cpp` file; for further information and how to obtain this file, please see [IBS/IBD](https://caterer-z-t.github.io/GRiD/ibs_ibd.html) page of our documentation. 
 
 For full algorithmic details, see the [Algorithms page](https://caterer-z-t.github.io/GRiD/algorithms.html) of our documentation.
 
@@ -105,7 +105,7 @@ compute_haploid_genotypes:
   n_iters: 100
 ```
 
-See [`grid/example_config.yaml`](./grid/example_config.yaml) for all available options and their defaults.
+See [`grid/example_config.yaml`](https://github.com/caterer-z-t/GRiD/tree/main/grid/example_config.yaml) for all available options and their defaults.
 
 For a full breakdown of every parameter, how to obtain required input files, and configuration tips see the [Getting Started page](https://caterer-z-t.github.io/GRiD/getting_started.html).
 
@@ -113,7 +113,7 @@ For a full breakdown of every parameter, how to obtain required input files, and
 
 ## HPC Usage
 
-For large cohorts on SLURM-based clusters, see [`examples/SOL.sh`](./examples/1000G_example.sh) for an example submission script used on the 1000 Genomes on University of North Carolina's Super Computing Cluster Longleaf.
+For large cohorts on SLURM-based clusters, see [`examples/1000G_example.sh`](https://caterer-z-t.github.io/GRiD/examples/1000G_example.html) for an example submission script used on the 1000 Genomes on University of North Carolina's Super Computing Cluster Longleaf.
 
 ---
 
@@ -132,18 +132,18 @@ If you use GRiD, please cite:
 ```
 
 GRiD builds on methods from:
-- Mukamel et al. (2021) [doi:10.1126/science.abg8635](https://doi.org/10.1126/science.abg8635)
+- Mukamel et al. (2021) [doi:10.1126/science.abg8289](https://doi.org/10.1126/science.abg8289)
 - Hujoel et al. (2026) [doi:10.1038/s41586-025-09886-z](https://doi.org/10.1038/s41586-025-09886-z)
 
 ---
 
 ## License
 
-Released under the [MIT License](./LICENSE).
+Released under the [MIT License](https://github.com/caterer-z-t/GRiD/blob/main/LICENSE).
 
 ## Support
 
 - [Issues](https://github.com/caterer-z-t/GRiD/issues)
 - [Discussions](https://github.com/caterer-z-t/GRiD/discussions)
-- [Contributing](./CONTRIBUTING.md)
-- [Code of Conduct](./CODE_OF_CONDUCT.md)
+- [Contributing](https://caterer-z-t.github.io/GRiD/contributing.html)
+- [Code of Conduct](https://caterer-z-t.github.io/GRiD/code_of_conduct.html)

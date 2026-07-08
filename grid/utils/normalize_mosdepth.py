@@ -157,11 +157,21 @@ def map_mosdepth_files_to_samples(mosdepth_dir: str, samples: list[str]) -> dict
         Dictionary mapping sample IDs to their global.dist file paths
     """
     mosdepth_dir = Path(mosdepth_dir)
-    return {
-        f.stem.split(".")[0]: f
-        for f in mosdepth_dir.glob("*.regions.bed.gz")
-        if f.stem.split(".")[0] in samples
-    }
+    sample_set = set(samples)
+    result = {}
+    for f in mosdepth_dir.glob("*.regions.bed.gz"):
+        # Filename may be "{sample_id}.regions.bed.gz" or
+        # "{sample_id}_{region_name}.regions.bed.gz".
+        # Try progressively shorter underscore-joined prefixes until we
+        # find a match in the sample list.
+        name_part = f.name.split(".")[0]
+        parts = name_part.split("_")
+        for i in range(len(parts), 0, -1):
+            candidate = "_".join(parts[:i])
+            if candidate in sample_set:
+                result[candidate] = f
+                break
+    return result
 
 
 def load_repeat_mask(repeat_bed: str) -> dict[str, set[int]]:

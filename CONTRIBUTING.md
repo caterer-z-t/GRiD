@@ -28,7 +28,7 @@ All types of contributions are encouraged and valued. See the [Table of Contents
 ## Code of Conduct
 
 This project and everyone participating in it is governed by the
-[GRiD Code of Conduct](https://github.com/caterer-z-t/GRiD/blob//CODE_OF_CONDUCT.md).
+[GRiD Code of Conduct](https://caterer-z-t.github.io/GRiD/code_of_conduct.html).
 By participating, you are expected to uphold this code. Please report unacceptable behavior
 to [Zachary Caterer](mailto:ztcaterer@colorado.edu).
 
