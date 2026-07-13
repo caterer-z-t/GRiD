@@ -297,15 +297,22 @@
 <p><strong>Module:</strong> <code class="xref py py-mod docutils literal notranslate"><span class="pre">grid.utils.hi_inference</span></code></p>
 <p>Diploid copy number estimates from Step 4 (denoted IRR — individual repeat ratio)
 cannot be decomposed into per-haplotype contributions without phase information.
-GRiD uses identity-by-descent (IBD) segments to identify haplotype-matched neighbors
-and infers haplotype-specific copy numbers iteratively, following Hujoel et al. (2026).
-For more information on the IBD neighbors file, see <a class="reference internal" href="../ibs_ibd.html"><span class="doc">Computing IBS/IBD Neighbors</span></a>.</p>
+GRiD infers haplotype-specific copy numbers iteratively by identifying
+haplotype-matched neighbors, following Hujoel et al. (2026).</p>
+<p>Two neighbor sources are supported via the <code class="docutils literal notranslate"><span class="pre">method</span></code> config parameter:</p>
+<ul class="simple">
+<li><p><strong>IBS</strong> (<code class="docutils literal notranslate"><span class="pre">method:</span> <span class="pre">&quot;ibs&quot;</span></code>) — neighbors from <code class="docutils literal notranslate"><span class="pre">computeIBSpbwt</span></code> PBWT matching output.
+Each neighbor is weighted equally.</p></li>
+<li><p><strong>IBD</strong> (<code class="docutils literal notranslate"><span class="pre">method:</span> <span class="pre">&quot;ibd&quot;</span></code>) — neighbors from iLASH IBD segment output.
+Set <code class="docutils literal notranslate"><span class="pre">weighted:</span> <span class="pre">True</span></code> to apply a Lorentzian distance+match weight to each segment.</p></li>
+</ul>
+<p>For more information on the neighbor file formats, see <a class="reference internal" href="../ibs_ibd.html"><span class="doc">Computing IBS/IBD Neighbors</span></a>.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>This step is <strong>locus-agnostic</strong> — it operates on diploid copy number estimates
-and a phased IBD neighbors file, with no assumptions about which locus produced
+and a haplotype neighbors file, with no assumptions about which locus produced
 those estimates. It was developed and validated on <em>LPA</em> KIV-2, but can be applied
-to any VNTR locus for which a phased VCF and IBD output are available.</p>
+to any VNTR locus for which phased neighbor data are available.</p>
 </div>
 <section id="notation">
 <h2>Notation<a class="headerlink" href="#notation" title="Link to this heading">¶</a></h2>
@@ -329,17 +336,28 @@ haplotype are excluded from iterative phasing and receive mean-imputed values.</
 </section>
 <section id="iterative-update">
 <h2>Iterative Update<a class="headerlink" href="#iterative-update" title="Link to this heading">¶</a></h2>
-<p>At each iteration <span class="math notranslate nohighlight">\(t\)</span>, the mean haplotype copy number across IBD-matched
-neighbors is computed for each haplotype:</p>
+<p>At each iteration <span class="math notranslate nohighlight">\(t\)</span>, a weighted mean haplotype copy number across
+matched neighbors is computed for each haplotype:</p>
 <div class="math-wrapper docutils container">
 <div class="math notranslate nohighlight">
 \[\bar{h}^{(t)}_{\mathcal{H}_{i,k}} =
-\frac{1}{|\mathcal{H}_{i,k}|}
-\sum_{(j,\, k') \in \mathcal{H}_{i,k}} h^{(t)}_{j,\, k'}\]</div>
+\frac{\displaystyle\sum_{(j,\, k') \in \mathcal{H}_{i,k}} w_{j,k'} \cdot h^{(t)}_{j,\, k'}}
+     {\displaystyle\sum_{(j,\, k') \in \mathcal{H}_{i,k}} w_{j,k'}}\]</div>
 </div>
-<p>where <span class="math notranslate nohighlight">\((j, k')\)</span> denotes haplotype <span class="math notranslate nohighlight">\(k'\)</span> of neighbor <span class="math notranslate nohighlight">\(j\)</span> that
-shares an IBD segment with haplotype <span class="math notranslate nohighlight">\(k\)</span> of individual <span class="math notranslate nohighlight">\(i\)</span>.</p>
-<p>Each haplotype is then updated proportionally, preserving the diploid constraint:</p>
+<p>where <span class="math notranslate nohighlight">\((j, k')\)</span> denotes haplotype <span class="math notranslate nohighlight">\(k'\)</span> of neighbor <span class="math notranslate nohighlight">\(j\)</span> matched
+to haplotype <span class="math notranslate nohighlight">\(k\)</span> of individual <span class="math notranslate nohighlight">\(i\)</span>.</p>
+<p><strong>IBS method:</strong> all weights <span class="math notranslate nohighlight">\(w_{j,k'} = 1\)</span>.</p>
+<p><strong>IBD method (unweighted):</strong> all weights <span class="math notranslate nohighlight">\(w_{j,k'} = 1\)</span>.</p>
+<p><strong>IBD method (weighted):</strong> the weight accounts for segment proximity to the
+target region and IBD match quality:</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[w_{j,k'} = \frac{\lambda}{\delta_{j,k'} + \lambda} \cdot m_{j,k'}\]</div>
+</div>
+<p>where <span class="math notranslate nohighlight">\(\delta_{j,k'}\)</span> is the physical distance (bp) from the IBD segment
+to the target region (0 if overlapping), <span class="math notranslate nohighlight">\(m_{j,k'}\)</span> is the iLASH match
+score, and <span class="math notranslate nohighlight">\(\lambda\)</span> is the <code class="docutils literal notranslate"><span class="pre">weight_scale</span></code> parameter (default 1,000,000 bp).</p>
+<p>Each haplotype is updated proportionally, preserving the diploid constraint:</p>
 <div class="math-wrapper docutils container">
 <div class="math notranslate nohighlight">
 \[h^{(t+1)}_{i,k} =
@@ -347,10 +365,9 @@ shares an IBD segment with haplotype <span class="math notranslate nohighlight">
 \frac{\bar{h}^{(t)}_{\mathcal{H}_{i,k}}}
      {\bar{h}^{(t)}_{\mathcal{H}_{i,1}} + \bar{h}^{(t)}_{\mathcal{H}_{i,2}}}\]</div>
 </div>
-<p>This update redistributes the diploid total between the two haplotypes in
-proportion to how much copy number their IBD neighbors carry. Convergence
-is reached when haplotype values stabilize; in practice the algorithm runs
-for a fixed number of iterations (default: <span class="math notranslate nohighlight">\(T = 100\)</span>).</p>
+<p>This redistributes the diploid total between haplotypes in proportion to their
+neighbors’ copy numbers. In practice the algorithm runs for a fixed number of
+iterations (default: <span class="math notranslate nohighlight">\(T = 100\)</span>).</p>
 </section>
 <section id="mean-imputation-for-unphased-samples">
 <h2>Mean Imputation for Unphased Samples<a class="headerlink" href="#mean-imputation-for-unphased-samples" title="Link to this heading">¶</a></h2>

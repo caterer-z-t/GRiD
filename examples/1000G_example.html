@@ -604,8 +604,8 @@ high-coverage WGS dataset. No login or data access agreement is required.</p>
 <span class="linenos">306</span>
 <span class="linenos">307</span><span class="s">  normalize:</span>
 <span class="linenos">308</span><span class="s">    run: True</span>
-<span class="linenos">309</span><span class="s">    min_depth: 20</span>
-<span class="linenos">310</span><span class="s">    max_depth: 100</span>
+<span class="linenos">309</span><span class="s">    min_depth: 1</span>
+<span class="linenos">310</span><span class="s">    max_depth: 30</span>
 <span class="linenos">311</span><span class="s">    top_frac: 0.1</span>
 <span class="linenos">312</span><span class="s">    output_file_prefix: &quot;mosdepth_normalized&quot;</span>
 <span class="linenos">313</span><span class="s">    repeat_mask_file: &quot;$REPEAT_MASK&quot;</span>
@@ -624,17 +624,18 @@ high-coverage WGS dataset. No login or data access agreement is required.</p>
 <span class="linenos">326</span><span class="s">compute_haploid_genotypes:</span>
 <span class="linenos">327</span><span class="s">  run: $HAPLOID_RUN</span>
 <span class="linenos">328</span><span class="s">  output_file_prefix: &quot;haploid_genotypes&quot;</span>
-<span class="linenos">329</span><span class="s">  ibs_output: &quot;$DATA_DIR/ibs_neighbors_chr6.tsv.gz&quot;</span>
-<span class="linenos">330</span><span class="s">  min_neighbors: 1</span>
-<span class="linenos">331</span><span class="s">  max_neighbors: 10</span>
-<span class="linenos">332</span><span class="s">  n_iters: 100</span>
-<span class="linenos">333</span><span class="s">YAML</span>
-<span class="linenos">334</span>
-<span class="linenos">335</span>log<span class="w"> </span><span class="s2">&quot;Config written to: </span><span class="nv">$CONFIG</span><span class="s2">&quot;</span>
-<span class="linenos">336</span>
-<span class="linenos">337</span><span class="c1"># Phase 5 — Run GRiD</span>
-<span class="linenos">338</span>log<span class="w"> </span><span class="s2">&quot;Running GRiD pipeline...&quot;</span>
-<span class="linenos">339</span>grid<span class="w"> </span>wgs<span class="w"> </span><span class="nv">$CONFIG</span>
+<span class="linenos">329</span><span class="s">  method: &quot;ibs&quot;</span>
+<span class="linenos">330</span><span class="s">  ibs_output: &quot;$DATA_DIR/ibs_neighbors_chr6.tsv.gz&quot;</span>
+<span class="linenos">331</span><span class="s">  min_neighbors: 1</span>
+<span class="linenos">332</span><span class="s">  max_neighbors: 10</span>
+<span class="linenos">333</span><span class="s">  n_iters: 100</span>
+<span class="linenos">334</span><span class="s">YAML</span>
+<span class="linenos">335</span>
+<span class="linenos">336</span>log<span class="w"> </span><span class="s2">&quot;Config written to: </span><span class="nv">$CONFIG</span><span class="s2">&quot;</span>
+<span class="linenos">337</span>
+<span class="linenos">338</span><span class="c1"># Phase 5 — Run GRiD</span>
+<span class="linenos">339</span>log<span class="w"> </span><span class="s2">&quot;Running GRiD pipeline...&quot;</span>
+<span class="linenos">340</span>grid<span class="w"> </span>wgs<span class="w"> </span><span class="nv">$CONFIG</span>
 </pre></div>
 </div>
 <section id="usage">
