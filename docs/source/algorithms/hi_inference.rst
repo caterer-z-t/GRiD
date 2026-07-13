@@ -7,16 +7,24 @@ Haplotype Inference
 
 Diploid copy number estimates from Step 4 (denoted IRR — individual repeat ratio)
 cannot be decomposed into per-haplotype contributions without phase information.
-GRiD uses identity-by-descent (IBD) segments to identify haplotype-matched neighbors
-and infers haplotype-specific copy numbers iteratively, following Hujoel et al. (2026).
-For more information on the IBD neighbors file, see :doc:`../ibs_ibd`.
+GRiD infers haplotype-specific copy numbers iteratively by identifying
+haplotype-matched neighbors, following Hujoel et al. (2026).
+
+Two neighbor sources are supported via the ``method`` config parameter:
+
+- **IBS** (``method: "ibs"``) — neighbors from ``computeIBSpbwt`` PBWT matching output.
+  Each neighbor is weighted equally.
+- **IBD** (``method: "ibd"``) — neighbors from iLASH IBD segment output.
+  Set ``weighted: True`` to apply a Lorentzian distance+match weight to each segment.
+
+For more information on the neighbor file formats, see :doc:`../ibs_ibd`.
 
 .. note::
 
    This step is **locus-agnostic** — it operates on diploid copy number estimates
-   and a phased IBD neighbors file, with no assumptions about which locus produced
+   and a haplotype neighbors file, with no assumptions about which locus produced
    those estimates. It was developed and validated on *LPA* KIV-2, but can be applied
-   to any VNTR locus for which a phased VCF and IBD output are available.
+   to any VNTR locus for which phased neighbor data are available.
 
 Notation
 --------
@@ -44,19 +52,34 @@ haplotype are excluded from iterative phasing and receive mean-imputed values.
 Iterative Update
 ----------------
 
-At each iteration :math:`t`, the mean haplotype copy number across IBD-matched
-neighbors is computed for each haplotype:
+At each iteration :math:`t`, a weighted mean haplotype copy number across
+matched neighbors is computed for each haplotype:
 
 .. math::
 
    \bar{h}^{(t)}_{\mathcal{H}_{i,k}} =
-   \frac{1}{|\mathcal{H}_{i,k}|}
-   \sum_{(j,\, k') \in \mathcal{H}_{i,k}} h^{(t)}_{j,\, k'}
+   \frac{\displaystyle\sum_{(j,\, k') \in \mathcal{H}_{i,k}} w_{j,k'} \cdot h^{(t)}_{j,\, k'}}
+        {\displaystyle\sum_{(j,\, k') \in \mathcal{H}_{i,k}} w_{j,k'}}
 
-where :math:`(j, k')` denotes haplotype :math:`k'` of neighbor :math:`j` that
-shares an IBD segment with haplotype :math:`k` of individual :math:`i`.
+where :math:`(j, k')` denotes haplotype :math:`k'` of neighbor :math:`j` matched
+to haplotype :math:`k` of individual :math:`i`.
 
-Each haplotype is then updated proportionally, preserving the diploid constraint:
+**IBS method:** all weights :math:`w_{j,k'} = 1`.
+
+**IBD method (unweighted):** all weights :math:`w_{j,k'} = 1`.
+
+**IBD method (weighted):** the weight accounts for segment proximity to the
+target region and IBD match quality:
+
+.. math::
+
+   w_{j,k'} = \frac{\lambda}{\delta_{j,k'} + \lambda} \cdot m_{j,k'}
+
+where :math:`\delta_{j,k'}` is the physical distance (bp) from the IBD segment
+to the target region (0 if overlapping), :math:`m_{j,k'}` is the iLASH match
+score, and :math:`\lambda` is the ``weight_scale`` parameter (default 1,000,000 bp).
+
+Each haplotype is updated proportionally, preserving the diploid constraint:
 
 .. math::
 
@@ -65,10 +88,9 @@ Each haplotype is then updated proportionally, preserving the diploid constraint
    \frac{\bar{h}^{(t)}_{\mathcal{H}_{i,k}}}
         {\bar{h}^{(t)}_{\mathcal{H}_{i,1}} + \bar{h}^{(t)}_{\mathcal{H}_{i,2}}}
 
-This update redistributes the diploid total between the two haplotypes in
-proportion to how much copy number their IBD neighbors carry. Convergence
-is reached when haplotype values stabilize; in practice the algorithm runs
-for a fixed number of iterations (default: :math:`T = 100`).
+This redistributes the diploid total between haplotypes in proportion to their
+neighbors' copy numbers. In practice the algorithm runs for a fixed number of
+iterations (default: :math:`T = 100`).
 
 Mean Imputation for Unphased Samples
 --------------------------------------

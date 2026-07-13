@@ -95,15 +95,19 @@ STEP_SCHEMA = [
     },
     # compute_haploid_genotypes
     {
-        "path": ("compute_haploid_genotypes", "phased_vcf"),
+        "path": ("compute_haploid_genotypes", "method"),
         "gate": ("compute_haploid_genotypes",),
-        "required": True,
-        "is_file": True,
+        "default": "'ibs'",
     },
     {
         "path": ("compute_haploid_genotypes", "ibs_output"),
         "gate": ("compute_haploid_genotypes",),
-        "required": True,
+        "default": "None",
+    },
+    {
+        "path": ("compute_haploid_genotypes", "ibd_output"),
+        "gate": ("compute_haploid_genotypes",),
+        "default": "None",
     },
     {
         "path": ("compute_haploid_genotypes", "output_file_prefix"),

@@ -58,7 +58,17 @@ compute_diploid_genotypes:
 compute_haploid_genotypes:
   run: True
   output_file_prefix: "haploid_genotypes"
-  ibs_output: "path/to/ibs_neighbors_chr6.tsv.gz"
+  method: "ibs"          # "ibs" or "ibd"
   min_neighbors: 1
   max_neighbors: 10
   n_iters: 100
+
+  # IBS method: provide computeIBSpbwt output
+  ibs_output: "path/to/ibs_neighbors_chr6.tsv.gz"
+
+  # IBD method: provide iLASH output and filtering thresholds
+  # ibd_output: "path/to/ilash_output.txt"
+  # weighted: False         # True = Lorentzian distance+match weighting
+  # weight_scale: 1000000   # bp half-width for distance weight
+  # min_length: 0.5         # minimum IBD segment length (cM)
+  # min_match: 0.70         # minimum IBD match score

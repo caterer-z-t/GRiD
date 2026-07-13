@@ -318,19 +318,28 @@ Step 5 — ``compute_haploid_genotypes``
 ---------------------------------------
 
 Decomposes diploid CN estimates into haplotype-specific copy numbers using an
-iterative IBD-based phasing algorithm. Requires an IBS neighbors file
-pre-computed by ``computeIBSpbwt``. See :doc:`algorithms/hi_inference` and
-:doc:`ibs_ibd`.
+iterative phasing algorithm. Two neighbor sources are supported via ``method``.
+See :doc:`algorithms/hi_inference` and :doc:`ibs_ibd`.
 
 .. code-block:: yaml
 
    compute_haploid_genotypes:
      run: True
      output_file_prefix: "haploid_genotypes"
-     ibs_output: "path/to/ibs_neighbors_chr6.tsv.gz"
+     method: "ibs"          # "ibs" or "ibd"
      min_neighbors: 1
      max_neighbors: 10
      n_iters: 100
+
+     # IBS method
+     ibs_output: "path/to/ibs_neighbors_chr6.tsv.gz"
+
+     # IBD method
+     # ibd_output: "path/to/ilash_output.txt"
+     # weighted: False
+     # weight_scale: 1000000
+     # min_length: 0.5
+     # min_match: 0.70
 
 .. list-table::
    :header-rows: 1
@@ -342,24 +351,35 @@ pre-computed by ``computeIBSpbwt``. See :doc:`algorithms/hi_inference` and
      - Set ``True`` to run haplotype inference.
    * - ``output_file_prefix``
      - Prefix for the haploid CN output files.
-   * - ``ibs_output``
-     - Path to the IBS/IBD neighbors file produced by ``computeIBSpbwt``.
-       See :doc:`ibs_ibd` for how to generate this file.
+   * - ``method``
+     - Neighbor source: ``"ibs"`` (computeIBSpbwt output) or ``"ibd"`` (iLASH output).
    * - ``min_neighbors``
-     - Minimum number of IBS neighbors required to include a sample.
-       Samples with fewer neighbors are excluded from phasing.
+     - Minimum neighbors required per haplotype. Samples below this threshold
+       are excluded from iterative phasing.
    * - ``max_neighbors``
-     - Maximum number of IBS neighbors used per haplotype per iteration.
-       Controls the breadth of the phasing signal.
+     - Maximum neighbors used per haplotype per iteration.
    * - ``n_iters``
-     - Number of iterations for the haplotype update loop. Convergence is
-       typically reached within 20–50 iterations; ``100`` is a safe default.
+     - Iterations for the update loop. ``100`` is a safe default.
+   * - ``ibs_output``
+     - *(IBS method)* Path to IBS neighbors file from ``computeIBSpbwt``.
+   * - ``ibd_output``
+     - *(IBD method)* Path to iLASH output file.
+   * - ``weighted``
+     - *(IBD method)* If ``True``, weight each IBD segment by distance to the
+       target region and match score (Lorentzian kernel). Default: ``False``.
+   * - ``weight_scale``
+     - *(IBD method, weighted)* Distance half-width in bp for the Lorentzian
+       weight function. Default: ``1000000``.
+   * - ``min_length``
+     - *(IBD method)* Minimum IBD segment length in cM. Default: ``0.5``.
+   * - ``min_match``
+     - *(IBD method)* Minimum iLASH match score. Default: ``0.70``.
 
 .. note::
 
-   ``ibs_output`` is the only required external file for this step. It must be
-   generated before running the pipeline. See :doc:`ibs_ibd` for full instructions
-   and :doc:`examples/IBS_example` for an annotated example script.
+   Either ``ibs_output`` or ``ibd_output`` must be provided depending on the
+   chosen ``method``. See :doc:`ibs_ibd` for file format details and
+   :doc:`examples/IBS_example` for an annotated example script.
 
 ----
 

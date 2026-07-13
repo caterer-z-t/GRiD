@@ -306,8 +306,8 @@ mosdepth:
 
   normalize:
     run: True
-    min_depth: 20
-    max_depth: 100
+    min_depth: 1
+    max_depth: 30
     top_frac: 0.1
     output_file_prefix: "mosdepth_normalized"
     repeat_mask_file: "$REPEAT_MASK"
@@ -326,6 +326,7 @@ compute_diploid_genotypes:
 compute_haploid_genotypes:
   run: $HAPLOID_RUN
   output_file_prefix: "haploid_genotypes"
+  method: "ibs"
   ibs_output: "$DATA_DIR/ibs_neighbors_chr6.tsv.gz"
   min_neighbors: 1
   max_neighbors: 10
