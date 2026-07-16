@@ -183,7 +183,7 @@
           <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
         </button>
       </div>
-      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
         <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
       </label>
     </div>
@@ -286,7 +286,7 @@
               <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
             </button>
           </div>
-          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
             <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
           </label>
         </div>
@@ -298,6 +298,74 @@ iterative IBD-based phasing algorithm. For each sample, haplotype copy numbers
 are updated proportionally to the mean of IBD-matched haplotype neighbors until
 convergence. This step is locus-agnostic — it requires only diploid CN estimates
 and a phased IBD neighbors file.</p>
+<dl class="py function" id="module-grid.utils.hi_inference">
+<dt class="sig sig-object py" id="grid.utils.hi_inference._compute_imp">
+<span class="sig-prename descclassname"><span class="pre">grid.utils.hi_inference.</span></span><span class="sig-name descname"><span class="pre">_compute_imp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">i</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hap_IRRs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hap_nbrs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mean_IRRs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#grid.utils.hi_inference._compute_imp" title="Link to this definition">¶</a></dt>
+<dd><p>Compute imputed haplotype neighbor means for sample i at the final iteration.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="grid.utils.hi_inference._load_ibd_neighbors">
+<span class="sig-prename descclassname"><span class="pre">grid.utils.hi_inference.</span></span><span class="sig-name descname"><span class="pre">_load_ibd_neighbors</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ilash_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">IDtoInd</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">MAX_NBR</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">region_start</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">region_end</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_length</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_match</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.7</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">weighted</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">weight_scale</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000000</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#grid.utils.hi_inference._load_ibd_neighbors" title="Link to this definition">¶</a></dt>
+<dd><p>Load IBD neighbors from iLASH output.</p>
+<dl class="simple">
+<dt>File format (no header, tab-separated):</dt><dd><p>FID1  HAP_ID1  FID2  HAP_ID2  CHR  BP1  BP2  SNP_BP1  SNP_BP2  LENGTH  MATCH</p>
+</dd>
+</dl>
+<p>HAP_ID format: {FID}_{hap} where hap is 0 or 1 (0-indexed).
+LENGTH is in cM. MATCH is the IBD match score.</p>
+<dl class="simple">
+<dt>If weighted=True, each neighbor gets a Lorentzian distance weight:</dt><dd><p>w = (weight_scale / (distance_bp + weight_scale)) * match</p>
+</dd>
+</dl>
+<p>Returns hap_nbrs: list of lists of (neighbor_hap_idx, weight).</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="grid.utils.hi_inference._load_ibs_neighbors">
+<span class="sig-prename descclassname"><span class="pre">grid.utils.hi_inference.</span></span><span class="sig-name descname"><span class="pre">_load_ibs_neighbors</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">neighbors_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">IDtoInd</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">MAX_NBR</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#grid.utils.hi_inference._load_ibs_neighbors" title="Link to this definition">¶</a></dt>
+<dd><p>Load IBS neighbors from computeIBSpbwt output.</p>
+<dl class="simple">
+<dt>File format (header + tab/space-separated rows):</dt><dd><p>ID  hap  nbrInd  cMlen  cMedge  IDnbr  hapNbr</p>
+</dd>
+</dl>
+<p>Haplotypes are 1-indexed (1 or 2).
+Returns hap_nbrs: list of lists of (neighbor_hap_idx, weight=1.0).</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="grid.utils.hi_inference._read_dip_cn_file">
+<span class="sig-prename descclassname"><span class="pre">grid.utils.hi_inference.</span></span><span class="sig-name descname"><span class="pre">_read_dip_cn_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dip_cn_file</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#grid.utils.hi_inference._read_dip_cn_file" title="Link to this definition">¶</a></dt>
+<dd><p>Read diploid CN file with string IDs, skipping non-data rows (e.g. header).</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="grid.utils.hi_inference._run_phasing">
+<span class="sig-prename descclassname"><span class="pre">grid.utils.hi_inference.</span></span><span class="sig-name descname"><span class="pre">_run_phasing</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">IRRs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hap_nbrs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">MIN_NBR</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">N_ITERS</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">console</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#grid.utils.hi_inference._run_phasing" title="Link to this definition">¶</a></dt>
+<dd><p>Iterative haplotype phasing shared by both IBS and IBD methods.</p>
+<p>hap_nbrs[h] is a list of (neighbor_hap_idx, weight).
+Returns (hap_IRRs, mean_IRRs).</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="grid.utils.hi_inference._segment_distance">
+<span class="sig-prename descclassname"><span class="pre">grid.utils.hi_inference.</span></span><span class="sig-name descname"><span class="pre">_segment_distance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bp1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bp2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">region_start</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">region_end</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#grid.utils.hi_inference._segment_distance" title="Link to this definition">¶</a></dt>
+<dd><p>Physical distance from IBD segment [bp1, bp2] to target region. 0 if overlapping.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="grid.utils.hi_inference.hi_inference">
+<span class="sig-prename descclassname"><span class="pre">grid.utils.hi_inference.</span></span><span class="sig-name descname"><span class="pre">hi_inference</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">console</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#grid.utils.hi_inference.hi_inference" title="Link to this definition">¶</a></dt>
+<dd><p>Impute haplotype-specific IRRs from diploid IRRs and haplotype neighbors.</p>
+<p>Supports two methods controlled by <code class="docutils literal notranslate"><span class="pre">method</span></code> in <code class="docutils literal notranslate"><span class="pre">compute_haploid_genotypes</span></code>:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;ibs&quot;</span></code> — uses computeIBSpbwt output (<code class="docutils literal notranslate"><span class="pre">ibs_output</span></code> key required)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;ibd&quot;</span></code> — uses iLASH output (<code class="docutils literal notranslate"><span class="pre">ibd_output</span></code> key required).
+Set <code class="docutils literal notranslate"><span class="pre">weighted:</span> <span class="pre">True</span></code> to apply Lorentzian distance weighting.</p></li>
+</ul>
+<p>Output columns: ID  IRRs  hap1phased  hap2phased  hap1imp  hap2imp</p>
+</dd></dl>
+
 </section>
 
         </article>
@@ -343,8 +411,33 @@ and a phased IBD neighbors file.</p>
         
       </footer>
     </div>
-    <aside class="toc-drawer no-toc">
+    <aside class="toc-drawer">
       
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Haplotype Inference</a><ul>
+<li><a class="reference internal" href="#grid.utils.hi_inference._compute_imp"><code class="docutils literal notranslate"><span class="pre">_compute_imp()</span></code></a></li>
+<li><a class="reference internal" href="#grid.utils.hi_inference._load_ibd_neighbors"><code class="docutils literal notranslate"><span class="pre">_load_ibd_neighbors()</span></code></a></li>
+<li><a class="reference internal" href="#grid.utils.hi_inference._load_ibs_neighbors"><code class="docutils literal notranslate"><span class="pre">_load_ibs_neighbors()</span></code></a></li>
+<li><a class="reference internal" href="#grid.utils.hi_inference._read_dip_cn_file"><code class="docutils literal notranslate"><span class="pre">_read_dip_cn_file()</span></code></a></li>
+<li><a class="reference internal" href="#grid.utils.hi_inference._run_phasing"><code class="docutils literal notranslate"><span class="pre">_run_phasing()</span></code></a></li>
+<li><a class="reference internal" href="#grid.utils.hi_inference._segment_distance"><code class="docutils literal notranslate"><span class="pre">_segment_distance()</span></code></a></li>
+<li><a class="reference internal" href="#grid.utils.hi_inference.hi_inference"><code class="docutils literal notranslate"><span class="pre">hi_inference()</span></code></a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
       
       
     </aside>
