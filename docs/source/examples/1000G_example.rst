@@ -5,7 +5,7 @@ This example demonstrates Stage 3 of the GRiD workflow: dynamically generating `
 
 The full workflow comprises three sequential modular scripts:
 
-1. :doc:`prep_data_example`: Downloads inputs, streams CRAM slices, and writes locus coordinates.
+1. :doc:`Prep_data`: Downloads inputs, streams CRAM slices, and writes locus coordinates.
 2. :doc:`IBS_example`: *(Optional)* Computes IBS neighbors for haploid copy number estimation.
 3. **GRiD Execution:** Generates configuration and runs GRiD steps (indexing, read counting, depth normalization, and genotype calling).
 
