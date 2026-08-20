@@ -1,7 +1,7 @@
 import pytest
 from pathlib import Path
 
-from grid.utils.hi_inference import read_dip_cn_file, read_neighbors_file
+from grid.utils.hi_inference import _read_dip_cn_file, read_neighbors_file
 
 
 # --- read_dip_cn_file ---
@@ -9,7 +9,7 @@ from grid.utils.hi_inference import read_dip_cn_file, read_neighbors_file
 def test_read_dip_cn_file_basic(tmp_path):
     f = tmp_path / "dipcn.tsv"
     f.write_text("1001 2.5\n1002 3.0\n1003 1.8\n")
-    IRRs, IDs, IDtoInd = read_dip_cn_file(str(f), [], [], {})
+    IRRs, IDs, IDtoInd = _read_dip_cn_file(str(f), [], [], {})
     assert IDs == [1001, 1002, 1003]
     assert IRRs == pytest.approx([2.5, 3.0, 1.8])
     assert IDtoInd[1001] == 0
@@ -18,13 +18,13 @@ def test_read_dip_cn_file_basic(tmp_path):
 def test_read_dip_cn_file_skips_blank_lines(tmp_path):
     f = tmp_path / "dipcn.tsv"
     f.write_text("1001 2.5\n\n1002 3.0\n")
-    IRRs, IDs, _ = read_dip_cn_file(str(f), [], [], {})
+    IRRs, IDs, _ = _read_dip_cn_file(str(f), [], [], {})
     assert len(IDs) == 2
 
 def test_read_dip_cn_file_empty(tmp_path):
     f = tmp_path / "dipcn.tsv"
     f.write_text("")
-    IRRs, IDs, IDtoInd = read_dip_cn_file(str(f), [], [], {})
+    IRRs, IDs, IDtoInd = _read_dip_cn_file(str(f), [], [], {})
     assert IDs == []
     assert IRRs == []
 
