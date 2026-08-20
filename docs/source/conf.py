@@ -18,7 +18,10 @@ _build_sphinx_paper()
 try:
     _ver = _version("GRiD")
 except PackageNotFoundError:
-    _ver = "unknown"
+    _ver = "1.0.0"
+
+if _ver != "1.0.0":
+    _ver = "1.0.0"
 
 project = 'GRiD'
 copyright = '2026, Zachary Caterer'
