@@ -40,9 +40,7 @@ def print_banner():
     ║                      Version {version}                        ║
     ║                                                           ║
     ╚═══════════════════════════════════════════════════════════╝
-    """.format(
-        version=__version__
-    )
+    """.format(version=__version__)
     log(console, banner, style="banner")
 
 
