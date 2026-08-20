@@ -1,45 +1,36 @@
 1000 Genomes Full Pipeline Example
-=====================================
+==================================
 
-This example runs the complete GRiD pipeline (from raw CRAMs through diploid
-copy number estimation) using the publicly available 1000 Genomes Project
-high-coverage WGS dataset. No login or data access agreement is required.
+This example demonstrates Stage 3 of the GRiD workflow: dynamically generating ``config.yaml`` and running the complete GRiD pipeline on the 1000 Genomes Project dataset for the *LPA* KIV-2 locus (GRCh38).
 
-.. literalinclude:: ../../../examples/1000G_example.sh
+The full workflow comprises three sequential modular scripts:
+
+1. :doc:`prep_data_example`: Downloads inputs, streams CRAM slices, and writes locus coordinates.
+2. :doc:`IBS_example`: *(Optional)* Computes IBS neighbors for haploid copy number estimation.
+3. **GRiD Execution:** Generates configuration and runs GRiD steps (indexing, read counting, depth normalization, and genotype calling).
+
+Stage 3 Execution Script
+------------------------
+
+``03-run-grid.sh`` checks for the presence of ``data/ibs_neighbors_chr6.tsv.gz`` from Stage 2. If present, haploid estimation (``compute_haploid_genotypes.run``) is set to ``True``. Otherwise, it falls back to diploid-only mode.
+
+.. literalinclude:: ../../../examples/03-run-grid.sh
    :language: bash
    :linenos:
+   :caption: 03-run-grid.sh — Stage 3: Config generation and pipeline execution
 
-Usage
------
+Full Pipeline Usage
+-------------------
 
-Run all samples from a single superpopulation:
-
-.. code-block:: bash
-
-   bash examples/1000G_example.sh --pop EUR
-
-Limit to 50 samples for a quick test:
+Run all three stages sequentially from your working directory:
 
 .. code-block:: bash
 
-   bash examples/1000G_example.sh --pop EUR --n 50
+   # Step 1: Prepare data and stream CRAMs
+   sbatch examples/01-prep-data.sh
 
-Submit to SLURM:
+   # Step 2: (Optional) Compute IBS neighbors for haploid CN
+   sbatch examples/02-run-ibs.sh
 
-.. code-block:: bash
-
-   sbatch --cpus-per-task=16 --mem=32G examples/1000G_example.sh --pop EUR --n 100
-
-Override the working directory:
-
-.. code-block:: bash
-
-   WORK_DIR=/scratch/my_run bash examples/1000G_example.sh --pop AFR
-
-Next Step — Haplotype Inference
----------------------------------
-
-The pipeline above estimates **diploid** copy number. To decompose into
-haplotype-specific copy numbers, you need an IBS neighbors file first.
-See :doc:`IBS_example` for instructions, then re-run the pipeline with
-``compute_haploid_genotypes.run: True`` in the generated config.
+   # Step 3: Generate config and run GRiD
+   sbatch examples/03-run-grid.sh

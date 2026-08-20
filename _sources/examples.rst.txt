@@ -9,5 +9,6 @@ Step 5 (haplotype inference).
    :maxdepth: 1
    :caption: Examples
 
+   examples/Prep_data
    examples/1000G_example
    examples/IBS_example
