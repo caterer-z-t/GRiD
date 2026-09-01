@@ -21,6 +21,7 @@ except PackageNotFoundError:
     _ver = "1.0.0"
 
 if _ver != "1.0.0":
+    print(f"Building documentation for GRiD version {_ver}")
     _ver = "1.0.0"
 
 project = 'GRiD'

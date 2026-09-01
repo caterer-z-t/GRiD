@@ -68,6 +68,13 @@ playground/
 .Rhistory
 docs/source/paper_sphinx.md
 
+# === Ignore claude files ===
 .claude/
+
+# === Ignore JOSS paper files ===
 paper/*
+jats/*
+
+# === Ignore coverage files ===
 .coverage
+
