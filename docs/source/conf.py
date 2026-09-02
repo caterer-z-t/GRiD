@@ -11,10 +11,6 @@ import os
 import sys
 from importlib.metadata import version as _version, PackageNotFoundError
 
-sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from build_sphinx_md import _build_sphinx_paper
-
-_build_sphinx_paper()
 try:
     _ver = _version("GRiD")
 except PackageNotFoundError:
@@ -52,7 +48,7 @@ source_suffix = {
     '.md': 'markdown'
 }
 
-bibtex_bibfiles = ["../../paper.bib"]
+# bibtex_bibfiles = ["../../paper.bib"]
 
 # -- Paths ---------------------------------------------------------------
 import os
