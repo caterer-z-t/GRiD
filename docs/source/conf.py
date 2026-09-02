@@ -48,7 +48,7 @@ source_suffix = {
     '.md': 'markdown'
 }
 
-# bibtex_bibfiles = ["../../paper.bib"]
+bibtex_bibfiles = ["../../paper.bib"]
 
 # -- Paths ---------------------------------------------------------------
 import os
