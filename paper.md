@@ -107,7 +107,7 @@ GRiD provides a reproducible, open-source implementation of a previously custom 
 
 The mathematical framework implemented in GRiD follows previously published methods. Coverage estimation, normalization, and diploid copy-number estimation follow Mukamel et al. [@mukamel2021], while haplotype-specific copy-number inference follows Hujoel et al. [@hujoel2026]. The equations below describe their implementation within GRiD; detailed methodological derivations and justification are provided in the original publications.
 
-**Coverage estimation.** Following Mukamel et al. [@mukamel2021], weighted mean depth across the VNTR region from mosdepth [@mosdepth] bins is computed as:
+**Coverage estimation.** Following Mukamel et al. [@mukamel2021, Supplemental Materials, Section 2], weighted mean depth across the VNTR region from mosdepth [@mosdepth] bins is computed as:
 
 $$
 \text{Coverage} =
@@ -123,7 +123,7 @@ $$
 
 where $R$ is the set of bins overlapping the region $[s,e]$, $\bar{C}_i$ is the mean depth of bin $i$, and $r_{i,s}$ and $r_{i,e}$ are the bin boundaries.
 
-**Normalization.** Following Mukamel et al. [@mukamel2021], let $D \in \mathbb{R}^{N \times M}$ be the depth matrix for $N$ individuals across $M$ genomic bins. Within-individual normalization gives $D^{(1)}_{ij} = D_{ij} / \bar{D}_i$, where $\bar{D}_i$ is the individual mean. Across-individual normalization then yields:
+**Normalization.** Following Mukamel et al. [@mukamel2021, Supplemental Materials, Section 2], let $D \in \mathbb{R}^{N \times M}$ be the depth matrix for $N$ individuals across $M$ genomic bins. Within-individual normalization gives $D^{(1)}_{ij} = D_{ij} / \bar{D}_i$, where $\bar{D}_i$ is the individual mean. Across-individual normalization then yields:
 
 $$
 D^{\mathrm{norm}}_{ij} =
@@ -132,7 +132,7 @@ $$
 
 where $\mu_j$ is the population mean of $D^{(1)}_{\cdot j}$. Regions are filtered by a variance ratio $\sigma_j^2 / \mu_j$, and the top fraction of high-variance regions are retained for neighbor computation.
 
-**Neighbor-normalized diploid copy number.** GRiD uses nearest-neighbor relationships in the normalized depth space to provide a local reference for copy-number estimation. Following the approach of Mukamel et al. [@mukamel2021], for individual $i$ with read count $r_i$ and depth scale $s_i$, the diploid copy number estimate is:
+**Neighbor-normalized diploid copy number.** GRiD uses the coverage-profile normalization approach described by Mukamel et al. [@mukamel2021, Supplementary Text, Section 2]. For each individual, VNTR read depth is normalized relative to a set of samples with similar genome-wide coverage profiles. GRiD identifies these reference samples using nearest-neighbor search in the normalized depth space, implemented with scikit-learn [@pedregosa2011]. The resulting diploid copy-number estimate for individual $i$ is:
 
 $$
 \widehat{\mathrm{dipCN}}_i =
@@ -140,9 +140,9 @@ $$
 {\frac{1}{|N_i|}\sum_{j \in N_i} r_j/s_j}
 $$
 
-where $N_i$ is the set of nearest neighbors identified from the normalized depth space using the nearest-neighbor implementation provided by scikit-learn [@pedregosa2011].
+where $N_i$ is the set of nearest-neighbor samples for individual $i$, and $r_i/s_i$ represents the individual's VNTR read count normalized by sequencing depth.
 
-**Haplotype inference.** Haplotype-specific copy-number inference follows the approach of Hujoel et al. [@hujoel2026]. This step uses identity-by-descent (IBD) relationships between samples to partition the diploid copy-number estimate into haplotype-specific estimates. For each individual, the two haplotype estimates are iteratively updated according to the copy numbers of IBD-matched haplotypes:
+**Haplotype inference.** Haplotype-specific copy-number inference follows the iterative phasing approach described by Hujoel et al. [@hujoel2026, Supplemental Materials, Section 5.3]. In this framework, diploid VNTR copy-number estimates are partitioned between an individual’s two haplotypes using information from IBD-matched haplotypes, with haplotype-specific estimates updated iteratively. GRiD formalizes this procedure as:
 
 $$
 h_{i,k}^{(t+1)} =
@@ -152,7 +152,7 @@ h_{i,k}^{(t+1)} =
 {\bar{h}_{N_{i,1}}^{(t)} + \bar{h}_{N_{i,2}}^{(t)}}
 $$
 
-where $\bar{h}_{N_{i,k}}^{(t)}$ is the mean haplotype copy number of IBD neighbors on haplotype $k$ at iteration $t$. At each iteration, the relative copy numbers of IBD-matched haplotypes determine the allocation of the individual's diploid copy-number estimate between the two haplotypes. The estimates are iteratively updated to incorporate information from IBD-related haplotypes.
+where $h_{i,k}^{(t)}$ is the estimated copy number of haplotype $k$ for individual $i$ at iteration $t$, and $\bar{h}{N{i,k}}^{(t)}$ is the mean haplotype copy number among IBD-matched reference haplotypes on haplotype $k$. At each iteration, the relative copy numbers of the IBD-matched haplotypes determine how the individual's diploid estimate is allocated between its two haplotypes. The estimates are then updated iteratively until convergence.
 
 # AI Usage Disclosure
 
