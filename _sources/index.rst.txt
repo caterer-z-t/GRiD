@@ -32,12 +32,6 @@ Developed for and validated on the KIV-2 VNTR in the *LPA* gene; the core depth-
    code_of_conduct.rst
 
 .. toctree::
-   :maxdepth: 1
-   :caption: Paper
-
-   paper.rst
-
-.. toctree::
    :maxdepth: 2
    :caption: API Reference
 
