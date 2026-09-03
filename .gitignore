@@ -78,3 +78,6 @@ jats/*
 # === Ignore coverage files ===
 .coverage
 
+# === Ignore Archive files ===
+GRiD.zip
+# command: git archive --format=zip --output=GRiD.zip HEAD
