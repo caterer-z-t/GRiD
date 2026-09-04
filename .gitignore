@@ -87,4 +87,4 @@ jats/*
 
 # === Ignore Archive files ===
 GRiD.zip
-# command: git archive --format=zip --output=GRiD.zip HEAD
+# git archive --format=zip --output=GRiD.zip HEAD

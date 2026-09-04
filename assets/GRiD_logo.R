@@ -10,6 +10,7 @@ library(hexSticker)
 library(showtext)
 library(ggplot2)
 library(rstudioapi)
+library(magick)
 
 ## Loading Google fonts
 font_add_google("Gochi Hand", "gochi")
@@ -17,30 +18,37 @@ showtext_auto()
 
 # Get the script directory
 outdir <- dirname(rstudioapi::getSourceEditorContext()$path)
-
-# Path to your background image in the same directory
 bkg_img <- file.path(outdir, "grid_bkg.png")
+print_file <- file.path(outdir, "grid_1200x1200.png")
+web_file <- file.path(outdir, "grid_600x600.png")
 
-## Generate sticker using grid_bkg.png as the image
-sticker(
+# Common sticker parameters
+common_params <- list(
   subplot = bkg_img,
   package = "GRiD",
-  p_size = 60,
   p_family = "gochi",
   p_color = "#FFFFFF",
-  p_y = .4, # Text positioning above background image
+  p_y = 0.4,
   s_x = 1.0,
   s_y = 1.2,
-  s_width = 0.85, # Adjusted width/height to fit cleanly inside hex
+  s_width = 0.85,
   s_height = 1,
   h_fill = "#F47B7B",
   h_color = "#F47B7B",
   h_size = 0,
-  # url = "Genomic Repeat inference from Depth",
-  # u_size = 9.3,
-  # u_color = "#FFFFFF",
-  # u_family = "gochi",
-  # u_y = 0.1, # Footer text positioning
-  filename = file.path(outdir, "grid_logo.png"),
-  dpi = 600
+  asp = 1 # Ensures exact 1:1 square aspect ratio
 )
+
+# 1. Printable image (1200 x 1200 px) -> 2 inches at 600 DPI
+do.call(sticker, c(common_params, list(
+  p_size = 60,
+  filename = file.path(outdir, "grid_1200x1200.png"),
+  out_width = 2,
+  out_height = 2,
+  dpi = 600
+)))
+
+# 2. Website image (600 x 600 px) -> 1 inch at 600 DPI
+img <- image_read(print_file)
+img_resized <- image_resize(img, "600x600")
+image_write(img_resized, path = web_file)
