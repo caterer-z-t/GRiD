@@ -39,16 +39,37 @@ common_params <- list(
   asp = 1 # Ensures exact 1:1 square aspect ratio
 )
 
-# 1. Printable image (1200 x 1200 px) -> 2 inches at 600 DPI
+# 1. Printable image (1200 x 1200 px)
 do.call(sticker, c(common_params, list(
   p_size = 60,
-  filename = file.path(outdir, "grid_1200x1200.png"),
+  filename = print_file,
   out_width = 2,
   out_height = 2,
   dpi = 600
 )))
 
-# 2. Website image (600 x 600 px) -> 1 inch at 600 DPI
-img <- image_read(print_file)
-img_resized <- image_resize(img, "600x600")
-image_write(img_resized, path = web_file)
+# Make absolutely sure the printable image is 1200 x 1200
+img_print <- image_read(print_file)
+
+img_print <- image_extent(
+  img_print,
+  geometry = "1200x1200",
+  gravity = "center",
+  color = "none"
+)
+
+image_write(img_print, path = print_file)
+
+# 2. Website image (600 x 600 px)
+img_web <- image_read(print_file)
+
+img_web <- image_resize(img_web, "600x600")
+
+img_web <- image_extent(
+  img_web,
+  geometry = "600x600",
+  gravity = "center",
+  color = "none"
+)
+
+image_write(img_web, path = web_file)
