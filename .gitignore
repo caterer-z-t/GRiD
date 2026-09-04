@@ -75,6 +75,13 @@ docs/source/paper_sphinx.md
 paper/*
 jats/*
 
+# docker run --rm \
+#     --platform linux/amd64 \
+#     --volume $PWD:/data \
+#     --user $(id -u):$(id -g) \
+#     --env JOURNAL=joss \
+#     openjournals/inara
+
 # === Ignore coverage files ===
 .coverage
 

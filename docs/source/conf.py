@@ -80,13 +80,13 @@ html_favicon = "_static/favicon.ico"
 
 html_theme_options = {
     "light_css_variables": {
-        "color-brand-primary": "#D91E36",
-        "color-brand-content": "#D91E36",
-        "color-link": "#D91E36",
+        "color-brand-primary": "#F47B7B",
+        "color-brand-content": "#F47B7B",
+        "color-link": "#F47B7B",
     },
     "dark_css_variables": {
-        "color-brand-primary": "#D91E36",
-        "color-brand-content": "#D91E36",
-        "color-link": "#D91E36",
+        "color-brand-primary": "#F47B7B",
+        "color-brand-content": "#F47B7B",
+        "color-link": "#F47B7B",
     },
 }
