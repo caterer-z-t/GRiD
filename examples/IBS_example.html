@@ -360,99 +360,107 @@
 <span class="linenos"> 64</span>
 <span class="linenos"> 65</span><span class="k">if</span><span class="w"> </span>!<span class="w"> </span><span class="nb">command</span><span class="w"> </span>-v<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$WORK_DIR</span><span class="s2">/qctool/qctool&quot;</span><span class="w"> </span><span class="p">&amp;</span>&gt;<span class="w"> </span>/dev/null<span class="p">;</span><span class="w"> </span><span class="k">then</span>
 <span class="linenos"> 66</span><span class="w">    </span>log<span class="w"> </span><span class="s2">&quot;Installing qctool...&quot;</span>
-<span class="linenos"> 67</span><span class="w">    </span>download_with_retry<span class="w"> </span><span class="se">\</span>
-<span class="linenos"> 68</span><span class="w">        </span><span class="s2">&quot;https://www.well.ox.ac.uk/~gav/resources/qctool_v2.2.0-CentOS_Linux7.8.2003-x86_64.tgz&quot;</span><span class="w"> </span><span class="se">\</span>
-<span class="linenos"> 69</span><span class="w">        </span><span class="s2">&quot;</span><span class="nv">$WORK_DIR</span><span class="s2">/qctool.tgz&quot;</span>
-<span class="linenos"> 70</span><span class="w">    </span>tar<span class="w"> </span>-xzf<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$WORK_DIR</span><span class="s2">/qctool.tgz&quot;</span><span class="w"> </span>-C<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$WORK_DIR</span><span class="s2">&quot;</span>
-<span class="linenos"> 71</span><span class="w">    </span>mv<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$WORK_DIR</span><span class="s2">/qctool_v2.2.0-CentOS Linux7.8.2003-x86_64&quot;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$WORK_DIR</span><span class="s2">/qctool&quot;</span>
-<span class="linenos"> 72</span><span class="w">    </span>rm<span class="w"> </span>-f<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$WORK_DIR</span><span class="s2">/qctool.tgz&quot;</span>
-<span class="linenos"> 73</span><span class="k">fi</span>
-<span class="linenos"> 74</span>
-<span class="linenos"> 75</span><span class="nv">MISSING</span><span class="o">=()</span>
-<span class="linenos"> 76</span><span class="k">for</span><span class="w"> </span>cmd<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$WORK_DIR</span><span class="s2">/qctool/qctool&quot;</span><span class="w"> </span>wget<span class="w"> </span>samtools<span class="p">;</span><span class="w"> </span><span class="k">do</span>
-<span class="linenos"> 77</span><span class="w">    </span><span class="nb">command</span><span class="w"> </span>-v<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$cmd</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">&amp;</span>&gt;/dev/null<span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nv">MISSING</span><span class="o">+=(</span><span class="s2">&quot;</span><span class="nv">$cmd</span><span class="s2">&quot;</span><span class="o">)</span>
-<span class="linenos"> 78</span><span class="k">done</span>
-<span class="linenos"> 79</span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="si">${#</span><span class="nv">MISSING</span><span class="p">[@]</span><span class="si">}</span><span class="w"> </span>-gt<span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
-<span class="linenos"> 80</span><span class="w">    </span>log<span class="w"> </span><span class="s2">&quot;ERROR: missing required tools: </span><span class="si">${</span><span class="nv">MISSING</span><span class="p">[*]</span><span class="si">}</span><span class="s2">&quot;</span>
-<span class="linenos"> 81</span><span class="w">    </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span>
-<span class="linenos"> 82</span><span class="k">fi</span>
-<span class="linenos"> 83</span>
-<span class="linenos"> 84</span><span class="nv">COMPUTE_IBS</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$WORK_DIR</span><span class="s2">/computeIBSpbwt&quot;</span>
-<span class="linenos"> 85</span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span>!<span class="w"> </span>-f<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$COMPUTE_IBS</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
-<span class="linenos"> 86</span><span class="w">    </span>log<span class="w"> </span><span class="s2">&quot;Downloading computeIBSpbwt binary...&quot;</span>
-<span class="linenos"> 87</span><span class="w">    </span>download_with_retry<span class="w"> </span><span class="se">\</span>
-<span class="linenos"> 88</span><span class="w">        </span><span class="s2">&quot;https://raw.githubusercontent.com/mhujoel/STRs/main/cpp_files/computeIBSpbwt&quot;</span><span class="w"> </span><span class="se">\</span>
-<span class="linenos"> 89</span><span class="w">        </span><span class="s2">&quot;</span><span class="nv">$COMPUTE_IBS</span><span class="s2">&quot;</span>
-<span class="linenos"> 90</span><span class="w">    </span>chmod<span class="w"> </span>+x<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$COMPUTE_IBS</span><span class="s2">&quot;</span>
-<span class="linenos"> 91</span><span class="k">fi</span>
-<span class="linenos"> 92</span>
-<span class="linenos"> 93</span><span class="nv">PHASED_VCF_URL</span><span class="o">=</span><span class="s2">&quot;https://ftp.1000genomes.ebi.ac.uk/vol1/ftp/data_collections/1000G_2504_high_coverage/working/20220422_3202_phased_SNV_INDEL_SV/1kGP_high_coverage_Illumina.chr</span><span class="si">${</span><span class="nv">CHR</span><span class="si">}</span><span class="s2">.filtered.SNV_INDEL_SV_phased_panel.vcf.gz&quot;</span>
-<span class="linenos"> 94</span><span class="nv">GENETIC_MAP_URL</span><span class="o">=</span><span class="s2">&quot;https://alkesgroup.broadinstitute.org/Eagle/downloads/tables/genetic_map_hg38_withX.txt.gz&quot;</span>
-<span class="linenos"> 95</span>
-<span class="linenos"> 96</span><span class="nv">LPA_VCF</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$DATA_DIR</span><span class="s2">/1kGP_chr</span><span class="si">${</span><span class="nv">CHR</span><span class="si">}</span><span class="s2">_LPA_phased.vcf.gz&quot;</span>
-<span class="linenos"> 97</span><span class="nv">BGEN_FILE</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$DATA_DIR</span><span class="s2">/1kGP_chr</span><span class="si">${</span><span class="nv">CHR</span><span class="si">}</span><span class="s2">_LPA_phased.bgen&quot;</span>
-<span class="linenos"> 98</span><span class="nv">SAMPLE_FILE</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$DATA_DIR</span><span class="s2">/1kGP_chr</span><span class="si">${</span><span class="nv">CHR</span><span class="si">}</span><span class="s2">_LPA_phased.sample&quot;</span>
-<span class="linenos"> 99</span><span class="nv">GENETIC_MAP</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$DATA_DIR</span><span class="s2">/genetic_map_hg38_chr</span><span class="si">${</span><span class="nv">CHR</span><span class="si">}</span><span class="s2">.txt&quot;</span>
-<span class="linenos">100</span><span class="nv">OUTPUT_FILE</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$DATA_DIR</span><span class="s2">/ibs_neighbors_chr</span><span class="si">${</span><span class="nv">CHR</span><span class="si">}</span><span class="s2">.tsv.gz&quot;</span>
-<span class="linenos">101</span>
-<span class="linenos">102</span><span class="c1"># --- Stream LPA region from the 1000G phased VCF ---</span>
-<span class="linenos">103</span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span>!<span class="w"> </span>-f<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$LPA_VCF</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
-<span class="linenos">104</span><span class="w">    </span>log<span class="w"> </span><span class="s2">&quot;Streaming LPA region from 1000G phased VCF...&quot;</span>
-<span class="linenos">105</span><span class="w">    </span>tabix<span class="w"> </span>-h<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$PHASED_VCF_URL</span><span class="s2">&quot;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$REGION</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>bgzip<span class="w"> </span>&gt;<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$LPA_VCF</span><span class="s2">&quot;</span>
-<span class="linenos">106</span><span class="w">    </span>tabix<span class="w"> </span>-p<span class="w"> </span>vcf<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$LPA_VCF</span><span class="s2">&quot;</span>
-<span class="linenos">107</span><span class="w">    </span>find<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$WORK_DIR</span><span class="s2">&quot;</span><span class="w"> </span>-maxdepth<span class="w"> </span><span class="m">1</span><span class="w"> </span>-name<span class="w"> </span><span class="s2">&quot;*.tbi&quot;</span><span class="w"> </span>!<span class="w"> </span>-path<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">LPA_VCF</span><span class="si">}</span><span class="s2">.tbi&quot;</span><span class="w"> </span>-delete
-<span class="linenos">108</span><span class="w">    </span>log<span class="w"> </span><span class="s2">&quot;LPA phased VCF ready: </span><span class="nv">$LPA_VCF</span><span class="s2">&quot;</span>
-<span class="linenos">109</span><span class="k">else</span>
-<span class="linenos">110</span><span class="w">    </span>log<span class="w"> </span><span class="s2">&quot;LPA phased VCF already present — skipping.&quot;</span>
-<span class="linenos">111</span><span class="k">fi</span>
-<span class="linenos">112</span>
-<span class="linenos">113</span><span class="c1"># --- Convert phased VCF -&gt; BGEN v1.2 ---</span>
-<span class="linenos">114</span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span>!<span class="w"> </span>-f<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$BGEN_FILE</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
-<span class="linenos">115</span><span class="w">    </span>log<span class="w"> </span><span class="s2">&quot;Converting phased VCF to BGEN v1.2...&quot;</span>
-<span class="linenos">116</span><span class="w">    </span><span class="s2">&quot;</span><span class="nv">$WORK_DIR</span><span class="s2">/qctool/qctool&quot;</span><span class="w"> </span><span class="se">\</span>
-<span class="linenos">117</span><span class="w">        </span>-g<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$LPA_VCF</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
-<span class="linenos">118</span><span class="w">        </span>-og<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$BGEN_FILE</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
-<span class="linenos">119</span><span class="w">        </span>-os<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$SAMPLE_FILE</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
-<span class="linenos">120</span><span class="w">        </span>-ofiletype<span class="w"> </span>bgen_v1.2<span class="w"> </span><span class="se">\</span>
-<span class="linenos">121</span><span class="w">        </span>-bgen-bits<span class="w"> </span><span class="m">16</span><span class="w"> </span><span class="se">\</span>
-<span class="linenos">122</span><span class="w">        </span>-bgen-permitted-input-rounding-error<span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="se">\</span>
-<span class="linenos">123</span><span class="w">        </span>&gt;&gt;<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$LOG_DIR</span><span class="s2">/qctool.log&quot;</span><span class="w"> </span><span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span>
-<span class="linenos">124</span><span class="w">    </span>log<span class="w"> </span><span class="s2">&quot;BGEN file ready: </span><span class="nv">$BGEN_FILE</span><span class="s2">&quot;</span>
-<span class="linenos">125</span><span class="k">else</span>
-<span class="linenos">126</span><span class="w">    </span>log<span class="w"> </span><span class="s2">&quot;BGEN file already present — skipping.&quot;</span>
-<span class="linenos">127</span><span class="k">fi</span>
-<span class="linenos">128</span>
-<span class="linenos">129</span><span class="c1"># --- Download + decompress + filter Eagle genetic map ---</span>
-<span class="linenos">130</span><span class="c1"># The map&#39;s chrom column is bare (e.g. &quot;6&quot;), not &quot;chr6&quot; — filtering on</span>
-<span class="linenos">131</span><span class="c1"># &quot;chr${CHR}&quot; here would silently match nothing and produce a header-only</span>
-<span class="linenos">132</span><span class="c1"># file, so this must stay as the bare chromosome number.</span>
-<span class="linenos">133</span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span>!<span class="w"> </span>-f<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$GENETIC_MAP</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
-<span class="linenos">134</span><span class="w">    </span>log<span class="w"> </span><span class="s2">&quot;Downloading Eagle hg38 genetic map...&quot;</span>
-<span class="linenos">135</span><span class="w">    </span>wget<span class="w"> </span>-q<span class="w"> </span>-O<span class="w"> </span>-<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$GENETIC_MAP_URL</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
-<span class="linenos">136</span><span class="w">        </span><span class="p">|</span><span class="w"> </span>gunzip<span class="w"> </span><span class="se">\</span>
-<span class="linenos">137</span><span class="w">        </span><span class="p">|</span><span class="w"> </span>awk<span class="w"> </span>-v<span class="w"> </span><span class="nv">c</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">CHR</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="s1">&#39;NR==1 || $1==c&#39;</span><span class="w"> </span><span class="se">\</span>
-<span class="linenos">138</span><span class="w">        </span>&gt;<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$GENETIC_MAP</span><span class="s2">&quot;</span>
-<span class="linenos">139</span><span class="w">    </span>log<span class="w"> </span><span class="s2">&quot;Genetic map ready: </span><span class="nv">$GENETIC_MAP</span><span class="s2">&quot;</span>
-<span class="linenos">140</span><span class="k">else</span>
-<span class="linenos">141</span><span class="w">    </span>log<span class="w"> </span><span class="s2">&quot;Genetic map already present — skipping.&quot;</span>
-<span class="linenos">142</span><span class="k">fi</span>
-<span class="linenos">143</span>
-<span class="linenos">144</span><span class="c1"># --- Run computeIBSpbwt ---</span>
-<span class="linenos">145</span>log<span class="w"> </span><span class="s2">&quot;Computing IBS neighbors...&quot;</span>
-<span class="linenos">146</span>log<span class="w"> </span><span class="s2">&quot;  CHR=</span><span class="nv">$CHR</span><span class="s2">  FOCAL_BP=</span><span class="nv">$FOCAL_BP</span><span class="s2">  NEIGHBORS=</span><span class="nv">$NUM_NEIGHBORS</span><span class="s2">  THREADS=</span><span class="nv">$THREADS</span><span class="s2">&quot;</span>
-<span class="linenos">147</span>
-<span class="linenos">148</span><span class="s2">&quot;</span><span class="nv">$COMPUTE_IBS</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
-<span class="linenos">149</span><span class="w">    </span><span class="s2">&quot;</span><span class="nv">$CHR</span><span class="s2">&quot;</span><span class="w">          </span><span class="se">\</span>
-<span class="linenos">150</span><span class="w">    </span><span class="s2">&quot;</span><span class="nv">$FOCAL_BP</span><span class="s2">&quot;</span><span class="w">     </span><span class="se">\</span>
-<span class="linenos">151</span><span class="w">    </span><span class="s2">&quot;</span><span class="nv">$BGEN_FILE</span><span class="s2">&quot;</span><span class="w">    </span><span class="se">\</span>
-<span class="linenos">152</span><span class="w">    </span><span class="s2">&quot;</span><span class="nv">$SAMPLE_FILE</span><span class="s2">&quot;</span><span class="w">  </span><span class="se">\</span>
-<span class="linenos">153</span><span class="w">    </span><span class="s2">&quot;</span><span class="nv">$GENETIC_MAP</span><span class="s2">&quot;</span><span class="w">  </span><span class="se">\</span>
-<span class="linenos">154</span><span class="w">    </span><span class="s2">&quot;</span><span class="nv">$NUM_NEIGHBORS</span><span class="s2">&quot;</span><span class="se">\</span>
-<span class="linenos">155</span><span class="w">    </span><span class="s2">&quot;</span><span class="nv">$THREADS</span><span class="s2">&quot;</span><span class="w">      </span><span class="se">\</span>
-<span class="linenos">156</span><span class="w">    </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_FILE</span><span class="s2">&quot;</span>
-<span class="linenos">157</span>
-<span class="linenos">158</span>log<span class="w"> </span><span class="s2">&quot;IBS neighbors written to: </span><span class="nv">$OUTPUT_FILE</span><span class="s2">&quot;</span>
-<span class="linenos">159</span>log<span class="w"> </span><span class="s2">&quot;Next: submit 03_generate_config_and_run.sh&quot;</span>
+<span class="linenos"> 67</span>
+<span class="linenos"> 68</span><span class="w">    </span>download_with_retry<span class="w"> </span><span class="se">\</span>
+<span class="linenos"> 69</span><span class="w">        </span><span class="s2">&quot;https://zenodo.org/records/22307601/files/qctool.gz?download=1&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="linenos"> 70</span><span class="w">        </span><span class="s2">&quot;</span><span class="nv">$WORK_DIR</span><span class="s2">/qctool.gz&quot;</span>
+<span class="linenos"> 71</span>
+<span class="linenos"> 72</span><span class="w">    </span>gunzip<span class="w"> </span>-f<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$WORK_DIR</span><span class="s2">/qctool.gz&quot;</span>
+<span class="linenos"> 73</span>
+<span class="linenos"> 74</span><span class="w">    </span>mv<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$WORK_DIR</span><span class="s2">/qctool_v2.2.0-CentOS Linux7.8.2003-x86_64&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="linenos"> 75</span><span class="w">       </span><span class="s2">&quot;</span><span class="nv">$WORK_DIR</span><span class="s2">/qctool&quot;</span>
+<span class="linenos"> 76</span>
+<span class="linenos"> 77</span><span class="w">    </span>mkdir<span class="w"> </span>-p<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$WORK_DIR</span><span class="s2">/qctool&quot;</span>
+<span class="linenos"> 78</span><span class="w">    </span>mv<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$WORK_DIR</span><span class="s2">/qctool&quot;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$WORK_DIR</span><span class="s2">/qctool/qctool&quot;</span>
+<span class="linenos"> 79</span>
+<span class="linenos"> 80</span><span class="w">    </span>chmod<span class="w"> </span>+x<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$WORK_DIR</span><span class="s2">/qctool/qctool&quot;</span>
+<span class="linenos"> 81</span><span class="k">fi</span>
+<span class="linenos"> 82</span>
+<span class="linenos"> 83</span><span class="nv">MISSING</span><span class="o">=()</span>
+<span class="linenos"> 84</span><span class="k">for</span><span class="w"> </span>cmd<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$WORK_DIR</span><span class="s2">/qctool/qctool&quot;</span><span class="w"> </span>wget<span class="w"> </span>samtools<span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="linenos"> 85</span><span class="w">    </span><span class="nb">command</span><span class="w"> </span>-v<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$cmd</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">&amp;</span>&gt;/dev/null<span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nv">MISSING</span><span class="o">+=(</span><span class="s2">&quot;</span><span class="nv">$cmd</span><span class="s2">&quot;</span><span class="o">)</span>
+<span class="linenos"> 86</span><span class="k">done</span>
+<span class="linenos"> 87</span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="si">${#</span><span class="nv">MISSING</span><span class="p">[@]</span><span class="si">}</span><span class="w"> </span>-gt<span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="linenos"> 88</span><span class="w">    </span>log<span class="w"> </span><span class="s2">&quot;ERROR: missing required tools: </span><span class="si">${</span><span class="nv">MISSING</span><span class="p">[*]</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="linenos"> 89</span><span class="w">    </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span>
+<span class="linenos"> 90</span><span class="k">fi</span>
+<span class="linenos"> 91</span>
+<span class="linenos"> 92</span><span class="nv">COMPUTE_IBS</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$WORK_DIR</span><span class="s2">/computeIBSpbwt&quot;</span>
+<span class="linenos"> 93</span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span>!<span class="w"> </span>-f<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$COMPUTE_IBS</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="linenos"> 94</span><span class="w">    </span>log<span class="w"> </span><span class="s2">&quot;Downloading computeIBSpbwt binary...&quot;</span>
+<span class="linenos"> 95</span><span class="w">    </span>download_with_retry<span class="w"> </span><span class="se">\</span>
+<span class="linenos"> 96</span><span class="w">        </span><span class="s2">&quot;https://raw.githubusercontent.com/mhujoel/STRs/main/cpp_files/computeIBSpbwt&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="linenos"> 97</span><span class="w">        </span><span class="s2">&quot;</span><span class="nv">$COMPUTE_IBS</span><span class="s2">&quot;</span>
+<span class="linenos"> 98</span><span class="w">    </span>chmod<span class="w"> </span>+x<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$COMPUTE_IBS</span><span class="s2">&quot;</span>
+<span class="linenos"> 99</span><span class="k">fi</span>
+<span class="linenos">100</span>
+<span class="linenos">101</span><span class="nv">PHASED_VCF_URL</span><span class="o">=</span><span class="s2">&quot;https://ftp.1000genomes.ebi.ac.uk/vol1/ftp/data_collections/1000G_2504_high_coverage/working/20220422_3202_phased_SNV_INDEL_SV/1kGP_high_coverage_Illumina.chr</span><span class="si">${</span><span class="nv">CHR</span><span class="si">}</span><span class="s2">.filtered.SNV_INDEL_SV_phased_panel.vcf.gz&quot;</span>
+<span class="linenos">102</span><span class="nv">GENETIC_MAP_URL</span><span class="o">=</span><span class="s2">&quot;https://alkesgroup.broadinstitute.org/Eagle/downloads/tables/genetic_map_hg38_withX.txt.gz&quot;</span>
+<span class="linenos">103</span>
+<span class="linenos">104</span><span class="nv">LPA_VCF</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$DATA_DIR</span><span class="s2">/1kGP_chr</span><span class="si">${</span><span class="nv">CHR</span><span class="si">}</span><span class="s2">_LPA_phased.vcf.gz&quot;</span>
+<span class="linenos">105</span><span class="nv">BGEN_FILE</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$DATA_DIR</span><span class="s2">/1kGP_chr</span><span class="si">${</span><span class="nv">CHR</span><span class="si">}</span><span class="s2">_LPA_phased.bgen&quot;</span>
+<span class="linenos">106</span><span class="nv">SAMPLE_FILE</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$DATA_DIR</span><span class="s2">/1kGP_chr</span><span class="si">${</span><span class="nv">CHR</span><span class="si">}</span><span class="s2">_LPA_phased.sample&quot;</span>
+<span class="linenos">107</span><span class="nv">GENETIC_MAP</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$DATA_DIR</span><span class="s2">/genetic_map_hg38_chr</span><span class="si">${</span><span class="nv">CHR</span><span class="si">}</span><span class="s2">.txt&quot;</span>
+<span class="linenos">108</span><span class="nv">OUTPUT_FILE</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$DATA_DIR</span><span class="s2">/ibs_neighbors_chr</span><span class="si">${</span><span class="nv">CHR</span><span class="si">}</span><span class="s2">.tsv.gz&quot;</span>
+<span class="linenos">109</span>
+<span class="linenos">110</span><span class="c1"># --- Stream LPA region from the 1000G phased VCF ---</span>
+<span class="linenos">111</span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span>!<span class="w"> </span>-f<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$LPA_VCF</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="linenos">112</span><span class="w">    </span>log<span class="w"> </span><span class="s2">&quot;Streaming LPA region from 1000G phased VCF...&quot;</span>
+<span class="linenos">113</span><span class="w">    </span>tabix<span class="w"> </span>-h<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$PHASED_VCF_URL</span><span class="s2">&quot;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$REGION</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>bgzip<span class="w"> </span>&gt;<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$LPA_VCF</span><span class="s2">&quot;</span>
+<span class="linenos">114</span><span class="w">    </span>tabix<span class="w"> </span>-p<span class="w"> </span>vcf<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$LPA_VCF</span><span class="s2">&quot;</span>
+<span class="linenos">115</span><span class="w">    </span>find<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$WORK_DIR</span><span class="s2">&quot;</span><span class="w"> </span>-maxdepth<span class="w"> </span><span class="m">1</span><span class="w"> </span>-name<span class="w"> </span><span class="s2">&quot;*.tbi&quot;</span><span class="w"> </span>!<span class="w"> </span>-path<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">LPA_VCF</span><span class="si">}</span><span class="s2">.tbi&quot;</span><span class="w"> </span>-delete
+<span class="linenos">116</span><span class="w">    </span>log<span class="w"> </span><span class="s2">&quot;LPA phased VCF ready: </span><span class="nv">$LPA_VCF</span><span class="s2">&quot;</span>
+<span class="linenos">117</span><span class="k">else</span>
+<span class="linenos">118</span><span class="w">    </span>log<span class="w"> </span><span class="s2">&quot;LPA phased VCF already present — skipping.&quot;</span>
+<span class="linenos">119</span><span class="k">fi</span>
+<span class="linenos">120</span>
+<span class="linenos">121</span><span class="c1"># --- Convert phased VCF -&gt; BGEN v1.2 ---</span>
+<span class="linenos">122</span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span>!<span class="w"> </span>-f<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$BGEN_FILE</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="linenos">123</span><span class="w">    </span>log<span class="w"> </span><span class="s2">&quot;Converting phased VCF to BGEN v1.2...&quot;</span>
+<span class="linenos">124</span><span class="w">    </span><span class="s2">&quot;</span><span class="nv">$WORK_DIR</span><span class="s2">/qctool/qctool&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="linenos">125</span><span class="w">        </span>-g<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$LPA_VCF</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="linenos">126</span><span class="w">        </span>-og<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$BGEN_FILE</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="linenos">127</span><span class="w">        </span>-os<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$SAMPLE_FILE</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="linenos">128</span><span class="w">        </span>-ofiletype<span class="w"> </span>bgen_v1.2<span class="w"> </span><span class="se">\</span>
+<span class="linenos">129</span><span class="w">        </span>-bgen-bits<span class="w"> </span><span class="m">16</span><span class="w"> </span><span class="se">\</span>
+<span class="linenos">130</span><span class="w">        </span>-bgen-permitted-input-rounding-error<span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="se">\</span>
+<span class="linenos">131</span><span class="w">        </span>&gt;&gt;<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$LOG_DIR</span><span class="s2">/qctool.log&quot;</span><span class="w"> </span><span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span>
+<span class="linenos">132</span><span class="w">    </span>log<span class="w"> </span><span class="s2">&quot;BGEN file ready: </span><span class="nv">$BGEN_FILE</span><span class="s2">&quot;</span>
+<span class="linenos">133</span><span class="k">else</span>
+<span class="linenos">134</span><span class="w">    </span>log<span class="w"> </span><span class="s2">&quot;BGEN file already present — skipping.&quot;</span>
+<span class="linenos">135</span><span class="k">fi</span>
+<span class="linenos">136</span>
+<span class="linenos">137</span><span class="c1"># --- Download + decompress + filter Eagle genetic map ---</span>
+<span class="linenos">138</span><span class="c1"># The map&#39;s chrom column is bare (e.g. &quot;6&quot;), not &quot;chr6&quot; — filtering on</span>
+<span class="linenos">139</span><span class="c1"># &quot;chr${CHR}&quot; here would silently match nothing and produce a header-only</span>
+<span class="linenos">140</span><span class="c1"># file, so this must stay as the bare chromosome number.</span>
+<span class="linenos">141</span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span>!<span class="w"> </span>-f<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$GENETIC_MAP</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="linenos">142</span><span class="w">    </span>log<span class="w"> </span><span class="s2">&quot;Downloading Eagle hg38 genetic map...&quot;</span>
+<span class="linenos">143</span><span class="w">    </span>wget<span class="w"> </span>-q<span class="w"> </span>-O<span class="w"> </span>-<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$GENETIC_MAP_URL</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="linenos">144</span><span class="w">        </span><span class="p">|</span><span class="w"> </span>gunzip<span class="w"> </span><span class="se">\</span>
+<span class="linenos">145</span><span class="w">        </span><span class="p">|</span><span class="w"> </span>awk<span class="w"> </span>-v<span class="w"> </span><span class="nv">c</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">CHR</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="s1">&#39;NR==1 || $1==c&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="linenos">146</span><span class="w">        </span>&gt;<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$GENETIC_MAP</span><span class="s2">&quot;</span>
+<span class="linenos">147</span><span class="w">    </span>log<span class="w"> </span><span class="s2">&quot;Genetic map ready: </span><span class="nv">$GENETIC_MAP</span><span class="s2">&quot;</span>
+<span class="linenos">148</span><span class="k">else</span>
+<span class="linenos">149</span><span class="w">    </span>log<span class="w"> </span><span class="s2">&quot;Genetic map already present — skipping.&quot;</span>
+<span class="linenos">150</span><span class="k">fi</span>
+<span class="linenos">151</span>
+<span class="linenos">152</span><span class="c1"># --- Run computeIBSpbwt ---</span>
+<span class="linenos">153</span>log<span class="w"> </span><span class="s2">&quot;Computing IBS neighbors...&quot;</span>
+<span class="linenos">154</span>log<span class="w"> </span><span class="s2">&quot;  CHR=</span><span class="nv">$CHR</span><span class="s2">  FOCAL_BP=</span><span class="nv">$FOCAL_BP</span><span class="s2">  NEIGHBORS=</span><span class="nv">$NUM_NEIGHBORS</span><span class="s2">  THREADS=</span><span class="nv">$THREADS</span><span class="s2">&quot;</span>
+<span class="linenos">155</span>
+<span class="linenos">156</span><span class="s2">&quot;</span><span class="nv">$COMPUTE_IBS</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="linenos">157</span><span class="w">    </span><span class="s2">&quot;</span><span class="nv">$CHR</span><span class="s2">&quot;</span><span class="w">          </span><span class="se">\</span>
+<span class="linenos">158</span><span class="w">    </span><span class="s2">&quot;</span><span class="nv">$FOCAL_BP</span><span class="s2">&quot;</span><span class="w">     </span><span class="se">\</span>
+<span class="linenos">159</span><span class="w">    </span><span class="s2">&quot;</span><span class="nv">$BGEN_FILE</span><span class="s2">&quot;</span><span class="w">    </span><span class="se">\</span>
+<span class="linenos">160</span><span class="w">    </span><span class="s2">&quot;</span><span class="nv">$SAMPLE_FILE</span><span class="s2">&quot;</span><span class="w">  </span><span class="se">\</span>
+<span class="linenos">161</span><span class="w">    </span><span class="s2">&quot;</span><span class="nv">$GENETIC_MAP</span><span class="s2">&quot;</span><span class="w">  </span><span class="se">\</span>
+<span class="linenos">162</span><span class="w">    </span><span class="s2">&quot;</span><span class="nv">$NUM_NEIGHBORS</span><span class="s2">&quot;</span><span class="se">\</span>
+<span class="linenos">163</span><span class="w">    </span><span class="s2">&quot;</span><span class="nv">$THREADS</span><span class="s2">&quot;</span><span class="w">      </span><span class="se">\</span>
+<span class="linenos">164</span><span class="w">    </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_FILE</span><span class="s2">&quot;</span>
+<span class="linenos">165</span>
+<span class="linenos">166</span>log<span class="w"> </span><span class="s2">&quot;IBS neighbors written to: </span><span class="nv">$OUTPUT_FILE</span><span class="s2">&quot;</span>
+<span class="linenos">167</span>log<span class="w"> </span><span class="s2">&quot;Next: submit 03_generate_config_and_run.sh&quot;</span>
 </pre></div>
 </div>
 </div>
