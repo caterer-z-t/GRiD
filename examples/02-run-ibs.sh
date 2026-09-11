@@ -34,7 +34,8 @@ WORK_DIR="${WORK_DIR:-$(pwd)}"
 LOG_DIR="$WORK_DIR/logs"
 DATA_DIR="$WORK_DIR/data"
 OUTPUT_DIR="$WORK_DIR/output"
-mkdir -p "$DATA_DIR" "$LOG_DIR" "$OUTPUT_DIR" "$WORK_DIR/slurm"
+QC_DIR="$WORK_DIR/qctool"
+mkdir -p "$DATA_DIR" "$LOG_DIR" "$OUTPUT_DIR" "$WORK_DIR/slurm" "$QC_DIR"
 
 THREADS="${SLURM_CPUS_PER_TASK:-$(nproc)}"
 
@@ -67,15 +68,9 @@ if ! command -v "$WORK_DIR/qctool/qctool" &> /dev/null; then
 
     download_with_retry \
         "https://zenodo.org/records/22307601/files/qctool.gz?download=1" \
-        "$WORK_DIR/qctool.gz"
+        "$QC_DIR/qctool.gz"
 
-    gunzip -f "$WORK_DIR/qctool.gz"
-
-    mv "$WORK_DIR/qctool_v2.2.0-CentOS Linux7.8.2003-x86_64" \
-       "$WORK_DIR/qctool"
-
-    mkdir -p "$WORK_DIR/qctool"
-    mv "$WORK_DIR/qctool" "$WORK_DIR/qctool/qctool"
+    gunzip -f "$QC_DIR/qctool.gz"
 
     chmod +x "$WORK_DIR/qctool/qctool"
 fi
