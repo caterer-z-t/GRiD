@@ -64,12 +64,20 @@ source "$VARS_FILE"
 
 if ! command -v "$WORK_DIR/qctool/qctool" &> /dev/null; then
     log "Installing qctool..."
+
     download_with_retry \
-        "https://www.well.ox.ac.uk/~gav/resources/qctool_v2.2.0-CentOS_Linux7.8.2003-x86_64.tgz" \
-        "$WORK_DIR/qctool.tgz"
-    tar -xzf "$WORK_DIR/qctool.tgz" -C "$WORK_DIR"
-    mv "$WORK_DIR/qctool_v2.2.0-CentOS Linux7.8.2003-x86_64" "$WORK_DIR/qctool"
-    rm -f "$WORK_DIR/qctool.tgz"
+        "https://zenodo.org/records/22307601/files/qctool.gz?download=1" \
+        "$WORK_DIR/qctool.gz"
+
+    gunzip -f "$WORK_DIR/qctool.gz"
+
+    mv "$WORK_DIR/qctool_v2.2.0-CentOS Linux7.8.2003-x86_64" \
+       "$WORK_DIR/qctool"
+
+    mkdir -p "$WORK_DIR/qctool"
+    mv "$WORK_DIR/qctool" "$WORK_DIR/qctool/qctool"
+
+    chmod +x "$WORK_DIR/qctool/qctool"
 fi
 
 MISSING=()
