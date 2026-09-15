@@ -101,3 +101,21 @@ def run_wgs_pipeline(console=False, config=None, **args):
             hi_inference(config_data, console)
         except Exception as e:
             log(console, f"Failed to compute haploid CNV calls: {e}", style="danger")
+
+    # Step 10 (optional, one-time): select stable GC-diverse normalization regions
+    if config_data.get("select_norm_regions", {}).get("run") == True:
+        try:
+            from .utils.select_norm_regions import select_normalization_regions
+
+            select_normalization_regions(config_data, console)
+        except Exception as e:
+            log(console, f"Failed to select normalization regions: {e}", style="danger")
+
+    # Step 11 (optional): GC-LOWESS copy number normalization (DRAGEN-style)
+    if config_data.get("gc_normalize", {}).get("run") == True:
+        try:
+            from .utils.gc_normalize import gc_normalize
+
+            gc_normalize(config_data, console)
+        except Exception as e:
+            log(console, f"Failed to run GC normalization: {e}", style="danger")

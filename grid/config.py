@@ -129,6 +129,54 @@ STEP_SCHEMA = [
         "gate": ("compute_haploid_genotypes",),
         "default": "100",
     },
+    # select_norm_regions
+    {
+        "path": ("select_norm_regions", "output_file"),
+        "gate": ("select_norm_regions",),
+        "default": "'norm_regions.gc.tsv'",
+    },
+    {
+        "path": ("select_norm_regions", "max_cv"),
+        "gate": ("select_norm_regions",),
+        "default": "0.15",
+    },
+    {
+        "path": ("select_norm_regions", "gc_bin_size"),
+        "gate": ("select_norm_regions",),
+        "default": "0.05",
+    },
+    {
+        "path": ("select_norm_regions", "n_per_gc_bin"),
+        "gate": ("select_norm_regions",),
+        "default": "300",
+    },
+    # gc_normalize
+    {
+        "path": ("gc_normalize", "norm_regions_gc_file"),
+        "gate": ("gc_normalize",),
+        "required": True,
+        "is_file": True,
+    },
+    {
+        "path": ("gc_normalize", "output_file_prefix"),
+        "gate": ("gc_normalize",),
+        "default": "'gc_corrected_cn'",
+    },
+    {
+        "path": ("gc_normalize", "reference_cn"),
+        "gate": ("gc_normalize",),
+        "default": "6.2",
+    },
+    {
+        "path": ("gc_normalize", "lowess_frac"),
+        "gate": ("gc_normalize",),
+        "default": "0.2",
+    },
+    {
+        "path": ("gc_normalize", "mad_threshold"),
+        "gate": ("gc_normalize",),
+        "default": "0.11",
+    },
 ]
 
 
