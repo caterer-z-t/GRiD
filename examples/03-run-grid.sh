@@ -7,11 +7,8 @@
 #SBATCH --mem=200G
 
 # Stage 3 of 3 — generate config.yaml and run the GRiD pipeline.
-# Submit after 01_prep_data.sh (and, if you want haploid CN, 02_run_ibs.sh)
+# Submit after 01-prep-data.sh (and, if you want haploid CN, 02-run-ibs.sh)
 # have both completed.
-#
-# Usage: sbatch 03_generate_config_and_run.sh   (from the same working
-# directory as stages 1 and 2)
 
 set -euo pipefail
 
@@ -30,10 +27,10 @@ THREADS="${SLURM_CPUS_PER_TASK:-$(nproc)}"
 timestamp() { date '+%Y-%m-%d %H:%M:%S'; }
 log() { echo "[$(timestamp)] $*" | tee -a "$LOG_DIR/pipeline.log"; }
 
-# --- Load locus coordinates written by 01_prep_data.sh ---
+# --- Load locus coordinates written by 01-prep-data.sh ---
 VARS_FILE="$DATA_DIR/pipeline_vars.sh"
 if [[ ! -f "$VARS_FILE" ]]; then
-    echo "ERROR: $VARS_FILE not found — run 01_prep_data.sh first."
+    echo "ERROR: $VARS_FILE not found — run 01-prep-data.sh first."
     exit 1
 fi
 source "$VARS_FILE"
@@ -41,22 +38,18 @@ source "$VARS_FILE"
 REF_FA="$DATA_DIR/GRCh38_no_alt.fa"
 REPEAT_MASK="$DATA_DIR/repeat_mask.bed"
 GRID_SAMPLES_FILE="$DATA_DIR/grid_samples.txt"
+NORM_REGIONS_FILE="$OUTPUT_DIR/norm_regions.gc.tsv"
 
 for f in "$REF_FA" "$GRID_SAMPLES_FILE"; do
     if [[ ! -f "$f" ]]; then
-        echo "ERROR: expected input $f not found — run 01_prep_data.sh first."
+        echo "ERROR: expected input $f not found — run 01-prep-data.sh first."
         exit 1
     fi
 done
 
-# --- Activate GRiD environment ---
-if ! conda env list | grep -qE '^\s*grid-test\s'; then
-    echo "ERROR: conda environment 'grid-test' not found."
-    echo "Create it first, e.g.: conda create -n grid-test python=3.11 -y"
-    exit 1
-fi
-source "$(conda info --base)/etc/profile.d/conda.sh"
-conda activate grid-test
+export PATH=/nas/longleaf/home/catererz/epi/software/micromamba:$PATH
+eval "$(micromamba shell hook --shell bash)"
+micromamba activate grid
 
 if ! command -v grid &>/dev/null; then
     echo "ERROR: 'grid' command not found after activating grid-test."
@@ -73,18 +66,17 @@ if [[ -f "$IBS_OUTPUT" ]]; then
     HAPLOID_RUN="True"
 else
     log "IBS neighbors file not found at $IBS_OUTPUT."
-    log "Run 02_run_ibs.sh first if you want haploid CN estimation."
+    log "Run 02-run-ibs.sh first if you want haploid CN estimation."
     log "Proceeding with diploid-only for this run."
 fi
 
 # Empty mask: the downloaded repeat_mask.bed spans nearly the entire LPA
 # window (KIV-2 is itself a massive tandem repeat), which zeroes out every
-# normalization bin if applied here. See prior discussion — using an empty
-# mask for this locus is the correct choice, not a workaround being skipped.
+# normalization bin if applied here. Using an empty mask for this locus is
+# the correct choice, not a workaround being skipped.
 EMPTY_MASK="$DATA_DIR/repeat_mask_empty.bed"
 touch "$EMPTY_MASK"
 
-# --- Generate config ---
 CONFIG="$WORK_DIR/config.yaml"
 
 cat > "$CONFIG" << YAML
@@ -98,7 +90,7 @@ file_type: "cram"
 chrom: "chr${CHR}"
 start_bp: $START
 end_bp: $END
-output_file_type: "tsv"
+output_file_type: "txt"
 
 index:
   run: True
@@ -121,7 +113,8 @@ mosdepth:
   mode: "fast"
   region_name: "LPA"
   work_dir: "$MOSDEPTH_WORK"
-  remove_intermediate: True
+  # Keep intermediate files; gc_normalize (phase 2) reads .regions.bed.gz.
+  remove_intermediate: False
 
   normalize:
     run: True
@@ -138,6 +131,9 @@ mosdepth:
     zmax: 2.0
     sigma2_max: 1000
 
+  gc_normalize:
+    run: False
+
 compute_diploid_genotypes:
   run: True
   output_file_prefix: "diploid_genotypes"
@@ -148,15 +144,10 @@ compute_haploid_genotypes:
   ibs_output: "$IBS_OUTPUT"
   min_neighbors: 1
   max_neighbors: 10
-  n_iters: 100
+  n_iters: 20
   method: "ibs"
 YAML
 
-log "Config written to: $CONFIG"
-log "  compute_haploid_genotypes.run: $HAPLOID_RUN"
-
-# --- Run GRiD ---
-log "Running GRiD pipeline..."
+log "Running GRiD pipeline"
 grid wgs "$CONFIG"
-
-log "Done. Results in: $OUTPUT_DIR"
+log "Phase 1 complete."
