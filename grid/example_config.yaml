@@ -22,26 +22,27 @@ count_reads:
   min_mapq: 1
   flags:
     - 83   # proper pair, reverse strand
+    - 99   # mate forward, reverse strand (unpaired-ish)
     - 147  # proper pair, mate reverse
+    - 163  # mate forward, reverse strand (unpaired-ish)
     - 81   # reverse, mate forward (unpaired-ish)
+    - 97   # forward, mate reverse (unpaired-ish)
     - 145  # mate reverse
+    - 161  # mate forward
 
 mosdepth:
   run: True
   output_file_prefix: "mosdepth_results"
   bin_size: 1000
-  mode: "fast"
-  region_name: "LPA"
   work_dir: "path/to/mosdepth_work/"
   remove_intermediate: True
+  example_bed: null
 
   normalize:
     run: True
-    min_depth: 20
-    max_depth: 100
-    top_frac: 0.1
-    output_file_prefix: "mosdepth_results_normalized"
-    repeat_mask_file: "path/to/repeat_mask.bed"
+    output_file_prefix: "ID_scale_zdepths"
+    combined_bins_gz: null  # optional, defaults to output_dir/mosdepth_bins.txt.gz
+    repeat_mask_file: "path/to/repeat_mask_list.hg38.ucsc_bed"
 
   neighbors:
     run: True

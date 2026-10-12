@@ -66,6 +66,9 @@ STEP_SCHEMA = [
         "required": True,
         "is_file": True,
     },
+    # mosdepth.normalize.external_scale_file is intentionally absent from
+    # this schema: it's opt-in (no warning when unset) since most configs
+    # don't need it. See normalize_mosdepth.apply_external_scale.
     # mosdepth.neighbors
     {
         "path": ("mosdepth", "neighbors", "output_file_prefix"),

@@ -1,15 +1,12 @@
 # In[0]: Imports
 from pathlib import Path
 from concurrent.futures import ThreadPoolExecutor, as_completed
-from threading import Lock
 from functools import partial
 import shutil
 import subprocess
-import time
-from typing import Tuple, List
 import gzip
 
-from .utils import log, get_samples, setup_output_file, find_file, progress_bar
+from .utils import log, get_samples, find_file, progress_bar
 
 
 # In[1]: Main Mosdepth
@@ -18,37 +15,41 @@ def compute_mosdepth(config, console=None):
         directory_loc = config["directory_loc"]
         samples_file = config["samples_file"]
         samples = get_samples(samples_file)
-        chrom = config.get("chrom", None)
-        start = config.get("start_bp", None)
-        end = config.get("end_bp", None)
 
-        output_file_prefix = config.get("mosdepth", {}).get("output_file_prefix", None)
-        output_file_type = config.get("output_file_type", "tsv")
-        output_dir = config.get("output_dir", ".")
-        output_file = Path(f"{output_dir}/{output_file_prefix}.{output_file_type}")
-
+        output_file_prefix = config.get("mosdepth", {}).get("output_file_prefix", "mosdepth_bins")
+        output_file_type = config.get("output_file_type", "txt")
+        output_dir = Path(config.get("output_dir", "."))
         threads = config.get("threads", 1)
-        ref = config.get("reference_genome", {})
-        region_name = config.get("mosdepth", {}).get("region_name", None)
+        ref = config.get("reference_genome")
         by = config.get("mosdepth", {}).get("bin_size", 1000)
-        fast_mode = config.get("mosdepth", {}).get("mode", "fast").lower()
-        work_dir = config.get("mosdepth", {}).get("work_dir", None)
-        remove_intermediate = config.get("mosdepth", {}).get("remove_intermediate", False)
+        mosdepth_dir = Path(config.get("mosdepth", {}).get("work_dir", output_dir / "mosdepth"))
+        remove_intermediate = config.get("mosdepth", {}).get("remove_intermediate", True)
+
+        # Example bed: use configured path if provided, otherwise default to mosdepth_dir
+        example_bed_path = config.get("mosdepth", {}).get("example_bed", None)
+        if example_bed_path is not None:
+            example_bed = Path(example_bed_path)
+        else:
+            example_bed = mosdepth_dir / "example.regions.bed.gz"
+
+        combined_file = output_dir / f"{output_file_prefix}.{output_file_type}"
+        combined_gz = Path(str(combined_file) + ".gz")
+
     except Exception as e:
         log(console, f"Config error: {e}", style="danger")
         return
 
     # Check mosdepth availability
-    try:
-        check_mosdepth_available()
-    except RuntimeError as e:
-        log(console, f"✗ {str(e)}", style="danger")
+    if shutil.which("mosdepth") is None:
+        log(console, "mosdepth not found in PATH. Please install mosdepth.", style="danger")
         return
 
-    work_path = Path(work_dir).expanduser()
-    work_path.mkdir(parents=True, exist_ok=True)
+    mosdepth_dir.mkdir(parents=True, exist_ok=True)
+    output_dir.mkdir(parents=True, exist_ok=True)
 
-    output_file = setup_output_file(output_file, chrom, start, end)
+    # Remove existing combined/gz files if present so we start fresh
+    combined_file.unlink(missing_ok=True)
+    combined_gz.unlink(missing_ok=True)
 
     files = {
         sample: result
@@ -56,271 +57,233 @@ def compute_mosdepth(config, console=None):
         if (result := find_file(directory_loc, sample, config.get("file_type"))) is not None
     }
 
-    # Create lock for thread-safe file writing
-    write_lock = Lock()
+    if not files:
+        log(console, "No CRAM files found — check directory_loc and samples_file.", style="danger")
+        return
 
-    # Create partial function with fixed parameters
+    # Process each CRAM: run mosdepth, parse regions.bed.gz, write per-sample file
     process_func = partial(
         run_mosdepth_single_cram,
         ref_fasta=ref,
-        work_dir=work_path,
-        chrom=chrom,
-        start=start,
-        end=end,
-        region_name=region_name,
+        mosdepth_dir=mosdepth_dir,
         by=by,
-        fast_mode=fast_mode,
-        threads=threads,
         console=console,
     )
 
-    # Process CRAMs with threading and progress tracking
     failed = []
-
     with progress_bar(console, total=len(files), description="Running mosdepth") as (
         progress,
         task,
     ):
         with ThreadPoolExecutor(max_workers=threads) as executor:
-            # Submit all jobs
-            future_to_file = {
-                executor.submit(process_func, file): sample for sample, file in files.items()
+            future_to_sample = {
+                executor.submit(process_func, cram_path): sample
+                for sample, cram_path in files.items()
             }
 
-            # Collect and write results as they complete
-            for future in as_completed(future_to_file):
-                sample = future_to_file[future]
-                coverage = future.result()
-
-                if coverage != "Error":
-                    write_coverage_result(output_file, sample, coverage, write_lock)
-                else:
-                    log(console, f"✗ {sample} failed", style="danger")
+            for future in as_completed(future_to_sample):
+                sample = future_to_sample[future]
+                success = future.result()
+                if not success:
                     failed.append(sample)
+                    log(console, f"✗ {sample} failed", style="danger")
+                progress.advance(task)
 
-                progress.update(task, advance=1)
+    if failed:
+        log(console, f"{len(failed)} samples failed: {failed}", style="warning")
 
-    log(console, f"Mosdepth coverage results written to {output_file}", style="success")
+    # Save example bed from first successful sample if not already present
+    if not example_bed.exists():
+        per_sample_beds = sorted(mosdepth_dir.glob("*.regions.bed.gz"))
+        if per_sample_beds:
+            shutil.copy(per_sample_beds[0], example_bed)
+            log(console, f"Saved example regions bed: {example_bed}", style="info")
+        else:
+            log(
+                console,
+                "WARNING: No regions.bed.gz files found to save as example.",
+                style="warning",
+            )
+    else:
+        log(
+            console,
+            f"Example regions bed already exists — skipping: {example_bed}",
+            style="info",
+        )
+
+    # Verify all expected per-sample files exist before merging
+    per_sample_files = sorted(mosdepth_dir.glob("*.per_sample.txt"))
+    n_expected = len(files)
+    n_found = len(per_sample_files)
+    if n_found < n_expected:
+        log(
+            console,
+            f"WARNING: Expected {n_expected} per-sample files, found {n_found}. "
+            f"{n_expected - n_found} samples may have failed.",
+            style="warning",
+        )
+    log(console, f"Merging {n_found} per-sample files into combined output...", style="info")
+
+    # Merge all per-sample files into combined file sequentially (no threads)
+    with open(combined_file, "w") as out_f:
+        for sample_file in per_sample_files:
+            out_f.write(sample_file.read_text())
+
+    # Verify merged file looks correct before gzipping
+    n_lines = sum(1 for _ in open(combined_file))
+    if n_lines != n_found:
+        log(
+            console,
+            f"ERROR: Merged file has {n_lines} lines but expected {n_found} — aborting gzip.",
+            style="danger",
+        )
+        return
+    log(console, f"Merged file has {n_lines} lines — looks correct.", style="info")
+
+    # Gzip using system gzip (more reliable than Python's gzip for large files)
+    log(console, "Gzipping combined file...", style="info")
+    try:
+        subprocess.run(
+            ["gzip", "-f", str(combined_file)],
+            check=True,
+            capture_output=True,
+            text=True,
+        )
+    except subprocess.CalledProcessError as e:
+        log(console, f"gzip failed: {e.stderr}", style="danger")
+        return
+
+    # Verify gz file exists and is not empty before declaring success
+    if not combined_gz.exists() or combined_gz.stat().st_size == 0:
+        log(console, f"ERROR: gzip output missing or empty: {combined_gz}", style="danger")
+        return
+
+    # Spot-check gz integrity
+    try:
+        result = subprocess.run(
+            ["gzip", "-t", str(combined_gz)],
+            check=True,
+            capture_output=True,
+            text=True,
+        )
+    except subprocess.CalledProcessError:
+        log(console, f"ERROR: gzip integrity check failed for {combined_gz}", style="danger")
+        return
+
+    # Remove intermediate files if requested — only after gz is confirmed good
     if remove_intermediate:
-        remove_intermediate_files(work_path, console)
+        remove_intermediate_files(mosdepth_dir, console)
+
+    log(console, f"Done. Combined output: {combined_gz}", style="success")
+    log(console, f"Example regions bed: {example_bed}", style="success")
 
 
-# In[2]: Helper Functions
-def check_mosdepth_available():
-    """
-    Check if mosdepth executable is available in PATH.
-
-    Args:
-        None
-
-    Returns:
-        None
-
-    Raises:
-        RuntimeError: If mosdepth is not found.
-    """
-    if shutil.which("mosdepth") is None:
-        raise RuntimeError("mosdepth not found in PATH. Please install mosdepth before running.")
-
-
-def write_coverage_result(
-    output_file: Path, sample_name: str, coverage: int, write_lock: Lock
-) -> None:
-    """
-    Write coverage result to output file in a thread-safe manner.
-
-    Args:
-        output_file: Path to output TSV file
-        sample_name: Sample name
-        coverage: Coverage value
-        write_lock: Threading lock for safe file writing
-    """
-    with write_lock:
-        with open(output_file, "a", newline="") as f:
-            f.write(f"{sample_name}\t{coverage}\n")
-
-
+# In[2]: Run mosdepth on a single CRAM
 def run_mosdepth_single_cram(
     cram_path: str,
     ref_fasta: str,
-    work_dir: Path,
-    chrom: str,
-    start: int,
-    end: int,
-    region_name: str,
-    by: int,
-    fast_mode: bool,
-    threads: int = 1,
+    mosdepth_dir: Path,
+    by: int = 1000,
     console=None,
-) -> Tuple[str, int | str]:
+) -> bool:
     """
-    Run mosdepth on a single CRAM file and compute coverage for region.
+    Run mosdepth genome-wide on one CRAM, parse the regions.bed.gz output
+    exactly as Mukamel's shell script does (strip chr, keep autosomes 1-22,
+    scale depth by 100 and round to int), and write one per-sample row file.
 
     Args:
         cram_path: Path to CRAM file
-        ref_fasta: Path to reference genome FASTA
-        work_dir: Working directory for intermediate files
-        chrom: Chromosome name
-        start: Start position
-        end: End position
-        by: Bin size for mosdepth
-        fast_mode: Whether to use fast mode
-        threads: Number of threads to use
+        ref_fasta: Path to reference FASTA
+        mosdepth_dir: Directory for mosdepth intermediate output
+        by: Bin size (default 1000 = 1kb)
+        console: Optional rich console for logging
+
     Returns:
-        Tuple of (sample_name, coverage) where coverage is int or "Error"
+        True on success, False on failure
     """
     cram = Path(cram_path)
-    sample_name = cram.stem
+    sample_id = cram.stem
+    out_prefix = mosdepth_dir / sample_id
+    per_sample_out = mosdepth_dir / f"{sample_id}.per_sample.txt"
+
+    # Skip if already processed
+    if per_sample_out.exists():
+        return True
 
     try:
-        # Build and run mosdepth command
-        out_prefix = work_dir / f"{sample_name}_{region_name}"
-        cmd = build_mosdepth_command(str(cram), ref_fasta, out_prefix, by, fast_mode, threads)
+        # Run mosdepth genome-wide, no region subsetting, fast mode, no per-base output
+        cmd = [
+            "mosdepth",
+            "-n",
+            "--fast-mode",
+            "--by",
+            str(by),
+            "-f",
+            str(ref_fasta),
+            str(out_prefix),
+            str(cram),
+        ]
         subprocess.run(cmd, check=True, capture_output=True, text=True)
 
-        # Wait for output file
-        regions_file = wait_for_mosdepth_output(work_dir, sample_name, console)
+        regions_file = mosdepth_dir / f"{sample_id}.regions.bed.gz"
 
-        # Compute coverage
-        coverage = compute_region_coverage(regions_file, chrom, start, end)
+        if not regions_file.exists():
+            log(console, f"regions.bed.gz not found for {sample_id}", style="danger")
+            return False
 
-        return coverage
+        # Parse regions.bed.gz exactly as the awk in the shell script:
+        # strip chr prefix, keep autosomes 1-22, scale by 100 and round
+        row_values = [sample_id]
+        with gzip.open(regions_file, "rt") as f:
+            for line in f:
+                parts = line.rstrip("\n").split("\t")
+                if len(parts) < 4:
+                    continue
+                c = parts[0]
+                if c.startswith("chr"):
+                    c = c[3:]
+                # Keep only autosomes 1-22 (length<=2 and numeric 1-22)
+                if len(c) <= 2:
+                    try:
+                        c_int = int(c)
+                    except ValueError:
+                        continue
+                    if 1 <= c_int <= 22:
+                        depth = float(parts[3])
+                        row_values.append(str(int(100 * depth + 0.5)))
+
+        # Write sample row: "SAMPLE_ID\tval1\tval2\t...\n"
+        with open(per_sample_out, "w") as f:
+            f.write("\t".join(row_values) + "\n")
+
+        return True
 
     except Exception as e:
-        return "Error"
+        log(console, f"Error processing {sample_id}: {e}", style="danger")
+        return False
 
 
-def build_mosdepth_command(
-    cram_path: str, ref_fasta: str, output_prefix: Path, by: int, fast_mode: bool, threads: int = 1
-) -> List[str]:
+# In[3]: Remove intermediate files
+def remove_intermediate_files(mosdepth_dir: Path, console=None) -> None:
     """
-    Build mosdepth command with appropriate flags.
+    Remove intermediate mosdepth files, keeping only the example bed.
 
-    Args:
-        cram_path: Path to CRAM file
-        ref_fasta: Path to reference genome FASTA
-        output_prefix: Output prefix for mosdepth
-        by: Bin size for coverage calculation
-        fast_mode: Whether to use fast mode
-        threads: Number of threads to use
-    Returns:
-        List of command arguments
+    Removes: *.mosdepth.global.dist.txt, *.mosdepth.region.dist.txt,
+             *.regions.bed.gz, *.regions.bed.gz.csi, *.per_sample.txt
     """
-    cmd = [
-        "mosdepth",
-        "-n",
-        "--by",
-        str(by),
-        "-f",
-        str(ref_fasta),
-        str(output_prefix),
-        str(cram_path),
-        "-t",
-        str(threads),
+    suffixes = [
+        ".mosdepth.global.dist.txt",
+        ".mosdepth.region.dist.txt",
+        ".regions.bed.gz",
+        ".regions.bed.gz.csi",
+        ".per_sample.txt",
     ]
 
-    if fast_mode:
-        cmd.insert(1, "--fast-mode")
-
-    return cmd
-
-
-def wait_for_mosdepth_output(
-    work_dir: Path, sample_name: str, console=None, max_attempts: int = 3, sleep_seconds: int = 2
-) -> Path:
-    """
-    Wait for mosdepth output file to appear.
-
-    Args:
-        work_dir: Working directory where mosdepth writes output
-        sample_name: Sample name to search for
-        max_attempts: Maximum number of attempts to find file
-        sleep_seconds: Seconds to wait between attempts
-
-    Returns:
-        Path to regions.bed.gz file
-
-    Raises:
-        FileNotFoundError: If file is not found after max attempts
-    """
-    for attempt in range(max_attempts):
-        matches = list(work_dir.glob(f"{sample_name}*regions.bed.gz"))
-        if matches:
-            return matches[0]
-
-        log(
-            console,
-            f"Waiting for mosdepth output ({attempt + 1}/{max_attempts})...",
-            style="warning",
-        )
-        time.sleep(sleep_seconds)
-
-    raise FileNotFoundError(
-        f"Expected mosdepth output matching pattern '{sample_name}*regions.bed.gz' "
-        f"not found in {work_dir} for sample {sample_name}."
-    )
-
-
-def compute_region_coverage(regions_file: Path, chrom: str, start: int, end: int) -> int:
-    """
-    Compute average coverage for a genomic region from mosdepth output.
-
-    Args:
-        regions_file: Path to mosdepth regions.bed.gz file
-        chrom: Chromosome name
-        start: Start position
-        end: End position
-
-    Returns:
-        Average coverage as integer (rounded and scaled by 100)
-    """
-    region_cov = 0.0
-    covered_bp = 0
-
-    with gzip.open(regions_file, "rt") as f:
-        for line in f:
-            r_chr, r_start, r_end, mean_cov = line.strip().split("\t")[:4]
-            r_start, r_end = int(r_start), int(r_end)
-            mean_cov = float(mean_cov)
-
-            if r_chr != chrom:
-                continue
-
-            overlap_start = max(start, r_start)
-            overlap_end = min(end, r_end)
-            overlap = overlap_end - overlap_start
-
-            if overlap > 0:
-                region_cov += mean_cov * overlap
-                covered_bp += overlap
-
-    return int(round(100 * (region_cov / covered_bp))) if covered_bp > 0 else 0
-
-
-def remove_intermediate_files(
-    work_dir: Path, console=None, include_region_bed_gz: bool = False
-) -> None:
-    """
-    Remove intermediate mosdepth files from the working directory.
-
-    Args:
-        work_dir: Path to working directory
-        console: Optional console for logging
-        include_region_bed_gz: Whether to include regions.bed.gz files in removal
-
-    Returns:
-        None
-    """
-    files_to_remove = ["mosdepth.global.dist.txt", "mosdepth.region.dist.txt", "regions.bed.gz.csi"]
-
-    work_dir = Path(work_dir)
-
-    if include_region_bed_gz:
-        files_to_remove.append("regions.bed.gz")
-
-    for file in work_dir.glob("*"):
-        if any(file.name.endswith(suffix) for suffix in files_to_remove):
+    for f in mosdepth_dir.glob("*"):
+        if f.name == "example.regions.bed.gz":
+            continue
+        if any(f.name.endswith(s) for s in suffixes):
             try:
-                file.unlink()
+                f.unlink()
             except Exception as e:
-                log(console, f"Failed to remove intermediate file {file}: {e}", style="warning")
+                log(console, f"Failed to remove {f}: {e}", style="warning")

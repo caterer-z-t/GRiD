@@ -1,5 +1,6 @@
 # In[0]: Imports
 import json
+import sys
 import yaml
 from pathlib import Path
 from .utils.utils import log
@@ -82,7 +83,17 @@ def run_wgs_pipeline(console=False, config=None, **args):
         except Exception as e:
             log(console, f"Failed to find neighbors: {e}", style="danger")
 
-    # Step 8: compute diploid cnv calls for all samples
+    # Step 8: if GC normalization is enabled, perform GC normalization for all samples
+    if config_data["mosdepth"]["gc_normalize"].get("run") == True:
+        # log(console, "GC normalizing for all samples...", style="info")
+        try:
+            from .utils.gc_normalize import gc_normalize
+            
+            gc_normalize(config_data, console)
+        except Exception as e:
+            log(console, f"Failed to GC normalize: {e}", style="danger")
+
+    # Step 9: compute diploid cnv calls for all samples
     if config_data["compute_diploid_genotypes"].get("run") == True:
         # log(console, "Computing diploid CNV calls for all samples...", style="info")
         try:
@@ -92,7 +103,7 @@ def run_wgs_pipeline(console=False, config=None, **args):
         except Exception as e:
             log(console, f"Failed to compute diploid CNV calls: {e}", style="danger")
 
-    # Step 9: compute haploid cnv calls for all samples
+    # Step 10: compute haploid cnv calls for all samples
     if config_data["compute_haploid_genotypes"].get("run") == True:
         # log(console, "Computing haploid CNV calls for all samples...", style="info")
         try:
