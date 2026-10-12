@@ -295,72 +295,235 @@ iterative IBD-based phasing algorithm. For each sample, haplotype copy numbers
 are updated proportionally to the mean of IBD-matched haplotype neighbors until
 convergence. This step is locus-agnostic — it requires only diploid CN estimates
 and a phased IBD neighbors file.</p>
-<dl class="py function" id="module-grid.utils.hi_inference">
+<section id="hi-inference-py">
+<span id="module-grid.utils.hi_inference"></span><h2>hi_inference.py<a class="headerlink" href="#hi-inference-py" title="Link to this heading">¶</a></h2>
+<p>Haplotype-specific IRR inference for GRID.</p>
+<p>Supports five phasing algorithms, all selectable via the config file key
+<code class="docutils literal notranslate"><span class="pre">compute_haploid_genotypes.phasing_method</span></code>:</p>
+<blockquote>
+<div><dl class="simple">
+<dt>iterative    — Hujoel C++ port: iteratively partition diploid IRR by</dt><dd><p>weighted neighbor means. The original default.</p>
+</dd>
+<dt>graph_prop   — Label-spreading: blend own diploid/2 with neighbor mean</dt><dd><p>at each iteration via a tunable <code class="docutils literal notranslate"><span class="pre">alpha</span></code>.
+Best empirical performance (Pearson r ~0.88 vs. Bionano).</p>
+</dd>
+</dl>
+<p>oneshot      — Single-pass, no iteration. Fast; useful as a baseline.</p>
+<dl class="simple">
+<dt>rank_based   — Like iterative but operates on rank-normalised hap IRRs,</dt><dd><p>reducing sensitivity to copy-number outliers.</p>
+</dd>
+</dl>
+<p>oneshot_rank — Single-pass rank-normalised variant of oneshot.</p>
+</div></blockquote>
+<dl class="simple">
+<dt>Two neighbor sources are supported (<code class="docutils literal notranslate"><span class="pre">method</span></code> key):</dt><dd><p>ibs  — computeIBSpbwt output
+ibd  — iLASH output</p>
+</dd>
+</dl>
+<section id="example-config-snippet">
+<h3>Example config snippet<a class="headerlink" href="#example-config-snippet" title="Link to this heading">¶</a></h3>
+<dl>
+<dt>compute_haploid_genotypes:</dt><dd><p>method: ibd                  # ibs | ibd
+phasing_method: graph_prop   # iterative | graph_prop | oneshot | rank_based | oneshot_rank
+ibd_output: path/to/output.match
+min_neighbors: 1
+max_neighbors: 20
+n_iters: 20                  # ignored by oneshot / oneshot_rank
+alpha: 0.7                   # graph_prop only
+agg_fn: mean                 # iterative | oneshot | rank_based | oneshot_rank</p>
+<blockquote>
+<div><p>#   mean | median | weighted_cM | weighted_score |
+#   weighted_cM_score | trimmed_mean</p>
+</div></blockquote>
+<p># IBD-specific filters
+min_length: 2.0              # minimum segment length in cM
+min_match: 0.95              # minimum iLASH match score
+weighted: false              # Lorentzian distance weighting on neighbor load
+weight_scale: 1000000</p>
+</dd>
+</dl>
+</section>
+</section>
+<dl class="py data">
+<dt class="sig sig-object py" id="grid.utils.hi_inference.PHASING_METHODS">
+<span class="sig-prename descclassname"><span class="pre">grid.utils.hi_inference.</span></span><span class="sig-name descname"><span class="pre">PHASING_METHODS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">('iterative',</span> <span class="pre">'graph_prop',</span> <span class="pre">'oneshot',</span> <span class="pre">'rank_based',</span> <span class="pre">'oneshot_rank')</span></em><a class="headerlink" href="#grid.utils.hi_inference.PHASING_METHODS" title="Link to this definition">¶</a></dt>
+<dd><p>All valid values for phasing_method and agg_fn (for validation / help text)</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="grid.utils.hi_inference._adaptive_match_threshold">
+<span class="sig-prename descclassname"><span class="pre">grid.utils.hi_inference.</span></span><span class="sig-name descname"><span class="pre">_adaptive_match_threshold</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">length_cM</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_length</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_match</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">match_at_min_length</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#grid.utils.hi_inference._adaptive_match_threshold" title="Link to this definition">¶</a></dt>
+<dd><p>Length-dependent match score threshold.</p>
+<p>Short segments near min_length require a high match score
+(match_at_min_length).  Long segments asymptote down to min_match.</p>
+<dl class="simple">
+<dt>Uses a hyperbolic curve fitted to two anchor points:</dt><dd><p>(min_length,  match_at_min_length)
+(inf,         min_match)</p>
+</dd>
+<dt>Derivation:</dt><dd><dl class="simple">
+<dt>threshold(L) = min_match + (match_at_min_length - min_match)</dt><dd><ul class="simple">
+<li><p>min_length / L</p></li>
+</ul>
+</dd>
+</dl>
+</dd>
+</dl>
+<p>At L = min_length  →  match_at_min_length  (strict)
+At L → ∞           →  min_match            (lenient floor)</p>
+<p>If match_at_min_length == min_match the function is flat (disabled).</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="grid.utils.hi_inference._aggregate">
+<span class="sig-prename descclassname"><span class="pre">grid.utils.hi_inference.</span></span><span class="sig-name descname"><span class="pre">_aggregate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vals</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">weights</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">agg_fn</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fallback</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#grid.utils.hi_inference._aggregate" title="Link to this definition">¶</a></dt>
+<dd><p>Aggregate a list of neighbor values using the chosen function.</p>
+<section id="agg-fn-options">
+<h2>agg_fn options<a class="headerlink" href="#agg-fn-options" title="Link to this heading">¶</a></h2>
+<p>mean               — simple arithmetic mean (ignores weights)
+median             — median (ignores weights)
+weighted_cM        — weights proportional to segment cM  (stored in weights)
+weighted_score     — weights proportional to match score (stored in weights)
+weighted_cM_score  — combined cM × score weight         (stored in weights)
+trimmed_mean       — 10 % trimmed mean</p>
+</section>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="grid.utils.hi_inference._collect_neighbor_vals">
+<span class="sig-prename descclassname"><span class="pre">grid.utils.hi_inference.</span></span><span class="sig-name descname"><span class="pre">_collect_neighbor_vals</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">h_idx</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hap_IRRs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hap_nbrs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#grid.utils.hi_inference._collect_neighbor_vals" title="Link to this definition">¶</a></dt>
+<dd><p>Return (vals, weights) for all non-NaN neighbors of haplotype h_idx.
+vals and weights are plain Python lists.</p>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="grid.utils.hi_inference._compute_imp">
 <span class="sig-prename descclassname"><span class="pre">grid.utils.hi_inference.</span></span><span class="sig-name descname"><span class="pre">_compute_imp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">i</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hap_IRRs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hap_nbrs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mean_IRRs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#grid.utils.hi_inference._compute_imp" title="Link to this definition">¶</a></dt>
-<dd><p>Compute imputed haplotype neighbor means for sample i at the final iteration.</p>
+<dd><p>Compute imputed haplotype neighbour means for sample i.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="grid.utils.hi_inference._init_candidates">
+<span class="sig-prename descclassname"><span class="pre">grid.utils.hi_inference.</span></span><span class="sig-name descname"><span class="pre">_init_candidates</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">IRRs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hap_nbrs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">MIN_NBR</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#grid.utils.hi_inference._init_candidates" title="Link to this definition">¶</a></dt>
+<dd><p>Identify samples with &gt;= MIN_NBR neighbors on BOTH haplotypes.
+Returns (candidate_set, hap_IRRs initialised to diploid/2, mean_IRRs).</p>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="grid.utils.hi_inference._load_ibd_neighbors">
-<span class="sig-prename descclassname"><span class="pre">grid.utils.hi_inference.</span></span><span class="sig-name descname"><span class="pre">_load_ibd_neighbors</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ilash_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">IDtoInd</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">MAX_NBR</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">region_start</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">region_end</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_length</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_match</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.7</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">weighted</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">weight_scale</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000000</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#grid.utils.hi_inference._load_ibd_neighbors" title="Link to this definition">¶</a></dt>
-<dd><p>Load IBD neighbors from iLASH output.</p>
+<span class="sig-prename descclassname"><span class="pre">grid.utils.hi_inference.</span></span><span class="sig-name descname"><span class="pre">_load_ibd_neighbors</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ilash_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">IDtoInd</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">MAX_NBR</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_length</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_match</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.7</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">match_at_min_length</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">region_start</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">region_end</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">weighted</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">weight_scale</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000000</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#grid.utils.hi_inference._load_ibd_neighbors" title="Link to this definition">¶</a></dt>
+<dd><p>Load IBD neighbors from iLASH output using a two-tier priority system.</p>
 <dl class="simple">
-<dt>File format (no header, tab-separated):</dt><dd><p>FID1  HAP_ID1  FID2  HAP_ID2  CHR  BP1  BP2  SNP_BP1  SNP_BP2  LENGTH  MATCH</p>
+<dt>Tier 1 (gold): segment overlaps the VNTR region [region_start, region_end]</dt><dd><p>AND passes the quality gate.</p>
+</dd>
+<dt>Tier 2 (fill): passes quality gate but does not overlap the VNTR region.</dt><dd><p>Used to fill remaining neighbor slots after Tier 1.</p>
 </dd>
 </dl>
-<p>HAP_ID format: {FID}_{hap} where hap is 0 or 1 (0-indexed).
-LENGTH is in cM. MATCH is the IBD match score.</p>
-<dl class="simple">
-<dt>If weighted=True, each neighbor gets a Lorentzian distance weight:</dt><dd><p>w = (weight_scale / (distance_bp + weight_scale)) * match</p>
+<p>If region_start/region_end are None, all segments are Tier 1.</p>
+<dl>
+<dt>Quality gate — length-adaptive match threshold:</dt><dd><p>If match_at_min_length is set (and &gt; min_match), the required match
+score scales with segment length:</p>
+<blockquote>
+<div><dl class="simple">
+<dt>threshold(L) = min_match</dt><dd><ul class="simple">
+<li><p>(match_at_min_length - min_match) * min_length / L</p></li>
+</ul>
 </dd>
 </dl>
-<p>Returns hap_nbrs: list of lists of (neighbor_hap_idx, weight).</p>
+</div></blockquote>
+<p>Short segments (L ≈ min_length) must clear match_at_min_length.
+Long segments asymptote to min_match.
+If match_at_min_length is None or == min_match, a flat threshold
+(min_match) is used for all lengths.</p>
+</dd>
+</dl>
+<p>Within each tier, segments are ranked by length * match descending.
+HAP_ID format: {FID}_{hap} where hap is 0 or 1 (0-indexed).
+Returns hap_nbrs: list of lists of (neighbor_hap_idx, weight).</p>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="grid.utils.hi_inference._load_ibs_neighbors">
 <span class="sig-prename descclassname"><span class="pre">grid.utils.hi_inference.</span></span><span class="sig-name descname"><span class="pre">_load_ibs_neighbors</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">neighbors_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">IDtoInd</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">MAX_NBR</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#grid.utils.hi_inference._load_ibs_neighbors" title="Link to this definition">¶</a></dt>
-<dd><p>Load IBS neighbors from computeIBSpbwt output.</p>
-<dl class="simple">
-<dt>File format (header + tab/space-separated rows):</dt><dd><p>ID  hap  nbrInd  cMlen  cMedge  IDnbr  hapNbr</p>
+<dd><p>Load IBS neighbors from computeIBSpbwt output.
+Haplotypes are 1-indexed (1 or 2).
+Returns hap_nbrs: list of lists of (neighbor_hap_idx, weight=1.0).</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="grid.utils.hi_inference._phase_graph_prop">
+<span class="sig-prename descclassname"><span class="pre">grid.utils.hi_inference.</span></span><span class="sig-name descname"><span class="pre">_phase_graph_prop</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">IRRs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hap_nbrs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">MIN_NBR</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">N_ITERS</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alpha</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">console</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#grid.utils.hi_inference._phase_graph_prop" title="Link to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>Label-spreading:</dt><dd><p>each iter: mixed_h = alpha*(diploid/2) + (1-alpha)*neighbor_mean
+then partition diploid by ratio of mixed values.</p>
 </dd>
 </dl>
-<p>Haplotypes are 1-indexed (1 or 2).
-Returns hap_nbrs: list of lists of (neighbor_hap_idx, weight=1.0).</p>
+<p>alpha=0.7 (trust own signal 70 %) gave best empirical results.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="grid.utils.hi_inference._phase_iterative">
+<span class="sig-prename descclassname"><span class="pre">grid.utils.hi_inference.</span></span><span class="sig-name descname"><span class="pre">_phase_iterative</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">IRRs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hap_nbrs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">MIN_NBR</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">N_ITERS</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">agg_fn</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">console</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#grid.utils.hi_inference._phase_iterative" title="Link to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>Original Hujoel algorithm:</dt><dd><p>initialise hap = diploid/2
+each iter: partition diploid by ratio of neighbor aggregate means</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="grid.utils.hi_inference._phase_oneshot">
+<span class="sig-prename descclassname"><span class="pre">grid.utils.hi_inference.</span></span><span class="sig-name descname"><span class="pre">_phase_oneshot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">IRRs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hap_nbrs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">MIN_NBR</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">agg_fn</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">console</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#grid.utils.hi_inference._phase_oneshot" title="Link to this definition">¶</a></dt>
+<dd><p>Single-pass, non-iterative.
+Neighbours’ values are always diploid/2 (the seed), so each sample’s
+estimate is independent of all others.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="grid.utils.hi_inference._phase_oneshot_rank">
+<span class="sig-prename descclassname"><span class="pre">grid.utils.hi_inference.</span></span><span class="sig-name descname"><span class="pre">_phase_oneshot_rank</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">IRRs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hap_nbrs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">MIN_NBR</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">agg_fn</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">console</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#grid.utils.hi_inference._phase_oneshot_rank" title="Link to this definition">¶</a></dt>
+<dd><p>Single-pass rank-normalised variant.
+Seeds are rank-normalised diploid/2 values; no iteration.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="grid.utils.hi_inference._phase_rank_based">
+<span class="sig-prename descclassname"><span class="pre">grid.utils.hi_inference.</span></span><span class="sig-name descname"><span class="pre">_phase_rank_based</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">IRRs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hap_nbrs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">MIN_NBR</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">N_ITERS</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">agg_fn</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">console</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#grid.utils.hi_inference._phase_rank_based" title="Link to this definition">¶</a></dt>
+<dd><p>Iterative, but ranks hap IRRs to [0,1] before aggregating neighbours.
+Reduces influence of extreme copy-number outliers on the mean signal.</p>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="grid.utils.hi_inference._read_dip_cn_file">
 <span class="sig-prename descclassname"><span class="pre">grid.utils.hi_inference.</span></span><span class="sig-name descname"><span class="pre">_read_dip_cn_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dip_cn_file</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#grid.utils.hi_inference._read_dip_cn_file" title="Link to this definition">¶</a></dt>
-<dd><p>Read diploid CN file with string IDs, skipping non-data rows (e.g. header).</p>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="grid.utils.hi_inference._run_phasing">
-<span class="sig-prename descclassname"><span class="pre">grid.utils.hi_inference.</span></span><span class="sig-name descname"><span class="pre">_run_phasing</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">IRRs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hap_nbrs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">MIN_NBR</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">N_ITERS</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">console</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#grid.utils.hi_inference._run_phasing" title="Link to this definition">¶</a></dt>
-<dd><p>Iterative haplotype phasing shared by both IBS and IBD methods.</p>
-<p>hap_nbrs[h] is a list of (neighbor_hap_idx, weight).
-Returns (hap_IRRs, mean_IRRs).</p>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="grid.utils.hi_inference._segment_distance">
-<span class="sig-prename descclassname"><span class="pre">grid.utils.hi_inference.</span></span><span class="sig-name descname"><span class="pre">_segment_distance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bp1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bp2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">region_start</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">region_end</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#grid.utils.hi_inference._segment_distance" title="Link to this definition">¶</a></dt>
-<dd><p>Physical distance from IBD segment [bp1, bp2] to target region. 0 if overlapping.</p>
+<dd><p>Read diploid CN file with string IDs, skipping non-data rows.</p>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="grid.utils.hi_inference.hi_inference">
 <span class="sig-prename descclassname"><span class="pre">grid.utils.hi_inference.</span></span><span class="sig-name descname"><span class="pre">hi_inference</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">console</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#grid.utils.hi_inference.hi_inference" title="Link to this definition">¶</a></dt>
-<dd><p>Impute haplotype-specific IRRs from diploid IRRs and haplotype neighbors.</p>
-<p>Supports two methods controlled by <code class="docutils literal notranslate"><span class="pre">method</span></code> in <code class="docutils literal notranslate"><span class="pre">compute_haploid_genotypes</span></code>:</p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">&quot;ibs&quot;</span></code> — uses computeIBSpbwt output (<code class="docutils literal notranslate"><span class="pre">ibs_output</span></code> key required)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">&quot;ibd&quot;</span></code> — uses iLASH output (<code class="docutils literal notranslate"><span class="pre">ibd_output</span></code> key required).
-Set <code class="docutils literal notranslate"><span class="pre">weighted:</span> <span class="pre">True</span></code> to apply Lorentzian distance weighting.</p></li>
-</ul>
+<dd><p>Impute haplotype-specific IRRs from diploid IRRs and haplotype neighbours.</p>
+<section id="neighbour-source-method-key">
+<h2>Neighbour source  (<code class="docutils literal notranslate"><span class="pre">method</span></code> key)<a class="headerlink" href="#neighbour-source-method-key" title="Link to this heading">¶</a></h2>
+<p>ibs   — computeIBSpbwt output (<code class="docutils literal notranslate"><span class="pre">ibs_output</span></code> required)
+ibd   — iLASH output          (<code class="docutils literal notranslate"><span class="pre">ibd_output</span></code> required)</p>
+</section>
+<section id="phasing-algorithm-phasing-method-key-default-graph-prop">
+<h2>Phasing algorithm  (<code class="docutils literal notranslate"><span class="pre">phasing_method</span></code> key, default: <code class="docutils literal notranslate"><span class="pre">graph_prop</span></code>)<a class="headerlink" href="#phasing-algorithm-phasing-method-key-default-graph-prop" title="Link to this heading">¶</a></h2>
+<p>iterative     — Hujoel C++ port (original GRID default)
+graph_prop    — Label-spreading; tune with <code class="docutils literal notranslate"><span class="pre">alpha</span></code> (default 0.7)
+oneshot       — Single-pass, no iteration
+rank_based    — Iterative on rank-normalised values
+oneshot_rank  — Single-pass rank-normalised</p>
+</section>
+<section id="aggregation-function-agg-fn-key-default-mean">
+<h2>Aggregation function  (<code class="docutils literal notranslate"><span class="pre">agg_fn</span></code> key, default: <code class="docutils literal notranslate"><span class="pre">mean</span></code>)<a class="headerlink" href="#aggregation-function-agg-fn-key-default-mean" title="Link to this heading">¶</a></h2>
+<p>Used by iterative, oneshot, rank_based, oneshot_rank.
+Ignored by graph_prop (always uses plain mean for neighbour signal).</p>
+<blockquote>
+<div><p>mean | median | weighted_cM | weighted_score | weighted_cM_score | trimmed_mean</p>
+</div></blockquote>
 <p>Output columns: ID  IRRs  hap1phased  hap2phased  hap1imp  hap2imp</p>
+</section>
 </dd></dl>
 
 </section>
@@ -421,12 +584,24 @@ Set <code class="docutils literal notranslate"><span class="pre">weighted:</span
           <div class="toc-tree">
             <ul>
 <li><a class="reference internal" href="#">Haplotype Inference</a><ul>
+<li><a class="reference internal" href="#hi-inference-py">hi_inference.py</a><ul>
+<li><a class="reference internal" href="#example-config-snippet">Example config snippet</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#grid.utils.hi_inference.PHASING_METHODS"><code class="docutils literal notranslate"><span class="pre">PHASING_METHODS</span></code></a></li>
+<li><a class="reference internal" href="#grid.utils.hi_inference._adaptive_match_threshold"><code class="docutils literal notranslate"><span class="pre">_adaptive_match_threshold()</span></code></a></li>
+<li><a class="reference internal" href="#grid.utils.hi_inference._aggregate"><code class="docutils literal notranslate"><span class="pre">_aggregate()</span></code></a></li>
+<li><a class="reference internal" href="#grid.utils.hi_inference._collect_neighbor_vals"><code class="docutils literal notranslate"><span class="pre">_collect_neighbor_vals()</span></code></a></li>
 <li><a class="reference internal" href="#grid.utils.hi_inference._compute_imp"><code class="docutils literal notranslate"><span class="pre">_compute_imp()</span></code></a></li>
+<li><a class="reference internal" href="#grid.utils.hi_inference._init_candidates"><code class="docutils literal notranslate"><span class="pre">_init_candidates()</span></code></a></li>
 <li><a class="reference internal" href="#grid.utils.hi_inference._load_ibd_neighbors"><code class="docutils literal notranslate"><span class="pre">_load_ibd_neighbors()</span></code></a></li>
 <li><a class="reference internal" href="#grid.utils.hi_inference._load_ibs_neighbors"><code class="docutils literal notranslate"><span class="pre">_load_ibs_neighbors()</span></code></a></li>
+<li><a class="reference internal" href="#grid.utils.hi_inference._phase_graph_prop"><code class="docutils literal notranslate"><span class="pre">_phase_graph_prop()</span></code></a></li>
+<li><a class="reference internal" href="#grid.utils.hi_inference._phase_iterative"><code class="docutils literal notranslate"><span class="pre">_phase_iterative()</span></code></a></li>
+<li><a class="reference internal" href="#grid.utils.hi_inference._phase_oneshot"><code class="docutils literal notranslate"><span class="pre">_phase_oneshot()</span></code></a></li>
+<li><a class="reference internal" href="#grid.utils.hi_inference._phase_oneshot_rank"><code class="docutils literal notranslate"><span class="pre">_phase_oneshot_rank()</span></code></a></li>
+<li><a class="reference internal" href="#grid.utils.hi_inference._phase_rank_based"><code class="docutils literal notranslate"><span class="pre">_phase_rank_based()</span></code></a></li>
 <li><a class="reference internal" href="#grid.utils.hi_inference._read_dip_cn_file"><code class="docutils literal notranslate"><span class="pre">_read_dip_cn_file()</span></code></a></li>
-<li><a class="reference internal" href="#grid.utils.hi_inference._run_phasing"><code class="docutils literal notranslate"><span class="pre">_run_phasing()</span></code></a></li>
-<li><a class="reference internal" href="#grid.utils.hi_inference._segment_distance"><code class="docutils literal notranslate"><span class="pre">_segment_distance()</span></code></a></li>
 <li><a class="reference internal" href="#grid.utils.hi_inference.hi_inference"><code class="docutils literal notranslate"><span class="pre">hi_inference()</span></code></a></li>
 </ul>
 </li>

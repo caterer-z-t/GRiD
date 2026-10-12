@@ -299,9 +299,8 @@ filtered by mapping quality and SAM flag as specified in the config.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="grid.utils.count_reads.count_reads_in_region">
-<span class="sig-prename descclassname"><span class="pre">grid.utils.count_reads.</span></span><span class="sig-name descname"><span class="pre">count_reads_in_region</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cram_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ref_fasta</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">chrom</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">proper_flags</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_mapq</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#grid.utils.count_reads.count_reads_in_region" title="Link to this definition">¶</a></dt>
-<dd><p>Count properly paired reads in a genomic region using pysam.</p>
-<dl class="field-list simple">
+<span class="sig-prename descclassname"><span class="pre">grid.utils.count_reads.</span></span><span class="sig-name descname"><span class="pre">count_reads_in_region</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cram_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ref_fasta</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">chrom</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">proper_flags</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#grid.utils.count_reads.count_reads_in_region" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>cram_file</strong> (<em>str</em>)</p></li>
@@ -310,7 +309,6 @@ filtered by mapping quality and SAM flag as specified in the config.</p>
 <li><p><strong>start</strong> (<em>int</em>)</p></li>
 <li><p><strong>end</strong> (<em>int</em>)</p></li>
 <li><p><strong>proper_flags</strong> (<em>set</em><em>[</em><em>int</em><em>]</em>)</p></li>
-<li><p><strong>min_mapq</strong> (<em>int</em>)</p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
@@ -321,7 +319,7 @@ filtered by mapping quality and SAM flag as specified in the config.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="grid.utils.count_reads.process_single_cram">
-<span class="sig-prename descclassname"><span class="pre">grid.utils.count_reads.</span></span><span class="sig-name descname"><span class="pre">process_single_cram</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ref_fasta</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">chrom</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">proper_flags</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_mapq</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">console</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#grid.utils.count_reads.process_single_cram" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">grid.utils.count_reads.</span></span><span class="sig-name descname"><span class="pre">process_single_cram</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ref_fasta</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">chrom</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">proper_flags</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">console</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#grid.utils.count_reads.process_single_cram" title="Link to this definition">¶</a></dt>
 <dd><p>Process a single sequence alignment file and count reads in region.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -332,7 +330,6 @@ filtered by mapping quality and SAM flag as specified in the config.</p>
 <li><p><strong>start</strong> (<em>int</em>) – Start position</p></li>
 <li><p><strong>end</strong> (<em>int</em>) – End position</p></li>
 <li><p><strong>proper_flags</strong> (<em>set</em><em>[</em><em>int</em><em>]</em>) – Set of SAM flags to count</p></li>
-<li><p><strong>min_mapq</strong> (<em>int</em>)</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>

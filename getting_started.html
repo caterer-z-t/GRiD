@@ -789,56 +789,57 @@ chosen <code class="docutils literal notranslate"><span class="pre">method</span
 <span class="linenos">22</span><span class="w">  </span><span class="nt">min_mapq</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
 <span class="linenos">23</span><span class="w">  </span><span class="nt">flags</span><span class="p">:</span>
 <span class="linenos">24</span><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">83</span><span class="w">   </span><span class="c1"># proper pair, reverse strand</span>
-<span class="linenos">25</span><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">147</span><span class="w">  </span><span class="c1"># proper pair, mate reverse</span>
-<span class="linenos">26</span><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">81</span><span class="w">   </span><span class="c1"># reverse, mate forward (unpaired-ish)</span>
-<span class="linenos">27</span><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">145</span><span class="w">  </span><span class="c1"># mate reverse</span>
-<span class="linenos">28</span>
-<span class="linenos">29</span><span class="nt">mosdepth</span><span class="p">:</span>
-<span class="linenos">30</span><span class="w">  </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">True</span>
-<span class="linenos">31</span><span class="w">  </span><span class="nt">output_file_prefix</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;mosdepth_results&quot;</span>
-<span class="linenos">32</span><span class="w">  </span><span class="nt">bin_size</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
-<span class="linenos">33</span><span class="w">  </span><span class="nt">mode</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;fast&quot;</span>
-<span class="linenos">34</span><span class="w">  </span><span class="nt">region_name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;LPA&quot;</span>
-<span class="linenos">35</span><span class="w">  </span><span class="nt">work_dir</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;path/to/mosdepth_work/&quot;</span>
-<span class="linenos">36</span><span class="w">  </span><span class="nt">remove_intermediate</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">True</span>
-<span class="linenos">37</span>
-<span class="linenos">38</span><span class="w">  </span><span class="nt">normalize</span><span class="p">:</span>
-<span class="linenos">39</span><span class="w">    </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">True</span>
-<span class="linenos">40</span><span class="w">    </span><span class="nt">min_depth</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">20</span>
-<span class="linenos">41</span><span class="w">    </span><span class="nt">max_depth</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">100</span>
-<span class="linenos">42</span><span class="w">    </span><span class="nt">top_frac</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.1</span>
-<span class="linenos">43</span><span class="w">    </span><span class="nt">output_file_prefix</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;mosdepth_results_normalized&quot;</span>
-<span class="linenos">44</span><span class="w">    </span><span class="nt">repeat_mask_file</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;path/to/repeat_mask.bed&quot;</span>
-<span class="linenos">45</span>
-<span class="linenos">46</span><span class="w">  </span><span class="nt">neighbors</span><span class="p">:</span>
-<span class="linenos">47</span><span class="w">    </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">True</span>
-<span class="linenos">48</span><span class="w">    </span><span class="nt">output_file_prefix</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;neighbor_coverage&quot;</span>
-<span class="linenos">49</span><span class="w">    </span><span class="nt">num_neighbors</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5</span>
-<span class="linenos">50</span><span class="w">    </span><span class="nt">zmax</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2.0</span>
-<span class="linenos">51</span><span class="w">    </span><span class="nt">sigma2_max</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
-<span class="linenos">52</span>
-<span class="linenos">53</span><span class="nt">compute_diploid_genotypes</span><span class="p">:</span>
-<span class="linenos">54</span><span class="w">  </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">True</span>
-<span class="linenos">55</span><span class="w">  </span><span class="nt">output_file_prefix</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;diploid_genotypes&quot;</span>
-<span class="linenos">56</span><span class="w">  </span><span class="nt">n_nbr</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">300</span>
-<span class="linenos">57</span>
-<span class="linenos">58</span><span class="nt">compute_haploid_genotypes</span><span class="p">:</span>
-<span class="linenos">59</span><span class="w">  </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">True</span>
-<span class="linenos">60</span><span class="w">  </span><span class="nt">output_file_prefix</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;haploid_genotypes&quot;</span>
-<span class="linenos">61</span><span class="w">  </span><span class="nt">method</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;ibs&quot;</span><span class="w">          </span><span class="c1"># &quot;ibs&quot; or &quot;ibd&quot;</span>
-<span class="linenos">62</span><span class="w">  </span><span class="nt">min_neighbors</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
-<span class="linenos">63</span><span class="w">  </span><span class="nt">max_neighbors</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10</span>
-<span class="linenos">64</span><span class="w">  </span><span class="nt">n_iters</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">100</span>
-<span class="linenos">65</span>
-<span class="linenos">66</span><span class="w">  </span><span class="c1"># IBS method: provide computeIBSpbwt output</span>
-<span class="linenos">67</span><span class="w">  </span><span class="nt">ibs_output</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;path/to/ibs_neighbors_chr6.tsv.gz&quot;</span>
-<span class="linenos">68</span>
-<span class="linenos">69</span><span class="w">  </span><span class="c1"># IBD method: provide iLASH output and filtering thresholds</span>
-<span class="linenos">70</span><span class="w">  </span><span class="c1"># ibd_output: &quot;path/to/ilash_output.txt&quot;</span>
-<span class="linenos">71</span><span class="w">  </span><span class="c1"># weighted: False         # True = Lorentzian distance+match weighting</span>
-<span class="linenos">72</span><span class="w">  </span><span class="c1"># weight_scale: 1000000   # bp half-width for distance weight</span>
-<span class="linenos">73</span><span class="w">  </span><span class="c1"># min_length: 0.5         # minimum IBD segment length (cM)</span>
-<span class="linenos">74</span><span class="w">  </span><span class="c1"># min_match: 0.70         # minimum IBD match score</span>
+<span class="linenos">25</span><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">99</span><span class="w">   </span><span class="c1"># mate forward, reverse strand (unpaired-ish)</span>
+<span class="linenos">26</span><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">147</span><span class="w">  </span><span class="c1"># proper pair, mate reverse</span>
+<span class="linenos">27</span><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">163</span><span class="w">  </span><span class="c1"># mate forward, reverse strand (unpaired-ish)</span>
+<span class="linenos">28</span><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">81</span><span class="w">   </span><span class="c1"># reverse, mate forward (unpaired-ish)</span>
+<span class="linenos">29</span><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">97</span><span class="w">   </span><span class="c1"># forward, mate reverse (unpaired-ish)</span>
+<span class="linenos">30</span><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">145</span><span class="w">  </span><span class="c1"># mate reverse</span>
+<span class="linenos">31</span><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">161</span><span class="w">  </span><span class="c1"># mate forward</span>
+<span class="linenos">32</span>
+<span class="linenos">33</span><span class="nt">mosdepth</span><span class="p">:</span>
+<span class="linenos">34</span><span class="w">  </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">True</span>
+<span class="linenos">35</span><span class="w">  </span><span class="nt">output_file_prefix</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;mosdepth_results&quot;</span>
+<span class="linenos">36</span><span class="w">  </span><span class="nt">bin_size</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
+<span class="linenos">37</span><span class="w">  </span><span class="nt">work_dir</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;path/to/mosdepth_work/&quot;</span>
+<span class="linenos">38</span><span class="w">  </span><span class="nt">remove_intermediate</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">True</span>
+<span class="linenos">39</span><span class="w">  </span><span class="nt">example_bed</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">null</span>
+<span class="linenos">40</span>
+<span class="linenos">41</span><span class="w">  </span><span class="nt">normalize</span><span class="p">:</span>
+<span class="linenos">42</span><span class="w">    </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">True</span>
+<span class="linenos">43</span><span class="w">    </span><span class="nt">output_file_prefix</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;ID_scale_zdepths&quot;</span>
+<span class="linenos">44</span><span class="w">    </span><span class="nt">combined_bins_gz</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">null</span><span class="w">  </span><span class="c1"># optional, defaults to output_dir/mosdepth_bins.txt.gz</span>
+<span class="linenos">45</span><span class="w">    </span><span class="nt">repeat_mask_file</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;path/to/repeat_mask_list.hg38.ucsc_bed&quot;</span>
+<span class="linenos">46</span>
+<span class="linenos">47</span><span class="w">  </span><span class="nt">neighbors</span><span class="p">:</span>
+<span class="linenos">48</span><span class="w">    </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">True</span>
+<span class="linenos">49</span><span class="w">    </span><span class="nt">output_file_prefix</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;neighbor_coverage&quot;</span>
+<span class="linenos">50</span><span class="w">    </span><span class="nt">num_neighbors</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5</span>
+<span class="linenos">51</span><span class="w">    </span><span class="nt">zmax</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2.0</span>
+<span class="linenos">52</span><span class="w">    </span><span class="nt">sigma2_max</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
+<span class="linenos">53</span>
+<span class="linenos">54</span><span class="nt">compute_diploid_genotypes</span><span class="p">:</span>
+<span class="linenos">55</span><span class="w">  </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">True</span>
+<span class="linenos">56</span><span class="w">  </span><span class="nt">output_file_prefix</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;diploid_genotypes&quot;</span>
+<span class="linenos">57</span><span class="w">  </span><span class="nt">n_nbr</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">300</span>
+<span class="linenos">58</span>
+<span class="linenos">59</span><span class="nt">compute_haploid_genotypes</span><span class="p">:</span>
+<span class="linenos">60</span><span class="w">  </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">True</span>
+<span class="linenos">61</span><span class="w">  </span><span class="nt">output_file_prefix</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;haploid_genotypes&quot;</span>
+<span class="linenos">62</span><span class="w">  </span><span class="nt">method</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;ibs&quot;</span><span class="w">          </span><span class="c1"># &quot;ibs&quot; or &quot;ibd&quot;</span>
+<span class="linenos">63</span><span class="w">  </span><span class="nt">min_neighbors</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
+<span class="linenos">64</span><span class="w">  </span><span class="nt">max_neighbors</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10</span>
+<span class="linenos">65</span><span class="w">  </span><span class="nt">n_iters</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">100</span>
+<span class="linenos">66</span>
+<span class="linenos">67</span><span class="w">  </span><span class="c1"># IBS method: provide computeIBSpbwt output</span>
+<span class="linenos">68</span><span class="w">  </span><span class="nt">ibs_output</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;path/to/ibs_neighbors_chr6.tsv.gz&quot;</span>
+<span class="linenos">69</span>
+<span class="linenos">70</span><span class="w">  </span><span class="c1"># IBD method: provide iLASH output and filtering thresholds</span>
+<span class="linenos">71</span><span class="w">  </span><span class="c1"># ibd_output: &quot;path/to/ilash_output.txt&quot;</span>
+<span class="linenos">72</span><span class="w">  </span><span class="c1"># weighted: False         # True = Lorentzian distance+match weighting</span>
+<span class="linenos">73</span><span class="w">  </span><span class="c1"># weight_scale: 1000000   # bp half-width for distance weight</span>
+<span class="linenos">74</span><span class="w">  </span><span class="c1"># min_length: 0.5         # minimum IBD segment length (cM)</span>
+<span class="linenos">75</span><span class="w">  </span><span class="c1"># min_match: 0.70         # minimum IBD match score</span>
 </pre></div>
 </div>
 </div>

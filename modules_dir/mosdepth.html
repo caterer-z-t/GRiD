@@ -293,162 +293,49 @@
 <p>Runs <a class="reference external" href="https://github.com/brentp/mosdepth">mosdepth</a> across all samples in binned mode,
 then computes an overlap-weighted mean depth for the KIV-2 region.</p>
 <dl class="py function" id="module-grid.utils.mosdepth">
-<dt class="sig sig-object py" id="grid.utils.mosdepth.build_mosdepth_command">
-<span class="sig-prename descclassname"><span class="pre">grid.utils.mosdepth.</span></span><span class="sig-name descname"><span class="pre">build_mosdepth_command</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cram_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ref_fasta</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_prefix</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">by</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fast_mode</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threads</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#grid.utils.mosdepth.build_mosdepth_command" title="Link to this definition">¶</a></dt>
-<dd><p>Build mosdepth command with appropriate flags.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>cram_path</strong> (<em>str</em>) – Path to CRAM file</p></li>
-<li><p><strong>ref_fasta</strong> (<em>str</em>) – Path to reference genome FASTA</p></li>
-<li><p><strong>output_prefix</strong> (<em>Path</em>) – Output prefix for mosdepth</p></li>
-<li><p><strong>by</strong> (<em>int</em>) – Bin size for coverage calculation</p></li>
-<li><p><strong>fast_mode</strong> (<em>bool</em>) – Whether to use fast mode</p></li>
-<li><p><strong>threads</strong> (<em>int</em>) – Number of threads to use</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>List of command arguments</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><em>List</em>[str]</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="grid.utils.mosdepth.check_mosdepth_available">
-<span class="sig-prename descclassname"><span class="pre">grid.utils.mosdepth.</span></span><span class="sig-name descname"><span class="pre">check_mosdepth_available</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#grid.utils.mosdepth.check_mosdepth_available" title="Link to this definition">¶</a></dt>
-<dd><p>Check if mosdepth executable is available in PATH.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>None</strong></p>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>None</p>
-</dd>
-<dt class="field-odd">Raises<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>RuntimeError</strong> – If mosdepth is not found.</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
 <dt class="sig sig-object py" id="grid.utils.mosdepth.compute_mosdepth">
 <span class="sig-prename descclassname"><span class="pre">grid.utils.mosdepth.</span></span><span class="sig-name descname"><span class="pre">compute_mosdepth</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">console</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#grid.utils.mosdepth.compute_mosdepth" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="grid.utils.mosdepth.compute_region_coverage">
-<span class="sig-prename descclassname"><span class="pre">grid.utils.mosdepth.</span></span><span class="sig-name descname"><span class="pre">compute_region_coverage</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">regions_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">chrom</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#grid.utils.mosdepth.compute_region_coverage" title="Link to this definition">¶</a></dt>
-<dd><p>Compute average coverage for a genomic region from mosdepth output.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>regions_file</strong> (<em>Path</em>) – Path to mosdepth regions.bed.gz file</p></li>
-<li><p><strong>chrom</strong> (<em>str</em>) – Chromosome name</p></li>
-<li><p><strong>start</strong> (<em>int</em>) – Start position</p></li>
-<li><p><strong>end</strong> (<em>int</em>) – End position</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Average coverage as integer (rounded and scaled by 100)</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>int</p>
+<dt class="sig sig-object py" id="grid.utils.mosdepth.remove_intermediate_files">
+<span class="sig-prename descclassname"><span class="pre">grid.utils.mosdepth.</span></span><span class="sig-name descname"><span class="pre">remove_intermediate_files</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mosdepth_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">console</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#grid.utils.mosdepth.remove_intermediate_files" title="Link to this definition">¶</a></dt>
+<dd><p>Remove intermediate mosdepth files, keeping only the example bed.</p>
+<dl class="simple">
+<dt>Removes: <a href="#id1"><span class="problematic" id="id2">*</span></a>.mosdepth.global.dist.txt, <a href="#id3"><span class="problematic" id="id4">*</span></a>.mosdepth.region.dist.txt,</dt><dd><p><a href="#id5"><span class="problematic" id="id6">*</span></a>.regions.bed.gz, <a href="#id7"><span class="problematic" id="id8">*</span></a>.regions.bed.gz.csi, <a href="#id9"><span class="problematic" id="id10">*</span></a>.per_sample.txt</p>
 </dd>
 </dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="grid.utils.mosdepth.remove_intermediate_files">
-<span class="sig-prename descclassname"><span class="pre">grid.utils.mosdepth.</span></span><span class="sig-name descname"><span class="pre">remove_intermediate_files</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">work_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">console</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">include_region_bed_gz</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#grid.utils.mosdepth.remove_intermediate_files" title="Link to this definition">¶</a></dt>
-<dd><p>Remove intermediate mosdepth files from the working directory.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>work_dir</strong> (<em>Path</em>) – Path to working directory</p></li>
-<li><p><strong>console</strong> – Optional console for logging</p></li>
-<li><p><strong>include_region_bed_gz</strong> (<em>bool</em>) – Whether to include regions.bed.gz files in removal</p></li>
-</ul>
+<dd class="field-odd"><p><strong>mosdepth_dir</strong> (<em>Path</em>)</p>
 </dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>None</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="grid.utils.mosdepth.run_mosdepth_single_cram">
-<span class="sig-prename descclassname"><span class="pre">grid.utils.mosdepth.</span></span><span class="sig-name descname"><span class="pre">run_mosdepth_single_cram</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cram_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ref_fasta</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">work_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">chrom</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">region_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">by</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fast_mode</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threads</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">console</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#grid.utils.mosdepth.run_mosdepth_single_cram" title="Link to this definition">¶</a></dt>
-<dd><p>Run mosdepth on a single CRAM file and compute coverage for region.</p>
+<span class="sig-prename descclassname"><span class="pre">grid.utils.mosdepth.</span></span><span class="sig-name descname"><span class="pre">run_mosdepth_single_cram</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cram_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ref_fasta</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mosdepth_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">by</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">console</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#grid.utils.mosdepth.run_mosdepth_single_cram" title="Link to this definition">¶</a></dt>
+<dd><p>Run mosdepth genome-wide on one CRAM, parse the regions.bed.gz output
+exactly as Mukamel’s shell script does (strip chr, keep autosomes 1-22,
+scale depth by 100 and round to int), and write one per-sample row file.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>cram_path</strong> (<em>str</em>) – Path to CRAM file</p></li>
-<li><p><strong>ref_fasta</strong> (<em>str</em>) – Path to reference genome FASTA</p></li>
-<li><p><strong>work_dir</strong> (<em>Path</em>) – Working directory for intermediate files</p></li>
-<li><p><strong>chrom</strong> (<em>str</em>) – Chromosome name</p></li>
-<li><p><strong>start</strong> (<em>int</em>) – Start position</p></li>
-<li><p><strong>end</strong> (<em>int</em>) – End position</p></li>
-<li><p><strong>by</strong> (<em>int</em>) – Bin size for mosdepth</p></li>
-<li><p><strong>fast_mode</strong> (<em>bool</em>) – Whether to use fast mode</p></li>
-<li><p><strong>threads</strong> (<em>int</em>) – Number of threads to use</p></li>
-<li><p><strong>region_name</strong> (<em>str</em>)</p></li>
+<li><p><strong>ref_fasta</strong> (<em>str</em>) – Path to reference FASTA</p></li>
+<li><p><strong>mosdepth_dir</strong> (<em>Path</em>) – Directory for mosdepth intermediate output</p></li>
+<li><p><strong>by</strong> (<em>int</em>) – Bin size (default 1000 = 1kb)</p></li>
+<li><p><strong>console</strong> – Optional rich console for logging</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Tuple of (sample_name, coverage) where coverage is int or “Error”</p>
+<dd class="field-even"><p>True on success, False on failure</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><em>Tuple</em>[str, int | str]</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="grid.utils.mosdepth.wait_for_mosdepth_output">
-<span class="sig-prename descclassname"><span class="pre">grid.utils.mosdepth.</span></span><span class="sig-name descname"><span class="pre">wait_for_mosdepth_output</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">work_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sample_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">console</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_attempts</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sleep_seconds</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#grid.utils.mosdepth.wait_for_mosdepth_output" title="Link to this definition">¶</a></dt>
-<dd><p>Wait for mosdepth output file to appear.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>work_dir</strong> (<em>Path</em>) – Working directory where mosdepth writes output</p></li>
-<li><p><strong>sample_name</strong> (<em>str</em>) – Sample name to search for</p></li>
-<li><p><strong>max_attempts</strong> (<em>int</em>) – Maximum number of attempts to find file</p></li>
-<li><p><strong>sleep_seconds</strong> (<em>int</em>) – Seconds to wait between attempts</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Path to regions.bed.gz file</p>
-</dd>
-<dt class="field-odd">Raises<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>FileNotFoundError</strong> – If file is not found after max attempts</p>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p><em>Path</em></p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="grid.utils.mosdepth.write_coverage_result">
-<span class="sig-prename descclassname"><span class="pre">grid.utils.mosdepth.</span></span><span class="sig-name descname"><span class="pre">write_coverage_result</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">output_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sample_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">coverage</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">write_lock</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#grid.utils.mosdepth.write_coverage_result" title="Link to this definition">¶</a></dt>
-<dd><p>Write coverage result to output file in a thread-safe manner.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>output_file</strong> (<em>Path</em>) – Path to output TSV file</p></li>
-<li><p><strong>sample_name</strong> (<em>str</em>) – Sample name</p></li>
-<li><p><strong>coverage</strong> (<em>int</em>) – Coverage value</p></li>
-<li><p><strong>write_lock</strong> (<em>allocate_lock</em>) – Threading lock for safe file writing</p></li>
-</ul>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>None</p>
+<dd class="field-odd"><p>bool</p>
 </dd>
 </dl>
 </dd></dl>
@@ -511,14 +398,9 @@ then computes an overlap-weighted mean depth for the KIV-2 region.</p>
           <div class="toc-tree">
             <ul>
 <li><a class="reference internal" href="#">Coverage Estimation</a><ul>
-<li><a class="reference internal" href="#grid.utils.mosdepth.build_mosdepth_command"><code class="docutils literal notranslate"><span class="pre">build_mosdepth_command()</span></code></a></li>
-<li><a class="reference internal" href="#grid.utils.mosdepth.check_mosdepth_available"><code class="docutils literal notranslate"><span class="pre">check_mosdepth_available()</span></code></a></li>
 <li><a class="reference internal" href="#grid.utils.mosdepth.compute_mosdepth"><code class="docutils literal notranslate"><span class="pre">compute_mosdepth()</span></code></a></li>
-<li><a class="reference internal" href="#grid.utils.mosdepth.compute_region_coverage"><code class="docutils literal notranslate"><span class="pre">compute_region_coverage()</span></code></a></li>
 <li><a class="reference internal" href="#grid.utils.mosdepth.remove_intermediate_files"><code class="docutils literal notranslate"><span class="pre">remove_intermediate_files()</span></code></a></li>
 <li><a class="reference internal" href="#grid.utils.mosdepth.run_mosdepth_single_cram"><code class="docutils literal notranslate"><span class="pre">run_mosdepth_single_cram()</span></code></a></li>
-<li><a class="reference internal" href="#grid.utils.mosdepth.wait_for_mosdepth_output"><code class="docutils literal notranslate"><span class="pre">wait_for_mosdepth_output()</span></code></a></li>
-<li><a class="reference internal" href="#grid.utils.mosdepth.write_coverage_result"><code class="docutils literal notranslate"><span class="pre">write_coverage_result()</span></code></a></li>
 </ul>
 </li>
 </ul>

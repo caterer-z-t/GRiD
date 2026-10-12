@@ -294,135 +294,24 @@
 using Euclidean distance (scikit-learn). Neighbors serve as an ancestry-matched
 reference panel for diploid copy number normalization.</p>
 <dl class="py function" id="module-grid.utils.find_neighbors">
-<dt class="sig sig-object py" id="grid.utils.find_neighbors.filter_regions_by_variance">
-<span class="sig-prename descclassname"><span class="pre">grid.utils.find_neighbors.</span></span><span class="sig-name descname"><span class="pre">filter_regions_by_variance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sigma2ratios</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">frac_r</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sigma2_max</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">console</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#grid.utils.find_neighbors.filter_regions_by_variance" title="Link to this definition">¶</a></dt>
-<dd><p>Select region indices whose sigma2 ratio passes the [sigma2min, sigma2max]
-filter, exactly mirroring the C++ logic.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>sigma2ratios</strong> (<em>ndarray</em>) – per-region variance ratios from the file header (length R)</p></li>
-<li><p><strong>frac_r</strong> (<em>float</em>) – fraction of regions to retain by lower bound (C++ = 1.0)</p></li>
-<li><p><strong>sigma2_max</strong> (<em>float</em>) – upper bound on variance ratio (C++ = 1000)</p></li>
-<li><p><strong>console</strong> – Rich console for logging</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>np.ndarray of int indices that pass the filter
-R_use         : number of retained regions</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>valid_indices</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
 <dt class="sig sig-object py" id="grid.utils.find_neighbors.find_neighbors">
-<span class="sig-prename descclassname"><span class="pre">grid.utils.find_neighbors.</span></span><span class="sig-name descname"><span class="pre">find_neighbors</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">console</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#grid.utils.find_neighbors.find_neighbors" title="Link to this definition">¶</a></dt>
-<dd><p>Find nearest neighbors from normalized coverage data for all samples.</p>
+<span class="sig-prename descclassname"><span class="pre">grid.utils.find_neighbors.</span></span><span class="sig-name descname"><span class="pre">find_neighbors</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">console</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#grid.utils.find_neighbors.find_neighbors" title="Link to this definition">¶</a></dt>
+<dd><p>Find nearest neighbors by calling the precompiled C++ executable,
+which matches Mukamel’s pipeline exactly.</p>
 <dl class="simple">
-<dt>Mirrors the C++ find_neighbors.cpp logic:</dt><dd><ol class="arabic simple">
-<li><p>Read N, R, per-region means (header row 0) — means unused here but
-read to advance the file pointer.</p></li>
-<li><p>Read per-region sigma2 ratios (header row 1) — used to filter regions.</p></li>
-<li><p>Clip z-scores to [-zmax, zmax] and replace NaN → 0.</p></li>
-<li><p>Filter regions: keep those with sigma2_min &lt;= ratio &lt;= sigma2_max.</p></li>
-<li><p>Compute pairwise Euclidean distances on the filtered z-score matrix.</p></li>
-<li><p>For each individual output the top N_OUTPUT nearest neighbors (excluding
-self), with normalised distance = raw_dist / (2 * R_use).</p></li>
-</ol>
+<dt>C++ argument order:</dt><dd><p>arg1: batch number (always 0 — single pass)
+arg2: total batches (always 1 — single pass)
+arg3: zMax
+arg4: ID_scale_zdepths input file
+arg5: output prefix (C++ appends .zMax&lt;val&gt;.txt.gz)</p>
 </dd>
 </dl>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>config</strong> – configuration dictionary</p></li>
-<li><p><strong>console</strong> – Rich console for logging</p></li>
+<li><p><strong>config</strong> (<em>dict</em>) – Configuration data loaded from the config file.</p></li>
+<li><p><strong>console</strong> – Rich console object for logging.</p></li>
 </ul>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="grid.utils.find_neighbors.find_neighbors_sklearn">
-<span class="sig-prename descclassname"><span class="pre">grid.utils.find_neighbors.</span></span><span class="sig-name descname"><span class="pre">find_neighbors_sklearn</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_matrix</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">individuals</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_neighbors</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">500</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#grid.utils.find_neighbors.find_neighbors_sklearn" title="Link to this definition">¶</a></dt>
-<dd><p>Find nearest neighbors using scikit-learn’s NearestNeighbors.</p>
-<p>The C++ computes raw squared Euclidean distances then writes
-dist / (2 * R_use).  sklearn returns Euclidean (not squared), so we
-square the distances before normalising to match — the normalisation
-itself happens in save_neighbors.</p>
-<p>Clipping and NaN-filling must be done BEFORE calling this function
-(handled in find_neighbors).</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>data_matrix</strong> (<em>ndarray</em>) – np.ndarray [N x R_use], already clipped and NaN-filled</p></li>
-<li><p><strong>individuals</strong> (<em>list</em><em>[</em><em>str</em><em>]</em>) – list of N sample IDs</p></li>
-<li><p><strong>n_neighbors</strong> (<em>int</em>) – number of neighbors to return per individual (C++ = 500)</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>[(neighbor_id, squared_euclidean_distance), …]}
-Length of each list = min(n_neighbors, N-1).</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>dict {individual_id</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="grid.utils.find_neighbors.read_normalized_data">
-<span class="sig-prename descclassname"><span class="pre">grid.utils.find_neighbors.</span></span><span class="sig-name descname"><span class="pre">read_normalized_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_file</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#grid.utils.find_neighbors.read_normalized_data" title="Link to this definition">¶</a></dt>
-<dd><p>Parse the gzipped normalized depth file produced by normalize_mosdepth.</p>
-<dl class="simple">
-<dt>File layout (matches write_normalized_output):</dt><dd><p>Line 0 : N &lt;tab&gt; Rwant &lt;tab&gt; mu_1 … mu_Rwant
-Line 1 : N &lt;tab&gt; Rwant &lt;tab&gt; varRatio_1 … varRatio_Rwant
-Line 2+: ID &lt;tab&gt; scale &lt;tab&gt; z_1 … z_Rwant</p>
-</dd>
-</dl>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>input_file</strong> (<em>Path</em>) – Path to the .tsv.gz output of normalize_mosdepth</p>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>list of sample IDs (length N)
-sigma2ratios : np.ndarray of per-region variance ratios (length Rwant)
-data_matrix  : np.ndarray shape [N x Rwant] of z-scores
-scales       : dict {sample_id: scale_value}</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>individuals</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="grid.utils.find_neighbors.save_neighbors">
-<span class="sig-prename descclassname"><span class="pre">grid.utils.find_neighbors.</span></span><span class="sig-name descname"><span class="pre">save_neighbors</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">neighbors_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scales</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">zmax</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">R_use</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#grid.utils.find_neighbors.save_neighbors" title="Link to this definition">¶</a></dt>
-<dd><p>Write neighbors to a gzipped text file.</p>
-<dl class="simple">
-<dt>Output format per line (matches C++):</dt><dd><p>ID  scale  nb1_ID  nb1_scale  nb1_norm_dist  nb2_ID  …</p>
-</dd>
-</dl>
-<p>where norm_dist = squared_euclidean_distance / (2 * R_use),
-exactly as in C++: fout &lt;&lt; dists[n*Nbatch+i] / (2*Ruse)</p>
-<p>NOTE: the original Python constructed the output filename here again,
-causing a double-suffix bug (.zMax2.0.txt.gz.zMax2.0.txt.gz).
-The caller now passes the fully-resolved Path directly.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>neighbors_dict</strong> (<em>dict</em><em>[</em><em>str</em><em>, </em><em>list</em><em>[</em><em>tuple</em><em>[</em><em>str</em><em>, </em><em>float</em><em>]</em><em>]</em><em>]</em>) – {id: [(neighbor_id, squared_dist), …]}</p></li>
-<li><p><strong>scales</strong> (<em>dict</em><em>[</em><em>str</em><em>, </em><em>float</em><em>]</em>) – {id: scale_value}</p></li>
-<li><p><strong>output_file</strong> (<em>Path</em>) – fully-resolved output Path (no filename construction here)</p></li>
-<li><p><strong>zmax</strong> (<em>float</em>) – z-score clip value (unused in output, kept for logging)</p></li>
-<li><p><strong>R_use</strong> (<em>int</em>) – number of regions used, for distance normalisation</p></li>
-</ul>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>None</p>
 </dd>
 </dl>
 </dd></dl>
@@ -485,11 +374,7 @@ The caller now passes the fully-resolved Path directly.</p>
           <div class="toc-tree">
             <ul>
 <li><a class="reference internal" href="#">Nearest-Neighbor Identification</a><ul>
-<li><a class="reference internal" href="#grid.utils.find_neighbors.filter_regions_by_variance"><code class="docutils literal notranslate"><span class="pre">filter_regions_by_variance()</span></code></a></li>
 <li><a class="reference internal" href="#grid.utils.find_neighbors.find_neighbors"><code class="docutils literal notranslate"><span class="pre">find_neighbors()</span></code></a></li>
-<li><a class="reference internal" href="#grid.utils.find_neighbors.find_neighbors_sklearn"><code class="docutils literal notranslate"><span class="pre">find_neighbors_sklearn()</span></code></a></li>
-<li><a class="reference internal" href="#grid.utils.find_neighbors.read_normalized_data"><code class="docutils literal notranslate"><span class="pre">read_normalized_data()</span></code></a></li>
-<li><a class="reference internal" href="#grid.utils.find_neighbors.save_neighbors"><code class="docutils literal notranslate"><span class="pre">save_neighbors()</span></code></a></li>
 </ul>
 </li>
 </ul>

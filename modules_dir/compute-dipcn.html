@@ -295,14 +295,23 @@ relative to its nearest neighbors, accounting for sample-specific sequencing dep
 <dl class="py function" id="module-grid.utils.compute_dipcn">
 <dt class="sig sig-object py" id="grid.utils.compute_dipcn.compute_diploid_genotypes">
 <span class="sig-prename descclassname"><span class="pre">grid.utils.compute_dipcn.</span></span><span class="sig-name descname"><span class="pre">compute_diploid_genotypes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">console</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#grid.utils.compute_dipcn.compute_diploid_genotypes" title="Link to this definition">¶</a></dt>
-<dd><p>Replicate the awk normalization exactly:</p>
-<blockquote>
-<div><dl class="simple">
+<dd><p>Compute diploid copy number estimates.</p>
+<p>Two modes depending on config:</p>
+<dl>
+<dt>Mode 1 — GC normalize enabled (gc_normalize: run: True):</dt><dd><p>Writes corrected_rpk_ratio directly from the GC normalization output
+to the diploid genotypes file. No neighbor normalization applied.
+This gives the best correlation with Bionano optical mapping (r=0.986).</p>
+</dd>
+<dt>Mode 2 — GC normalize disabled (gc_normalize: run: False):</dt><dd><dl class="simple">
+<dt>Replicates Mukamel’s awk normalization exactly:</dt><dd><dl class="simple">
 <dt>norm_reads = reads[sample] / sample_scale</dt><dd><p>/ mean( reads[neighbor] / neighbor_scale )</p>
 </dd>
 </dl>
-</div></blockquote>
+</dd>
+</dl>
 <p>where the mean is over the top n_nbr neighbors.</p>
+</dd>
+</dl>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
@@ -324,7 +333,6 @@ relative to its nearest neighbors, accounting for sample-specific sequencing dep
 <dt>Each line format:</dt><dd><p>sample_id  sample_scale  nbr1_id  nbr1_scale  nbr1_norm_dist  nbr2_id …</p>
 </dd>
 </dl>
-<p>norm_dist is present but unused — only neighbor_id and neighbor_scale are needed.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>{sample_id: [(neighbor_id, neighbor_scale), …]}

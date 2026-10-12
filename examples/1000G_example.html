@@ -311,159 +311,150 @@
 <span class="linenos">  7</span><span class="c1">#SBATCH --mem=200G</span>
 <span class="linenos">  8</span>
 <span class="linenos">  9</span><span class="c1"># Stage 3 of 3 — generate config.yaml and run the GRiD pipeline.</span>
-<span class="linenos"> 10</span><span class="c1"># Submit after 01_prep_data.sh (and, if you want haploid CN, 02_run_ibs.sh)</span>
+<span class="linenos"> 10</span><span class="c1"># Submit after 01-prep-data.sh (and, if you want haploid CN, 02-run-ibs.sh)</span>
 <span class="linenos"> 11</span><span class="c1"># have both completed.</span>
-<span class="linenos"> 12</span><span class="c1">#</span>
-<span class="linenos"> 13</span><span class="c1"># Usage: sbatch 03_generate_config_and_run.sh   (from the same working</span>
-<span class="linenos"> 14</span><span class="c1"># directory as stages 1 and 2)</span>
-<span class="linenos"> 15</span>
-<span class="linenos"> 16</span><span class="nb">set</span><span class="w"> </span>-euo<span class="w"> </span>pipefail
-<span class="linenos"> 17</span>
-<span class="linenos"> 18</span>module<span class="w"> </span>load<span class="w"> </span>anaconda<span class="w"> </span>mosdepth<span class="w"> </span>samtools
-<span class="linenos"> 19</span>
-<span class="linenos"> 20</span><span class="nv">WORK_DIR</span><span class="o">=</span><span class="s2">&quot;</span><span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span><span class="s2">&quot;</span>
-<span class="linenos"> 21</span><span class="nv">CRAM_DIR</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$WORK_DIR</span><span class="s2">/crams&quot;</span>
-<span class="linenos"> 22</span><span class="nv">LOG_DIR</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$WORK_DIR</span><span class="s2">/logs&quot;</span>
-<span class="linenos"> 23</span><span class="nv">DATA_DIR</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$WORK_DIR</span><span class="s2">/data&quot;</span>
-<span class="linenos"> 24</span><span class="nv">OUTPUT_DIR</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$WORK_DIR</span><span class="s2">/output&quot;</span>
-<span class="linenos"> 25</span><span class="nv">MOSDEPTH_WORK</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$WORK_DIR</span><span class="s2">/mosdepth_work&quot;</span>
-<span class="linenos"> 26</span>mkdir<span class="w"> </span>-p<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">&quot;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$MOSDEPTH_WORK</span><span class="s2">&quot;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$LOG_DIR</span><span class="s2">&quot;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$WORK_DIR</span><span class="s2">/slurm&quot;</span>
-<span class="linenos"> 27</span>
-<span class="linenos"> 28</span><span class="nv">THREADS</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">SLURM_CPUS_PER_TASK</span><span class="k">:-$(</span>nproc<span class="k">)</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="linenos"> 12</span>
+<span class="linenos"> 13</span><span class="nb">set</span><span class="w"> </span>-euo<span class="w"> </span>pipefail
+<span class="linenos"> 14</span>
+<span class="linenos"> 15</span>module<span class="w"> </span>load<span class="w"> </span>anaconda<span class="w"> </span>mosdepth<span class="w"> </span>samtools
+<span class="linenos"> 16</span>
+<span class="linenos"> 17</span><span class="nv">WORK_DIR</span><span class="o">=</span><span class="s2">&quot;</span><span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span><span class="s2">&quot;</span>
+<span class="linenos"> 18</span><span class="nv">CRAM_DIR</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$WORK_DIR</span><span class="s2">/crams&quot;</span>
+<span class="linenos"> 19</span><span class="nv">LOG_DIR</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$WORK_DIR</span><span class="s2">/logs&quot;</span>
+<span class="linenos"> 20</span><span class="nv">DATA_DIR</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$WORK_DIR</span><span class="s2">/data&quot;</span>
+<span class="linenos"> 21</span><span class="nv">OUTPUT_DIR</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$WORK_DIR</span><span class="s2">/output&quot;</span>
+<span class="linenos"> 22</span><span class="nv">MOSDEPTH_WORK</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$WORK_DIR</span><span class="s2">/mosdepth_work&quot;</span>
+<span class="linenos"> 23</span>mkdir<span class="w"> </span>-p<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">&quot;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$MOSDEPTH_WORK</span><span class="s2">&quot;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$LOG_DIR</span><span class="s2">&quot;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$WORK_DIR</span><span class="s2">/slurm&quot;</span>
+<span class="linenos"> 24</span>
+<span class="linenos"> 25</span><span class="nv">THREADS</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">SLURM_CPUS_PER_TASK</span><span class="k">:-$(</span>nproc<span class="k">)</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="linenos"> 26</span>
+<span class="linenos"> 27</span>timestamp<span class="o">()</span><span class="w"> </span><span class="o">{</span><span class="w"> </span>date<span class="w"> </span><span class="s1">&#39;+%Y-%m-%d %H:%M:%S&#39;</span><span class="p">;</span><span class="w"> </span><span class="o">}</span>
+<span class="linenos"> 28</span>log<span class="o">()</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;[</span><span class="k">$(</span>timestamp<span class="k">)</span><span class="s2">] </span><span class="nv">$*</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>tee<span class="w"> </span>-a<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$LOG_DIR</span><span class="s2">/pipeline.log&quot;</span><span class="p">;</span><span class="w"> </span><span class="o">}</span>
 <span class="linenos"> 29</span>
-<span class="linenos"> 30</span>timestamp<span class="o">()</span><span class="w"> </span><span class="o">{</span><span class="w"> </span>date<span class="w"> </span><span class="s1">&#39;+%Y-%m-%d %H:%M:%S&#39;</span><span class="p">;</span><span class="w"> </span><span class="o">}</span>
-<span class="linenos"> 31</span>log<span class="o">()</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;[</span><span class="k">$(</span>timestamp<span class="k">)</span><span class="s2">] </span><span class="nv">$*</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>tee<span class="w"> </span>-a<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$LOG_DIR</span><span class="s2">/pipeline.log&quot;</span><span class="p">;</span><span class="w"> </span><span class="o">}</span>
-<span class="linenos"> 32</span>
-<span class="linenos"> 33</span><span class="c1"># --- Load locus coordinates written by 01_prep_data.sh ---</span>
-<span class="linenos"> 34</span><span class="nv">VARS_FILE</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$DATA_DIR</span><span class="s2">/pipeline_vars.sh&quot;</span>
-<span class="linenos"> 35</span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span>!<span class="w"> </span>-f<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$VARS_FILE</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
-<span class="linenos"> 36</span><span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;ERROR: </span><span class="nv">$VARS_FILE</span><span class="s2"> not found — run 01_prep_data.sh first.&quot;</span>
-<span class="linenos"> 37</span><span class="w">    </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span>
-<span class="linenos"> 38</span><span class="k">fi</span>
-<span class="linenos"> 39</span><span class="nb">source</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$VARS_FILE</span><span class="s2">&quot;</span>
-<span class="linenos"> 40</span>
-<span class="linenos"> 41</span><span class="nv">REF_FA</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$DATA_DIR</span><span class="s2">/GRCh38_no_alt.fa&quot;</span>
-<span class="linenos"> 42</span><span class="nv">REPEAT_MASK</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$DATA_DIR</span><span class="s2">/repeat_mask.bed&quot;</span>
-<span class="linenos"> 43</span><span class="nv">GRID_SAMPLES_FILE</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$DATA_DIR</span><span class="s2">/grid_samples.txt&quot;</span>
-<span class="linenos"> 44</span>
-<span class="linenos"> 45</span><span class="k">for</span><span class="w"> </span>f<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$REF_FA</span><span class="s2">&quot;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$GRID_SAMPLES_FILE</span><span class="s2">&quot;</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
-<span class="linenos"> 46</span><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span>!<span class="w"> </span>-f<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$f</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
-<span class="linenos"> 47</span><span class="w">        </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;ERROR: expected input </span><span class="nv">$f</span><span class="s2"> not found — run 01_prep_data.sh first.&quot;</span>
-<span class="linenos"> 48</span><span class="w">        </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span>
-<span class="linenos"> 49</span><span class="w">    </span><span class="k">fi</span>
-<span class="linenos"> 50</span><span class="k">done</span>
-<span class="linenos"> 51</span>
-<span class="linenos"> 52</span><span class="c1"># --- Activate GRiD environment ---</span>
-<span class="linenos"> 53</span><span class="k">if</span><span class="w"> </span>!<span class="w"> </span>conda<span class="w"> </span>env<span class="w"> </span>list<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-qE<span class="w"> </span><span class="s1">&#39;^\s*grid-test\s&#39;</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
-<span class="linenos"> 54</span><span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;ERROR: conda environment &#39;grid-test&#39; not found.&quot;</span>
-<span class="linenos"> 55</span><span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Create it first, e.g.: conda create -n grid-test python=3.11 -y&quot;</span>
-<span class="linenos"> 56</span><span class="w">    </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span>
-<span class="linenos"> 57</span><span class="k">fi</span>
-<span class="linenos"> 58</span><span class="nb">source</span><span class="w"> </span><span class="s2">&quot;</span><span class="k">$(</span>conda<span class="w"> </span>info<span class="w"> </span>--base<span class="k">)</span><span class="s2">/etc/profile.d/conda.sh&quot;</span>
-<span class="linenos"> 59</span>conda<span class="w"> </span>activate<span class="w"> </span>grid-test
-<span class="linenos"> 60</span>
-<span class="linenos"> 61</span><span class="k">if</span><span class="w"> </span>!<span class="w"> </span><span class="nb">command</span><span class="w"> </span>-v<span class="w"> </span>grid<span class="w"> </span><span class="p">&amp;</span>&gt;/dev/null<span class="p">;</span><span class="w"> </span><span class="k">then</span>
-<span class="linenos"> 62</span><span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;ERROR: &#39;grid&#39; command not found after activating grid-test.&quot;</span>
-<span class="linenos"> 63</span><span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Check that &#39;pip install -e .&#39; completed successfully in that env.&quot;</span>
-<span class="linenos"> 64</span><span class="w">    </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span>
-<span class="linenos"> 65</span><span class="k">fi</span>
-<span class="linenos"> 66</span>
-<span class="linenos"> 67</span><span class="c1"># --- Check for IBS output from stage 2 (optional — diploid-only if absent) ---</span>
-<span class="linenos"> 68</span><span class="nv">IBS_OUTPUT</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$DATA_DIR</span><span class="s2">/ibs_neighbors_chr</span><span class="si">${</span><span class="nv">CHR</span><span class="si">}</span><span class="s2">.tsv.gz&quot;</span>
-<span class="linenos"> 69</span><span class="nv">HAPLOID_RUN</span><span class="o">=</span><span class="s2">&quot;False&quot;</span>
-<span class="linenos"> 70</span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span>-f<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$IBS_OUTPUT</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
-<span class="linenos"> 71</span><span class="w">    </span>log<span class="w"> </span><span class="s2">&quot;IBS neighbors file found: </span><span class="nv">$IBS_OUTPUT</span><span class="s2">&quot;</span>
-<span class="linenos"> 72</span><span class="w">    </span>log<span class="w"> </span><span class="s2">&quot;Haploid CN estimation will run.&quot;</span>
-<span class="linenos"> 73</span><span class="w">    </span><span class="nv">HAPLOID_RUN</span><span class="o">=</span><span class="s2">&quot;True&quot;</span>
-<span class="linenos"> 74</span><span class="k">else</span>
-<span class="linenos"> 75</span><span class="w">    </span>log<span class="w"> </span><span class="s2">&quot;IBS neighbors file not found at </span><span class="nv">$IBS_OUTPUT</span><span class="s2">.&quot;</span>
-<span class="linenos"> 76</span><span class="w">    </span>log<span class="w"> </span><span class="s2">&quot;Run 02_run_ibs.sh first if you want haploid CN estimation.&quot;</span>
-<span class="linenos"> 77</span><span class="w">    </span>log<span class="w"> </span><span class="s2">&quot;Proceeding with diploid-only for this run.&quot;</span>
-<span class="linenos"> 78</span><span class="k">fi</span>
+<span class="linenos"> 30</span><span class="c1"># --- Load locus coordinates written by 01-prep-data.sh ---</span>
+<span class="linenos"> 31</span><span class="nv">VARS_FILE</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$DATA_DIR</span><span class="s2">/pipeline_vars.sh&quot;</span>
+<span class="linenos"> 32</span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span>!<span class="w"> </span>-f<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$VARS_FILE</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="linenos"> 33</span><span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;ERROR: </span><span class="nv">$VARS_FILE</span><span class="s2"> not found — run 01-prep-data.sh first.&quot;</span>
+<span class="linenos"> 34</span><span class="w">    </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span>
+<span class="linenos"> 35</span><span class="k">fi</span>
+<span class="linenos"> 36</span><span class="nb">source</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$VARS_FILE</span><span class="s2">&quot;</span>
+<span class="linenos"> 37</span>
+<span class="linenos"> 38</span><span class="nv">REF_FA</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$DATA_DIR</span><span class="s2">/GRCh38_no_alt.fa&quot;</span>
+<span class="linenos"> 39</span><span class="nv">REPEAT_MASK</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$DATA_DIR</span><span class="s2">/repeat_mask.bed&quot;</span>
+<span class="linenos"> 40</span><span class="nv">GRID_SAMPLES_FILE</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$DATA_DIR</span><span class="s2">/grid_samples.txt&quot;</span>
+<span class="linenos"> 41</span><span class="nv">NORM_REGIONS_FILE</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/norm_regions.gc.tsv&quot;</span>
+<span class="linenos"> 42</span>
+<span class="linenos"> 43</span><span class="k">for</span><span class="w"> </span>f<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$REF_FA</span><span class="s2">&quot;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$GRID_SAMPLES_FILE</span><span class="s2">&quot;</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="linenos"> 44</span><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span>!<span class="w"> </span>-f<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$f</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="linenos"> 45</span><span class="w">        </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;ERROR: expected input </span><span class="nv">$f</span><span class="s2"> not found — run 01-prep-data.sh first.&quot;</span>
+<span class="linenos"> 46</span><span class="w">        </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span>
+<span class="linenos"> 47</span><span class="w">    </span><span class="k">fi</span>
+<span class="linenos"> 48</span><span class="k">done</span>
+<span class="linenos"> 49</span>
+<span class="linenos"> 50</span><span class="nb">export</span><span class="w"> </span><span class="nv">PATH</span><span class="o">=</span>/nas/longleaf/home/catererz/epi/software/micromamba:<span class="nv">$PATH</span>
+<span class="linenos"> 51</span><span class="nb">eval</span><span class="w"> </span><span class="s2">&quot;</span><span class="k">$(</span>micromamba<span class="w"> </span>shell<span class="w"> </span>hook<span class="w"> </span>--shell<span class="w"> </span>bash<span class="k">)</span><span class="s2">&quot;</span>
+<span class="linenos"> 52</span>micromamba<span class="w"> </span>activate<span class="w"> </span>grid
+<span class="linenos"> 53</span>
+<span class="linenos"> 54</span><span class="k">if</span><span class="w"> </span>!<span class="w"> </span><span class="nb">command</span><span class="w"> </span>-v<span class="w"> </span>grid<span class="w"> </span><span class="p">&amp;</span>&gt;/dev/null<span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="linenos"> 55</span><span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;ERROR: &#39;grid&#39; command not found after activating grid-test.&quot;</span>
+<span class="linenos"> 56</span><span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Check that &#39;pip install -e .&#39; completed successfully in that env.&quot;</span>
+<span class="linenos"> 57</span><span class="w">    </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span>
+<span class="linenos"> 58</span><span class="k">fi</span>
+<span class="linenos"> 59</span>
+<span class="linenos"> 60</span><span class="c1"># --- Check for IBS output from stage 2 (optional — diploid-only if absent) ---</span>
+<span class="linenos"> 61</span><span class="nv">IBS_OUTPUT</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$DATA_DIR</span><span class="s2">/ibs_neighbors_chr</span><span class="si">${</span><span class="nv">CHR</span><span class="si">}</span><span class="s2">.tsv.gz&quot;</span>
+<span class="linenos"> 62</span><span class="nv">HAPLOID_RUN</span><span class="o">=</span><span class="s2">&quot;False&quot;</span>
+<span class="linenos"> 63</span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span>-f<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$IBS_OUTPUT</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="linenos"> 64</span><span class="w">    </span>log<span class="w"> </span><span class="s2">&quot;IBS neighbors file found: </span><span class="nv">$IBS_OUTPUT</span><span class="s2">&quot;</span>
+<span class="linenos"> 65</span><span class="w">    </span>log<span class="w"> </span><span class="s2">&quot;Haploid CN estimation will run.&quot;</span>
+<span class="linenos"> 66</span><span class="w">    </span><span class="nv">HAPLOID_RUN</span><span class="o">=</span><span class="s2">&quot;True&quot;</span>
+<span class="linenos"> 67</span><span class="k">else</span>
+<span class="linenos"> 68</span><span class="w">    </span>log<span class="w"> </span><span class="s2">&quot;IBS neighbors file not found at </span><span class="nv">$IBS_OUTPUT</span><span class="s2">.&quot;</span>
+<span class="linenos"> 69</span><span class="w">    </span>log<span class="w"> </span><span class="s2">&quot;Run 02-run-ibs.sh first if you want haploid CN estimation.&quot;</span>
+<span class="linenos"> 70</span><span class="w">    </span>log<span class="w"> </span><span class="s2">&quot;Proceeding with diploid-only for this run.&quot;</span>
+<span class="linenos"> 71</span><span class="k">fi</span>
+<span class="linenos"> 72</span>
+<span class="linenos"> 73</span><span class="c1"># Empty mask: the downloaded repeat_mask.bed spans nearly the entire LPA</span>
+<span class="linenos"> 74</span><span class="c1"># window (KIV-2 is itself a massive tandem repeat), which zeroes out every</span>
+<span class="linenos"> 75</span><span class="c1"># normalization bin if applied here. Using an empty mask for this locus is</span>
+<span class="linenos"> 76</span><span class="c1"># the correct choice, not a workaround being skipped.</span>
+<span class="linenos"> 77</span><span class="nv">EMPTY_MASK</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$DATA_DIR</span><span class="s2">/repeat_mask_empty.bed&quot;</span>
+<span class="linenos"> 78</span>touch<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$EMPTY_MASK</span><span class="s2">&quot;</span>
 <span class="linenos"> 79</span>
-<span class="linenos"> 80</span><span class="c1"># Empty mask: the downloaded repeat_mask.bed spans nearly the entire LPA</span>
-<span class="linenos"> 81</span><span class="c1"># window (KIV-2 is itself a massive tandem repeat), which zeroes out every</span>
-<span class="linenos"> 82</span><span class="c1"># normalization bin if applied here. See prior discussion — using an empty</span>
-<span class="linenos"> 83</span><span class="c1"># mask for this locus is the correct choice, not a workaround being skipped.</span>
-<span class="linenos"> 84</span><span class="nv">EMPTY_MASK</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$DATA_DIR</span><span class="s2">/repeat_mask_empty.bed&quot;</span>
-<span class="linenos"> 85</span>touch<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$EMPTY_MASK</span><span class="s2">&quot;</span>
-<span class="linenos"> 86</span>
-<span class="linenos"> 87</span><span class="c1"># --- Generate config ---</span>
-<span class="linenos"> 88</span><span class="nv">CONFIG</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$WORK_DIR</span><span class="s2">/config.yaml&quot;</span>
-<span class="linenos"> 89</span>
-<span class="linenos"> 90</span>cat<span class="w"> </span>&gt;<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$CONFIG</span><span class="s2">&quot;</span><span class="w"> </span><span class="s">&lt;&lt; YAML</span>
-<span class="linenos"> 91</span><span class="s"># Auto-generated GRiD config — 1000 Genomes LPA KIV-2 example</span>
-<span class="linenos"> 92</span><span class="s">samples_file: &quot;$GRID_SAMPLES_FILE&quot;</span>
-<span class="linenos"> 93</span><span class="s">directory_loc: &quot;$CRAM_DIR&quot;</span>
-<span class="linenos"> 94</span><span class="s">reference_genome: &quot;$REF_FA&quot;</span>
-<span class="linenos"> 95</span><span class="s">output_dir: &quot;$OUTPUT_DIR&quot;</span>
-<span class="linenos"> 96</span><span class="s">threads: $THREADS</span>
-<span class="linenos"> 97</span><span class="s">file_type: &quot;cram&quot;</span>
-<span class="linenos"> 98</span><span class="s">chrom: &quot;chr${CHR}&quot;</span>
-<span class="linenos"> 99</span><span class="s">start_bp: $START</span>
-<span class="linenos">100</span><span class="s">end_bp: $END</span>
-<span class="linenos">101</span><span class="s">output_file_type: &quot;tsv&quot;</span>
-<span class="linenos">102</span>
-<span class="linenos">103</span><span class="s">index:</span>
-<span class="linenos">104</span><span class="s">  run: True</span>
-<span class="linenos">105</span><span class="s">  output_file_prefix: &quot;index_file_results&quot;</span>
-<span class="linenos">106</span>
-<span class="linenos">107</span><span class="s">count_reads:</span>
-<span class="linenos">108</span><span class="s">  run: True</span>
-<span class="linenos">109</span><span class="s">  output_file_prefix: &quot;read_counts&quot;</span>
-<span class="linenos">110</span><span class="s">  min_mapq: 1</span>
-<span class="linenos">111</span><span class="s">  flags:</span>
-<span class="linenos">112</span><span class="s">    - 83    # proper pair, read reverse strand</span>
-<span class="linenos">113</span><span class="s">    - 147   # proper pair, mate reverse strand</span>
-<span class="linenos">114</span><span class="s">    - 81    # read reverse strand</span>
-<span class="linenos">115</span><span class="s">    - 145   # mate reverse strand</span>
-<span class="linenos">116</span>
-<span class="linenos">117</span><span class="s">mosdepth:</span>
-<span class="linenos">118</span><span class="s">  run: True</span>
-<span class="linenos">119</span><span class="s">  output_file_prefix: &quot;mosdepth_results&quot;</span>
-<span class="linenos">120</span><span class="s">  bin_size: 1000</span>
-<span class="linenos">121</span><span class="s">  mode: &quot;fast&quot;</span>
-<span class="linenos">122</span><span class="s">  region_name: &quot;LPA&quot;</span>
-<span class="linenos">123</span><span class="s">  work_dir: &quot;$MOSDEPTH_WORK&quot;</span>
-<span class="linenos">124</span><span class="s">  remove_intermediate: True</span>
-<span class="linenos">125</span>
-<span class="linenos">126</span><span class="s">  normalize:</span>
-<span class="linenos">127</span><span class="s">    run: True</span>
-<span class="linenos">128</span><span class="s">    min_depth: 1</span>
-<span class="linenos">129</span><span class="s">    max_depth: 30</span>
-<span class="linenos">130</span><span class="s">    top_frac: 0.9</span>
-<span class="linenos">131</span><span class="s">    output_file_prefix: &quot;mosdepth_normalized&quot;</span>
-<span class="linenos">132</span><span class="s">    repeat_mask_file: &quot;$EMPTY_MASK&quot;</span>
+<span class="linenos"> 80</span><span class="nv">CONFIG</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$WORK_DIR</span><span class="s2">/config.yaml&quot;</span>
+<span class="linenos"> 81</span>
+<span class="linenos"> 82</span>cat<span class="w"> </span>&gt;<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$CONFIG</span><span class="s2">&quot;</span><span class="w"> </span><span class="s">&lt;&lt; YAML</span>
+<span class="linenos"> 83</span><span class="s"># Auto-generated GRiD config — 1000 Genomes LPA KIV-2 example</span>
+<span class="linenos"> 84</span><span class="s">samples_file: &quot;$GRID_SAMPLES_FILE&quot;</span>
+<span class="linenos"> 85</span><span class="s">directory_loc: &quot;$CRAM_DIR&quot;</span>
+<span class="linenos"> 86</span><span class="s">reference_genome: &quot;$REF_FA&quot;</span>
+<span class="linenos"> 87</span><span class="s">output_dir: &quot;$OUTPUT_DIR&quot;</span>
+<span class="linenos"> 88</span><span class="s">threads: $THREADS</span>
+<span class="linenos"> 89</span><span class="s">file_type: &quot;cram&quot;</span>
+<span class="linenos"> 90</span><span class="s">chrom: &quot;chr${CHR}&quot;</span>
+<span class="linenos"> 91</span><span class="s">start_bp: $START</span>
+<span class="linenos"> 92</span><span class="s">end_bp: $END</span>
+<span class="linenos"> 93</span><span class="s">output_file_type: &quot;txt&quot;</span>
+<span class="linenos"> 94</span>
+<span class="linenos"> 95</span><span class="s">index:</span>
+<span class="linenos"> 96</span><span class="s">  run: True</span>
+<span class="linenos"> 97</span><span class="s">  output_file_prefix: &quot;index_file_results&quot;</span>
+<span class="linenos"> 98</span>
+<span class="linenos"> 99</span><span class="s">count_reads:</span>
+<span class="linenos">100</span><span class="s">  run: True</span>
+<span class="linenos">101</span><span class="s">  output_file_prefix: &quot;read_counts&quot;</span>
+<span class="linenos">102</span><span class="s">  min_mapq: 1</span>
+<span class="linenos">103</span><span class="s">  flags:</span>
+<span class="linenos">104</span><span class="s">    - 83    # proper pair, read reverse strand</span>
+<span class="linenos">105</span><span class="s">    - 147   # proper pair, mate reverse strand</span>
+<span class="linenos">106</span><span class="s">    - 81    # read reverse strand</span>
+<span class="linenos">107</span><span class="s">    - 145   # mate reverse strand</span>
+<span class="linenos">108</span>
+<span class="linenos">109</span><span class="s">mosdepth:</span>
+<span class="linenos">110</span><span class="s">  run: True</span>
+<span class="linenos">111</span><span class="s">  output_file_prefix: &quot;mosdepth_results&quot;</span>
+<span class="linenos">112</span><span class="s">  bin_size: 1000</span>
+<span class="linenos">113</span><span class="s">  mode: &quot;fast&quot;</span>
+<span class="linenos">114</span><span class="s">  region_name: &quot;LPA&quot;</span>
+<span class="linenos">115</span><span class="s">  work_dir: &quot;$MOSDEPTH_WORK&quot;</span>
+<span class="linenos">116</span><span class="s">  # Keep intermediate files; gc_normalize (phase 2) reads .regions.bed.gz.</span>
+<span class="linenos">117</span><span class="s">  remove_intermediate: False</span>
+<span class="linenos">118</span>
+<span class="linenos">119</span><span class="s">  normalize:</span>
+<span class="linenos">120</span><span class="s">    run: True</span>
+<span class="linenos">121</span><span class="s">    min_depth: 1</span>
+<span class="linenos">122</span><span class="s">    max_depth: 30</span>
+<span class="linenos">123</span><span class="s">    top_frac: 0.9</span>
+<span class="linenos">124</span><span class="s">    output_file_prefix: &quot;mosdepth_normalized&quot;</span>
+<span class="linenos">125</span><span class="s">    repeat_mask_file: &quot;$EMPTY_MASK&quot;</span>
+<span class="linenos">126</span>
+<span class="linenos">127</span><span class="s">  neighbors:</span>
+<span class="linenos">128</span><span class="s">    run: True</span>
+<span class="linenos">129</span><span class="s">    output_file_prefix: &quot;neighbors&quot;</span>
+<span class="linenos">130</span><span class="s">    num_neighbors: 5</span>
+<span class="linenos">131</span><span class="s">    zmax: 2.0</span>
+<span class="linenos">132</span><span class="s">    sigma2_max: 1000</span>
 <span class="linenos">133</span>
-<span class="linenos">134</span><span class="s">  neighbors:</span>
-<span class="linenos">135</span><span class="s">    run: True</span>
-<span class="linenos">136</span><span class="s">    output_file_prefix: &quot;neighbors&quot;</span>
-<span class="linenos">137</span><span class="s">    num_neighbors: 5</span>
-<span class="linenos">138</span><span class="s">    zmax: 2.0</span>
-<span class="linenos">139</span><span class="s">    sigma2_max: 1000</span>
+<span class="linenos">134</span><span class="s">  gc_normalize:</span>
+<span class="linenos">135</span><span class="s">    run: False</span>
+<span class="linenos">136</span>
+<span class="linenos">137</span><span class="s">compute_diploid_genotypes:</span>
+<span class="linenos">138</span><span class="s">  run: True</span>
+<span class="linenos">139</span><span class="s">  output_file_prefix: &quot;diploid_genotypes&quot;</span>
 <span class="linenos">140</span>
-<span class="linenos">141</span><span class="s">compute_diploid_genotypes:</span>
-<span class="linenos">142</span><span class="s">  run: True</span>
-<span class="linenos">143</span><span class="s">  output_file_prefix: &quot;diploid_genotypes&quot;</span>
-<span class="linenos">144</span>
-<span class="linenos">145</span><span class="s">compute_haploid_genotypes:</span>
-<span class="linenos">146</span><span class="s">  run: $HAPLOID_RUN</span>
-<span class="linenos">147</span><span class="s">  output_file_prefix: &quot;haploid_genotypes&quot;</span>
-<span class="linenos">148</span><span class="s">  ibs_output: &quot;$IBS_OUTPUT&quot;</span>
-<span class="linenos">149</span><span class="s">  min_neighbors: 1</span>
-<span class="linenos">150</span><span class="s">  max_neighbors: 10</span>
-<span class="linenos">151</span><span class="s">  n_iters: 100</span>
-<span class="linenos">152</span><span class="s">  method: &quot;ibs&quot;</span>
-<span class="linenos">153</span><span class="s">YAML</span>
-<span class="linenos">154</span>
-<span class="linenos">155</span>log<span class="w"> </span><span class="s2">&quot;Config written to: </span><span class="nv">$CONFIG</span><span class="s2">&quot;</span>
-<span class="linenos">156</span>log<span class="w"> </span><span class="s2">&quot;  compute_haploid_genotypes.run: </span><span class="nv">$HAPLOID_RUN</span><span class="s2">&quot;</span>
-<span class="linenos">157</span>
-<span class="linenos">158</span><span class="c1"># --- Run GRiD ---</span>
-<span class="linenos">159</span>log<span class="w"> </span><span class="s2">&quot;Running GRiD pipeline...&quot;</span>
-<span class="linenos">160</span>grid<span class="w"> </span>wgs<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$CONFIG</span><span class="s2">&quot;</span>
-<span class="linenos">161</span>
-<span class="linenos">162</span>log<span class="w"> </span><span class="s2">&quot;Done. Results in: </span><span class="nv">$OUTPUT_DIR</span><span class="s2">&quot;</span>
+<span class="linenos">141</span><span class="s">compute_haploid_genotypes:</span>
+<span class="linenos">142</span><span class="s">  run: $HAPLOID_RUN</span>
+<span class="linenos">143</span><span class="s">  output_file_prefix: &quot;haploid_genotypes&quot;</span>
+<span class="linenos">144</span><span class="s">  ibs_output: &quot;$IBS_OUTPUT&quot;</span>
+<span class="linenos">145</span><span class="s">  min_neighbors: 1</span>
+<span class="linenos">146</span><span class="s">  max_neighbors: 10</span>
+<span class="linenos">147</span><span class="s">  n_iters: 20</span>
+<span class="linenos">148</span><span class="s">  method: &quot;ibs&quot;</span>
+<span class="linenos">149</span><span class="s">YAML</span>
+<span class="linenos">150</span>
+<span class="linenos">151</span>log<span class="w"> </span><span class="s2">&quot;Running GRiD pipeline&quot;</span>
+<span class="linenos">152</span>grid<span class="w"> </span>wgs<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$CONFIG</span><span class="s2">&quot;</span>
+<span class="linenos">153</span>log<span class="w"> </span><span class="s2">&quot;Phase 1 complete.&quot;</span>
 </pre></div>
 </div>
 </div>
