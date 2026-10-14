@@ -3,7 +3,7 @@
   <head><meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="index" title="Index" href="genindex.html"><link rel="search" title="Search" href="search.html"><link rel="next" title="Example Pipeline Jobs" href="examples.html"><link rel="prev" title="Getting Started" href="getting_started.html">
+<link rel="index" title="Index" href="genindex.html"><link rel="search" title="Search" href="search.html"><link rel="next" title="Computing IBS Neighbors" href="ibs.html"><link rel="prev" title="Getting Started" href="getting_started.html">
         <link rel="prefetch" href="_static/grid_logo.png" as="image">
 
     <link rel="shortcut icon" href="_static/favicon.ico"><!-- Generated with Sphinx 8.2.3 and Furo 2025.09.25 -->
@@ -183,7 +183,7 @@
           <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
         </button>
       </div>
-      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
         <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
       </label>
     </div>
@@ -208,11 +208,15 @@
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="readme.html">Welcome to GRiD’s documentation!</a></li>
 <li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a></li>
-<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Computing IBS/IBD Neighbors</a></li>
+<li class="toctree-l1 current has-children current-page"><a class="current reference internal" href="#">Computing IBS/IBD Neighbors</a><input aria-label="Toggle navigation of Computing IBS/IBD Neighbors" checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="ibs.html">Computing IBS Neighbors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ibd.html">Computing IBD Neighbors with iLASH</a></li>
+</ul>
+</li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Examples</span></p>
 <ul>
-<li class="toctree-l1 has-children"><a class="reference internal" href="examples.html">Example Pipeline Jobs</a><input aria-label="Toggle navigation of Example Pipeline Jobs" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="examples.html">Example Pipeline Jobs</a><input aria-label="Toggle navigation of Example Pipeline Jobs" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="examples/Prep_data.html">Data Preparation Example</a></li>
 <li class="toctree-l2"><a class="reference internal" href="examples/1000G_example.html">1000 Genomes Full Pipeline Example</a></li>
 <li class="toctree-l2"><a class="reference internal" href="examples/IBS_example.html">IBS/IBD Neighbor Computation Example</a></li>
@@ -221,7 +225,7 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Algorithms</span></p>
 <ul>
-<li class="toctree-l1 has-children"><a class="reference internal" href="algorithms.html">Algorithms</a><input aria-label="Toggle navigation of Algorithms" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="algorithms.html">Algorithms</a><input aria-label="Toggle navigation of Algorithms" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="algorithms/count_reads.html">Read Counting</a></li>
 <li class="toctree-l2"><a class="reference internal" href="algorithms/coverage.html">Coverage Estimation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="algorithms/normalization.html">Coverage Normalization</a></li>
@@ -238,7 +242,7 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
 <ul>
-<li class="toctree-l1 has-children"><a class="reference internal" href="modules.html">API Reference</a><input aria-label="Toggle navigation of API Reference" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="modules.html">API Reference</a><input aria-label="Toggle navigation of API Reference" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="modules_dir/grid_core.html">Core</a></li>
 <li class="toctree-l2"><a class="reference internal" href="modules_dir/count-reads.html">Read Counting</a></li>
 <li class="toctree-l2"><a class="reference internal" href="modules_dir/mosdepth.html">Coverage Estimation</a></li>
@@ -283,268 +287,48 @@
               <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
             </button>
           </div>
-          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
             <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
           </label>
         </div>
         <article role="main" id="furo-main-content">
           <section id="computing-ibs-ibd-neighbors">
 <h1>Computing IBS/IBD Neighbors<a class="headerlink" href="#computing-ibs-ibd-neighbors" title="Link to this heading">¶</a></h1>
-<p>Step 5 of GRiD (haplotype inference) requires a file of identity-by-descent (IBD) /
-identity-by-state (IBS) haplotype neighbors as input. This file is produced by
-<code class="docutils literal notranslate"><span class="pre">computeIBSpbwt.cpp</span></code>, a C++ program from Hujoel et al. (2026) that identifies
-the closest haplotype matches for each individual using the Positional Burrows-Wheeler
-Transform (PBWT).</p>
-<p>This page covers how to obtain the source, compile it, prepare the required inputs,
-and run it to generate the neighbors file used by <code class="docutils literal notranslate"><span class="pre">hi_inference</span></code>.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p><code class="docutils literal notranslate"><span class="pre">computeIBSpbwt.cpp</span></code> is not included in the GRiD repository. It is part of the
-supplementary code released with Hujoel et al. (2026) Nature
-(<a class="reference external" href="https://doi.org/10.1038/s41586-025-09886-z">doi:10.1038/s41586-025-09886-z</a>).
-The source is available directly at:
-<a class="reference external" href="https://github.com/mhujoel/STRs/blob/main/cpp_files/computeIBSpbwt.cpp">mhujoel/STRs — computeIBSpbwt.cpp</a>.</p>
-</div>
-<hr class="docutils" />
-<section id="dependencies">
-<h2>Dependencies<a class="headerlink" href="#dependencies" title="Link to this heading">¶</a></h2>
-<p><code class="docutils literal notranslate"><span class="pre">computeIBSpbwt.cpp</span></code> depends on:</p>
-<ol class="arabic">
-<li><p><strong>Eagle v2.4.1 header files</strong> — specifically <code class="docutils literal notranslate"><span class="pre">Types.hpp</span></code>, <code class="docutils literal notranslate"><span class="pre">FileUtils.cpp</span></code>,
-<code class="docutils literal notranslate"><span class="pre">StringUtils.cpp</span></code>, <code class="docutils literal notranslate"><span class="pre">MemoryUtils.cpp</span></code>, <code class="docutils literal notranslate"><span class="pre">Timer.cpp</span></code>, and <code class="docutils literal notranslate"><span class="pre">MapInterpolater.cpp</span></code>.
-Download Eagle from:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>wget<span class="w"> </span>https://alkesgroup.broadinstitute.org/Eagle/downloads/Eagle_v2.4.1.tar.gz
-tar<span class="w"> </span>-xzf<span class="w"> </span>Eagle_v2.4.1.tar.gz
-<span class="c1"># headers are in Eagle_v2.4.1/src/</span>
-</pre></div>
-</div>
-</li>
-<li><p><strong>Boost iostreams</strong> (≥ 1.58.0):</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># via conda</span>
-conda<span class="w"> </span>install<span class="w"> </span>-c<span class="w"> </span>conda-forge<span class="w"> </span>boost
-
-<span class="c1"># or download manually</span>
-wget<span class="w"> </span>https://archives.boost.org/release/1.58.0/source/boost_1_58_0.tar.gz
-</pre></div>
-</div>
-</li>
-<li><p><strong>zlib</strong> — usually available on HPC systems; install if missing:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>install<span class="w"> </span>-c<span class="w"> </span>conda-forge<span class="w"> </span>zlib
-</pre></div>
-</div>
-</li>
-<li><p><strong>OpenMP</strong> — included with GCC; no separate install needed.</p></li>
-</ol>
-</section>
-<hr class="docutils" />
-<section id="compilation">
-<h2>Compilation<a class="headerlink" href="#compilation" title="Link to this heading">¶</a></h2>
-<p>Replace <code class="docutils literal notranslate"><span class="pre">/path/to/Eagle/src</span></code>, <code class="docutils literal notranslate"><span class="pre">/path/to/boost/include</span></code>, and
-<code class="docutils literal notranslate"><span class="pre">/path/to/boost/lib</span></code> with your actual paths.</p>
-<p><strong>Standard build:</strong></p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>g++<span class="w"> </span>-O2<span class="w"> </span>-fopenmp<span class="w"> </span>-Wall<span class="w"> </span>computeIBSpbwt.cpp<span class="w"> </span>-o<span class="w"> </span>computeIBSpbwt<span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>-I/path/to/Eagle_v2.4.1/src<span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>-I/path/to/boost/include<span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>-L/path/to/boost/lib<span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>-Wl,-Bstatic<span class="w"> </span>-lboost_iostreams<span class="w"> </span>-Wl,-Bdynamic<span class="w"> </span>-lz
-</pre></div>
-</div>
-<p><strong>Static build (recommended for HPC clusters):</strong></p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>g++<span class="w"> </span>-O2<span class="w"> </span>-fopenmp<span class="w"> </span>-Wall<span class="w"> </span>-static-libgcc<span class="w"> </span>-static-libstdc++<span class="w"> </span>computeIBSpbwt.cpp<span class="w"> </span>-o<span class="w"> </span>computeIBSpbwt<span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>-I/path/to/Eagle_v2.4.1/src<span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>-I/path/to/boost/include<span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>-L/path/to/boost/lib<span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>-Wl,-Bstatic<span class="w"> </span>-lboost_iostreams<span class="w"> </span>-lz
-</pre></div>
-</div>
-<p>Verify the build:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./computeIBSpbwt
-<span class="c1"># should print: Usage: - arg1 = chr (integer) ...</span>
-</pre></div>
-</div>
-</section>
-<hr class="docutils" />
-<section id="required-input-files">
-<h2>Required Input Files<a class="headerlink" href="#required-input-files" title="Link to this heading">¶</a></h2>
-<p>The program takes 8 arguments in order:</p>
+<p>Step 7 of GRiD (haplotype inference) requires a pre-computed haplotype neighbors
+file as input. Two methods are supported, each producing a different file format
+that GRiD’s <code class="docutils literal notranslate"><span class="pre">hi_inference</span></code> module reads automatically:</p>
 <div class="table-wrapper colwidths-given docutils container">
 <table class="docutils align-default">
 <colgroup>
-<col style="width: 10.0%" />
 <col style="width: 20.0%" />
-<col style="width: 70.0%" />
+<col style="width: 30.0%" />
+<col style="width: 50.0%" />
 </colgroup>
 <thead>
-<tr class="row-odd"><th class="head"><p>Arg</p></th>
-<th class="head"><p>Name</p></th>
-<th class="head"><p>Description</p></th>
+<tr class="row-odd"><th class="head"><p>Method</p></th>
+<th class="head"><p>Tool</p></th>
+<th class="head"><p>Best for</p></th>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p>1</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">chr</span></code></p></td>
-<td><p>Chromosome number as integer (e.g. <code class="docutils literal notranslate"><span class="pre">6</span></code> for <em>LPA</em>)</p></td>
+<tr class="row-even"><td><p><strong>IBS</strong></p></td>
+<td><p><a class="reference external" href="https://github.com/mhujoel/STRs/tree/main/cpp_files">computeIBSpbwt</a> (Hujoel et al. 2026)</p></td>
+<td><p>Cohorts without long-range IBD data; fast PBWT-based matching</p></td>
 </tr>
-<tr class="row-odd"><td><p>2</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">focal_bp</span></code></p></td>
-<td><p>Focal base pair position in the same genome build as the BGEN file. For <em>LPA</em> KIV-2 in hg19, use the center of the VNTR region (<span class="math notranslate nohighlight">\(\sim\)</span> <code class="docutils literal notranslate"><span class="pre">160690000</span></code>).</p></td>
-</tr>
-<tr class="row-even"><td><p>3</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">bgen_file</span></code></p></td>
-<td><p>Phased genotype data in BGEN v1.2 format (layout 2, compressed, phased). See below.</p></td>
-</tr>
-<tr class="row-odd"><td><p>4</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">sample_file</span></code></p></td>
-<td><p>Oxford-format sample file corresponding to the BGEN file. See below.</p></td>
-</tr>
-<tr class="row-even"><td><p>5</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">genetic_map_file</span></code></p></td>
-<td><p>Genetic map in cM units, in the same genome build as the BGEN file. See below.</p></td>
-</tr>
-<tr class="row-odd"><td><p>6</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">num_neighbors</span></code></p></td>
-<td><p>Number of IBS neighbors to find per haplotype. Recommended: <code class="docutils literal notranslate"><span class="pre">200</span></code></p></td>
-</tr>
-<tr class="row-even"><td><p>7</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">threads</span></code></p></td>
-<td><p>Number of CPU threads for parallel computation.</p></td>
-</tr>
-<tr class="row-odd"><td><p>8</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">output_file</span></code></p></td>
-<td><p>Output file path. Use a <code class="docutils literal notranslate"><span class="pre">.gz</span></code> extension for automatic gzip compression.</p></td>
+<tr class="row-odd"><td><p><strong>IBD</strong></p></td>
+<td><p><a class="reference external" href="https://github.com/roohy/iLASH">iLASH</a></p></td>
+<td><p>Larger cohorts where true IBD segments improve phasing specificity</p></td>
 </tr>
 </tbody>
 </table>
 </div>
-<section id="phased-bgen-file">
-<h3>Phased BGEN File<a class="headerlink" href="#phased-bgen-file" title="Link to this heading">¶</a></h3>
-<p>The BGEN file must contain <strong>phased</strong> SNP-array or WGS genotypes for the chromosome
-of interest. Requirements:</p>
-<ul class="simple">
-<li><p>BGEN v1.2, layout 2, compressed (<code class="docutils literal notranslate"><span class="pre">CompressedSNPBlocks=1</span></code>)</p></li>
-<li><p>Phased (<code class="docutils literal notranslate"><span class="pre">Phased=1</span></code>)</p></li>
-<li><p>16-bit probability encoding (<code class="docutils literal notranslate"><span class="pre">bgenBits=16</span></code>)</p></li>
-<li><p>Biallelic variants only (<code class="docutils literal notranslate"><span class="pre">K=2</span></code>)</p></li>
+<p>Select the page for the method you want to use:</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ibs.html">Computing IBS Neighbors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ibd.html">Computing IBD Neighbors with iLASH</a></li>
 </ul>
-</section>
-<section id="sample-file">
-<h3>Sample File<a class="headerlink" href="#sample-file" title="Link to this heading">¶</a></h3>
-<p>Oxford-format <code class="docutils literal notranslate"><span class="pre">.sample</span></code> file with two header lines followed by one row per individual:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>ID_1 ID_2 missing
-0 0 0
-SAMPLE001 SAMPLE001 0
-SAMPLE002 SAMPLE002 0
-...
-</pre></div>
 </div>
-<p>The program uses column <code class="docutils literal notranslate"><span class="pre">ID_1</span></code> as the sample identifier. The identifier must match
-the IDs in the diploid CN file passed to <code class="docutils literal notranslate"><span class="pre">hi_inference</span></code>.</p>
-</section>
-<section id="genetic-map-file">
-<h3>Genetic Map File<a class="headerlink" href="#genetic-map-file" title="Link to this heading">¶</a></h3>
-<p>A tab-separated file with columns: <code class="docutils literal notranslate"><span class="pre">position</span></code>, <code class="docutils literal notranslate"><span class="pre">COMBINED_rate</span></code>, <code class="docutils literal notranslate"><span class="pre">Genetic_Map(cM)</span></code>.
-Download pre-built maps from Eagle’s website:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>wget<span class="w"> </span>https://alkesgroup.broadinstitute.org/Eagle/downloads/tables/genetic_map_hg19.tar.gz
-<span class="c1"># or for hg38:</span>
-wget<span class="w"> </span>https://alkesgroup.broadinstitute.org/Eagle/downloads/tables/genetic_map_hg38.tar.gz
-</pre></div>
-</div>
-</section>
-</section>
-<section id="running-the-program">
-<h2>Running the Program<a class="headerlink" href="#running-the-program" title="Link to this heading">¶</a></h2>
-<p>Example command for <em>LPA</em> KIV-2 (hg19, chr6):</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./computeIBSpbwt<span class="w"> </span><span class="se">\</span>
-<span class="w">    </span><span class="m">6</span><span class="w"> </span><span class="se">\</span>
-<span class="w">    </span><span class="m">160690000</span><span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>phased_chr6.bgen<span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>phased_chr6.sample<span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>genetic_map_chr6_combined_b37.txt<span class="w"> </span><span class="se">\</span>
-<span class="w">    </span><span class="m">200</span><span class="w"> </span><span class="se">\</span>
-<span class="w">    </span><span class="m">16</span><span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>ibs_neighbors_chr6.tsv.gz
-</pre></div>
-</div>
-<p>On a SLURM cluster:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
-<span class="c1">#SBATCH --job-name=computeIBS</span>
-<span class="c1">#SBATCH --cpus-per-task=16</span>
-<span class="c1">#SBATCH --mem=64G</span>
-<span class="c1">#SBATCH --time=4:00:00</span>
-
-./computeIBSpbwt<span class="w"> </span><span class="m">6</span><span class="w"> </span><span class="m">160690000</span><span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>phased_chr6.bgen<span class="w"> </span>phased_chr6.sample<span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>genetic_map_chr6_combined_b37.txt<span class="w"> </span><span class="se">\</span>
-<span class="w">    </span><span class="m">200</span><span class="w"> </span><span class="m">16</span><span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>ibs_neighbors_chr6.tsv.gz
-</pre></div>
-</div>
-</section>
-<section id="output-format">
-<h2>Output Format<a class="headerlink" href="#output-format" title="Link to this heading">¶</a></h2>
-<p>The output is a tab-separated file with one row per haplotype-neighbor pair:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>ID      hap  nbrInd  cMlen   cMedge  IDnbr      hapNbr
-10001   1    1       8.45    4.22    20034      2
-10001   1    2       7.13    3.56    30017      1
-10001   2    1       9.01    5.10    20034      1
-...
-</pre></div>
-</div>
-<div class="table-wrapper colwidths-given docutils container">
-<table class="docutils align-default">
-<colgroup>
-<col style="width: 15.0%" />
-<col style="width: 85.0%" />
-</colgroup>
-<thead>
-<tr class="row-odd"><th class="head"><p>Column</p></th>
-<th class="head"><p>Description</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ID</span></code></p></td>
-<td><p>Sample identifier</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">hap</span></code></p></td>
-<td><p>Haplotype index (1 or 2)</p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">nbrInd</span></code></p></td>
-<td><p>Neighbor rank (1 = closest)</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">cMlen</span></code></p></td>
-<td><p>Total IBS match length in cM (weighted combination of left and right extents)</p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">cMedge</span></code></p></td>
-<td><p>Minimum of left and right IBS match edge lengths in cM</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">IDnbr</span></code></p></td>
-<td><p>Neighbor sample identifier</p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">hapNbr</span></code></p></td>
-<td><p>Neighbor haplotype index (1 or 2)</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-<p>This file is passed directly to GRiD Step 5 via <code class="docutils literal notranslate"><span class="pre">compute_haploid_genotypes.ibs_output</span></code>
-in the config.</p>
-</section>
-<hr class="docutils" />
-<section id="passing-the-output-to-grid">
-<h2>Passing the Output to GRiD<a class="headerlink" href="#passing-the-output-to-grid" title="Link to this heading">¶</a></h2>
-<p>Once the neighbors file is generated, point to it in your config:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">compute_haploid_genotypes</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">True</span>
-<span class="w">  </span><span class="nt">output_file_prefix</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;haploid_genotypes&quot;</span>
-<span class="w">  </span><span class="nt">ibs_output</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;path/to/ibs_neighbors_chr6.tsv.gz&quot;</span>
-<span class="w">  </span><span class="nt">min_neighbors</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
-<span class="w">  </span><span class="nt">max_neighbors</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10</span>
-<span class="w">  </span><span class="nt">n_iters</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">100</span>
-</pre></div>
-</div>
-<p>See <a class="reference internal" href="algorithms/hi_inference.html"><span class="doc">Haplotype Inference</span></a> for details on how the neighbors file is used
-in the iterative phasing algorithm.</p>
-</section>
 </section>
 
         </article>
@@ -552,12 +336,12 @@ in the iterative phasing algorithm.</p>
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="examples.html">
+          <a class="next-page" href="ibs.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">Example Pipeline Jobs</div>
+                <div class="title">Computing IBS Neighbors</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
@@ -590,37 +374,8 @@ in the iterative phasing algorithm.</p>
         
       </footer>
     </div>
-    <aside class="toc-drawer">
+    <aside class="toc-drawer no-toc">
       
-      
-      <div class="toc-sticky toc-scroll">
-        <div class="toc-title-container">
-          <span class="toc-title">
-            On this page
-          </span>
-        </div>
-        <div class="toc-tree-container">
-          <div class="toc-tree">
-            <ul>
-<li><a class="reference internal" href="#">Computing IBS/IBD Neighbors</a><ul>
-<li><a class="reference internal" href="#dependencies">Dependencies</a></li>
-<li><a class="reference internal" href="#compilation">Compilation</a></li>
-<li><a class="reference internal" href="#required-input-files">Required Input Files</a><ul>
-<li><a class="reference internal" href="#phased-bgen-file">Phased BGEN File</a></li>
-<li><a class="reference internal" href="#sample-file">Sample File</a></li>
-<li><a class="reference internal" href="#genetic-map-file">Genetic Map File</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#running-the-program">Running the Program</a></li>
-<li><a class="reference internal" href="#output-format">Output Format</a></li>
-<li><a class="reference internal" href="#passing-the-output-to-grid">Passing the Output to GRiD</a></li>
-</ul>
-</li>
-</ul>
-
-          </div>
-        </div>
-      </div>
       
       
     </aside>
@@ -631,7 +386,5 @@ in the iterative phasing algorithm.</p>
     <script src="_static/scripts/furo.js?v=46bd48cc"></script>
     <script src="_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="_static/copybutton.js?v=f281be69"></script>
-    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     </body>
 </html>

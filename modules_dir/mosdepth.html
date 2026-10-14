@@ -208,11 +208,15 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../readme.html">Welcome to GRiD’s documentation!</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../getting_started.html">Getting Started</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../ibs_ibd.html">Computing IBS/IBD Neighbors</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../ibs_ibd.html">Computing IBS/IBD Neighbors</a><input aria-label="Toggle navigation of Computing IBS/IBD Neighbors" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../ibs.html">Computing IBS Neighbors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ibd.html">Computing IBD Neighbors with iLASH</a></li>
+</ul>
+</li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Examples</span></p>
 <ul>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../examples.html">Example Pipeline Jobs</a><input aria-label="Toggle navigation of Example Pipeline Jobs" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../examples.html">Example Pipeline Jobs</a><input aria-label="Toggle navigation of Example Pipeline Jobs" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../examples/Prep_data.html">Data Preparation Example</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../examples/1000G_example.html">1000 Genomes Full Pipeline Example</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../examples/IBS_example.html">IBS/IBD Neighbor Computation Example</a></li>
@@ -221,7 +225,7 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Algorithms</span></p>
 <ul>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../algorithms.html">Algorithms</a><input aria-label="Toggle navigation of Algorithms" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../algorithms.html">Algorithms</a><input aria-label="Toggle navigation of Algorithms" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../algorithms/count_reads.html">Read Counting</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../algorithms/coverage.html">Coverage Estimation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../algorithms/normalization.html">Coverage Normalization</a></li>
@@ -238,7 +242,7 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
 <ul class="current">
-<li class="toctree-l1 current has-children"><a class="reference internal" href="../modules.html">API Reference</a><input aria-label="Toggle navigation of API Reference" checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul class="current">
+<li class="toctree-l1 current has-children"><a class="reference internal" href="../modules.html">API Reference</a><input aria-label="Toggle navigation of API Reference" checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="grid_core.html">Core</a></li>
 <li class="toctree-l2"><a class="reference internal" href="count-reads.html">Read Counting</a></li>
 <li class="toctree-l2 current current-page"><a class="current reference internal" href="#">Coverage Estimation</a></li>
@@ -301,10 +305,14 @@ then computes an overlap-weighted mean depth for the KIV-2 region.</p>
 <dt class="sig sig-object py" id="grid.utils.mosdepth.remove_intermediate_files">
 <span class="sig-prename descclassname"><span class="pre">grid.utils.mosdepth.</span></span><span class="sig-name descname"><span class="pre">remove_intermediate_files</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mosdepth_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">console</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#grid.utils.mosdepth.remove_intermediate_files" title="Link to this definition">¶</a></dt>
 <dd><p>Remove intermediate mosdepth files, keeping only the example bed.</p>
-<dl class="simple">
-<dt>Removes: <a href="#id1"><span class="problematic" id="id2">*</span></a>.mosdepth.global.dist.txt, <a href="#id3"><span class="problematic" id="id4">*</span></a>.mosdepth.region.dist.txt,</dt><dd><p><a href="#id5"><span class="problematic" id="id6">*</span></a>.regions.bed.gz, <a href="#id7"><span class="problematic" id="id8">*</span></a>.regions.bed.gz.csi, <a href="#id9"><span class="problematic" id="id10">*</span></a>.per_sample.txt</p>
-</dd>
-</dl>
+<p>Removes:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">*.mosdepth.global.dist.txt</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">*.mosdepth.region.dist.txt</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">*.regions.bed.gz</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">*.regions.bed.gz.csi</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">*.per_sample.txt</span></code></p></li>
+</ul>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>mosdepth_dir</strong> (<em>Path</em>)</p>

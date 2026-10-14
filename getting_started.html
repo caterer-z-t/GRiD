@@ -208,11 +208,15 @@
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="readme.html">Welcome to GRiD’s documentation!</a></li>
 <li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Getting Started</a></li>
-<li class="toctree-l1"><a class="reference internal" href="ibs_ibd.html">Computing IBS/IBD Neighbors</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="ibs_ibd.html">Computing IBS/IBD Neighbors</a><input aria-label="Toggle navigation of Computing IBS/IBD Neighbors" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="ibs.html">Computing IBS Neighbors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ibd.html">Computing IBD Neighbors with iLASH</a></li>
+</ul>
+</li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Examples</span></p>
 <ul>
-<li class="toctree-l1 has-children"><a class="reference internal" href="examples.html">Example Pipeline Jobs</a><input aria-label="Toggle navigation of Example Pipeline Jobs" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="examples.html">Example Pipeline Jobs</a><input aria-label="Toggle navigation of Example Pipeline Jobs" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="examples/Prep_data.html">Data Preparation Example</a></li>
 <li class="toctree-l2"><a class="reference internal" href="examples/1000G_example.html">1000 Genomes Full Pipeline Example</a></li>
 <li class="toctree-l2"><a class="reference internal" href="examples/IBS_example.html">IBS/IBD Neighbor Computation Example</a></li>
@@ -221,7 +225,7 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Algorithms</span></p>
 <ul>
-<li class="toctree-l1 has-children"><a class="reference internal" href="algorithms.html">Algorithms</a><input aria-label="Toggle navigation of Algorithms" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="algorithms.html">Algorithms</a><input aria-label="Toggle navigation of Algorithms" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="algorithms/count_reads.html">Read Counting</a></li>
 <li class="toctree-l2"><a class="reference internal" href="algorithms/coverage.html">Coverage Estimation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="algorithms/normalization.html">Coverage Normalization</a></li>
@@ -238,7 +242,7 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
 <ul>
-<li class="toctree-l1 has-children"><a class="reference internal" href="modules.html">API Reference</a><input aria-label="Toggle navigation of API Reference" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="modules.html">API Reference</a><input aria-label="Toggle navigation of API Reference" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="modules_dir/grid_core.html">Core</a></li>
 <li class="toctree-l2"><a class="reference internal" href="modules_dir/count-reads.html">Read Counting</a></li>
 <li class="toctree-l2"><a class="reference internal" href="modules_dir/mosdepth.html">Coverage Estimation</a></li>
@@ -389,8 +393,8 @@ identifying loci where copy number is likely to vary and be heritable. Their ful
 is available at <a class="reference external" href="https://zenodo.org/record/4776804">Zenodo 4776804</a>.</p>
 <p>The same file is bundled with GRiD at
 <a class="reference external" href="https://github.com/caterer-z-t/GRiD/tree/main/files/734_possible_coding_vntr_regions.IBD2R_gt_0.25.uniq.txt">734_possible_coding_vntr_regions.IBD2R_gt_0.25.uniq.txt</a>.
-To run GRiD on a different locus, simply update the <code class="docutils literal notranslate"><span class="pre">chrom</span></code>, <code class="docutils literal notranslate"><span class="pre">start_bp</span></code>, and <code class="docutils literal notranslate"><span class="pre">end_bp</span></code> fields in your
-config file to match the coordinates of your target region. For example, to run on <em>LPA</em> KIV-2.</p>
+To run GRiD on a different locus, simply update the <code class="docutils literal notranslate"><span class="pre">chrom</span></code>, <code class="docutils literal notranslate"><span class="pre">start_bp</span></code>, and
+<code class="docutils literal notranslate"><span class="pre">end_bp</span></code> fields in your config file to match the coordinates of your target region.</p>
 </div>
 </section>
 <hr class="docutils" />
@@ -624,8 +628,9 @@ using scikit-learn <code class="docutils literal notranslate"><span class="pre">
 conservative default; increase for small or heterogeneous cohorts.</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">zmax</span></code></p></td>
-<td><p>Clip normalized depth values to <span class="math notranslate nohighlight">\(\pm\)</span> <code class="docutils literal notranslate"><span class="pre">zmax</span></code> before distance computation.
-Reduces the influence of outlier bins. Typical range: <code class="docutils literal notranslate"><span class="pre">1.5</span></code>–<code class="docutils literal notranslate"><span class="pre">3.0</span></code>.</p></td>
+<td><p>Clip normalized depth values to <span class="math notranslate nohighlight">\(\pm\)</span> <code class="docutils literal notranslate"><span class="pre">zmax</span></code> before distance
+computation. Reduces the influence of outlier bins. Typical range:
+<code class="docutils literal notranslate"><span class="pre">1.5</span></code>–<code class="docutils literal notranslate"><span class="pre">3.0</span></code>.</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">sigma2_max</span></code></p></td>
 <td><p>Maximum allowed neighbor variance. Samples whose nearest-neighbor
@@ -677,33 +682,41 @@ to the closest matches.</p></td>
 </section>
 <section id="step-5-compute-haploid-genotypes">
 <h2>Step 5 — <code class="docutils literal notranslate"><span class="pre">compute_haploid_genotypes</span></code><a class="headerlink" href="#step-5-compute-haploid-genotypes" title="Link to this heading">¶</a></h2>
-<p>Decomposes diploid CN estimates into haplotype-specific copy numbers using an
-iterative phasing algorithm. Two neighbor sources are supported via <code class="docutils literal notranslate"><span class="pre">method</span></code>.
-See <a class="reference internal" href="algorithms/hi_inference.html"><span class="doc">Haplotype Inference</span></a> and <a class="reference internal" href="ibs_ibd.html"><span class="doc">Computing IBS/IBD Neighbors</span></a>.</p>
+<p>Decomposes diploid CN estimates into haplotype-specific copy numbers using a
+neighbor-based phasing algorithm. Two neighbor sources (IBS or IBD) and five
+phasing algorithms are supported. See <a class="reference internal" href="algorithms/hi_inference.html"><span class="doc">Haplotype Inference</span></a> for full
+algorithm details and <a class="reference internal" href="ibs_ibd.html"><span class="doc">Computing IBS/IBD Neighbors</span></a> for how to generate the neighbors file.</p>
+<p><strong>IBS (original method):</strong></p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">compute_haploid_genotypes</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">True</span>
 <span class="w">  </span><span class="nt">output_file_prefix</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;haploid_genotypes&quot;</span>
-<span class="w">  </span><span class="nt">method</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;ibs&quot;</span><span class="w">          </span><span class="c1"># &quot;ibs&quot; or &quot;ibd&quot;</span>
+<span class="w">  </span><span class="nt">method</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;ibs&quot;</span>
+<span class="w">  </span><span class="nt">phasing_method</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;iterative&quot;</span>
+<span class="w">  </span><span class="nt">ibs_output</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;path/to/ibs_neighbors_chr6.tsv.gz&quot;</span>
 <span class="w">  </span><span class="nt">min_neighbors</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
 <span class="w">  </span><span class="nt">max_neighbors</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10</span>
-<span class="w">  </span><span class="nt">n_iters</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">100</span>
-
-<span class="w">  </span><span class="c1"># IBS method</span>
-<span class="w">  </span><span class="nt">ibs_output</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;path/to/ibs_neighbors_chr6.tsv.gz&quot;</span>
-
-<span class="w">  </span><span class="c1"># IBD method</span>
-<span class="w">  </span><span class="c1"># ibd_output: &quot;path/to/ilash_output.txt&quot;</span>
-<span class="w">  </span><span class="c1"># weighted: False</span>
-<span class="w">  </span><span class="c1"># weight_scale: 1000000</span>
-<span class="w">  </span><span class="c1"># min_length: 0.5</span>
-<span class="w">  </span><span class="c1"># min_match: 0.70</span>
+<span class="w">  </span><span class="nt">n_iters</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">20</span>
+</pre></div>
+</div>
+<p><strong>IBD (recommended):</strong></p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">compute_haploid_genotypes</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">True</span>
+<span class="w">  </span><span class="nt">output_file_prefix</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;haploid_genotypes&quot;</span>
+<span class="w">  </span><span class="nt">method</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;ibd&quot;</span>
+<span class="w">  </span><span class="nt">phasing_method</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;graph_prop&quot;</span>
+<span class="w">  </span><span class="nt">ibd_output</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;path/to/output.match&quot;</span>
+<span class="w">  </span><span class="nt">alpha</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.7</span>
+<span class="w">  </span><span class="nt">n_iters</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">20</span>
+<span class="w">  </span><span class="nt">max_neighbors</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">20</span>
+<span class="w">  </span><span class="nt">min_length</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2.0</span>
+<span class="w">  </span><span class="nt">min_match</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.95</span>
 </pre></div>
 </div>
 <div class="table-wrapper colwidths-given docutils container">
 <table class="docutils align-default">
 <colgroup>
-<col style="width: 25.0%" />
-<col style="width: 75.0%" />
+<col style="width: 28.0%" />
+<col style="width: 72.0%" />
 </colgroup>
 <thead>
 <tr class="row-odd"><th class="head"><p>Parameter</p></th>
@@ -715,40 +728,65 @@ See <a class="reference internal" href="algorithms/hi_inference.html"><span clas
 <td><p>Set <code class="docutils literal notranslate"><span class="pre">True</span></code> to run haplotype inference.</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">output_file_prefix</span></code></p></td>
-<td><p>Prefix for the haploid CN output files.</p></td>
+<td><p>Prefix for the haploid CN output file.</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">method</span></code></p></td>
-<td><p>Neighbor source: <code class="docutils literal notranslate"><span class="pre">&quot;ibs&quot;</span></code> (computeIBSpbwt output) or <code class="docutils literal notranslate"><span class="pre">&quot;ibd&quot;</span></code> (iLASH output).</p></td>
+<td><p>Neighbor source: <code class="docutils literal notranslate"><span class="pre">&quot;ibs&quot;</span></code> (computeIBSpbwt output) or <code class="docutils literal notranslate"><span class="pre">&quot;ibd&quot;</span></code>
+(iLASH output).</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">phasing_method</span></code></p></td>
+<td><p>Phasing algorithm. Options: <code class="docutils literal notranslate"><span class="pre">&quot;iterative&quot;</span></code> (original Hujoel method),
+<code class="docutils literal notranslate"><span class="pre">&quot;graph_prop&quot;</span></code> <em>(recommended)</em>, <code class="docutils literal notranslate"><span class="pre">&quot;graph_prop_weighted&quot;</span></code>,
+<code class="docutils literal notranslate"><span class="pre">&quot;oneshot&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;rank_based&quot;</span></code>. See <a class="reference internal" href="algorithms/hi_inference.html"><span class="doc">Haplotype Inference</span></a>
+for descriptions of each.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">alpha</span></code></p></td>
+<td><p><em>(graph_prop / graph_prop_weighted)</em> Mixing weight between the
+individual’s own diploid signal and the neighbor aggregate. Range (0, 1);
+higher values trust the individual more. Default: <code class="docutils literal notranslate"><span class="pre">0.7</span></code>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">agg_fn</span></code></p></td>
+<td><p>Neighbor aggregation function. Options: <code class="docutils literal notranslate"><span class="pre">&quot;mean&quot;</span></code> <em>(default)</em>,
+<code class="docutils literal notranslate"><span class="pre">&quot;median&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;weighted_cM&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;weighted_score&quot;</span></code>,
+<code class="docutils literal notranslate"><span class="pre">&quot;weighted_cM_score&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;trimmed_mean&quot;</span></code>. Ignored by plain
+<code class="docutils literal notranslate"><span class="pre">graph_prop</span></code>.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">n_iters</span></code></p></td>
+<td><p>Number of phasing iterations. Ignored by <code class="docutils literal notranslate"><span class="pre">oneshot</span></code>. Default: <code class="docutils literal notranslate"><span class="pre">20</span></code>.</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">min_neighbors</span></code></p></td>
-<td><p>Minimum neighbors required per haplotype. Samples below this threshold
-are excluded from iterative phasing.</p></td>
+<td><p>Minimum neighbors required on both haplotypes to phase a sample.
+Samples below this threshold receive mean-imputed values. Default: <code class="docutils literal notranslate"><span class="pre">1</span></code>.</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">max_neighbors</span></code></p></td>
-<td><p>Maximum neighbors used per haplotype per iteration.</p></td>
+<td><p>Maximum neighbors loaded per haplotype. Default: <code class="docutils literal notranslate"><span class="pre">20</span></code>.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">n_iters</span></code></p></td>
-<td><p>Iterations for the update loop. <code class="docutils literal notranslate"><span class="pre">100</span></code> is a safe default.</p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ibs_output</span></code></p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">ibs_output</span></code></p></td>
 <td><p><em>(IBS method)</em> Path to IBS neighbors file from <code class="docutils literal notranslate"><span class="pre">computeIBSpbwt</span></code>.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">ibd_output</span></code></p></td>
-<td><p><em>(IBD method)</em> Path to iLASH output file.</p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ibd_output</span></code></p></td>
+<td><p><em>(IBD method)</em> Path to iLASH <code class="docutils literal notranslate"><span class="pre">.match</span></code> output file.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">weighted</span></code></p></td>
-<td><p><em>(IBD method)</em> If <code class="docutils literal notranslate"><span class="pre">True</span></code>, weight each IBD segment by distance to the
-target region and match score (Lorentzian kernel). Default: <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">weight_scale</span></code></p></td>
-<td><p><em>(IBD method, weighted)</em> Distance half-width in bp for the Lorentzian
-weight function. Default: <code class="docutils literal notranslate"><span class="pre">1000000</span></code>.</p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">min_length</span></code></p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">min_length</span></code></p></td>
 <td><p><em>(IBD method)</em> Minimum IBD segment length in cM. Default: <code class="docutils literal notranslate"><span class="pre">0.5</span></code>.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">min_match</span></code></p></td>
-<td><p><em>(IBD method)</em> Minimum iLASH match score. Default: <code class="docutils literal notranslate"><span class="pre">0.70</span></code>.</p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">min_match</span></code></p></td>
+<td><p><em>(IBD method)</em> Minimum iLASH match score; lenient floor for long
+segments when <code class="docutils literal notranslate"><span class="pre">match_at_min_length</span></code> is set. Default: <code class="docutils literal notranslate"><span class="pre">0.70</span></code>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">match_at_min_length</span></code></p></td>
+<td><p><em>(IBD method, optional)</em> Strict match score required at <code class="docutils literal notranslate"><span class="pre">min_length</span></code>
+cM. Enables a length-adaptive threshold that relaxes toward
+<code class="docutils literal notranslate"><span class="pre">min_match</span></code> for longer segments. Leave unset for a flat threshold.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">weighted</span></code></p></td>
+<td><p><em>(IBD method)</em> If <code class="docutils literal notranslate"><span class="pre">True</span></code>, weight each neighbor by
+<span class="math notranslate nohighlight">\(\mathrm{match}^3 \times \mathrm{cM}\)</span> during loading.
+Default: <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">weight_scale</span></code></p></td>
+<td><p><em>(IBD method, weighted)</em> <span class="math notranslate nohighlight">\(\lambda\)</span> in bp for the Lorentzian
+distance weight function. Default: <code class="docutils literal notranslate"><span class="pre">1000000</span></code>.</p></td>
 </tr>
 </tbody>
 </table>
@@ -756,8 +794,8 @@ weight function. Default: <code class="docutils literal notranslate"><span class
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Either <code class="docutils literal notranslate"><span class="pre">ibs_output</span></code> or <code class="docutils literal notranslate"><span class="pre">ibd_output</span></code> must be provided depending on the
-chosen <code class="docutils literal notranslate"><span class="pre">method</span></code>. See <a class="reference internal" href="ibs_ibd.html"><span class="doc">Computing IBS/IBD Neighbors</span></a> for file format details and
-<a class="reference internal" href="examples/IBS_example.html"><span class="doc">IBS/IBD Neighbor Computation Example</span></a> for an annotated example script.</p>
+chosen <code class="docutils literal notranslate"><span class="pre">method</span></code>. See <a class="reference internal" href="ibs_ibd.html"><span class="doc">Computing IBS/IBD Neighbors</span></a> for file format details and how to
+generate each neighbors file.</p>
 </div>
 </section>
 <hr class="docutils" />
@@ -818,28 +856,31 @@ chosen <code class="docutils literal notranslate"><span class="pre">method</span
 <span class="linenos">51</span><span class="w">    </span><span class="nt">zmax</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2.0</span>
 <span class="linenos">52</span><span class="w">    </span><span class="nt">sigma2_max</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
 <span class="linenos">53</span>
-<span class="linenos">54</span><span class="nt">compute_diploid_genotypes</span><span class="p">:</span>
-<span class="linenos">55</span><span class="w">  </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">True</span>
-<span class="linenos">56</span><span class="w">  </span><span class="nt">output_file_prefix</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;diploid_genotypes&quot;</span>
-<span class="linenos">57</span><span class="w">  </span><span class="nt">n_nbr</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">300</span>
-<span class="linenos">58</span>
-<span class="linenos">59</span><span class="nt">compute_haploid_genotypes</span><span class="p">:</span>
-<span class="linenos">60</span><span class="w">  </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">True</span>
-<span class="linenos">61</span><span class="w">  </span><span class="nt">output_file_prefix</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;haploid_genotypes&quot;</span>
-<span class="linenos">62</span><span class="w">  </span><span class="nt">method</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;ibs&quot;</span><span class="w">          </span><span class="c1"># &quot;ibs&quot; or &quot;ibd&quot;</span>
-<span class="linenos">63</span><span class="w">  </span><span class="nt">min_neighbors</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
-<span class="linenos">64</span><span class="w">  </span><span class="nt">max_neighbors</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10</span>
-<span class="linenos">65</span><span class="w">  </span><span class="nt">n_iters</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">100</span>
-<span class="linenos">66</span>
-<span class="linenos">67</span><span class="w">  </span><span class="c1"># IBS method: provide computeIBSpbwt output</span>
-<span class="linenos">68</span><span class="w">  </span><span class="nt">ibs_output</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;path/to/ibs_neighbors_chr6.tsv.gz&quot;</span>
+<span class="linenos">54</span><span class="w">  </span><span class="nt">gc_normalize</span><span class="p">:</span>
+<span class="linenos">55</span><span class="w">    </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span>
+<span class="linenos">56</span>
+<span class="linenos">57</span><span class="nt">compute_diploid_genotypes</span><span class="p">:</span>
+<span class="linenos">58</span><span class="w">  </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">True</span>
+<span class="linenos">59</span><span class="w">  </span><span class="nt">output_file_prefix</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;diploid_genotypes&quot;</span>
+<span class="linenos">60</span><span class="w">  </span><span class="nt">n_nbr</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">300</span>
+<span class="linenos">61</span>
+<span class="linenos">62</span><span class="nt">compute_haploid_genotypes</span><span class="p">:</span>
+<span class="linenos">63</span><span class="w">  </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">True</span>
+<span class="linenos">64</span><span class="w">  </span><span class="nt">output_file_prefix</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;haploid_genotypes&quot;</span>
+<span class="linenos">65</span><span class="w">  </span><span class="nt">method</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;ibs&quot;</span><span class="w">          </span><span class="c1"># &quot;ibs&quot; or &quot;ibd&quot;</span>
+<span class="linenos">66</span><span class="w">  </span><span class="nt">min_neighbors</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
+<span class="linenos">67</span><span class="w">  </span><span class="nt">max_neighbors</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10</span>
+<span class="linenos">68</span><span class="w">  </span><span class="nt">n_iters</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">100</span>
 <span class="linenos">69</span>
-<span class="linenos">70</span><span class="w">  </span><span class="c1"># IBD method: provide iLASH output and filtering thresholds</span>
-<span class="linenos">71</span><span class="w">  </span><span class="c1"># ibd_output: &quot;path/to/ilash_output.txt&quot;</span>
-<span class="linenos">72</span><span class="w">  </span><span class="c1"># weighted: False         # True = Lorentzian distance+match weighting</span>
-<span class="linenos">73</span><span class="w">  </span><span class="c1"># weight_scale: 1000000   # bp half-width for distance weight</span>
-<span class="linenos">74</span><span class="w">  </span><span class="c1"># min_length: 0.5         # minimum IBD segment length (cM)</span>
-<span class="linenos">75</span><span class="w">  </span><span class="c1"># min_match: 0.70         # minimum IBD match score</span>
+<span class="linenos">70</span><span class="w">  </span><span class="c1"># IBS method: provide computeIBSpbwt output</span>
+<span class="linenos">71</span><span class="w">  </span><span class="nt">ibs_output</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;path/to/ibs_neighbors_chr6.tsv.gz&quot;</span>
+<span class="linenos">72</span>
+<span class="linenos">73</span><span class="w">  </span><span class="c1"># IBD method: provide iLASH output and filtering thresholds</span>
+<span class="linenos">74</span><span class="w">  </span><span class="c1"># ibd_output: &quot;path/to/ilash_output.txt&quot;</span>
+<span class="linenos">75</span><span class="w">  </span><span class="c1"># weighted: False         # True = Lorentzian distance+match weighting</span>
+<span class="linenos">76</span><span class="w">  </span><span class="c1"># weight_scale: 1000000   # bp half-width for distance weight</span>
+<span class="linenos">77</span><span class="w">  </span><span class="c1"># min_length: 0.5         # minimum IBD segment length (cM)</span>
+<span class="linenos">78</span><span class="w">  </span><span class="c1"># min_match: 0.70         # minimum IBD match score</span>
 </pre></div>
 </div>
 </div>

@@ -87,10 +87,10 @@ These fields apply to every pipeline step.
    identifying loci where copy number is likely to vary and be heritable. Their full code
    is available at `Zenodo 4776804 <https://zenodo.org/record/4776804>`_.
 
-   The same file is bundled with GRiD at 
-   `734_possible_coding_vntr_regions.IBD2R_gt_0.25.uniq.txt <https://github.com/caterer-z-t/GRiD/tree/main/files/734_possible_coding_vntr_regions.IBD2R_gt_0.25.uniq.txt>`_. 
-   To run GRiD on a different locus, simply update the ``chrom``, ``start_bp``, and ``end_bp`` fields in your 
-   config file to match the coordinates of your target region. For example, to run on *LPA* KIV-2.
+   The same file is bundled with GRiD at
+   `734_possible_coding_vntr_regions.IBD2R_gt_0.25.uniq.txt <https://github.com/caterer-z-t/GRiD/tree/main/files/734_possible_coding_vntr_regions.IBD2R_gt_0.25.uniq.txt>`_.
+   To run GRiD on a different locus, simply update the ``chrom``, ``start_bp``, and
+   ``end_bp`` fields in your config file to match the coordinates of your target region.
 
 ====
 
@@ -278,8 +278,9 @@ using scikit-learn ``NearestNeighbors``. See :doc:`algorithms/neighbors`.
      - Number of nearest neighbors to retain per sample. ``5`` is a
        conservative default; increase for small or heterogeneous cohorts.
    * - ``zmax``
-     - Clip normalized depth values to :math:`\pm` ``zmax`` before distance computation.
-       Reduces the influence of outlier bins. Typical range: ``1.5``–``3.0``.
+     - Clip normalized depth values to :math:`\pm` ``zmax`` before distance
+       computation. Reduces the influence of outlier bins. Typical range:
+       ``1.5``–``3.0``.
    * - ``sigma2_max``
      - Maximum allowed neighbor variance. Samples whose nearest-neighbor
        set has variance above this threshold are flagged. Increase if many
@@ -317,69 +318,101 @@ its nearest neighbors at the same locus. See :doc:`algorithms/dipcn`.
 Step 5 — ``compute_haploid_genotypes``
 ---------------------------------------
 
-Decomposes diploid CN estimates into haplotype-specific copy numbers using an
-iterative phasing algorithm. Two neighbor sources are supported via ``method``.
-See :doc:`algorithms/hi_inference` and :doc:`ibs_ibd`.
+Decomposes diploid CN estimates into haplotype-specific copy numbers using a
+neighbor-based phasing algorithm. Two neighbor sources (IBS or IBD) and five
+phasing algorithms are supported. See :doc:`algorithms/hi_inference` for full
+algorithm details and :doc:`ibs_ibd` for how to generate the neighbors file.
+
+**IBS (original method):**
 
 .. code-block:: yaml
 
    compute_haploid_genotypes:
      run: True
      output_file_prefix: "haploid_genotypes"
-     method: "ibs"          # "ibs" or "ibd"
+     method: "ibs"
+     phasing_method: "iterative"
+     ibs_output: "path/to/ibs_neighbors_chr6.tsv.gz"
      min_neighbors: 1
      max_neighbors: 10
-     n_iters: 100
+     n_iters: 20
 
-     # IBS method
-     ibs_output: "path/to/ibs_neighbors_chr6.tsv.gz"
+**IBD (recommended):**
 
-     # IBD method
-     # ibd_output: "path/to/ilash_output.txt"
-     # weighted: False
-     # weight_scale: 1000000
-     # min_length: 0.5
-     # min_match: 0.70
+.. code-block:: yaml
+
+   compute_haploid_genotypes:
+     run: True
+     output_file_prefix: "haploid_genotypes"
+     method: "ibd"
+     phasing_method: "graph_prop"
+     ibd_output: "path/to/output.match"
+     alpha: 0.7
+     n_iters: 20
+     max_neighbors: 20
+     min_length: 2.0
+     min_match: 0.95
 
 .. list-table::
    :header-rows: 1
-   :widths: 25 75
+   :widths: 28 72
 
    * - Parameter
      - Description
    * - ``run``
      - Set ``True`` to run haplotype inference.
    * - ``output_file_prefix``
-     - Prefix for the haploid CN output files.
+     - Prefix for the haploid CN output file.
    * - ``method``
-     - Neighbor source: ``"ibs"`` (computeIBSpbwt output) or ``"ibd"`` (iLASH output).
-   * - ``min_neighbors``
-     - Minimum neighbors required per haplotype. Samples below this threshold
-       are excluded from iterative phasing.
-   * - ``max_neighbors``
-     - Maximum neighbors used per haplotype per iteration.
+     - Neighbor source: ``"ibs"`` (computeIBSpbwt output) or ``"ibd"``
+       (iLASH output).
+   * - ``phasing_method``
+     - Phasing algorithm. Options: ``"iterative"`` (original Hujoel method),
+       ``"graph_prop"`` *(recommended)*, ``"graph_prop_weighted"``,
+       ``"oneshot"``, ``"rank_based"``. See :doc:`algorithms/hi_inference`
+       for descriptions of each.
+   * - ``alpha``
+     - *(graph_prop / graph_prop_weighted)* Mixing weight between the
+       individual's own diploid signal and the neighbor aggregate. Range (0, 1);
+       higher values trust the individual more. Default: ``0.7``.
+   * - ``agg_fn``
+     - Neighbor aggregation function. Options: ``"mean"`` *(default)*,
+       ``"median"``, ``"weighted_cM"``, ``"weighted_score"``,
+       ``"weighted_cM_score"``, ``"trimmed_mean"``. Ignored by plain
+       ``graph_prop``.
    * - ``n_iters``
-     - Iterations for the update loop. ``100`` is a safe default.
+     - Number of phasing iterations. Ignored by ``oneshot``. Default: ``20``.
+   * - ``min_neighbors``
+     - Minimum neighbors required on both haplotypes to phase a sample.
+       Samples below this threshold receive mean-imputed values. Default: ``1``.
+   * - ``max_neighbors``
+     - Maximum neighbors loaded per haplotype. Default: ``20``.
    * - ``ibs_output``
      - *(IBS method)* Path to IBS neighbors file from ``computeIBSpbwt``.
    * - ``ibd_output``
-     - *(IBD method)* Path to iLASH output file.
-   * - ``weighted``
-     - *(IBD method)* If ``True``, weight each IBD segment by distance to the
-       target region and match score (Lorentzian kernel). Default: ``False``.
-   * - ``weight_scale``
-     - *(IBD method, weighted)* Distance half-width in bp for the Lorentzian
-       weight function. Default: ``1000000``.
+     - *(IBD method)* Path to iLASH ``.match`` output file.
    * - ``min_length``
      - *(IBD method)* Minimum IBD segment length in cM. Default: ``0.5``.
    * - ``min_match``
-     - *(IBD method)* Minimum iLASH match score. Default: ``0.70``.
+     - *(IBD method)* Minimum iLASH match score; lenient floor for long
+       segments when ``match_at_min_length`` is set. Default: ``0.70``.
+   * - ``match_at_min_length``
+     - *(IBD method, optional)* Strict match score required at ``min_length``
+       cM. Enables a length-adaptive threshold that relaxes toward
+       ``min_match`` for longer segments. Leave unset for a flat threshold.
+   * - ``weighted``
+     - *(IBD method)* If ``True``, weight each neighbor by
+       :math:`\mathrm{match}^3 \times \mathrm{cM}` during loading.
+       Default: ``False``.
+   * - ``weight_scale``
+     - *(IBD method, weighted)* :math:`\lambda` in bp for the Lorentzian
+       distance weight function. Default: ``1000000``.
 
 .. note::
 
    Either ``ibs_output`` or ``ibd_output`` must be provided depending on the
-   chosen ``method``. See :doc:`ibs_ibd` for file format details and
-   :doc:`examples/IBS_example` for an annotated example script.
+   chosen ``method``. See :doc:`ibs_ibd` for file format details and how to
+   generate each neighbors file.
 
 ----
 

@@ -1,0 +1,725 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="./">
+  <head><meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="Index" href="genindex.html"><link rel="search" title="Search" href="search.html"><link rel="next" title="Example Pipeline Jobs" href="examples.html"><link rel="prev" title="Computing IBS Neighbors" href="ibs.html">
+        <link rel="prefetch" href="_static/grid_logo.png" as="image">
+
+    <link rel="shortcut icon" href="_static/favicon.ico"><!-- Generated with Sphinx 8.2.3 and Furo 2025.09.25 -->
+        <title>Computing IBD Neighbors with iLASH - GRiD 1.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d111a655" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=580074bf" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=8dab3a3b" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f2f2f2;
+  --color-code-foreground: #1e1e1e;
+  --color-brand-primary: #F47B7B;
+  --color-brand-content: #F47B7B;
+  --color-link: #F47B7B;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  --color-brand-primary: #F47B7B;
+  --color-brand-content: #F47B7B;
+  --color-link: #F47B7B;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  --color-brand-primary: #F47B7B;
+  --color-brand-content: #F47B7B;
+  --color-link: #F47B7B;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle site navigation sidebar">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc" aria-label="Toggle table of contents sidebar">
+<label class="overlay sidebar-overlay" for="__navigation"></label>
+<label class="overlay toc-overlay" for="__toc"></label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <span class="icon"><svg><use href="#svg-menu"></use></svg></span>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="index.html"><div class="brand">GRiD 1.0.0 documentation</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="index.html">
+  <div class="sidebar-logo-container">
+    <img class="sidebar-logo" src="_static/grid_logo.png" alt="Logo"/>
+  </div>
+  
+  <span class="sidebar-brand-text">GRiD 1.0.0 documentation</span>
+  
+</a><form class="sidebar-search-container" method="get" action="search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="readme.html">Welcome to GRiD’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a></li>
+<li class="toctree-l1 current has-children"><a class="reference internal" href="ibs_ibd.html">Computing IBS/IBD Neighbors</a><input aria-label="Toggle navigation of Computing IBS/IBD Neighbors" checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="ibs.html">Computing IBS Neighbors</a></li>
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">Computing IBD Neighbors with iLASH</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Examples</span></p>
+<ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="examples.html">Example Pipeline Jobs</a><input aria-label="Toggle navigation of Example Pipeline Jobs" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="examples/Prep_data.html">Data Preparation Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/1000G_example.html">1000 Genomes Full Pipeline Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/IBS_example.html">IBS/IBD Neighbor Computation Example</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Algorithms</span></p>
+<ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="algorithms.html">Algorithms</a><input aria-label="Toggle navigation of Algorithms" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="algorithms/count_reads.html">Read Counting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="algorithms/coverage.html">Coverage Estimation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="algorithms/normalization.html">Coverage Normalization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="algorithms/neighbors.html">Nearest-Neighbor Identification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="algorithms/dipcn.html">Diploid Copy Number Estimation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="algorithms/hi_inference.html">Haplotype Inference</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Project</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="code_of_conduct.html">Code of Conduct</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="modules.html">API Reference</a><input aria-label="Toggle navigation of API Reference" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="modules_dir/grid_core.html">Core</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules_dir/count-reads.html">Read Counting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules_dir/mosdepth.html">Coverage Estimation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules_dir/normalize-mosdepth.html">Coverage Normalization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules_dir/find-neighbors.html">Nearest-Neighbor Identification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules_dir/compute-dipcn.html">Diploid Copy Number Estimation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules_dir/hi-inference.html">Haplotype Inference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules_dir/crai.html">CRAM Index Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules_dir/utils.html">Utilities &amp; Helper Functions</a></li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="view-this-page">
+  <a class="muted-link" href="_sources/ibd.rst.txt" title="View this page">
+    <svg><use href="#svg-eye"></use></svg>
+    <span class="visually-hidden">View this page</span>
+  </a>
+</div>
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <section id="computing-ibd-neighbors-with-ilash">
+<h1>Computing IBD Neighbors with iLASH<a class="headerlink" href="#computing-ibd-neighbors-with-ilash" title="Link to this heading">¶</a></h1>
+<p>Step 7 of GRiD (haplotype inference) can use identity-by-descent (IBD) haplotype
+neighbors computed by <a class="reference external" href="https://github.com/roohy/iLASH">iLASH</a>, a scalable
+local alignment-based IBD detection tool. IBD segments represent true
+identity-by-descent rather than identity-by-state, making them more specific
+haplotype neighbors for phasing — particularly for individuals who lack long
+IBS matches.</p>
+<p>For IBS-based neighbors using <code class="docutils literal notranslate"><span class="pre">computeIBSpbwt</span></code>, see <a class="reference internal" href="ibs.html"><span class="doc">Computing IBS Neighbors</span></a>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>iLASH is not included in the GRiD repository and must be available on your
+<code class="docutils literal notranslate"><span class="pre">PATH</span></code> (e.g. via <code class="docutils literal notranslate"><span class="pre">module</span> <span class="pre">load</span> <span class="pre">ilash</span></code> on supported HPC clusters).</p>
+</div>
+<hr class="docutils" />
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">¶</a></h2>
+<p>The iLASH workflow for GRiD requires three stages before running iLASH itself:</p>
+<ol class="arabic simple">
+<li><p><strong>Phase your VCF</strong> — phased genotypes are required (e.g. from
+<a class="reference external" href="https://github.com/AI-sandbox/gnomix">GnoMix</a> or a reference panel).</p></li>
+<li><p><strong>Convert VCF → PED/MAP</strong> — iLASH takes PLINK text-format (<code class="docutils literal notranslate"><span class="pre">.ped/.map</span></code>)
+input, not VCF or BGEN. Use <code class="docutils literal notranslate"><span class="pre">vcf2ped_zc.py</span></code> to preserve phase information.</p></li>
+<li><p><strong>Add genetic map coordinates</strong> — iLASH needs cM positions. Use
+<code class="docutils literal notranslate"><span class="pre">add_gen_map.py</span></code> to annotate the MAP file with a genetic map.</p></li>
+</ol>
+</section>
+<hr class="docutils" />
+<section id="input-requirements">
+<h2>Input Requirements<a class="headerlink" href="#input-requirements" title="Link to this heading">¶</a></h2>
+<p><strong>Phased VCF</strong> — iLASH requires phased genotypes. If your VCF is unphased,
+phase it first with a tool such as GnoMix, Eagle, or SHAPEIT. The phased VCF
+must be indexed and cover the chromosome of interest.</p>
+<p><strong>Genetic map</strong> — a tab-separated file with physical and cM positions for
+the target chromosome. Download pre-built hg38 maps:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>wget<span class="w"> </span>https://alkesgroup.broadinstitute.org/Eagle/downloads/tables/genetic_map_hg38.tar.gz
+tar<span class="w"> </span>-xzf<span class="w"> </span>genetic_map_hg38.tar.gz
+</pre></div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="stage-1-convert-vcf-to-ped-map">
+<h2>Stage 1 — Convert VCF to PED/MAP<a class="headerlink" href="#stage-1-convert-vcf-to-ped-map" title="Link to this heading">¶</a></h2>
+<p>iLASH reads PLINK text format (<code class="docutils literal notranslate"><span class="pre">.ped/.map</span></code>). The <code class="docutils literal notranslate"><span class="pre">vcf2ped_zc.py</span></code> helper
+converts a phased VCF while preserving haplotype phase. It lives in
+<code class="docutils literal notranslate"><span class="pre">grid/utils/helper_dir/</span></code>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Count variants in the VCF</span>
+<span class="nv">SNP_COUNT</span><span class="o">=</span><span class="k">$(</span>bcftools<span class="w"> </span>view<span class="w"> </span>-H<span class="w"> </span>phased_chr6.vcf.gz<span class="w"> </span><span class="p">|</span><span class="w"> </span>wc<span class="w"> </span>-l<span class="k">)</span>
+
+python<span class="w"> </span>grid/utils/helper_dir/vcf2ped_zc.py<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--vcf<span class="w">       </span>phased_chr6.vcf.gz<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--out<span class="w">       </span>gnomix_phased_chr6<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--snp-count<span class="w"> </span><span class="nv">$SNP_COUNT</span>
+</pre></div>
+</div>
+<p>This produces <code class="docutils literal notranslate"><span class="pre">gnomix_phased_chr6.ped</span></code> and <code class="docutils literal notranslate"><span class="pre">gnomix_phased_chr6.map</span></code>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Use <code class="docutils literal notranslate"><span class="pre">vcf2ped_zc.py</span></code> rather than standard PLINK conversion tools —
+standard converters do not guarantee phase order is preserved in the
+PED file, which is required for iLASH to assign haplotypes correctly.</p>
+</div>
+</section>
+<hr class="docutils" />
+<section id="stage-2-add-genetic-map-coordinates">
+<h2>Stage 2 — Add Genetic Map Coordinates<a class="headerlink" href="#stage-2-add-genetic-map-coordinates" title="Link to this heading">¶</a></h2>
+<p>iLASH uses cM positions from the MAP file to compute segment lengths.
+Annotate the MAP file produced in Stage 1 using <code class="docutils literal notranslate"><span class="pre">add_gen_map.py</span></code> from
+<code class="docutils literal notranslate"><span class="pre">grid/utils/helper_dir/</span></code>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>grid/utils/helper_dir/add_gen_map.py<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--map<span class="w">         </span>gnomix_phased_chr6.map<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--genetic-map<span class="w"> </span>genetic_map_hg38_chr6.txt.gz<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--out<span class="w">         </span>gnomix_phased_chr6_mapped
+</pre></div>
+</div>
+<p>This produces <code class="docutils literal notranslate"><span class="pre">gnomix_phased_chr6_mapped.map</span></code> with cM coordinates filled in.</p>
+</section>
+<hr class="docutils" />
+<section id="stage-3-ilash-configuration-file">
+<h2>Stage 3 — iLASH Configuration File<a class="headerlink" href="#stage-3-ilash-configuration-file" title="Link to this heading">¶</a></h2>
+<p>iLASH is configured via a plain-text parameter file. Key parameters for GRiD use:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span># iLASH parameter file for LPA KIV-2 (chr6)
+map  /path/to/gnomix_phased_chr6_mapped.map
+ped  /path/to/gnomix_phased_chr6.ped
+output /path/to/output.match
+
+# SNP-based slicing
+auto_slice 1
+slice_size 350
+step_size 350
+min_length 0.5
+slice_length 0.5
+cm_overlap 1
+
+# LSH parameters
+shingle_size 15
+shingle_overlap 0
+perm_count 50
+bucket_count 10
+interest_threshold 0.50
+match_threshold 0.70
+minhash_threshold 55
+
+# Threading
+max_thread 3
+</pre></div>
+</div>
+<div class="table-wrapper colwidths-given docutils container">
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 28.0%" />
+<col style="width: 72.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Parameter</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">map</span></code> / <code class="docutils literal notranslate"><span class="pre">ped</span></code></p></td>
+<td><p>Paths to the genetic-map-annotated MAP file and phased PED file.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">output</span></code></p></td>
+<td><p>Path for the output <code class="docutils literal notranslate"><span class="pre">.match</span></code> file.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">auto_slice</span></code></p></td>
+<td><p>Set <code class="docutils literal notranslate"><span class="pre">1</span></code> to use SNP-count-based window slicing (recommended).</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">slice_size</span></code> / <code class="docutils literal notranslate"><span class="pre">step_size</span></code></p></td>
+<td><p>Window size and step in number of SNPs.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">min_length</span></code> / <code class="docutils literal notranslate"><span class="pre">slice_length</span></code></p></td>
+<td><p>Minimum IBD segment length (cM) and slice length (cM).</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">shingle_size</span></code> / <code class="docutils literal notranslate"><span class="pre">perm_count</span></code> / <code class="docutils literal notranslate"><span class="pre">bucket_count</span></code></p></td>
+<td><p>LSH parameters controlling sensitivity vs. speed.
+Increasing <code class="docutils literal notranslate"><span class="pre">perm_count</span></code> improves recall at the cost of runtime.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">interest_threshold</span></code> / <code class="docutils literal notranslate"><span class="pre">match_threshold</span></code></p></td>
+<td><p>Candidate and final match score thresholds written to the output file.
+Set permissively here (e.g. <code class="docutils literal notranslate"><span class="pre">0.70</span></code>) and let GRiD filter at load time.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">minhash_threshold</span></code></p></td>
+<td><p>Minimum number of MinHash collisions to consider a pair. Lower values
+increase sensitivity but also false-positive rate.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">max_thread</span></code></p></td>
+<td><p>Number of CPU threads. Match to your SLURM <code class="docutils literal notranslate"><span class="pre">--cpus-per-task</span></code>.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Run iLASH with a permissive <code class="docutils literal notranslate"><span class="pre">match_threshold</span></code> (e.g. <code class="docutils literal notranslate"><span class="pre">0.70</span></code>) and let
+GRiD filter at load time via <code class="docutils literal notranslate"><span class="pre">min_match</span></code> and <code class="docutils literal notranslate"><span class="pre">match_at_min_length</span></code>.
+This avoids re-running iLASH when experimenting with different quality
+thresholds during phasing.</p>
+</div>
+</section>
+<hr class="docutils" />
+<section id="running-ilash">
+<h2>Running iLASH<a class="headerlink" href="#running-ilash" title="Link to this heading">¶</a></h2>
+<p>Once the config file is written, run iLASH:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ilash<span class="w"> </span>/path/to/config
+</pre></div>
+</div>
+<p>Full SLURM submission script:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
+<span class="c1">#SBATCH --job-name=ilash</span>
+<span class="c1">#SBATCH --output=slurm/%x.out</span>
+<span class="c1">#SBATCH --error=slurm/%x.err</span>
+<span class="c1">#SBATCH --time=4:00:00</span>
+<span class="c1">#SBATCH --mem=300G</span>
+<span class="c1">#SBATCH --cpus-per-task=3</span>
+
+<span class="nb">set</span><span class="w"> </span>-euo<span class="w"> </span>pipefail
+
+module<span class="w"> </span>load<span class="w"> </span>bcftools<span class="w"> </span>ilash<span class="w"> </span>anaconda
+conda<span class="w"> </span>activate<span class="w"> </span>gnomix
+
+<span class="nv">OUTDIR</span><span class="o">=</span><span class="s2">&quot;path/to/output&quot;</span>
+<span class="nv">STUDY</span><span class="o">=</span><span class="s2">&quot;my_cohort&quot;</span>
+<span class="nv">SCRIPTS</span><span class="o">=</span><span class="s2">&quot;path/to/grid/scripts&quot;</span>
+
+mkdir<span class="w"> </span>-p<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$OUTDIR</span><span class="s2">/</span><span class="nv">$STUDY</span><span class="s2">/data&quot;</span>
+
+<span class="c1"># Decompress phased VCF if needed</span>
+<span class="nv">PHASED_VCF</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$OUTDIR</span><span class="s2">/</span><span class="nv">$STUDY</span><span class="s2">/data/gnomix_output/query_file_phased.vcf.gz&quot;</span>
+gunzip<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$PHASED_VCF</span><span class="s2">&quot;</span><span class="w"> </span>&gt;<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">PHASED_VCF</span><span class="p">%.gz</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="nv">PHASED_VCF</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">PHASED_VCF</span><span class="p">%.gz</span><span class="si">}</span><span class="s2">&quot;</span>
+
+<span class="nv">SNP_COUNT</span><span class="o">=</span><span class="k">$(</span>bcftools<span class="w"> </span>view<span class="w"> </span>-H<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$PHASED_VCF</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>wc<span class="w"> </span>-l<span class="k">)</span>
+
+<span class="c1"># Stage 1: VCF → PED/MAP</span>
+python<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$SCRIPTS</span><span class="s2">/grid/utils/helper_dir/vcf2ped_zc.py&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--vcf<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$PHASED_VCF</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--out<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$OUTDIR</span><span class="s2">/</span><span class="nv">$STUDY</span><span class="s2">/data/gnomix_phased_</span><span class="si">${</span><span class="nv">STUDY</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--snp-count<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$SNP_COUNT</span><span class="s2">&quot;</span>
+
+<span class="c1"># Stage 2: add genetic map coordinates</span>
+python<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$SCRIPTS</span><span class="s2">/grid/utils/helper_dir/add_gen_map.py&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--map<span class="w">         </span><span class="s2">&quot;</span><span class="nv">$OUTDIR</span><span class="s2">/</span><span class="nv">$STUDY</span><span class="s2">/data/gnomix_phased_</span><span class="si">${</span><span class="nv">STUDY</span><span class="si">}</span><span class="s2">.map&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--genetic-map<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$SCRIPTS</span><span class="s2">/files/genetic_map_hg38_chr6.txt.gz&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--out<span class="w">         </span><span class="s2">&quot;</span><span class="nv">$OUTDIR</span><span class="s2">/</span><span class="nv">$STUDY</span><span class="s2">/data/gnomix_phased_</span><span class="si">${</span><span class="nv">STUDY</span><span class="si">}</span><span class="s2">_mapped&quot;</span>
+
+<span class="c1"># Stage 3: write iLASH config and run</span>
+cat<span class="w"> </span>&gt;<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$OUTDIR</span><span class="s2">/</span><span class="nv">$STUDY</span><span class="s2">/config&quot;</span><span class="w"> </span><span class="s">&lt;&lt; EOT</span>
+<span class="s">map    $OUTDIR/$STUDY/data/gnomix_phased_${STUDY}_mapped.map</span>
+<span class="s">ped    $OUTDIR/$STUDY/data/gnomix_phased_${STUDY}.ped</span>
+<span class="s">output $OUTDIR/$STUDY/data/output.match</span>
+<span class="s">auto_slice 1</span>
+<span class="s">slice_size 350</span>
+<span class="s">step_size 350</span>
+<span class="s">min_length 0.5</span>
+<span class="s">slice_length 0.5</span>
+<span class="s">cm_overlap 1</span>
+<span class="s">shingle_size 15</span>
+<span class="s">shingle_overlap 0</span>
+<span class="s">perm_count 50</span>
+<span class="s">bucket_count 10</span>
+<span class="s">interest_threshold 0.50</span>
+<span class="s">match_threshold 0.70</span>
+<span class="s">minhash_threshold 55</span>
+<span class="s">max_thread $SLURM_CPUS_PER_TASK</span>
+<span class="s">EOT</span>
+
+ilash<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$OUTDIR</span><span class="s2">/</span><span class="nv">$STUDY</span><span class="s2">/config&quot;</span>
+
+<span class="c1"># Clean up intermediate files</span>
+rm<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$OUTDIR</span><span class="s2">/</span><span class="nv">$STUDY</span><span class="s2">/data/gnomix_phased_</span><span class="si">${</span><span class="nv">STUDY</span><span class="si">}</span><span class="s2">.map&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">   </span><span class="s2">&quot;</span><span class="nv">$OUTDIR</span><span class="s2">/</span><span class="nv">$STUDY</span><span class="s2">/data/gnomix_phased_</span><span class="si">${</span><span class="nv">STUDY</span><span class="si">}</span><span class="s2">.ped&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">   </span><span class="s2">&quot;</span><span class="nv">$OUTDIR</span><span class="s2">/</span><span class="nv">$STUDY</span><span class="s2">/data/gnomix_phased_</span><span class="si">${</span><span class="nv">STUDY</span><span class="si">}</span><span class="s2">_mapped.map&quot;</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Memory usage scales with cohort size and chromosome length.
+For a 2,500-sample cohort on chr6, expect 200–300 GB RAM and 2–4 hours
+at 3 threads.</p>
+</div>
+</section>
+<hr class="docutils" />
+<section id="output-format">
+<h2>Output Format<a class="headerlink" href="#output-format" title="Link to this heading">¶</a></h2>
+<p>iLASH writes a tab-separated <code class="docutils literal notranslate"><span class="pre">.match</span></code> file with one IBD segment per row
+and no header line:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>NA19919  NA19919_1  NA21144  NA21144_1  chr6  166290821  166437824  6:166290821:C:A  6:166437824:T:C  0.541199  0.926214
+HG03563  HG03563_0  NA21144  NA21144_0  chr6  160157539  160706689  6:160157539:G:T  6:160706689:T:C  0.515263  0.798077
+</pre></div>
+</div>
+<div class="table-wrapper colwidths-given docutils container">
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 8.0%" />
+<col style="width: 20.0%" />
+<col style="width: 72.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Col</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ID1</span></code></p></td>
+<td><p>Sample identifier for individual 1</p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">HAP_ID1</span></code></p></td>
+<td><p>Haplotype identifier: <code class="docutils literal notranslate"><span class="pre">{ID1}_{hap}</span></code> where hap is <code class="docutils literal notranslate"><span class="pre">0</span></code> or <code class="docutils literal notranslate"><span class="pre">1</span></code> (0-indexed)</p></td>
+</tr>
+<tr class="row-even"><td><p>3</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ID2</span></code></p></td>
+<td><p>Sample identifier for individual 2</p></td>
+</tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">HAP_ID2</span></code></p></td>
+<td><p>Haplotype identifier: <code class="docutils literal notranslate"><span class="pre">{ID2}_{hap}</span></code> where hap is <code class="docutils literal notranslate"><span class="pre">0</span></code> or <code class="docutils literal notranslate"><span class="pre">1</span></code> (0-indexed)</p></td>
+</tr>
+<tr class="row-even"><td><p>5</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">chrom</span></code></p></td>
+<td><p>Chromosome (e.g. <code class="docutils literal notranslate"><span class="pre">chr6</span></code>)</p></td>
+</tr>
+<tr class="row-odd"><td><p>6</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">bp_start</span></code></p></td>
+<td><p>Start position of the IBD segment (bp, same build as input)</p></td>
+</tr>
+<tr class="row-even"><td><p>7</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">bp_end</span></code></p></td>
+<td><p>End position of the IBD segment (bp)</p></td>
+</tr>
+<tr class="row-odd"><td><p>8</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">snp_start</span></code></p></td>
+<td><p>Variant ID at the start of the segment</p></td>
+</tr>
+<tr class="row-even"><td><p>9</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">snp_end</span></code></p></td>
+<td><p>Variant ID at the end of the segment</p></td>
+</tr>
+<tr class="row-odd"><td><p>10</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">length_cM</span></code></p></td>
+<td><p>Segment length in centiMorgans</p></td>
+</tr>
+<tr class="row-even"><td><p>11</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">match_score</span></code></p></td>
+<td><p>iLASH match score in [0, 1]. The default IBD calling threshold in iLASH
+is ≥ 0.99, but lower values are retained when <code class="docutils literal notranslate"><span class="pre">match_threshold</span></code> /
+<code class="docutils literal notranslate"><span class="pre">interest_threshold</span></code> are relaxed.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>iLASH haplotype indices are <strong>0-indexed</strong> (<code class="docutils literal notranslate"><span class="pre">_0</span></code> and <code class="docutils literal notranslate"><span class="pre">_1</span></code>), whereas
+<code class="docutils literal notranslate"><span class="pre">computeIBSpbwt</span></code> uses <strong>1-indexed</strong> haplotypes (<code class="docutils literal notranslate"><span class="pre">hap=1</span></code> or <code class="docutils literal notranslate"><span class="pre">hap=2</span></code>).
+GRiD’s <code class="docutils literal notranslate"><span class="pre">hi_inference</span></code> handles both formats automatically.</p>
+</div>
+</section>
+<hr class="docutils" />
+<section id="passing-the-output-to-grid">
+<h2>Passing the Output to GRiD<a class="headerlink" href="#passing-the-output-to-grid" title="Link to this heading">¶</a></h2>
+<p>Point to the <code class="docutils literal notranslate"><span class="pre">.match</span></code> file in your config under <code class="docutils literal notranslate"><span class="pre">ibd_output</span></code>:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">compute_haploid_genotypes</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">True</span>
+<span class="w">  </span><span class="nt">output_file_prefix</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;haploid_genotypes&quot;</span>
+<span class="w">  </span><span class="nt">method</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;ibd&quot;</span>
+<span class="w">  </span><span class="nt">phasing_method</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;graph_prop&quot;</span>
+<span class="w">  </span><span class="nt">ibd_output</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;path/to/output.match&quot;</span>
+<span class="w">  </span><span class="nt">alpha</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.7</span>
+<span class="w">  </span><span class="nt">n_iters</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">20</span>
+<span class="w">  </span><span class="nt">max_neighbors</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">20</span>
+<span class="w">  </span><span class="nt">min_length</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2.0</span>
+<span class="w">  </span><span class="nt">min_match</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.95</span>
+</pre></div>
+</div>
+<p>The top-level <code class="docutils literal notranslate"><span class="pre">start_bp</span></code> and <code class="docutils literal notranslate"><span class="pre">end_bp</span></code> config keys (the VNTR coordinates)
+are used to assign IBD segments to Tier-1 (overlapping the VNTR) or Tier-2
+(elsewhere on the chromosome) priority buckets when loading neighbors.
+See <a class="reference internal" href="algorithms/hi_inference.html#tiered-neighbors"><span class="std std-ref">Two-Tier Neighbor Priority</span></a> for details on the two-tier system and
+<a class="reference internal" href="algorithms/hi_inference.html#adaptive-threshold"><span class="std std-ref">Length-Adaptive Match Threshold</span></a> for the length-adaptive match threshold.</p>
+<p>For a full description of all IBD-related config parameters and phasing
+algorithms, see <a class="reference internal" href="algorithms/hi_inference.html"><span class="doc">Haplotype Inference</span></a>.</p>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="examples.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">Example Pipeline Jobs</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="ibs.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">Computing IBS Neighbors</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2026, Zachary Caterer
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Computing IBD Neighbors with iLASH</a><ul>
+<li><a class="reference internal" href="#overview">Overview</a></li>
+<li><a class="reference internal" href="#input-requirements">Input Requirements</a></li>
+<li><a class="reference internal" href="#stage-1-convert-vcf-to-ped-map">Stage 1 — Convert VCF to PED/MAP</a></li>
+<li><a class="reference internal" href="#stage-2-add-genetic-map-coordinates">Stage 2 — Add Genetic Map Coordinates</a></li>
+<li><a class="reference internal" href="#stage-3-ilash-configuration-file">Stage 3 — iLASH Configuration File</a></li>
+<li><a class="reference internal" href="#running-ilash">Running iLASH</a></li>
+<li><a class="reference internal" href="#output-format">Output Format</a></li>
+<li><a class="reference internal" href="#passing-the-output-to-grid">Passing the Output to GRiD</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="_static/documentation_options.js?v=8d563738"></script>
+    <script src="_static/doctools.js?v=9bcbadda"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/scripts/furo.js?v=46bd48cc"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    </body>
+</html>

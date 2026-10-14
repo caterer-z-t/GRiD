@@ -208,11 +208,15 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../readme.html">Welcome to GRiD’s documentation!</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../getting_started.html">Getting Started</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../ibs_ibd.html">Computing IBS/IBD Neighbors</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../ibs_ibd.html">Computing IBS/IBD Neighbors</a><input aria-label="Toggle navigation of Computing IBS/IBD Neighbors" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../ibs.html">Computing IBS Neighbors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ibd.html">Computing IBD Neighbors with iLASH</a></li>
+</ul>
+</li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Examples</span></p>
 <ul>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../examples.html">Example Pipeline Jobs</a><input aria-label="Toggle navigation of Example Pipeline Jobs" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../examples.html">Example Pipeline Jobs</a><input aria-label="Toggle navigation of Example Pipeline Jobs" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../examples/Prep_data.html">Data Preparation Example</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../examples/1000G_example.html">1000 Genomes Full Pipeline Example</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../examples/IBS_example.html">IBS/IBD Neighbor Computation Example</a></li>
@@ -221,7 +225,7 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Algorithms</span></p>
 <ul>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../algorithms.html">Algorithms</a><input aria-label="Toggle navigation of Algorithms" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../algorithms.html">Algorithms</a><input aria-label="Toggle navigation of Algorithms" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../algorithms/count_reads.html">Read Counting</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../algorithms/coverage.html">Coverage Estimation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../algorithms/normalization.html">Coverage Normalization</a></li>
@@ -238,7 +242,7 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
 <ul class="current">
-<li class="toctree-l1 current has-children"><a class="reference internal" href="../modules.html">API Reference</a><input aria-label="Toggle navigation of API Reference" checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul class="current">
+<li class="toctree-l1 current has-children"><a class="reference internal" href="../modules.html">API Reference</a><input aria-label="Toggle navigation of API Reference" checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="grid_core.html">Core</a></li>
 <li class="toctree-l2"><a class="reference internal" href="count-reads.html">Read Counting</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mosdepth.html">Coverage Estimation</a></li>
@@ -290,61 +294,14 @@
         <article role="main" id="furo-main-content">
           <section id="haplotype-inference">
 <h1>Haplotype Inference<a class="headerlink" href="#haplotype-inference" title="Link to this heading">¶</a></h1>
-<p>Decomposes diploid copy number estimates into haplotype-specific values using an
-iterative IBD-based phasing algorithm. For each sample, haplotype copy numbers
-are updated proportionally to the mean of IBD-matched haplotype neighbors until
-convergence. This step is locus-agnostic — it requires only diploid CN estimates
-and a phased IBD neighbors file.</p>
-<section id="hi-inference-py">
-<span id="module-grid.utils.hi_inference"></span><h2>hi_inference.py<a class="headerlink" href="#hi-inference-py" title="Link to this heading">¶</a></h2>
-<p>Haplotype-specific IRR inference for GRID.</p>
-<p>Supports five phasing algorithms, all selectable via the config file key
-<code class="docutils literal notranslate"><span class="pre">compute_haploid_genotypes.phasing_method</span></code>:</p>
-<blockquote>
-<div><dl class="simple">
-<dt>iterative    — Hujoel C++ port: iteratively partition diploid IRR by</dt><dd><p>weighted neighbor means. The original default.</p>
-</dd>
-<dt>graph_prop   — Label-spreading: blend own diploid/2 with neighbor mean</dt><dd><p>at each iteration via a tunable <code class="docutils literal notranslate"><span class="pre">alpha</span></code>.
-Best empirical performance (Pearson r ~0.88 vs. Bionano).</p>
-</dd>
-</dl>
-<p>oneshot      — Single-pass, no iteration. Fast; useful as a baseline.</p>
-<dl class="simple">
-<dt>rank_based   — Like iterative but operates on rank-normalised hap IRRs,</dt><dd><p>reducing sensitivity to copy-number outliers.</p>
-</dd>
-</dl>
-<p>oneshot_rank — Single-pass rank-normalised variant of oneshot.</p>
-</div></blockquote>
-<dl class="simple">
-<dt>Two neighbor sources are supported (<code class="docutils literal notranslate"><span class="pre">method</span></code> key):</dt><dd><p>ibs  — computeIBSpbwt output
-ibd  — iLASH output</p>
-</dd>
-</dl>
-<section id="example-config-snippet">
-<h3>Example config snippet<a class="headerlink" href="#example-config-snippet" title="Link to this heading">¶</a></h3>
-<dl>
-<dt>compute_haploid_genotypes:</dt><dd><p>method: ibd                  # ibs | ibd
-phasing_method: graph_prop   # iterative | graph_prop | oneshot | rank_based | oneshot_rank
-ibd_output: path/to/output.match
-min_neighbors: 1
-max_neighbors: 20
-n_iters: 20                  # ignored by oneshot / oneshot_rank
-alpha: 0.7                   # graph_prop only
-agg_fn: mean                 # iterative | oneshot | rank_based | oneshot_rank</p>
-<blockquote>
-<div><p>#   mean | median | weighted_cM | weighted_score |
-#   weighted_cM_score | trimmed_mean</p>
-</div></blockquote>
-<p># IBD-specific filters
-min_length: 2.0              # minimum segment length in cM
-min_match: 0.95              # minimum iLASH match score
-weighted: false              # Lorentzian distance weighting on neighbor load
-weight_scale: 1000000</p>
-</dd>
-</dl>
-</section>
-</section>
-<dl class="py data">
+<p>Decomposes diploid copy number estimates into haplotype-specific values using
+neighbor-based phasing. Supports two neighbor sources (IBS via <code class="docutils literal notranslate"><span class="pre">computeIBSpbwt</span></code>,
+or IBD via iLASH) and five phasing algorithms selectable via config.
+This step is locus-agnostic — it requires only diploid CN estimates and a phased
+neighbors file.</p>
+<p>For a full description of the algorithms, neighbor quality-control options,
+and configuration reference, see <a class="reference internal" href="../algorithms/hi_inference.html"><span class="doc">Haplotype Inference</span></a>.</p>
+<dl class="py data" id="module-grid.utils.hi_inference">
 <dt class="sig sig-object py" id="grid.utils.hi_inference.PHASING_METHODS">
 <span class="sig-prename descclassname"><span class="pre">grid.utils.hi_inference.</span></span><span class="sig-name descname"><span class="pre">PHASING_METHODS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">('iterative',</span> <span class="pre">'graph_prop',</span> <span class="pre">'oneshot',</span> <span class="pre">'rank_based',</span> <span class="pre">'oneshot_rank')</span></em><a class="headerlink" href="#grid.utils.hi_inference.PHASING_METHODS" title="Link to this definition">¶</a></dt>
 <dd><p>All valid values for phasing_method and agg_fn (for validation / help text)</p>
@@ -584,10 +541,6 @@ Ignored by graph_prop (always uses plain mean for neighbour signal).</p>
           <div class="toc-tree">
             <ul>
 <li><a class="reference internal" href="#">Haplotype Inference</a><ul>
-<li><a class="reference internal" href="#hi-inference-py">hi_inference.py</a><ul>
-<li><a class="reference internal" href="#example-config-snippet">Example config snippet</a></li>
-</ul>
-</li>
 <li><a class="reference internal" href="#grid.utils.hi_inference.PHASING_METHODS"><code class="docutils literal notranslate"><span class="pre">PHASING_METHODS</span></code></a></li>
 <li><a class="reference internal" href="#grid.utils.hi_inference._adaptive_match_threshold"><code class="docutils literal notranslate"><span class="pre">_adaptive_match_threshold()</span></code></a></li>
 <li><a class="reference internal" href="#grid.utils.hi_inference._aggregate"><code class="docutils literal notranslate"><span class="pre">_aggregate()</span></code></a></li>

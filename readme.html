@@ -208,11 +208,15 @@
 <ul class="current">
 <li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Welcome to GRiD’s documentation!</a></li>
 <li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a></li>
-<li class="toctree-l1"><a class="reference internal" href="ibs_ibd.html">Computing IBS/IBD Neighbors</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="ibs_ibd.html">Computing IBS/IBD Neighbors</a><input aria-label="Toggle navigation of Computing IBS/IBD Neighbors" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="ibs.html">Computing IBS Neighbors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ibd.html">Computing IBD Neighbors with iLASH</a></li>
+</ul>
+</li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Examples</span></p>
 <ul>
-<li class="toctree-l1 has-children"><a class="reference internal" href="examples.html">Example Pipeline Jobs</a><input aria-label="Toggle navigation of Example Pipeline Jobs" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="examples.html">Example Pipeline Jobs</a><input aria-label="Toggle navigation of Example Pipeline Jobs" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="examples/Prep_data.html">Data Preparation Example</a></li>
 <li class="toctree-l2"><a class="reference internal" href="examples/1000G_example.html">1000 Genomes Full Pipeline Example</a></li>
 <li class="toctree-l2"><a class="reference internal" href="examples/IBS_example.html">IBS/IBD Neighbor Computation Example</a></li>
@@ -221,7 +225,7 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Algorithms</span></p>
 <ul>
-<li class="toctree-l1 has-children"><a class="reference internal" href="algorithms.html">Algorithms</a><input aria-label="Toggle navigation of Algorithms" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="algorithms.html">Algorithms</a><input aria-label="Toggle navigation of Algorithms" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="algorithms/count_reads.html">Read Counting</a></li>
 <li class="toctree-l2"><a class="reference internal" href="algorithms/coverage.html">Coverage Estimation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="algorithms/normalization.html">Coverage Normalization</a></li>
@@ -238,7 +242,7 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
 <ul>
-<li class="toctree-l1 has-children"><a class="reference internal" href="modules.html">API Reference</a><input aria-label="Toggle navigation of API Reference" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="modules.html">API Reference</a><input aria-label="Toggle navigation of API Reference" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="modules_dir/grid_core.html">Core</a></li>
 <li class="toctree-l2"><a class="reference internal" href="modules_dir/count-reads.html">Read Counting</a></li>
 <li class="toctree-l2"><a class="reference internal" href="modules_dir/mosdepth.html">Coverage Estimation</a></li>
@@ -378,14 +382,18 @@ pip<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </s
 </tr>
 <tr class="row-even"><td><p>7</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">hi_inference</span></code></p></td>
-<td><p>Infer haplotype-specific copy numbers via IBD phasing</p></td>
+<td><p>Infer haplotype-specific copy numbers via IBS or IBD phasing</p></td>
 <td><p>No*</p></td>
 </tr>
 </tbody>
 </table>
 </div>
-<p><span class="math notranslate nohighlight">\(*\)</span> Step 7 requires a Identity By Descent/State output file from <a class="reference external" href="https://doi.org/10.1038/s41586-025-09886-z">Hujoel 2026 Nature</a> <code class="docutils literal notranslate"><span class="pre">.cpp</span></code> file; for further information and how to obtain this file, please see <a class="reference external" href="https://caterer-z-t.github.io/GRiD/ibs_ibd.html">IBS/IBD</a> page of our documentation.</p>
-<p>For full algorithmic details, see the <a class="reference external" href="https://caterer-z-t.github.io/GRiD/algorithms.html">Algorithms page</a> of our documentation.</p>
+<p>* Step 7 requires a pre-computed haplotype neighbors file. Two sources are supported:</p>
+<ul class="simple">
+<li><p><strong>IBS</strong> — from <code class="docutils literal notranslate"><span class="pre">computeIBSpbwt</span></code> (Hujoel et al. 2026 <a class="reference external" href="https://doi.org/10.1038/s41586-025-09886-z">Nature</a>)</p></li>
+<li><p><strong>IBD</strong> — from <a class="reference external" href="https://github.com/roohy/iLASH">iLASH</a></p></li>
+</ul>
+<p>Five phasing algorithms are available (<code class="docutils literal notranslate"><span class="pre">iterative</span></code>, <code class="docutils literal notranslate"><span class="pre">graph_prop</span></code>, <code class="docutils literal notranslate"><span class="pre">graph_prop_weighted</span></code>, <code class="docutils literal notranslate"><span class="pre">oneshot</span></code>, <code class="docutils literal notranslate"><span class="pre">rank_based</span></code>). See the <a class="reference external" href="https://caterer-z-t.github.io/GRiD/ibs_ibd.html">IBS/IBD page</a> for how to generate the neighbors file and the <a class="reference external" href="https://caterer-z-t.github.io/GRiD/algorithms.html">Algorithms page</a> for full method details.</p>
 </section>
 <hr class="docutils" />
 <section id="configuration">
@@ -409,12 +417,27 @@ pip<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </s
 <span class="w">  </span><span class="nt">bin_size</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
 <span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">...</span>
 
+<span class="c1"># IBS-based haplotype inference (original method)</span>
 <span class="nt">compute_haploid_genotypes</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">True</span>
+<span class="w">  </span><span class="nt">method</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;ibs&quot;</span>
+<span class="w">  </span><span class="nt">phasing_method</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;iterative&quot;</span>
 <span class="w">  </span><span class="nt">ibs_output</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;path/to/ibs_neighbors_chr6.tsv.gz&quot;</span>
 <span class="w">  </span><span class="nt">min_neighbors</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
 <span class="w">  </span><span class="nt">max_neighbors</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10</span>
-<span class="w">  </span><span class="nt">n_iters</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">100</span>
+<span class="w">  </span><span class="nt">n_iters</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">20</span>
+
+<span class="c1"># IBD-based haplotype inference (recommended)</span>
+<span class="nt">compute_haploid_genotypes</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">True</span>
+<span class="w">  </span><span class="nt">method</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;ibd&quot;</span>
+<span class="w">  </span><span class="nt">phasing_method</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;graph_prop&quot;</span>
+<span class="w">  </span><span class="nt">ibd_output</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;path/to/output.match&quot;</span>
+<span class="w">  </span><span class="nt">alpha</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.7</span>
+<span class="w">  </span><span class="nt">n_iters</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">20</span>
+<span class="w">  </span><span class="nt">max_neighbors</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">20</span>
+<span class="w">  </span><span class="nt">min_length</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2.0</span>
+<span class="w">  </span><span class="nt">min_match</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.95</span>
 </pre></div>
 </div>
 <p>See <a class="reference external" href="https://github.com/caterer-z-t/GRiD/tree/main/grid/example_config.yaml"><code class="docutils literal notranslate"><span class="pre">grid/example_config.yaml</span></code></a> for all available options and their defaults.</p>
@@ -423,7 +446,7 @@ pip<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </s
 <hr class="docutils" />
 <section id="hpc-usage">
 <h3>HPC Usage<a class="headerlink" href="#hpc-usage" title="Link to this heading">¶</a></h3>
-<p>For large cohorts on SLURM-based clusters, see <a class="reference external" href="https://caterer-z-t.github.io/GRiD/examples/1000G_example.html"><code class="docutils literal notranslate"><span class="pre">examples/1000G_example.sh</span></code></a> for an example submission script used on the 1000 Genomes on University of North Carolina’s Super Computing Cluster Longleaf.</p>
+<p>For large cohorts on SLURM-based clusters, see <a class="reference external" href="https://caterer-z-t.github.io/GRiD/examples/1000G_example.html"><code class="docutils literal notranslate"><span class="pre">examples/1000G_example.sh</span></code></a> for an example submission script used on the 1000 Genomes Project on the University of North Carolina’s Longleaf computing cluster.</p>
 </section>
 <hr class="docutils" />
 <section id="citation">
@@ -545,7 +568,5 @@ pip<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </s
     <script src="_static/scripts/furo.js?v=46bd48cc"></script>
     <script src="_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="_static/copybutton.js?v=f281be69"></script>
-    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     </body>
 </html>

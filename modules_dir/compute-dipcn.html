@@ -208,11 +208,15 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../readme.html">Welcome to GRiD’s documentation!</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../getting_started.html">Getting Started</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../ibs_ibd.html">Computing IBS/IBD Neighbors</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../ibs_ibd.html">Computing IBS/IBD Neighbors</a><input aria-label="Toggle navigation of Computing IBS/IBD Neighbors" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../ibs.html">Computing IBS Neighbors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ibd.html">Computing IBD Neighbors with iLASH</a></li>
+</ul>
+</li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Examples</span></p>
 <ul>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../examples.html">Example Pipeline Jobs</a><input aria-label="Toggle navigation of Example Pipeline Jobs" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../examples.html">Example Pipeline Jobs</a><input aria-label="Toggle navigation of Example Pipeline Jobs" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../examples/Prep_data.html">Data Preparation Example</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../examples/1000G_example.html">1000 Genomes Full Pipeline Example</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../examples/IBS_example.html">IBS/IBD Neighbor Computation Example</a></li>
@@ -221,7 +225,7 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Algorithms</span></p>
 <ul>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../algorithms.html">Algorithms</a><input aria-label="Toggle navigation of Algorithms" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../algorithms.html">Algorithms</a><input aria-label="Toggle navigation of Algorithms" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../algorithms/count_reads.html">Read Counting</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../algorithms/coverage.html">Coverage Estimation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../algorithms/normalization.html">Coverage Normalization</a></li>
@@ -238,7 +242,7 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
 <ul class="current">
-<li class="toctree-l1 current has-children"><a class="reference internal" href="../modules.html">API Reference</a><input aria-label="Toggle navigation of API Reference" checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul class="current">
+<li class="toctree-l1 current has-children"><a class="reference internal" href="../modules.html">API Reference</a><input aria-label="Toggle navigation of API Reference" checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="grid_core.html">Core</a></li>
 <li class="toctree-l2"><a class="reference internal" href="count-reads.html">Read Counting</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mosdepth.html">Coverage Estimation</a></li>
@@ -297,30 +301,24 @@ relative to its nearest neighbors, accounting for sample-specific sequencing dep
 <span class="sig-prename descclassname"><span class="pre">grid.utils.compute_dipcn.</span></span><span class="sig-name descname"><span class="pre">compute_diploid_genotypes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">console</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#grid.utils.compute_dipcn.compute_diploid_genotypes" title="Link to this definition">¶</a></dt>
 <dd><p>Compute diploid copy number estimates.</p>
 <p>Two modes depending on config:</p>
-<dl>
-<dt>Mode 1 — GC normalize enabled (gc_normalize: run: True):</dt><dd><p>Writes corrected_rpk_ratio directly from the GC normalization output
+<p><strong>Mode 1</strong> — GC normalize enabled (<code class="docutils literal notranslate"><span class="pre">gc_normalize:</span> <span class="pre">run:</span> <span class="pre">True</span></code>):</p>
+<blockquote>
+<div><p>Writes corrected_rpk_ratio directly from the GC normalization output
 to the diploid genotypes file. No neighbor normalization applied.
 This gives the best correlation with Bionano optical mapping (r=0.986).</p>
-</dd>
-<dt>Mode 2 — GC normalize disabled (gc_normalize: run: False):</dt><dd><dl class="simple">
-<dt>Replicates Mukamel’s awk normalization exactly:</dt><dd><dl class="simple">
-<dt>norm_reads = reads[sample] / sample_scale</dt><dd><p>/ mean( reads[neighbor] / neighbor_scale )</p>
-</dd>
-</dl>
-</dd>
-</dl>
+</div></blockquote>
+<p><strong>Mode 2</strong> — GC normalize disabled (<code class="docutils literal notranslate"><span class="pre">gc_normalize:</span> <span class="pre">run:</span> <span class="pre">False</span></code>):</p>
+<blockquote>
+<div><p>Replicates Mukamel’s awk normalization exactly:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">norm_reads</span> <span class="o">=</span> <span class="n">reads</span><span class="p">[</span><span class="n">sample</span><span class="p">]</span> <span class="o">/</span> <span class="n">sample_scale</span>
+             <span class="o">/</span> <span class="n">mean</span><span class="p">(</span> <span class="n">reads</span><span class="p">[</span><span class="n">neighbor</span><span class="p">]</span> <span class="o">/</span> <span class="n">neighbor_scale</span> <span class="p">)</span>
+</pre></div>
+</div>
 <p>where the mean is over the top n_nbr neighbors.</p>
-</dd>
-</dl>
+</div></blockquote>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>config</strong> – configuration dictionary</p></li>
-<li><p><strong>console</strong> – Rich console for logging</p></li>
-</ul>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>None</p>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
 </dd>
 </dl>
 </dd></dl>
