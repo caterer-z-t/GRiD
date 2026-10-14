@@ -107,12 +107,12 @@ def test_compute_diploid_genotypes_end_to_end(tmp_path):
     from unittest.mock import patch, MagicMock
     from grid.utils.compute_dipcn import compute_diploid_genotypes
 
-    # Write read counts file
+    # Write read counts file — space-separated, no header (matches actual format)
     counts_file = tmp_path / "counts.tsv"
-    counts_file.write_text("Sample\tchr6:1000-2000\nS1\t100\nS2\t90\nS3\t110\n")
+    counts_file.write_text("S1 100\nS2 90\nS3 110\n")
 
-    # Write neighbors file
-    nbrs_file = tmp_path / "nbrs.zMax2.0.tsv.gz"
+    # Neighbors file: <prefix>.zMax<zmax:g>.txt.gz — capital M, :g format, .txt.gz
+    nbrs_file = tmp_path / "nbrs.zMax2.txt.gz"
     with gzip.open(nbrs_file, "wt") as f:
         f.write("S1\t1.0\tS2\t1.0\t0.1\tS3\t1.0\t0.2\n")
         f.write("S2\t1.0\tS1\t1.0\t0.1\tS3\t1.0\t0.15\n")
@@ -123,7 +123,10 @@ def test_compute_diploid_genotypes_end_to_end(tmp_path):
         "output_file_type": "tsv",
         "compute_diploid_genotypes": {"output_file_prefix": "dipcn", "n_nbr": 10},
         "count_reads": {"output_file_prefix": "counts"},
-        "mosdepth": {"neighbors": {"zmax": 2.0, "output_file_prefix": "nbrs"}},
+        "mosdepth": {
+            "neighbors": {"zmax": 2, "output_file_prefix": "nbrs"},
+            "gc_normalize": {"run": False},
+        },
     }
 
     # progress_bar uses custom Rich theme styles only available on the CLI console;
@@ -137,9 +140,14 @@ def test_compute_diploid_genotypes_end_to_end(tmp_path):
     with patch("grid.utils.compute_dipcn.progress_bar", _noop_progress):
         compute_diploid_genotypes(config, console=None)
 
-    out = tmp_path / "dipcn.tsv"
-    assert out.exists()
-    lines = out.read_text().strip().split("\n")
-    # Header + 3 data rows
-    assert len(lines) == 4
-    assert lines[0] == "Sample\tNorm_Reads"
+    # Output is always .txt, space-separated, no header
+    out = tmp_path / "dipcn.txt"
+    assert out.exists(), f"Expected dipcn.txt, found: {list(tmp_path.iterdir())}"
+    lines = [l for l in out.read_text().strip().split("\n") if l.strip()]
+    assert len(lines) == 3
+    for line in lines:
+        parts = line.split()
+        assert len(parts) == 2
+        assert parts[0] in ("S1", "S2", "S3")
+        if parts[1] != "NA":
+            float(parts[1])
