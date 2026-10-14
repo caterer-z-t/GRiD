@@ -91,9 +91,7 @@ def main():
 
             row += 1
 
-    assert (
-        row == snp_count
-    ), f"Row count mismatch after parsing: parsed {row}, expected {snp_count}"
+    assert row == snp_count, f"Row count mismatch after parsing: parsed {row}, expected {snp_count}"
 
     with open(output_addr + ".ped", "w") as ped_file:
         for idx, sample_id in enumerate(id_list):
@@ -103,9 +101,7 @@ def main():
                     f"ERROR: sample {sample_id} has incomplete genotype data "
                     f"— refusing to write a malformed ped row."
                 )
-            ped_file.write(
-                f"{sample_id} {sample_id} 0 0 0 -9 " + " ".join(column) + "\n"
-            )
+            ped_file.write(f"{sample_id} {sample_id} 0 0 0 -9 " + " ".join(column) + "\n")
 
     print(
         f"Wrote {output_addr}.ped and {output_addr}.map "
