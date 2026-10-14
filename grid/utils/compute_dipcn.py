@@ -12,21 +12,22 @@ def compute_diploid_genotypes(config, console) -> None:
 
     Two modes depending on config:
 
-    Mode 1 — GC normalize enabled (gc_normalize: run: True):
+    **Mode 1** — GC normalize enabled (``gc_normalize: run: True``):
+
         Writes corrected_rpk_ratio directly from the GC normalization output
         to the diploid genotypes file. No neighbor normalization applied.
         This gives the best correlation with Bionano optical mapping (r=0.986).
 
-    Mode 2 — GC normalize disabled (gc_normalize: run: False):
-        Replicates Mukamel's awk normalization exactly:
+    **Mode 2** — GC normalize disabled (``gc_normalize: run: False``):
+
+        Replicates Mukamel's awk normalization exactly::
+
             norm_reads = reads[sample] / sample_scale
                          / mean( reads[neighbor] / neighbor_scale )
-        where the mean is over the top n_nbr neighbors.
 
-    Args:
-        config:  configuration dictionary
-        console: Rich console for logging
+        where the mean is over the top n_nbr neighbors.
     """
+
     try:
         output_file_prefix = config.get("compute_diploid_genotypes", {}).get(
             "output_file_prefix", "diploid_genotypes"

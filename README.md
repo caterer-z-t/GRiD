@@ -64,11 +64,13 @@ GRiD runs seven sequential steps, each controlled by a `run: True/False` flag in
 | 4 | `normalize_mosdepth` | Normalize coverage within and across individuals | No |
 | 5 | `find_neighbors` | Identify read depth-matched nearest neighbors | No |
 | 6 | `compute_dipcn` | Estimate diploid copy number via neighbor normalization | No |
-| 7 | `hi_inference` | Infer haplotype-specific copy numbers via IBD phasing | No* |
+| 7 | `hi_inference` | Infer haplotype-specific copy numbers via IBS or IBD phasing | No* |
 
-$*$ Step 7 requires a Identity By Descent/State output file from [Hujoel 2026 Nature](https://doi.org/10.1038/s41586-025-09886-z) `.cpp` file; for further information and how to obtain this file, please see [IBS/IBD](https://caterer-z-t.github.io/GRiD/ibs_ibd.html) page of our documentation. 
+\* Step 7 requires a pre-computed haplotype neighbors file. Two sources are supported:
+- **IBS** — from `computeIBSpbwt` (Hujoel et al. 2026 [Nature](https://doi.org/10.1038/s41586-025-09886-z))
+- **IBD** — from [iLASH](https://github.com/roohy/iLASH)
 
-For full algorithmic details, see the [Algorithms page](https://caterer-z-t.github.io/GRiD/algorithms.html) of our documentation.
+Five phasing algorithms are available (`iterative`, `graph_prop`, `graph_prop_weighted`, `oneshot`, `rank_based`). See the [IBS/IBD page](https://caterer-z-t.github.io/GRiD/ibs_ibd.html) for how to generate the neighbors file and the [Algorithms page](https://caterer-z-t.github.io/GRiD/algorithms.html) for full method details.
 
 ---
 
@@ -79,7 +81,6 @@ All parameters are set in a YAML file. Top-level fields define global settings; 
 <div style="padding:10px; border-left:4px solid #FF7800;">
 <strong>Note:</strong> Each step is controlled by a <code>run: True/False</code> flag. Setting a step to <code>False</code> skips it entirely — and because the pipeline is sequential, any downstream step that depends on its output will also fail to run correctly. Enable steps in order and ensure all prerequisite steps have been run at least once before skipping them.
 </div>
-
 
 ```yaml
 samples_file: "path/to/sample_ids.txt"
@@ -97,12 +98,27 @@ mosdepth:
   bin_size: 1000
   ...
 
+# IBS-based haplotype inference (original method)
 compute_haploid_genotypes:
   run: True
+  method: "ibs"
+  phasing_method: "iterative"
   ibs_output: "path/to/ibs_neighbors_chr6.tsv.gz"
   min_neighbors: 1
   max_neighbors: 10
-  n_iters: 100
+  n_iters: 20
+
+# IBD-based haplotype inference (recommended)
+compute_haploid_genotypes:
+  run: True
+  method: "ibd"
+  phasing_method: "graph_prop"
+  ibd_output: "path/to/output.match"
+  alpha: 0.7
+  n_iters: 20
+  max_neighbors: 20
+  min_length: 2.0
+  min_match: 0.95
 ```
 
 See [`grid/example_config.yaml`](https://github.com/caterer-z-t/GRiD/tree/main/grid/example_config.yaml) for all available options and their defaults.
@@ -113,7 +129,7 @@ For a full breakdown of every parameter, how to obtain required input files, and
 
 ## HPC Usage
 
-For large cohorts on SLURM-based clusters, see [`examples/1000G_example.sh`](https://caterer-z-t.github.io/GRiD/examples/1000G_example.html) for an example submission script used on the 1000 Genomes on University of North Carolina's Super Computing Cluster Longleaf.
+For large cohorts on SLURM-based clusters, see [`examples/1000G_example.sh`](https://caterer-z-t.github.io/GRiD/examples/1000G_example.html) for an example submission script used on the 1000 Genomes Project on the University of North Carolina's Longleaf computing cluster.
 
 ---
 

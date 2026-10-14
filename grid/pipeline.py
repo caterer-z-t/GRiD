@@ -88,7 +88,7 @@ def run_wgs_pipeline(console=False, config=None, **args):
         # log(console, "GC normalizing for all samples...", style="info")
         try:
             from .utils.gc_normalize import gc_normalize
-            
+
             gc_normalize(config_data, console)
         except Exception as e:
             log(console, f"Failed to GC normalize: {e}", style="danger")

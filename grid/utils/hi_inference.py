@@ -1,49 +1,3 @@
-"""
-hi_inference.py
-===============
-Haplotype-specific IRR inference for GRID.
-
-Supports five phasing algorithms, all selectable via the config file key
-``compute_haploid_genotypes.phasing_method``:
-
-    iterative    — Hujoel C++ port: iteratively partition diploid IRR by
-                   weighted neighbor means. The original default.
-
-    graph_prop   — Label-spreading: blend own diploid/2 with neighbor mean
-                   at each iteration via a tunable ``alpha``.
-                   Best empirical performance (Pearson r ~0.88 vs. Bionano).
-
-    oneshot      — Single-pass, no iteration. Fast; useful as a baseline.
-
-    rank_based   — Like iterative but operates on rank-normalised hap IRRs,
-                   reducing sensitivity to copy-number outliers.
-
-    oneshot_rank — Single-pass rank-normalised variant of oneshot.
-
-Two neighbor sources are supported (``method`` key):
-    ibs  — computeIBSpbwt output
-    ibd  — iLASH output
-
-Example config snippet
-----------------------
-compute_haploid_genotypes:
-  method: ibd                  # ibs | ibd
-  phasing_method: graph_prop   # iterative | graph_prop | oneshot | rank_based | oneshot_rank
-  ibd_output: path/to/output.match
-  min_neighbors: 1
-  max_neighbors: 20
-  n_iters: 20                  # ignored by oneshot / oneshot_rank
-  alpha: 0.7                   # graph_prop only
-  agg_fn: mean                 # iterative | oneshot | rank_based | oneshot_rank
-                               #   mean | median | weighted_cM | weighted_score |
-                               #   weighted_cM_score | trimmed_mean
-  # IBD-specific filters
-  min_length: 2.0              # minimum segment length in cM
-  min_match: 0.95              # minimum iLASH match score
-  weighted: false              # Lorentzian distance weighting on neighbor load
-  weight_scale: 1000000
-"""
-
 from __future__ import annotations
 
 import math
@@ -52,6 +6,7 @@ from collections import defaultdict
 from pathlib import Path
 
 from .utils import open_maybe_gz, log, progress_bar
+
 
 def _read_dip_cn_file(dip_cn_file):
     """Read diploid CN file with string IDs, skipping non-data rows."""
@@ -281,6 +236,7 @@ def _load_ibd_neighbors(
 
     return hap_nbrs, None, None, None, None
 
+
 def _collect_neighbor_vals(h_idx, hap_IRRs, hap_nbrs):
     """
     Return (vals, weights) for all non-NaN neighbors of haplotype h_idx.
@@ -339,6 +295,7 @@ def _aggregate(vals, weights, agg_fn, fallback):
             f"Unknown agg_fn '{agg_fn}'. Choose from: mean, median, "
             "weighted_cM, weighted_score, weighted_cM_score, trimmed_mean"
         )
+
 
 def _init_candidates(IRRs, hap_nbrs, MIN_NBR):
     """
@@ -566,6 +523,7 @@ def _phase_oneshot_rank(IRRs, hap_nbrs, MIN_NBR, agg_fn, console):
 
     return hap_IRRs, mean_IRRs
 
+
 def _compute_imp(i, hap_IRRs, hap_nbrs, mean_IRRs):
     """Compute imputed haplotype neighbour means for sample i."""
     hap_nbr_wsum = [1e-9, 1e-9]
@@ -587,6 +545,7 @@ def _compute_imp(i, hap_IRRs, hap_nbrs, mean_IRRs):
         imp1 = mean_IRRs / 2.0
 
     return imp0, imp1
+
 
 #: All valid values for phasing_method and agg_fn (for validation / help text)
 PHASING_METHODS = ("iterative", "graph_prop", "oneshot", "rank_based", "oneshot_rank")

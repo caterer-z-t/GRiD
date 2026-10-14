@@ -51,6 +51,9 @@ mosdepth:
     zmax: 2.0
     sigma2_max: 1000
 
+  gc_normalize:
+    run: False
+
 compute_diploid_genotypes:
   run: True
   output_file_prefix: "diploid_genotypes"

@@ -268,9 +268,15 @@ def remove_intermediate_files(mosdepth_dir: Path, console=None) -> None:
     """
     Remove intermediate mosdepth files, keeping only the example bed.
 
-    Removes: *.mosdepth.global.dist.txt, *.mosdepth.region.dist.txt,
-             *.regions.bed.gz, *.regions.bed.gz.csi, *.per_sample.txt
+    Removes:
+
+    - ``*.mosdepth.global.dist.txt``
+    - ``*.mosdepth.region.dist.txt``
+    - ``*.regions.bed.gz``
+    - ``*.regions.bed.gz.csi``
+    - ``*.per_sample.txt``
     """
+
     suffixes = [
         ".mosdepth.global.dist.txt",
         ".mosdepth.region.dist.txt",

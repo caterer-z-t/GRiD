@@ -47,9 +47,9 @@ for f in "$REF_FA" "$GRID_SAMPLES_FILE"; do
     fi
 done
 
-export PATH=/nas/longleaf/home/catererz/epi/software/micromamba:$PATH
+module load anaconda
 eval "$(micromamba shell hook --shell bash)"
-micromamba activate grid
+micromamba activate grid-env
 
 if ! command -v grid &>/dev/null; then
     echo "ERROR: 'grid' command not found after activating grid-test."
